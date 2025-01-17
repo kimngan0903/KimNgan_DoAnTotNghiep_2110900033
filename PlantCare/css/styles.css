@@ -1,0 +1,145 @@
+/* Reset default browser styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Container */
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 50px;
+    background-color: #151616;
+}
+
+/* Logo */
+.logo {
+    width: 90px;
+    height: 90px;
+    object-fit: cover;
+}
+
+/* Navbar */
+.navbar {
+    display: flex;
+    gap: 20px;
+}
+
+.navbar .link {
+    text-transform: uppercase;
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 8px 12px;
+    transition: color 0.3s ease;
+}
+
+.navbar .link:hover {
+    color: #6bd88c;
+}
+
+/* Icon Cart */
+.icon-cart {
+    position: relative;
+    margin-right: 20px;
+}
+
+.icon-cart .fi {
+    font-size: 20px;
+    color: #333;
+}
+
+/* Dropdown Menu */
+.dropdow {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown .header-auth-text {
+    display: flex;
+    align-items: center;
+    color: #333;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.dropdow .header-auth-text i {
+    font-size: 20px;
+    color: black;
+}
+
+/* Dropdown List */
+.dropdow-list {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    display: none;
+    background: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    min-width: 160px;
+    z-index: 1000;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    margin-top: 10px;
+}
+
+.dropdow:hover .dropdow-list {
+    display: block;
+}
+
+.dropdow-list .dropdown-item {
+    padding: 12px 16px;
+    color: #fff;
+    text-decoration: none;
+    display: block;
+    transition: background-color 0.3s ease;
+}
+
+.dropdow-list .dropdown-item:hover {
+    background-color: #f1f1f1;
+}
+
+/* Scroll to Top Button */
+#scroll-top {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    color: #333;
+    font-size: 18px;
+    transition: color 0.3s ease;
+}
+
+#scroll-top:hover {
+    color: #007bff;
+}
+
+.carousel-inner .carousel-item img {
+    width: 100%;
+    height: 600px;
+}
+/* Responsive Design */
+@media (max-width: 768px) {
+    .navbar {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .navbar .link {
+        padding: 12px 16px;
+        text-align: center;
+    }
+
+    .group-icon {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+    }
+
+    .dropdow {
+        display: block;
+        width: 100%;
+    }
+}
