@@ -1,0 +1,10 @@
+﻿@model PlantCare.Models.ServiceCategory
+
+<dl class="row">
+    <dt class="col-sm-4">@Html.DisplayNameFor(model => model.CategoryServiceName)</dt>
+    <dd class="col-sm-8">@Html.DisplayFor(model => model.CategoryServiceName)</dd>
+</dl>
+<button type="button" class="btn btn-primary" onclick="loadModal('@Url.Action("Edit", "ServiceCategories", new { id = Model?.CategoryServiceId })')">
+    Chỉnh sửa
+</button>
+<button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>

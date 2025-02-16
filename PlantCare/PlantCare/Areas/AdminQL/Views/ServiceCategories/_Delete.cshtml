@@ -1,0 +1,8 @@
+﻿@model PlantCare.Models.ServiceCategory
+
+<form asp-action="DeleteConfirmed" method="post">
+    <input type="hidden" asp-for="CategoryServiceId" />
+    <p>Bạn có chắc chắn muốn xóa <strong>@Model.CategoryServiceName</strong> không?</p>
+    <button type="submit" class="btn btn-danger">Xóa</button>
+    <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
+</form>

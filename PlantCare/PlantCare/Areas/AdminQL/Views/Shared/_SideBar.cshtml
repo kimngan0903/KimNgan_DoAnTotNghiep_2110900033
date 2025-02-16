@@ -1,0 +1,157 @@
+﻿@using Microsoft.AspNetCore.Http
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+
+<!-- [ navigation menu ] start -->
+<nav class="pcoded-navbar">
+    <div class="navbar-wrapper">
+        <div class="navbar-content scroll-div">
+            <div class="">
+                <div class="main-menu-header">
+                    <img class="img-radius" src="~/assets/images/user/admin.jpg" alt="User-Profile-Image">
+                    <div class="user-details">
+                        <span>
+                          @HttpContextAccessor.HttpContext.Session.GetString("AdminName")
+                        </span>
+                        <div id="more-details">@HttpContextAccessor.HttpContext.Session.GetString("AdminAddress")<i class="fa fa-chevron-down m-l-5"></i></div>
+                    </div>
+                </div>
+                <div class="collapse" id="nav-user-link">
+                    <ul class="list-unstyled">
+                        <li class="list-group-item"><a asp-controller="Admins" asp-action="Details" asp-route-adminid="@Context.Session.GetInt32("AdminId")"><i class="feather icon-user m-r-5"></i>Xem hồ sơ</a></li>
+                        <li class="list-group-item"><a href="#!"><i class="feather icon-settings m-r-5"></i>Cài đặt</a></li>
+                        <li class="list-group-item"><a asp-action="Logout" asp-controller="Login"><i class="feather icon-log-out m-r-5"></i>Thoát</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <ul class="nav pcoded-inner-navbar">
+                @if (HttpContextAccessor.HttpContext.Session.GetInt32("RoleId") == 1)
+                {
+                    <li class="nav-item">
+                        <a href="~/adminql/dashboard" class="nav-link ">
+                            <span class="pcoded-micon">
+                                <i class="nav-icon fas fa-tachometer-alt"></i>
+                            </span>
+                            <span class="pcoded-mtext">
+                                Bảng điều khiển
+                            </span>
+                        </a>
+                    </li>
+                }
+                @if (HttpContextAccessor.HttpContext.Session.GetInt32("RoleId") == 1)
+                {
+                    <li class="nav-item pcoded-hasmenu">
+                        <a href="#" class="nav-link">
+                            <span class="pcoded-micon"><i class="feather icon-shield"></i></span>
+                            <span class="pcoded-mtext">Quản lý tài khoản</span>
+                        </a>
+                        <ul class="pcoded-submenu">
+
+                            <li><a href="~/adminql/admins"><i class="feather icon-user"></i> Danh sách Admin</a></li>
+                            <li><a href="~/adminql/roles"><i class="feather icon-user"></i> Phân quyền</a></li>
+                        </ul>
+                    </li>
+                }
+
+                <li class="nav-item pcoded-hasmenu">
+                    <a href="#" class="nav-link">
+                        @if (HttpContextAccessor.HttpContext.Session.GetInt32("RoleId") == 1)
+                        {
+                            <span class="pcoded-micon"><i class="feather icon-users"></i></span>
+                            <span class="pcoded-mtext">Quản lý khách hàng</span>
+                        }
+                    </a>
+                    <ul class="pcoded-submenu">
+                        @if (HttpContextAccessor.HttpContext.Session.GetInt32("RoleId") == 1)
+                        {
+                            <li><a href="~/adminql/customers"><i class="feather icon-user"></i> Danh sách khách hàng</a></li>
+                            <li><a href="~/adminql/contracts"><i class="feather icon-file-text"></i> Hợp đồng dịch vụ</a></li>
+                            <li><a href="~/adminql/orders"><i class="feather icon-clock"></i> Lịch sử giao dịch</a></li>
+                        }
+                        <li><a href="~/adminql/feedbacks"><i class="feather icon-star"></i> Phản hồi và đánh giá</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item pcoded-hasmenu">
+                    <a href="#" class="nav-link">
+                        <span class="pcoded-micon"><i class="feather icon-user-check"></i></span>
+                        <span class="pcoded-mtext">Quản lý nhân viên</span>
+                    </a>
+                    <ul class="pcoded-submenu">
+                        @if (HttpContextAccessor.HttpContext.Session.GetInt32("RoleId") == 1)
+                        {
+                            <li><a href="~/adminql/staffs"><i class="feather icon-users"></i> Danh sách nhân viên</a></li>
+                            <li><a href="~/adminql/staffs"><i class="feather icon-credit-card"></i> Bảng lương</a></li>
+                        }
+                        @if (HttpContextAccessor.HttpContext.Session.GetInt32("RoleId") == 2)
+                        {
+                            <li><a asp-controller="Staffs" asp-action="Details" asp-route-id="@HttpContextAccessor.HttpContext.Session.GetInt32("StaffId")"><i class="feather icon-calendar"></i> Thông tin nhân viên</a></li>
+                        }
+                        <li><a href="~/adminql/careschedules"><i class="feather icon-calendar"></i> Lịch làm việc và phân công</a></li>
+                    </ul>
+                </li>
+                @if (HttpContextAccessor.HttpContext.Session.GetInt32("RoleId") == 1)
+                {
+                    <li class="nav-item pcoded-hasmenu">
+                        <a href="#" class="nav-link">
+                            <span class="pcoded-micon"><i class="feather icon-briefcase"></i></span>
+                            <span class="pcoded-mtext">Quản lý dịch vụ</span>
+                        </a>
+                        <ul class="pcoded-submenu">
+
+                            <li><a href="~/adminql/servicecategories"><i class="feather icon-grid"></i> Danh mục dịch vụ</a></li>
+                            <li><a href="~/adminql/services"><i class="feather icon-list"></i> Danh sách dịch vụ</a></li>
+                            <li><a href="~/adminql/servicerequests"><i class="feather icon-plus-circle"></i> Yêu cầu phát sinh</a></li>
+                            <li><a href="~/adminql/careschedules"><i class="feather icon-package"></i> Gói dịch vụ chăm sóc</a></li>
+                        </ul>
+                    </li>
+                }
+                @if (HttpContextAccessor.HttpContext.Session.GetInt32("RoleId") == 1)
+                {
+                    <li class="nav-item pcoded-hasmenu">
+                        <a href="#" class="nav-link">
+                            <span class="pcoded-micon"><i class="feather icon-box"></i></span>
+                            <span class="pcoded-mtext">Quản lý sản phẩm</span>
+                        </a>
+                        <ul class="pcoded-submenu">
+
+                            <li><a href="~/adminql/categories"><i class="feather icon-grid"></i> Danh mục sản phẩm</a></li>
+                            <li><a href="~/adminql/products"><i class="feather icon-list"></i> Danh sách sản phẩm</a></li>
+                            <li><a href="~/adminql/inventoryitems"><i class="fa-solid fa-boxes-stacked"></i> Kho hàng và tồn kho</a></li>
+                            <li><a href="~/adminql/serviceinventory"><i class="feather icon-clipboard"></i> Kho dịch vụ</a></li>
+                        </ul>
+                    </li>
+                }
+
+                <li class="nav-item pcoded-hasmenu">
+                    <a href="#" class="nav-link">
+                        <span class="pcoded-micon"><i class="feather icon-credit-card"></i></span>
+                        <span class="pcoded-mtext">Quản lý thanh toán</span>
+                    </a>
+                    <ul class="pcoded-submenu">
+                        <li><a href="~/adminql/orders"><i class="feather icon-file"></i> Hóa đơn và giao dịch</a></li>
+                        <li><a href="~/adminql/orderdetails"><i class="feather icon-list"></i> Chi tiết đơn hàng</a></li>
+                        <li><a href="~/adminql/paymentmethods"><i class="feather icon-credit-card"></i> Phương thức thanh toán</a></li>
+                    </ul>
+                </li>
+
+                <li class="nav-item pcoded-hasmenu">
+                    <a href="#" class="nav-link">
+                        <span class="pcoded-micon"><i class="feather icon-file-text"></i></span>
+                        <span class="pcoded-mtext">Quản lý nội dung</span>
+                    </a>
+                    <ul class="pcoded-submenu">
+                        @if (HttpContextAccessor.HttpContext.Session.GetInt32("RoleId") == 1)
+                        {
+                            <li><a href="~/adminql/partners"><i class="feather icon-briefcase"></i> Đối tác</a></li>
+                        }
+                        <li><a href="~/adminql/banners"><i class="feather icon-image"></i> Banner quảng cáo</a></li>
+                        <li><a href="~/adminql/news"><i class="feather icon-book"></i> Tin tức</a></li>
+                        <li><a href="~/adminql/contacts"><i class="feather icon-phone"></i> Danh bạ liên hệ</a></li>
+
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<!-- [ navigation menu ] end -->
