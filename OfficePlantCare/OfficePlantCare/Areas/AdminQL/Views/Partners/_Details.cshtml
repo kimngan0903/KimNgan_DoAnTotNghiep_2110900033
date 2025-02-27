@@ -1,0 +1,64 @@
+﻿@model OfficePlantCare.Models.Partner
+
+<dl class="row">
+    <dt class="col-sm-2">
+        @Html.DisplayNameFor(model => model.PartnerName)
+    </dt>
+    <dd class="col-sm-10">
+        @Html.DisplayFor(model => model.PartnerName)
+    </dd>
+    <dt class="col-sm-2">
+        @Html.DisplayNameFor(model => model.Logo)
+    </dt>
+    <dd class="col-sm-10">
+        @Html.DisplayFor(model => model.Logo)
+    </dd>
+    <dt class="col-sm-2">
+        @Html.DisplayNameFor(model => model.CreatedDate)
+    </dt>
+    <dd class="col-sm-10">
+        @Html.DisplayFor(model => model.CreatedDate)
+    </dd>
+    <dt class="col-sm-2">
+        @Html.DisplayNameFor(model => model.Description)
+    </dt>
+    <dd class="col-sm-10">
+        @Html.DisplayFor(model => model.Description)
+    </dd>
+    <dt class="col-sm-2">
+        @Html.DisplayNameFor(model => model.Status)
+    </dt>
+    <dd class="col-sm-10">
+        @if (Model.Status != null)
+        {
+            if (Model.Status.ToString() == "Đang hợp tác")
+            {
+                <span class="text-success fw-bold">Đang hợp tác</span> <!-- Màu xanh lá -->
+            }
+            else if (Model.Status.ToString() == "Tạm dừng hợp tác")
+            {
+                <span class="text-warning fw-bold">Tạm dừng hợp tác</span> <!-- Màu vàng -->
+            }
+            else if (Model.Status.ToString() == "Ngừng hợp tác")
+            {
+                <span class="text-danger fw-bold">Ngừng hợp tác</span> <!-- Màu đỏ -->
+            }
+            else if (Model.Status.ToString() == "Đối tác tiềm năng")
+            {
+                <span class="text-primary fw-bold">Đối tác tiềm năng</span> <!-- Màu xanh dương -->
+            }
+            else if (Model.Status.ToString() == "Đối tác chiến lược")
+            {
+                <span class="text-info fw-bold">Đối tác chiến lược</span> <!-- Màu xanh nhạt -->
+            }
+        }
+        else
+        {
+            <span class="text-secondary fw-bold">Không xác định</span> <!-- Màu xám nếu giá trị null -->
+        }
+    </dd>
+</dl>
+<button type="button" class="btn btn-primary" onclick="loadModal('@Url.Action("Edit", "Partners", new { id = Model?.PartnerId })')">
+    Chỉnh sửa
+</button>
+<button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>

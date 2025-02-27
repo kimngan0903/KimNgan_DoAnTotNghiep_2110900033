@@ -47,7 +47,7 @@ namespace PlantCare.Areas.AdminQL.Controllers
         // GET: AdminQL/Services/Create
         public IActionResult Create()
         {
-            ViewData["CategoryServiceId"] = new SelectList(_context.ServiceCategories, "CategoryServiceId", "CategoryServiceId");
+            ViewData["CategoryServiceId"] = new SelectList(_context.ServiceCategories, "CategoryServiceId", "CategoryServiceName");
             return View();
         }
 
@@ -56,7 +56,7 @@ namespace PlantCare.Areas.AdminQL.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ServiceId,ServiceName,Description,Price,CreatedDate,UpdatedDate,Status,CategoryServiceId")] Service service)
+        public async Task<IActionResult> Create([Bind("ServiceId,ServiceName,Description,Price,CreatedDate,UpdatedDate,Status,CategoryServiceId,Image")] Service service)
         {
             if (ModelState.IsValid)
             {
@@ -81,7 +81,7 @@ namespace PlantCare.Areas.AdminQL.Controllers
             {
                 return NotFound();
             }
-            ViewData["CategoryServiceId"] = new SelectList(_context.ServiceCategories, "CategoryServiceId", "CategoryServiceId", service.CategoryServiceId);
+            ViewData["CategoryServiceId"] = new SelectList(_context.ServiceCategories, "CategoryServiceId", "CategoryServiceName", service.CategoryServiceId);
             return View(service);
         }
 
@@ -90,7 +90,7 @@ namespace PlantCare.Areas.AdminQL.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ServiceId,ServiceName,Description,Price,CreatedDate,UpdatedDate,Status,CategoryServiceId")] Service service)
+        public async Task<IActionResult> Edit(int id, [Bind("ServiceId,ServiceName,Description,Price,CreatedDate,UpdatedDate,Status,CategoryServiceId,Image")] Service service)
         {
             if (id != service.ServiceId)
             {
@@ -117,7 +117,7 @@ namespace PlantCare.Areas.AdminQL.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CategoryServiceId"] = new SelectList(_context.ServiceCategories, "CategoryServiceId", "CategoryServiceId", service.CategoryServiceId);
+            ViewData["CategoryServiceId"] = new SelectList(_context.ServiceCategories, "CategoryServiceId", "CategoryServiceName", service.CategoryServiceId);
             return View(service);
         }
 

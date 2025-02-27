@@ -1,0 +1,70 @@
+﻿@model OfficePlantCare.Models.Staff
+
+<form asp-action="Edit" method="post">
+    <input type="hidden" asp-for="StaffId" />
+    <div class="form-group">
+        <label asp-for="StaffName" class="control-label"></label>
+        <input asp-for="StaffName" class="form-control" />
+        <span asp-validation-for="StaffName" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Position" class="control-label"></label>
+        <input asp-for="Position" class="form-control" />
+        <span asp-validation-for="Position" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Phone" class="control-label"></label>
+        <input asp-for="Phone" class="form-control" />
+        <span asp-validation-for="Phone" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Email" class="control-label"></label>
+        <input asp-for="Email" class="form-control" />
+        <span asp-validation-for="Email" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Avatar" class="control-label"><i class="fa-solid fa-image me-2"></i>Ảnh Hiện Tại</label>
+        @if (!string.IsNullOrEmpty(Model.Avatar))
+        {
+            <div>
+                <img src="@Model.Avatar" alt="Avatar" style="width: 150px; height: 150px; object-fit: cover; border-radius: 50%;" />
+            </div>
+        }
+        <label asp-for="Avatar" class="control-label"><i class="fa-solid fa-upload me-2"></i>Tải Lên Ảnh Mới</label>
+        <input asp-for="Avatar" type="file" class="form-control" />
+        <span asp-validation-for="Avatar" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="BirthDate" class="control-label"></label>
+        <input asp-for="BirthDate" class="form-control" />
+        <span asp-validation-for="BirthDate" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="HireDate" class="control-label"></label>
+        <input asp-for="HireDate" class="form-control" />
+        <span asp-validation-for="HireDate" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Salary" class="control-label"></label>
+        <input asp-for="Salary" class="form-control" />
+        <span asp-validation-for="Salary" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Status" class="control-label"></label>
+        <select asp-for="Status" class="form-control">
+            <option value="Đang làm">Đang làm</option>
+            <option value="Bị sa thải">Bị sa thải</option>
+            <option value="Nghỉ việc">Nghỉ việc</option>
+        </select>
+        <span asp-validation-for="Status" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="RoleId" class="control-label"></label>
+        <select asp-for="RoleId" class="form-control" asp-items="ViewBag.RoleId"></select>
+        <span asp-validation-for="RoleId" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-primary">Lưu</button>
+</form>
+<div class="mt-3">
+    <a asp-action="Index" class="btn btn-secondary">Quay lại danh sách</a>
+</div>

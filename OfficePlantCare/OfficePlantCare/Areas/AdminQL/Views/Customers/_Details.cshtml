@@ -1,0 +1,81 @@
+﻿@model OfficePlantCare.Models.Customer
+
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.CustomerName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.CustomerName)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Phone)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Phone)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Address)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Address)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.CustomerType)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.CustomerType)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.PasswordHash)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.PasswordHash)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.CreatedDate)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.CreatedDate)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Status)
+        </dt>
+        <dd class="col-sm-10">
+            @if (Model?.Status != null)
+            {
+                if (Model.Status.ToString() == "Hoạt động")
+                {
+                    <span class="text-success fw-bold">Hoạt động</span> <!-- Màu xanh -->
+                }
+                else if (Model.Status.ToString() == "Không hoạt động")
+                {
+                    <span class="text-warning fw-bold">Không hoạt động</span> <!-- Màu vàng -->
+                }
+                else
+                {
+                    <span class="text-danger fw-bold">Bị khóa</span> <!-- Màu đỏ -->
+                }
+            }
+            else
+            {
+                <span class="text-secondary fw-bold">Không xác định</span> <!-- Màu xám nếu giá trị null -->
+            }
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Role)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Role.RoleName)
+        </dd>
+    </dl>
+
+<button type="button" class="btn btn-primary" onclick="loadModal('@Url.Action("Edit", "Customers", new { id = Model?.CustomerId })')">
+    Chỉnh sửa
+</button>
+<button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>

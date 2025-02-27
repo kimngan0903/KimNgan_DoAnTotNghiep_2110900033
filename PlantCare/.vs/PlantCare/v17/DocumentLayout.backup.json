@@ -3,8 +3,19 @@
   "WorkspaceRootPath": "D:\\DEV_02409GH_KN\\KimNgan_DoAnTotNghiep\\PlantCare\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{2ED2C94D-2AFE-4539-B1FE-1CC0D23EDA8A}|PlantCare\\PlantCare.csproj|d:\\dev_02409gh_kn\\kimngan_doantotnghiep\\plantcare\\plantcare\\views\\services\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{2ED2C94D-2AFE-4539-B1FE-1CC0D23EDA8A}|PlantCare\\PlantCare.csproj|solutionrelative:plantcare\\views\\services\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{2ED2C94D-2AFE-4539-B1FE-1CC0D23EDA8A}|PlantCare\\PlantCare.csproj|d:\\dev_02409gh_kn\\kimngan_doantotnghiep\\plantcare\\plantcare\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{2ED2C94D-2AFE-4539-B1FE-1CC0D23EDA8A}|PlantCare\\PlantCare.csproj|solutionrelative:plantcare\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2ED2C94D-2AFE-4539-B1FE-1CC0D23EDA8A}|PlantCare\\PlantCare.csproj|d:\\dev_02409gh_kn\\kimngan_doantotnghiep\\plantcare\\plantcare\\areas\\adminql\\views\\admins\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{2ED2C94D-2AFE-4539-B1FE-1CC0D23EDA8A}|PlantCare\\PlantCare.csproj|solutionrelative:plantcare\\areas\\adminql\\views\\admins\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\alazea-gh-pages\\alazea-gh-pages\\shop-details.html||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{2ED2C94D-2AFE-4539-B1FE-1CC0D23EDA8A}|PlantCare\\PlantCare.csproj|d:\\dev_02409gh_kn\\kimngan_doantotnghiep\\plantcare\\plantcare\\areas\\adminql\\views\\login\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
@@ -39,10 +50,6 @@
       "RelativeMoniker": "D:0:0:{2ED2C94D-2AFE-4539-B1FE-1CC0D23EDA8A}|PlantCare\\PlantCare.csproj|solutionrelative:plantcare\\areas\\adminql\\views\\admins\\_edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{2ED2C94D-2AFE-4539-B1FE-1CC0D23EDA8A}|PlantCare\\PlantCare.csproj|d:\\dev_02409gh_kn\\kimngan_doantotnghiep\\plantcare\\plantcare\\areas\\adminql\\views\\admins\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{2ED2C94D-2AFE-4539-B1FE-1CC0D23EDA8A}|PlantCare\\PlantCare.csproj|solutionrelative:plantcare\\areas\\adminql\\views\\admins\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{2ED2C94D-2AFE-4539-B1FE-1CC0D23EDA8A}|PlantCare\\PlantCare.csproj|d:\\dev_02409gh_kn\\kimngan_doantotnghiep\\plantcare\\plantcare\\areas\\adminql\\controllers\\adminscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{2ED2C94D-2AFE-4539-B1FE-1CC0D23EDA8A}|PlantCare\\PlantCare.csproj|solutionrelative:plantcare\\areas\\adminql\\controllers\\adminscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -70,17 +77,17 @@
       "DocumentGroups": [
         {
           "DockedWidth": 221,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "_Layout.cshtml",
               "DocumentMoniker": "D:\\DEV_02409GH_KN\\KimNgan_DoAnTotNghiep\\PlantCare\\PlantCare\\Views\\Shared\\_Layout.cshtml",
               "RelativeDocumentMoniker": "PlantCare\\Views\\Shared\\_Layout.cshtml",
               "ToolTip": "D:\\DEV_02409GH_KN\\KimNgan_DoAnTotNghiep\\PlantCare\\PlantCare\\Views\\Shared\\_Layout.cshtml",
               "RelativeToolTip": "PlantCare\\Views\\Shared\\_Layout.cshtml",
-              "ViewState": "AgIAAGwAAAAAAAAAAAAgwIAAAAB2AAAAAAAAAA==",
+              "ViewState": "AgIAAGwAAAAAAAAAAAAgwH8AAACbAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2025-02-14T09:47:10.789Z",
               "IsPinned": true,
@@ -88,7 +95,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 0,
+              "Title": "Details.cshtml",
+              "DocumentMoniker": "D:\\DEV_02409GH_KN\\KimNgan_DoAnTotNghiep\\PlantCare\\PlantCare\\Views\\Services\\Details.cshtml",
+              "RelativeDocumentMoniker": "PlantCare\\Views\\Services\\Details.cshtml",
+              "ToolTip": "D:\\DEV_02409GH_KN\\KimNgan_DoAnTotNghiep\\PlantCare\\PlantCare\\Views\\Services\\Details.cshtml",
+              "RelativeToolTip": "PlantCare\\Views\\Services\\Details.cshtml",
+              "ViewState": "AgIAADYAAAAAAAAAAAAAAD8AAAA3AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-02-16T07:27:48.145Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
               "Title": "ServicesController.cs",
               "DocumentMoniker": "D:\\DEV_02409GH_KN\\KimNgan_DoAnTotNghiep\\PlantCare\\PlantCare\\Controllers\\ServicesController.cs",
               "RelativeDocumentMoniker": "PlantCare\\Controllers\\ServicesController.cs",
@@ -96,12 +116,11 @@
               "RelativeToolTip": "PlantCare\\Controllers\\ServicesController.cs",
               "ViewState": "AgIAAKMAAAAAAAAAAAAAAHcAAACAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-16T07:19:59.486Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-02-16T07:19:59.486Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 4,
               "Title": "Index.cshtml",
               "DocumentMoniker": "D:\\DEV_02409GH_KN\\KimNgan_DoAnTotNghiep\\PlantCare\\PlantCare\\Areas\\AdminQL\\Views\\Login\\Index.cshtml",
               "RelativeDocumentMoniker": "PlantCare\\Areas\\AdminQL\\Views\\Login\\Index.cshtml",
@@ -109,12 +128,11 @@
               "RelativeToolTip": "PlantCare\\Areas\\AdminQL\\Views\\Login\\Index.cshtml",
               "ViewState": "AgIAAFoAAAAAAAAAAAAAAHUAAABJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-02-15T15:40:55.986Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-02-15T15:40:55.986Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 9,
               "Title": "HomeController.cs",
               "DocumentMoniker": "D:\\DEV_02409GH_KN\\KimNgan_DoAnTotNghiep\\PlantCare\\PlantCare\\Controllers\\HomeController.cs",
               "RelativeDocumentMoniker": "PlantCare\\Controllers\\HomeController.cs",
@@ -126,7 +144,32 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 2,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "D:\\DEV_02409GH_KN\\KimNgan_DoAnTotNghiep\\PlantCare\\PlantCare\\Areas\\AdminQL\\Views\\Admins\\Index.cshtml",
+              "RelativeDocumentMoniker": "PlantCare\\Areas\\AdminQL\\Views\\Admins\\Index.cshtml",
+              "ToolTip": "D:\\DEV_02409GH_KN\\KimNgan_DoAnTotNghiep\\PlantCare\\PlantCare\\Areas\\AdminQL\\Views\\Admins\\Index.cshtml",
+              "RelativeToolTip": "PlantCare\\Areas\\AdminQL\\Views\\Admins\\Index.cshtml",
+              "ViewState": "AgIAADMAAAAAAAAAAAAAAE8AAAAtAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-02-13T10:34:39.553Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "shop-details.html",
+              "DocumentMoniker": "D:\\alazea-gh-pages\\alazea-gh-pages\\shop-details.html",
+              "RelativeDocumentMoniker": "..\\..\\..\\alazea-gh-pages\\alazea-gh-pages\\shop-details.html",
+              "ToolTip": "D:\\alazea-gh-pages\\alazea-gh-pages\\shop-details.html",
+              "RelativeToolTip": "..\\..\\..\\alazea-gh-pages\\alazea-gh-pages\\shop-details.html",
+              "ViewState": "AgIAAJwAAAAAAAAAAAAAAKEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001512|",
+              "WhenOpened": "2025-02-16T07:24:45.427Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
               "Title": "AdminsController.cs",
               "DocumentMoniker": "D:\\DEV_02409GH_KN\\KimNgan_DoAnTotNghiep\\PlantCare\\PlantCare\\Areas\\AdminQL\\Controllers\\AdminsController.cs",
               "RelativeDocumentMoniker": "PlantCare\\Areas\\AdminQL\\Controllers\\AdminsController.cs",
@@ -138,19 +181,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "Index.cshtml",
-              "DocumentMoniker": "D:\\DEV_02409GH_KN\\KimNgan_DoAnTotNghiep\\PlantCare\\PlantCare\\Areas\\AdminQL\\Views\\Admins\\Index.cshtml",
-              "RelativeDocumentMoniker": "PlantCare\\Areas\\AdminQL\\Views\\Admins\\Index.cshtml",
-              "ToolTip": "D:\\DEV_02409GH_KN\\KimNgan_DoAnTotNghiep\\PlantCare\\PlantCare\\Areas\\AdminQL\\Views\\Admins\\Index.cshtml",
-              "RelativeToolTip": "PlantCare\\Areas\\AdminQL\\Views\\Admins\\Index.cshtml",
-              "ViewState": "AgIAADMAAAAAAAAAAAAAAFIAAABVAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-02-13T10:34:39.553Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 11,
               "Title": "_Edit.cshtml",
               "DocumentMoniker": "D:\\DEV_02409GH_KN\\KimNgan_DoAnTotNghiep\\PlantCare\\PlantCare\\Areas\\AdminQL\\Views\\Admins\\_Edit.cshtml",
               "RelativeDocumentMoniker": "PlantCare\\Areas\\AdminQL\\Views\\Admins\\_Edit.cshtml",
@@ -162,7 +193,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 10,
               "Title": "Create.cshtml",
               "DocumentMoniker": "D:\\DEV_02409GH_KN\\KimNgan_DoAnTotNghiep\\PlantCare\\PlantCare\\Areas\\AdminQL\\Views\\Admins\\Create.cshtml",
               "RelativeDocumentMoniker": "PlantCare\\Areas\\AdminQL\\Views\\Admins\\Create.cshtml",
@@ -174,7 +205,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 6,
               "Title": "Admin.cshtml",
               "DocumentMoniker": "D:\\DEV_02409GH_KN\\KimNgan_DoAnTotNghiep\\PlantCare\\PlantCare\\Areas\\AdminQL\\Views\\Shared\\Admin.cshtml",
               "RelativeDocumentMoniker": "PlantCare\\Areas\\AdminQL\\Views\\Shared\\Admin.cshtml",
@@ -182,12 +213,11 @@
               "RelativeToolTip": "PlantCare\\Areas\\AdminQL\\Views\\Shared\\Admin.cshtml",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAATAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-02-15T15:40:02.64Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-02-15T15:40:02.64Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 7,
               "Title": "_NavBar.cshtml",
               "DocumentMoniker": "D:\\DEV_02409GH_KN\\KimNgan_DoAnTotNghiep\\PlantCare\\PlantCare\\Areas\\AdminQL\\Views\\Shared\\_NavBar.cshtml",
               "RelativeDocumentMoniker": "PlantCare\\Areas\\AdminQL\\Views\\Shared\\_NavBar.cshtml",
@@ -199,7 +229,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 8,
               "Title": "styles.css",
               "DocumentMoniker": "D:\\DEV_02409GH_KN\\KimNgan_DoAnTotNghiep\\PlantCare\\PlantCare\\wwwroot\\styles.css",
               "RelativeDocumentMoniker": "PlantCare\\wwwroot\\styles.css",
@@ -211,7 +241,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 13,
               "Title": "_Details.cshtml",
               "DocumentMoniker": "D:\\DEV_02409GH_KN\\KimNgan_DoAnTotNghiep\\PlantCare\\PlantCare\\Areas\\AdminQL\\Views\\Admins\\_Details.cshtml",
               "RelativeDocumentMoniker": "PlantCare\\Areas\\AdminQL\\Views\\Admins\\_Details.cshtml",
@@ -223,7 +253,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 14,
               "Title": "_SideBar.cshtml",
               "DocumentMoniker": "D:\\DEV_02409GH_KN\\KimNgan_DoAnTotNghiep\\PlantCare\\PlantCare\\Areas\\AdminQL\\Views\\Shared\\_SideBar.cshtml",
               "RelativeDocumentMoniker": "PlantCare\\Areas\\AdminQL\\Views\\Shared\\_SideBar.cshtml",
@@ -235,7 +265,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 15,
               "Title": "styles.css",
               "DocumentMoniker": "D:\\DEV_02409GH_KN\\KimNgan_DoAnTotNghiep\\PlantCare\\PlantCare\\wwwroot\\assets\\css\\styles.css",
               "RelativeDocumentMoniker": "PlantCare\\wwwroot\\assets\\css\\styles.css",
@@ -247,7 +277,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 16,
               "Title": "_Edit.cshtml",
               "DocumentMoniker": "D:\\DEV_02409GH_KN\\KimNgan_DoAnTotNghiep\\PlantCare\\PlantCare\\Areas\\AdminQL\\Views\\ServiceCategories\\_Edit.cshtml",
               "RelativeDocumentMoniker": "PlantCare\\Areas\\AdminQL\\Views\\ServiceCategories\\_Edit.cshtml",

@@ -21,6 +21,8 @@ public partial class Service
 
     public int? CategoryServiceId { get; set; }
 
+    public string? Image { get; set; }
+
     public virtual ServiceCategory? CategoryService { get; set; }
 
     public virtual ICollection<Feedback> Feedbacks { get; set; } = new List<Feedback>();

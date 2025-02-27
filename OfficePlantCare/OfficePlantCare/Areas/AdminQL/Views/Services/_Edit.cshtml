@@ -1,0 +1,54 @@
+﻿@model OfficePlantCare.Models.Service
+
+<form asp-action="Edit" method="post">
+    <input type="hidden" asp-for="ServiceId" />
+    <div class="form-group">
+        <label asp-for="ServiceName" class="control-label"></label>
+        <input asp-for="ServiceName" class="form-control" />
+        <span asp-validation-for="ServiceName" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Description" class="control-label"></label>
+        <input asp-for="Description" class="form-control" />
+        <span asp-validation-for="Description" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="CreatedDate" class="control-label"></label>
+        <input asp-for="CreatedDate" class="form-control" />
+        <span asp-validation-for="CreatedDate" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="UpdatedDate" class="control-label"></label>
+        <input asp-for="UpdatedDate" class="form-control" />
+        <span asp-validation-for="UpdatedDate" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Status" class="control-label"></label>
+        <select asp-for="Status" class="form-control">
+            <option value="Đang hoạt động">Đang hoạt động</option>
+            <option value="Tạm dừng">Tạm dừng</option>
+        </select>
+        <span asp-validation-for="Status" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="CategoryServiceId" class="control-label"></label>
+        <select asp-for="CategoryServiceId" class="form-control" asp-items="ViewBag.CategoryServiceId"></select>
+        <span asp-validation-for="CategoryServiceId" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Image" class="control-label"><i class="fa-solid fa-image me-2"></i>Ảnh Hiện Tại</label>
+        @if (!string.IsNullOrEmpty(Model.Image))
+        {
+            <div>
+                <img src="@Model.Image" alt="Avatar" style="width: 150px; height: 150px; object-fit: cover; border-radius: 50%;" />
+            </div>
+        }
+        <label asp-for="Image" class="control-label"><i class="fa-solid fa-upload me-2"></i>Tải Lên Ảnh Mới</label>
+        <input asp-for="Image" type="file" class="form-control" />
+        <span asp-validation-for="Image" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-primary">Lưu</button>
+</form>
+<div class="mt-3">
+    <a asp-action="Index" class="btn btn-secondary">Quay lại danh sách</a>
+</div>

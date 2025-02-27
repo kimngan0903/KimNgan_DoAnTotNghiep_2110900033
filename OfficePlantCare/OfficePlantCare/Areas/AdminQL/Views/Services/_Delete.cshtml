@@ -1,0 +1,8 @@
+﻿@model OfficePlantCare.Models.Service
+
+<form asp-action="Delete" method="post">
+    <input type="hidden" asp-for="ServiceId" />
+    <p>Bạn có chắc chắn muốn xóa <strong>@Model.ServiceName</strong> không?</p>
+    <button type="submit" class="btn btn-danger">Xóa</button>
+    <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
+</form>

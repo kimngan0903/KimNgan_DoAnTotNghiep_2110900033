@@ -125,7 +125,7 @@
                                                             <ul class="dropdown">
                                                                 @foreach (var service in category.Services)
                                                                 {
-                                                                    <li><a href="~/services/details/@service.ServiceId">@service.ServiceName</a></li>
+                                                                    <li><a asp-controller="Services" asp-action="Details" asp-route-id="@service.ServiceId">@service.ServiceName</a></li>
                                                                     <hr style="margin-top: 5px;margin-bottom: 5px;" />
 
                                                                 }

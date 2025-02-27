@@ -26,5 +26,6 @@ public partial class Admin
     public string? Address { get; set; }
 
     public virtual Role? Role { get; set; }
+
     public virtual ICollection<ServiceRequest> ServiceRequests { get; set; } = new List<ServiceRequest>();
 }

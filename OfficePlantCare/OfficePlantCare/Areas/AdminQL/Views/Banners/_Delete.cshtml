@@ -1,0 +1,8 @@
+﻿@model OfficePlantCare.Models.Banner
+
+<form asp-action="Delete" method="post" enctype="multipart/form-data">
+    <input type="hidden" name="id" value="@Model.BannerId" />
+    <p>Bạn có chắc chắn muốn xóa <strong>@Model.Title</strong> không?</p>
+    <button type="submit" class="btn btn-danger">Xóa</button>
+    <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
+</form>

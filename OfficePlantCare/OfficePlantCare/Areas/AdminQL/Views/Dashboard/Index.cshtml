@@ -1,0 +1,250 @@
+﻿@model OfficePlantCare.Areas.AdminQL.Models.Dashboard
+
+@{
+    ViewData["Title"] = "DashBoard";
+    Layout = "~/Areas/AdminQL/Views/Shared/Admin.cshtml";
+}
+<!-- [ Main Content ] start -->
+<div class="pcoded-main-container">
+    <div class="pcoded-content">
+        <!-- [ breadcrumb ] start -->
+        <div class="page-header">
+            <div class="page-block">
+                <div class="row align-items-center">
+                    <div class="col-md-12">
+                        <div class="page-header-title">
+                            <h5 class="m-b-10">Dashboard Analytics</h5>
+                        </div>
+                        <ul class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="index.html"><i class="feather icon-home"></i></a></li>
+                            <li class="breadcrumb-item"><a href="#!">Dashboard Analytics</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- [ breadcrumb ] end -->
+        <!-- [ Main Content ] start -->
+        <div class="row">
+            <!-- table card-1 start -->
+            <div class="col-md-12 col-xl-6">
+                <div class="card flat-card">
+                    <div class="row-table">
+                        <div class="col-sm-6 card-body br">
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <i class="icon feather icon-user text-c-green mb-1 d-block"></i>
+                                </div>
+                                <div class="col-sm-8 text-md-center">
+                                    <h5>@Model.KhachHang</h5>
+                                    <span>Khách hàng</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 card-body">
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <i class="icon feather icon-users text-c-red mb-1 d-block"></i>
+                                </div>
+                                <div class="col-sm-8 text-md-center">
+                                    <h5>@Model.NhanVien</h5>
+                                    <span>Nhân viên</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row-table">
+                        <div class="col-sm-6 card-body br">
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <i class="icon feather icon-activity text-c-blue mb-1 d-block"></i>
+                                </div>
+                                <div class="col-sm-8 text-md-center">
+                                    <h5>@Model.DichVu</h5>
+                                    <span>Dịch vụ</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 card-body">
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <i class="icon feather icon-file-text text-c-yellow mb-1 d-block"></i>
+                                </div>
+                                <div class="col-sm-8 text-md-center">
+                                    <h5>@Model.HopDong</h5>
+                                    <span>Hợp đồng</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- table card-1 end -->
+            <!-- table card-2 start -->
+            <div class="col-md-12 col-xl-6">
+                <div class="card flat-card">
+                    <div class="row-table">
+                        <div class="col-sm-6 card-body br">
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <i class="icon feather icon-shopping-cart text-c-blue mb-1 d-block"></i>
+                                </div>
+                                <div class="col-sm-8 text-md-center">
+                                    <h5>@Model.DonHang</h5>
+                                    <span>Đơn hàng</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 card-body">
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <i class="icon feather icon-star text-c-blue mb-1 d-block"></i>
+                                </div>
+                                <div class="col-sm-8 text-md-center">
+                                    <h5>@Model.DanhGia</h5>
+                                    <span>Đánh giá</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row-table">
+                        <div class="col-sm-6 card-body br">
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <i class="icon feather icon-box text-c-blue mb-1 d-block"></i>
+                                </div>
+                                <div class="col-sm-8 text-md-center">
+                                    <h5>@Model.YeuCauPhatSinh</h5>
+                                    <span>Yêu cầu phát sinh</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 card-body br">
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <i class="icon feather icon-briefcase text-c-green mb-1 d-block"></i>
+                                </div>
+                                <div class="col-sm-8 text-md-center">
+                                    <h5>@Model.DoiTac</h5>
+                                    <span>Đối tác</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12 col-xl-6">
+                <div class="card flat-card mb-4">
+                    <div class="row">
+                        <!-- Card 1: Doanh thu -->
+                        <div class="col-sm-6 card-body br">
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <i class="icon feather icon-bar-chart text-c-green mb-1 d-block"></i>
+                                </div>
+                                <div class="col-sm-8 text-md-center">
+                                    <h5>@Model.DoanhThu.ToString("C0")</h5>
+                                    <span>Doanh thu</span>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Card 2: Chi phí -->
+                        <div class="col-sm-6 card-body">
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <i class="icon feather icon-credit-card text-c-red mb-1 d-block"></i>
+                                </div>
+                                <div class="col-sm-8 text-md-center">
+                                    <h5>@Model.ChiPhi.ToString("C0")</h5>
+                                    <span>Chi phí</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <!-- Card 3: Lợi nhuận -->
+                        <div class="col-sm-12 card-body">
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <i class="icon feather icon-trending-up text-c-blue mb-1 d-block"></i>
+                                </div>
+                                <div class="col-sm-8 text-md-center">
+                                    <h5>@Model.LoiNhuan.ToString("C0")</h5>
+                                    <span>Lợi nhuận</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- table card-2 end -->
+            <!-- Widget primary-success card start -->
+            <!-- Container for the chart -->
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">THỐNG KÊ TỔNG QUAN</h5>
+                        <canvas id="dashboardChart"></canvas>
+                    </div>
+                </div>
+            </div>
+            <!-- Widget primary-success card end -->
+            <!-- Latest Customers end -->
+        </div>
+        <!-- [ Main Content ] end -->
+    </div>
+</div>
+<!-- Widget primary-success card end -->
+<!-- Latest Customers end -->
+<!-- [ Main Content ] end -->
+<!-- [ Main Content ] end -->
+<!-- Script to generate the line chart -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        var ctx = document.getElementById("dashboardChart").getContext("2d");
+        var dashboardChart = new Chart(ctx, {
+            type: "bar",
+            data: {
+                labels: ["Khách hàng", "Nhân viên", "Dịch vụ", "Hợp đồng", "Đơn hàng", "Đánh giá", "Yêu cầu phát sinh", "Đối tác", "Doanh thu", "Chi phí", "Lợi nhuận"],
+                datasets: [{
+                    label: "Số lượng & Giá trị",
+                    data: [
+    @Model.KhachHang,
+    @Model.NhanVien,
+    @Model.DichVu,
+    @Model.HopDong,
+    @Model.DonHang,
+    @Model.DanhGia,
+    @Model.YeuCauPhatSinh,
+    @Model.DoiTac,
+    @Model.DoanhThu,
+    @Model.ChiPhi,
+    @Model.LoiNhuan
+                        ],
+                    backgroundColor: [
+                        "rgba(54, 162, 235, 0.5)",
+                        "rgba(255, 99, 132, 0.5)",
+                        "rgba(255, 206, 86, 0.5)",
+                        "rgba(75, 192, 192, 0.5)",
+                        "rgba(153, 102, 255, 0.5)",
+                        "rgba(255, 159, 64, 0.5)",
+                        "rgba(199, 199, 199, 0.5)",
+                        "rgba(83, 102, 255, 0.5)",
+                        "rgba(0, 255, 0, 0.5)",  // Doanh thu
+                        "rgba(255, 0, 0, 0.5)",  // Chi phí
+                        "rgba(0, 0, 255, 0.5)"   // Lợi nhuận
+                    ],
+                    borderColor: "rgba(0, 0, 0, 0.8)",
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: { beginAtZero: true }
+                }
+            }
+        });
+    });
+</script>
