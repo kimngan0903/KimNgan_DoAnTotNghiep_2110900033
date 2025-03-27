@@ -1,0 +1,186 @@
+﻿@model X.PagedList.IPagedList<OfficePlantCare.Areas.AdminQL.Models.NotificationViewModel>
+@using X.PagedList.Mvc.Core;
+@{
+    ViewData["Title"] = "Tất cả thông báo";
+    Layout = "~/Areas/AdminQL/Views/Shared/Admin.cshtml";
+}
+
+<div class="pcoded-main-container">
+    <div class="pcoded-content">
+        <!-- Page Header -->
+        <div class="page-header card shadow-sm border-0">
+            <div class="page-block">
+                <div class="row align-items-center">
+                    <div class="col-md-12">
+                        <div class="page-header-title d-flex justify-content-between align-items-center py-3 ml-3">
+                            <h5 class="m-0 text-success font-weight-bold">TẤT CẢ THÔNG BÁO</h5>
+                            <nav aria-label="breadcrumb">
+                                <ol class="breadcrumb mb-0 bg-transparent">
+                                    <li class="breadcrumb-item"><a asp-area="AdminQL" asp-controller="Dashboard" asp-action="AllNotifications"><i class="fa icon-home"></i></a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">TẤT CẢ THÔNG BÁO</li>
+                                </ol>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card shadow-sm border-0">
+                    <div class="card-header bg-white px-4 py-3 border-bottom">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <h5 class="text-success font-weight-bold mb-0">DANH SÁCH THÔNG BÁO</h5>
+                            <div class="d-flex align-items-center gap-3">
+                                <!-- Bộ lọc trạng thái -->
+                                <select id="statusFilter" class="form-select form-select-sm" style="width: 150px;">
+                                    <option value="all">Tất cả trạng thái</option>
+                                    <option value="unread">Chưa đọc</option>
+                                    <option value="read">Đã đọc</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body p-4">
+                        @if (Model == null || !Model.Any())
+                        {
+                            <div class="alert alert-info text-center" role="alert">
+                                <i class="fas fa-info-circle me-2"></i> Không có thông báo nào để hiển thị.
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="table-responsive">
+                                <table class="table table-hover table-striped" id="notificationTable">
+                                    <thead class="bg-dark text-white">
+                                        <tr>
+                                            <th class="text-muted">Loại</th>
+                                            <th class="text-muted">Thông báo</th>
+                                            <th class="text-muted">Thời gian</th>
+                                            <th class="text-muted">Trạng thái</th>
+                                            <th class="text-muted">Hành động</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var notification in Model)
+                                        {
+                                            <tr class="@(notification.IsRead ? "" : "table-primary")" data-status="@(notification.IsRead ? "read" : "unread")">
+                                                <td><i class="@notification.Icon me-2"></i> @notification.Type</td>
+                                                <td>
+                                                    @if (!string.IsNullOrEmpty(notification.Link))
+                                                    {
+                                                        <a href="@notification.Link" class="text-decoration-none">@notification.Message</a>
+                                                    }
+                                                    else
+                                                    {
+                                                        <span>@notification.Message</span>
+                                                    }
+                                                </td>
+                                                <td>@notification.TimeAgo</td>
+                                                <td>
+                                                    @if (!notification.IsRead)
+                                                    {
+                                                        <span class="badge badge-danger">Chưa đọc</span>
+                                                    }
+                                                    else
+                                                    {
+                                                        <span class="badge badge-success">Đã đọc</span>
+                                                    }
+                                                </td>
+                                                <td>
+                                                    @if (!string.IsNullOrEmpty(notification.Link))
+                                                    {
+                                                        <a href="@notification.Link" class="btn btn-sm btn-outline-primary">Xem chi tiết</a>
+                                                    }
+                                                    else
+                                                    {
+                                                        <button class="btn btn-sm btn-outline-secondary" disabled>Xem chi tiết</button>
+                                                    }
+                                                </td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                            <!-- Pagination -->
+                            <div class="d-flex justify-content-center mt-4">
+                                @Html.PagedListPager(
+                                         Model,
+                                         page => Url.Action("Index", new { page = page, name = ViewBag.keyword }),
+                                         new PagedListRenderOptions
+                            {
+                                LiElementClasses = new[] { "page-item" },
+                                PageClasses = new[] { "page-link" },
+                                UlElementClasses = new[] { "pagination" },
+                                ActiveLiElementClass = "active",
+                                LinkToFirstPageFormat = "«",
+                                LinkToLastPageFormat = "»",
+                                LinkToNextPageFormat = "›",
+                                LinkToPreviousPageFormat = "‹",
+                                DisplayLinkToFirstPage = PagedListDisplayMode.Always,
+                                DisplayLinkToLastPage = PagedListDisplayMode.Always,
+                                DisplayLinkToPreviousPage = PagedListDisplayMode.Always,
+                                DisplayLinkToNextPage = PagedListDisplayMode.Always
+                            }
+                                         )
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .card {
+        transition: all 0.3s ease;
+    }
+
+        .card:hover {
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            transform: translateY(-5px);
+        }
+
+    .table-primary {
+        background-color: #e7f1ff !important;
+    }
+
+    .badge {
+        font-size: 0.85em;
+        padding: 0.5em 0.75em;
+    }
+
+    .form-select-sm {
+        padding: 0.25rem 0.5rem;
+        font-size: 0.875rem;
+    }
+
+    .table th, .table td {
+        vertical-align: middle;
+    }
+</style>
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const statusFilter = document.getElementById('statusFilter');
+        const tableRows = document.querySelectorAll('#notificationTable tbody tr');
+
+        // Lọc trạng thái thông báo
+        statusFilter.addEventListener('change', function () {
+            const selectedStatus = this.value;
+
+            tableRows.forEach(row => {
+                const rowStatus = row.getAttribute('data-status');
+                if (selectedStatus === 'all' || rowStatus === selectedStatus) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+        });
+    });
+</script>

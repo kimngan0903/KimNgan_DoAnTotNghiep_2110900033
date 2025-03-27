@@ -1,0 +1,50 @@
+﻿@model OfficePlantCare.Models.CareScheduleSupply
+<link rel="stylesheet" href="~/assets/css/details.css" />
+
+<div class="modal-body p-0">
+    <div class="card shadow-sm border-0 rounded-lg p-1">
+        <h3 class="text-success text-center font-weight-bold mb-4"><i class="fa-solid fa-info-circle me-2"></i> CHI TIẾT THÔNG TIN</h3>
+        <div class="row">
+            <!-- Cột trái -->
+            <div class="col-md-6">
+                <div class="form-group mb-4">
+                    <label class="control-label fw-bold text-muted">
+                        <i class="fa-solid fa-boxes-stacked me-2"></i>@Html.DisplayNameFor(model => model.QuantityUsed)
+                    </label>
+                    <div class="form-control rounded-pill bg-light">@Html.DisplayFor(model => model.QuantityUsed)</div>
+                </div>
+                <div class="form-group mb-4">
+                    <label class="control-label fw-bold text-muted">
+                        <i class="fa-solid fa-note-sticky me-2"></i>@Html.DisplayNameFor(model => model.Notes)
+                    </label>
+                    <div class="form-control rounded-pill bg-light">@Html.DisplayFor(model => model.Notes)</div>
+                </div>
+            </div>
+
+            <!-- Cột phải -->
+            <div class="col-md-6">
+                <div class="form-group mb-4">
+                    <label class="control-label fw-bold text-muted">
+                        <i class="fa-solid fa-list-ul me-2"></i>@Html.DisplayNameFor(model => model.ScheduleId)
+                    </label>
+                    <div class="form-control rounded-pill bg-light">@Html.DisplayFor(model => model.ScheduleId)</div>
+                </div>
+                <div class="form-group mb-4">
+                    <label class="control-label fw-bold text-muted">
+                        <i class="fa-solid fa-cubes me-2"></i>@Html.DisplayNameFor(model => model.SupplyId)
+                    </label>
+                    <div class="form-control rounded-pill bg-light">@Html.DisplayFor(model => model.Supply.SupplyName)</div>
+                </div>
+            </div>
+        </div>
+        <!-- Buttons -->
+        <div class="form-group d-flex gap-3 justify-content-center">
+            <button type="button" class="btn btn-primary rounded-pill px-4" onclick="loadModal('@Url.Action("Edit", "CareScheduleSupplies", new { id = Model?.CareScheduleSupplyId })')">
+                <i class="fas fa-edit me-2"></i>Chỉnh sửa
+            </button>
+            <button type="button" class="btn btn-secondary rounded-pill px-4" data-dismiss="modal">
+                <i class="fas fa-times me-2"></i>Đóng
+            </button>
+        </div>
+    </div>
+</div>

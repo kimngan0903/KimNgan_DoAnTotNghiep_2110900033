@@ -1,0 +1,157 @@
+﻿@model X.PagedList.IPagedList<OfficePlantCare.Models.PaymentMethod>
+@using X.PagedList.Mvc.Core;
+
+@{
+    ViewData["Title"] = "Danh sách phương thức thanh toán";
+    Layout = "~/Areas/AdminQL/Views/Shared/Admin.cshtml";
+}
+
+<link rel="stylesheet" href="~/assets/css/index.css" />
+
+<div class="pcoded-main-container">
+    <div class="pcoded-content">
+        <!-- Page Header -->
+        <div class="page-header card shadow-sm border-0">
+            <div class="page-block">
+                <div class="row align-items-center">
+                    <div class="col-md-12">
+                        <div class="page-header-title d-flex justify-content-between align-items-center py-3 ml-3">
+                            <h5 class="m-0 text-success font-weight-bold">QUẢN LÝ PHƯƠNG THỨC THANH TOÁN</h5>
+                            <nav aria-label="breadcrumb">
+                                <ol class="breadcrumb mb-0 bg-transparent">
+                                    <li class="breadcrumb-item"><a asp-area="AdminQL" asp-controller="PaymentMethods" asp-action="Index"><i class="fas fa-home"></i></a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">DANH SÁCH PHƯƠNG THỨC THANH TOÁN</li>
+                                </ol>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card shadow-sm border-0">
+                    <div class="card-header bg-white px-4 py-3 border-bottom">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <h5 class="text-success font-weight-bold mb-0">DANH SÁCH PHƯƠNG THỨC THANH TOÁN</h5>
+                            <div class="d-flex align-items-center gap-3">
+                                <!-- Search Form -->
+                                <form method="get" class="d-flex">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control border-success rounded-pill" name="name" id="keyword"
+                                               value="@ViewBag.keyword" placeholder="Nhập tên phương thức cần tìm" style="max-width: 250px;" />
+                                        <button type="submit" class="btn btn-success rounded-pill ml-2">
+                                            <i class="fas fa-search"></i> Tìm
+                                        </button>
+                                    </div>
+                                </form>
+                                <!-- Add New Button -->
+                                <a class="btn btn-success rounded-pill px-4" asp-action="Create">
+                                    <i class="fas fa-plus"></i> Thêm mới
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card-body p-4">
+                        <div class="table-responsive">
+                            <table class="table table-hover table-striped align-middle">
+                                <thead class="bg-dark">
+                                    <tr>
+                                        <th class="text-muted text-center">
+                                            @Html.DisplayNameFor(model => model.FirstOrDefault().MethodName)
+                                        </th>
+                                        <th class="text-muted text-center">Hành động</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model)
+                                    {
+                                        <tr>
+                                            <td class="text-center">@Html.DisplayFor(modelItem => item.MethodName)</td>
+                                            <td class="text-center">
+                                                <div class="btn-group" role="group">
+                                                    <button class="btn btn-outline-primary btn-sm" onclick="loadModal('@Url.Action("Edit", "PaymentMethods", new { id = item.PaymentMethodId })')"><i class="fas fa-edit"></i> Sửa</button>
+                                                    <button class="btn btn-outline-info btn-sm" onclick="loadModal('@Url.Action("Details", "PaymentMethods", new { id = item.PaymentMethodId })')"><i class="fas fa-info-circle"></i> Chi tiết</button>
+                                                    <button class="btn btn-outline-danger btn-sm" onclick="loadModal('@Url.Action("Delete", "PaymentMethods", new { id = item.PaymentMethodId })')"><i class="fas fa-trash-alt"></i> Xóa</button>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <!-- Pagination -->
+                        <div class="d-flex justify-content-center mt-4">
+                            @Html.PagedListPager(
+                                     Model,
+                                     page => Url.Action("Index", new { page = page, methodName = ViewBag.keyword }),
+                                     new PagedListRenderOptions
+                            {
+                                LiElementClasses = new[] { "page-item" },
+                                PageClasses = new[] { "page-link" },
+                                UlElementClasses = new[] { "pagination" },
+                                ActiveLiElementClass = "active",
+                                LinkToFirstPageFormat = "«",
+                                LinkToLastPageFormat = "»",
+                                LinkToNextPageFormat = "›",
+                                LinkToPreviousPageFormat = "‹",
+                                DisplayLinkToFirstPage = PagedListDisplayMode.Always,
+                                DisplayLinkToLastPage = PagedListDisplayMode.Always,
+                                DisplayLinkToPreviousPage = PagedListDisplayMode.Always,
+                                DisplayLinkToNextPage = PagedListDisplayMode.Always
+                            }
+                                     )
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="modal-container" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content border-0 shadow-lg">
+            <div class="modal-header text-white">
+                <h5 class="modal-title text-success">THÔNG TIN</h5>
+                <button type="button" class="close text-dark" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body" id="modal-content">
+                <!-- Nội dung sẽ được tải bằng AJAX -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+@section Scripts {
+    <script>
+        function loadModal(url) {
+            $.get(url, function (data) {
+                $("#modal-content").html(data);
+                $("#modal-container").modal("show");
+            });
+        }
+
+        // Kiểm tra và hiển thị thông báo thành công
+        $(document).ready(function () {
+            var successMessage = '@Html.Raw(System.Web.HttpUtility.JavaScriptStringEncode(TempData["SuccessMessage"]?.ToString() ?? ""))';
+            if (successMessage) {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Thành công!',
+                    text: successMessage,
+                    confirmButtonText: 'OK',
+                    confirmButtonColor: '#1ABC9C'
+                });
+            }
+        });
+    </script>
+}

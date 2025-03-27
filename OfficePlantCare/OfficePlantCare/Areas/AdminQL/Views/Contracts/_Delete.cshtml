@@ -1,8 +1,0 @@
-﻿@model OfficePlantCare.Models.Contract
-
-<form asp-action="Delete" method="post" enctype="multipart/form-data">
-    <input type="hidden" name="id" value="@Model.ContractId" />
-    <p>Bạn có chắc chắn muốn xóa <strong>@Model.ContractCode</strong> không?</p>
-    <button type="submit" class="btn btn-danger">Xóa</button>
-    <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
-</form>

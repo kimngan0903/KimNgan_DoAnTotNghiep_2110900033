@@ -1,0 +1,81 @@
+﻿@model OfficePlantCare.Models.Contact
+<link rel="stylesheet" href="~/assets/css/details.css" />
+
+<div class="modal-body p-0">
+    <div class="card shadow-sm border-0 rounded-lg p-1">
+        <h3 class="text-success text-center font-weight-bold mb-4"><i class="fa-solid fa-info-circle me-2"></i> CHI TIẾT THÔNG TIN</h3>
+        <div class="row">
+            <!-- Cột trái -->
+            <div class="col-md-6">
+                <div class="form-group mb-4">
+                    <label class="control-label fw-bold text-muted">
+                        <i class="fa-solid fa-boxes-stacked me-2"></i>@Html.DisplayNameFor(model => model.Email)
+                    </label>
+                    <div class="form-control rounded-pill bg-light">@Html.DisplayFor(model => model.Email)</div>
+                </div>
+                <div class="form-group mb-4">
+                    <label class="control-label fw-bold text-muted">
+                        <i class="fa-solid fa-note-sticky me-2"></i>@Html.DisplayNameFor(model => model.Phone)
+                    </label>
+                    <div class="form-control rounded-pill bg-light">@Html.DisplayFor(model => model.Phone)</div>
+                </div>
+                <div class="form-group mb-4">
+                    <label class="control-label fw-bold text-muted">
+                        <i class="fa-solid fa-note-sticky me-2"></i>@Html.DisplayNameFor(model => model.Address)
+                    </label>
+                    <div class="form-control rounded-pill bg-light">@Html.DisplayFor(model => model.Address)</div>
+                </div>
+            </div>
+
+            <!-- Cột phải -->
+            <div class="col-md-6">
+                <div class="form-group mb-4">
+                    <label class="control-label fw-bold text-muted">
+                        <i class="fa-solid fa-calendar-days me-2"></i>@Html.DisplayNameFor(model => model.Description)
+                    </label>
+                    <div class="form-control rounded-pill bg-light">@Html.DisplayFor(model => model.Description)</div>
+                </div>
+                <div class="form-group mb-4">
+                    <label class="control-label fw-bold text-muted">
+                        <i class="fa-solid fa-calendar-days me-2"></i>@Html.DisplayNameFor(model => model.CreatedDate)
+                    </label>
+                    <div class="form-control rounded-pill bg-light">@Html.DisplayFor(model => model.CreatedDate)</div>
+                </div>
+                <div class="form-group mb-4">
+                    <label class="control-label fw-bold text-muted">
+                        <i class="fa-solid fa-toggle-on me-2"></i>@Html.DisplayNameFor(model => model.Status)
+                    </label>
+                    <div class="form-control rounded-pill bg-light">
+                        @if (Model?.Status != null)
+                        {
+                            if (Model.Status.ToString() == "Hoàn thành")
+                            {
+                                <span class="badge badge-success px-3 py-1">Hoàn thành</span> <!-- Màu xanh -->
+                            }
+                            else if (Model.Status.ToString() == "Đang xử lý")
+                            {
+                                <span class="badge badge-warning px-3 py-1">Đang xử lý</span> <!-- Màu vàng -->
+                            }
+                            else
+                            {
+                                <span class="badge badge-danger px-3 py-1">Chưa xử lý</span> <!-- Màu đỏ -->
+                            }
+                        }
+                        else
+                        {
+                            <span class="badge badge-secondary px-3 py-1">Không xác định</span> <!-- Màu xám nếu giá trị null -->
+                        }
+                    </div>
+            </div>
+        </div>
+        <!-- Buttons -->
+        <div class="form-group d-flex gap-3 justify-content-center">
+            <button type="button" class="btn btn-primary rounded-pill px-4" onclick="loadModal('@Url.Action("Edit", "Contacts", new { id = Model?.ContactId })')">
+                <i class="fas fa-edit me-2"></i>Chỉnh sửa
+            </button>
+            <button type="button" class="btn btn-secondary rounded-pill px-4" data-dismiss="modal">
+                <i class="fas fa-times me-2"></i>Đóng
+            </button>
+        </div>
+    </div>
+</div>

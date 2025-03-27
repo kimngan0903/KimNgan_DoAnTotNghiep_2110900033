@@ -1,0 +1,152 @@
+﻿@model OfficePlantCare.Models.CareSchedule
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Areas/AdminQL/Views/Shared/Admin.cshtml";
+}
+
+<h4>CareSchedule</h4>
+<hr />
+<div class="row">
+    <div class="col-md-12">
+        <form asp-action="Create" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <!-- Dropdown to select the type -->
+            <div class="form-group">
+                <label class="control-label">Loại</label>
+                <select id="typeSelector" name="type" class="form-control">
+                    <option value="Contract">Hợp đồng</option>
+                    <option value="Order">Đơn hàng</option>
+                    <option value="ServiceRequest">Yêu cầu dịch vụ</option>
+                </select>
+            </div>
+
+            <!-- Contract Dropdown -->
+            <div class="form-group type-section" id="contractSection" style="@(ViewData["SelectedType"]?.ToString() == "Contract" ? "" : "display: none;")">
+                <label asp-for="ContractId" class="control-label"></label>
+                <select asp-for="ContractId" class="form-control" asp-items="ViewBag.ContractId"></select>
+                <span asp-validation-for="ContractId" class="text-danger"></span>
+            </div>
+
+            <!-- Order Dropdown -->
+            <div class="form-group type-section" id="orderSection" style="@(ViewData["SelectedType"]?.ToString() == "Order" ? "" : "display: none;")">
+                <label asp-for="OrderId" class="control-label"></label>
+                <select asp-for="OrderId" class="form-control" asp-items="ViewBag.OrderId"></select>
+                <span asp-validation-for="OrderId" class="text-danger"></span>
+            </div>
+
+            <!-- Request Dropdown -->
+            <div class="form-group type-section" id="requestSection" style="@(ViewData["SelectedType"]?.ToString() == "Request" ? "" : "display: none;")">
+                <label asp-for="RequestId" class="control-label"></label>
+                <select asp-for="RequestId" class="form-control" asp-items="ViewBag.RequestId"></select>
+                <span asp-validation-for="RequestId" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="PlantId" class="control-label"></label>
+                <select asp-for="PlantId" class="form-control" asp-items="ViewBag.PlantId"></select>
+                <span asp-validation-for="PlantId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="StaffId" class="control-label"></label>
+                <select asp-for="StaffId" class="form-control" asp-items="ViewBag.StaffId"></select>
+                <span asp-validation-for="StaffId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ScheduledDate" class="control-label"></label>
+                <input asp-for="ScheduledDate" type="date" class="form-control" />
+                <span asp-validation-for="ScheduledDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ScheduledTime" class="control-label"></label>
+                <input asp-for="ScheduledTime" type="time" class="form-control" />
+                <span asp-validation-for="ScheduledTime" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ActualDate" class="control-label"></label>
+                <input asp-for="ActualDate" type="date" class="form-control" />
+                <span asp-validation-for="ActualDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Duration" class="control-label"></label>
+                <input asp-for="Duration" class="form-control" />
+                <span asp-validation-for="Duration" class="text-danger"></span>
+            </div>
+            <div class="form-group mb-4">
+                <i class="fa-solid fa-toggle-on me-2"></i>
+                <label asp-for="Status" class="control-label fw-bold text-muted"></label>
+                <select asp-for="Status" class="form-control custom-select rounded-pill">
+                    <option value="Hoàn thành">Hoàn thành</option>
+                    <option value="Đang thực hiện">Đang thực hiện</option>
+                    <option value="Chưa thực hiện">Chưa thực hiện</option>
+                </select>
+                <span asp-validation-for="Status" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Vật tư sử dụng</label>
+                <select name="selectedSupplies" multiple class="form-control" id="suppliesSelect">
+                    @foreach (var item in ViewData["Supplies"] as MultiSelectList)
+                    {
+                        <option value="@item.Value">@item.Text</option>
+                    }
+                </select>
+            </div>
+            <div id="supplyQuantities">
+                <!-- JavaScript sẽ thêm các input số lượng tại đây -->
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            // Handle type selector change
+            $("#typeSelector").change(function () {
+                var selectedType = $(this).val();
+                $(".type-section").hide();
+                if (selectedType === "Contract") {
+                    $("#contractSection").show();
+                    $("#orderSection select").val("");
+                    $("#requestSection select").val("");
+                } else if (selectedType === "Order") {
+                    $("#orderSection").show();
+                    $("#contractSection select").val("");
+                    $("#requestSection select").val("");
+                } else if (selectedType === "Request") {
+                    $("#requestSection").show();
+                    $("#contractSection select").val("");
+                    $("#orderSection select").val("");
+                }
+            });
+
+            // Handle supplies selection
+            $('#suppliesSelect').on('change', function () {
+                var selectedSupplies = $(this).val();
+                var supplyQuantitiesDiv = $('#supplyQuantities');
+                supplyQuantitiesDiv.empty();
+
+                if (selectedSupplies) {
+                    selectedSupplies.forEach(function (supplyId, index) {
+                        // Lấy tên vật tư từ option để hiển thị
+                        var supplyName = $('#suppliesSelect option[value="' + supplyId + '"]').text();
+                        supplyQuantitiesDiv.append(`
+                            <div class="form-group">
+                                <label>Số lượng cho "${supplyName}"</label>
+                                <input type="number" name="quantities[${index}]" class="form-control" min="0" step="0.1" required />
+                            </div>
+                        `);
+                    });
+                }
+            });
+        });
+    </script>
+}

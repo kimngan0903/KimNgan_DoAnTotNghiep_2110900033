@@ -1,0 +1,69 @@
+﻿@model OfficePlantCare.Models.LoginUser
+@{
+    ViewData["Title"] = "Đăng nhập";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@if (!ViewData.ModelState.IsValid)
+{
+    <div class="alert alert-danger">
+        <ul>
+            @foreach (var modelState in ViewData.ModelState.Values)
+            {
+                foreach (var error in modelState.Errors)
+                {
+                    <li>@error.ErrorMessage</li>
+                }
+            }
+        </ul>
+    </div>
+}
+
+<body class="bg-light" style="background: url('https://newoffice24h.com/wp-content/uploads/2023/07/thiet-ke-van-phong-xanh-43.jpg') no-repeat center center fixed; background-size: cover;">
+    <div class="d-flex justify-content-center align-items-center vh-100" style="margin-bottom: 2rem; margin-top: 5rem">
+        <section class="shadow-lg p-4 rounded bg-white" style="width: 100%; max-width: 450px;">
+            <h2 class="text-center mb-4" style="color: #48c023">ĐĂNG NHẬP!</h2>
+            <p class="text-center text-muted mb-4">Hãy đăng nhập để tiếp tục truy cập</p>
+            <div class="container-fluid">
+                <div class="row d-flex justify-content-center align-items-center">
+                    <div class="col-12">
+                        <form asp-action="Index" method="post">
+                            <!-- Email input -->
+                            <div class="form-outline mb-4">
+                                <label for="form3Example3" class="form-label" style="color: #48c023">Email</label>
+                                <input asp-for="Email" type="email" id="form3Example3" class="custom-input form-control form-control-lg"
+                                       placeholder="Nhập email của bạn" required />
+                            </div>
+
+                            <!-- Password input -->
+                            <div class="form-outline mb-3">
+                                <label for="form3Example4" class="form-label" style="color: #48c023">Mật khẩu</label>
+                                <input asp-for="PasswordHash" type="password" id="form3Example4" class="custom-input form-control form-control-lg"
+                                       placeholder="Nhập mật khẩu" required />
+                            </div>
+
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                <a asp-controller="ForgotPassword" asp-action="ForgotPassword" class="text-body text-decoration-none">Quên mật khẩu?</a>
+                            </div>
+
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-success btn-lg w-100 rounded-pill shadow-sm" name="returnUrl" value="@ViewBag.ReturnUrl">
+                                    Đăng nhập
+                                </button>
+                            </div>
+                            <div class="text-center mt-4">
+                                <p class="small fw-bold text-muted">
+                                    Bạn chưa có tài khoản?
+                                    <a asp-controller="Customers" asp-action="Create" class="text-danger fw-bold">Đăng ký ngay</a>
+                                </p>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    <script src="../../plugins/jquery/jquery.min.js"></script>
+    <script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="../../dist/js/adminlte.min.js">    </script>
+</body>

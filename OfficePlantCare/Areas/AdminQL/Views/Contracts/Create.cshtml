@@ -1,0 +1,200 @@
+﻿@model OfficePlantCare.Models.Contract
+
+@{
+    ViewData["Title"] = "Tạo hợp đồng mới";
+    Layout = "~/Areas/AdminQL/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Tạo hợp đồng mới</h2>
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["SuccessMessage"]
+    </div>
+}
+
+@if (!ViewData.ModelState.IsValid)
+{
+    <div class="alert alert-danger">
+        <ul>
+            @foreach (var modelState in ViewData.ModelState.Values)
+            {
+                foreach (var error in modelState.Errors)
+                {
+                    <li>@error.ErrorMessage</li>
+                }
+            }
+        </ul>
+    </div>
+}
+
+<div class="row">
+    <div class="col-md-6">
+        <form asp-action="Create" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-group mb-3">
+                <label asp-for="ContractCode" class="control-label">Mã hợp đồng</label>
+                <input asp-for="ContractCode" class="form-control" />
+                <span asp-validation-for="ContractCode" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mb-3">
+                <label asp-for="CustomerId" class="control-label">Khách hàng</label>
+                <select asp-for="CustomerId" class="form-control" asp-items="ViewBag.CustomerId"></select>
+                <span asp-validation-for="CustomerId" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mb-3">
+                <label for="ServiceId" class="control-label">Dịch vụ</label>
+                <select id="ServiceId" name="ServiceId" class="form-control" onchange="loadServicePrices()">
+                    <option value="">-- Chọn dịch vụ --</option>
+                    @foreach (var service in ViewBag.ServiceId)
+                    {
+                        <option value="@service.Value">@service.Text</option>
+                    }
+                </select>
+            </div>
+
+            <div class="form-group mb-3">
+                <label for="OfficeSize" class="control-label">Kích thước văn phòng</label>
+                <select id="OfficeSize" name="OfficeSize" class="form-control" onchange="loadServicePrices()">
+                    <option value="">-- Chọn kích thước văn phòng --</option>
+                    <option value="Dưới 50m²">Dưới 50m²</option>
+                    <option value="50-100m²">50-100m²</option>
+                    <option value="Trên 100m²">Trên 100m²</option>
+                </select>
+            </div>
+
+            <div class="form-group mb-3">
+                <label for="TreeSize" class="control-label">Kích thước cây</label>
+                <select id="TreeSize" name="TreeSize" class="form-control" onchange="loadServicePrices()">
+                    <option value="">-- Chọn kích thước cây --</option>
+                    <option value="Nhỏ">Nhỏ</option>
+                    <option value="Trung bình">Trung bình</option>
+                    <option value="Lớn">Lớn</option>
+                </select>
+            </div>
+
+            <div class="form-group mb-3">
+                <label for="ServiceType" class="control-label">Thời hạn dịch vụ</label>
+                <select id="ServiceType" name="ServiceType" class="form-control" onchange="loadServicePrices()">
+                    <option value="">-- Chọn thời hạn dịch vụ --</option>
+                    <option value="3 tháng">3 tháng</option>
+                    <option value="6 tháng">6 tháng</option>
+                    <option value="12 tháng">12 tháng</option>
+                </select>
+            </div>
+
+            <div class="form-group mb-3">
+                <label asp-for="PriceId" class="control-label">Giá dịch vụ</label>
+                <select id="PriceId" name="PriceId" class="form-control">
+                    <option value="">-- Chọn giá dịch vụ --</option>
+                </select>
+                <span asp-validation-for="PriceId" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mb-3">
+                <label asp-for="StartDate" class="control-label">Ngày bắt đầu</label>
+                <input asp-for="StartDate" class="form-control" type="date" />
+                <span asp-validation-for="StartDate" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mb-3">
+                <label asp-for="PaymentMethodId" class="control-label">Phương thức thanh toán</label>
+                <select asp-for="PaymentMethodId" class="form-control" asp-items="ViewBag.PaymentMethodId"></select>
+                <span asp-validation-for="PaymentMethodId" class="text-danger"></span>
+            </div>
+
+            <!-- Thêm các trường để chọn ngày chăm sóc -->
+            <div class="form-group mb-3">
+                <label for="CareDay1" class="control-label">Ngày chăm sóc 1</label>
+                <select id="CareDay1" name="CareDay1" class="form-control">
+                    <option value="">-- Chọn ngày --</option>
+                    <option value="Monday">Thứ 2</option>
+                    <option value="Tuesday">Thứ 3</option>
+                    <option value="Wednesday">Thứ 4</option>
+                    <option value="Thursday">Thứ 5</option>
+                    <option value="Friday">Thứ 6</option>
+                    <option value="Saturday">Thứ 7</option>
+                    <option value="Sunday">Chủ nhật</option>
+                </select>
+            </div>
+
+            <div class="form-group mb-3">
+                <label for="CareDay2" class="control-label">Ngày chăm sóc 2</label>
+                <select id="CareDay2" name="CareDay2" class="form-control">
+                    <option value="">-- Chọn ngày --</option>
+                    <option value="Monday">Thứ 2</option>
+                    <option value="Tuesday">Thứ 3</option>
+                    <option value="Wednesday">Thứ 4</option>
+                    <option value="Thursday">Thứ 5</option>
+                    <option value="Friday">Thứ 6</option>
+                    <option value="Saturday">Thứ 7</option>
+                    <option value="Sunday">Chủ nhật</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">Tạo hợp đồng</button>
+                <a asp-action="Index" class="btn btn-secondary">Quay lại</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script>
+        // Truyền danh sách ServicePrices từ ViewBag vào JavaScript
+        var servicePrices = @Html.Raw(Json.Serialize(ViewBag.ServicePrices));
+
+        function loadServicePrices() {
+            var serviceId = document.getElementById("ServiceId").value;
+            var officeSize = document.getElementById("OfficeSize").value;
+            var treeSize = document.getElementById("TreeSize").value;
+            var serviceType = document.getElementById("ServiceType").value;
+            var priceSelect = document.getElementById("PriceId");
+
+            // Xóa các tùy chọn hiện tại
+            priceSelect.innerHTML = '<option value="">-- Chọn giá dịch vụ --</option>';
+
+            // Lọc ServicePrices dựa trên các tiêu chí
+            var filteredPrices = servicePrices.filter(function (price) {
+                return price.serviceId == serviceId &&
+                    price.officeSize == officeSize &&
+                    price.treeSize == treeSize &&
+                    price.serviceType == serviceType;
+            });
+
+            // Thêm các tùy chọn giá vào dropdown
+            filteredPrices.forEach(function (price) {
+                var option = document.createElement("option");
+                option.value = price.priceId;
+                option.text = `${price.price.toLocaleString('vi-VN')} VNĐ - ${price.durationInMonths} tháng`;
+                priceSelect.appendChild(option);
+            });
+        }
+
+        // Xác nhận CareDay1 và CareDay2
+        document.querySelector("form").addEventListener("submit", function (e) {
+            var careDay1 = document.getElementById("CareDay1").value;
+            var careDay2 = document.getElementById("CareDay2").value;
+
+            // Kiểm tra nếu CareDay1 và CareDay2 trùng nhau
+            if (careDay1 && careDay2 && careDay1 === careDay2) {
+                e.preventDefault();
+                alert("Hai ngày chăm sóc không được trùng nhau. Vui lòng chọn hai ngày khác nhau.");
+            }
+        });
+
+        // Gắn sự kiện onchange cho các dropdown
+        document.getElementById("ServiceId").addEventListener("change", loadServicePrices);
+        document.getElementById("OfficeSize").addEventListener("change", loadServicePrices);
+        document.getElementById("TreeSize").addEventListener("change", loadServicePrices);
+        document.getElementById("ServiceType").addEventListener("change", loadServicePrices);
+    </script>
+}

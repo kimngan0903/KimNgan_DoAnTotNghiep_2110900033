@@ -1,0 +1,465 @@
+﻿@model OfficePlantCare.Models.Customer
+
+@{
+    ViewData["Title"] = "Đăng ký";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    /* Tùy chỉnh giao diện */
+    body {
+        background: linear-gradient(135deg, #e0f7fa 0%, #b2dfdb 100%);
+        font-family: 'Poppins', sans-serif;
+    }
+
+    .register-container {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+    }
+
+    .register-card {
+        background: #fff;
+        border-radius: 20px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+        display: flex;
+        max-width: 900px;
+        width: 100%;
+    }
+
+    .register-left {
+        background: url('https://newoffice24h.com/wp-content/uploads/2023/07/thiet-ke-van-phong-xanh-43.jpg') no-repeat center center;
+        background-size: cover;
+        color: #fff;
+        padding: 40px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        position: relative;
+        width: 40%;
+    }
+
+        .register-left::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 128, 0, 0.5); /* Lớp phủ màu xanh lá cây */
+        }
+
+        .register-left h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .register-left p {
+            font-size: 1rem;
+            line-height: 1.6;
+            position: relative;
+            z-index: 1;
+        }
+
+    .register-right {
+        padding: 40px;
+        width: 60%;
+        background: #f9f9f9;
+    }
+
+        .register-right h2 {
+            color: #48c023;
+            font-weight: 700;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+    .form-control {
+        border-radius: 10px;
+        border: 1px solid #ddd;
+        padding: 10px;
+        transition: all 0.3s ease;
+    }
+
+        .form-control:focus {
+            border-color: #48c023;
+            box-shadow: 0 0 10px rgba(72, 192, 35, 0.2);
+        }
+
+    .btn-success {
+        background: #48c023;
+        border: none;
+        border-radius: 10px;
+        padding: 12px;
+        font-weight: 600;
+        transition: all 0.3s ease;
+    }
+
+        .btn-success:hover {
+            background: #3a9c1b;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(72, 192, 35, 0.3);
+        }
+
+    .form-label {
+        font-weight: 500;
+        color: #333;
+    }
+
+    .alert {
+        border-radius: 10px;
+        margin-bottom: 20px;
+    }
+
+    #contractFields {
+        background: #fff;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        margin-top: 20px;
+    }
+
+    #PriceDisplay {
+        background-color: #e8f5e9;
+        color: #2e7d32;
+        font-weight: 600;
+    }
+</style>
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["SuccessMessage"]
+    </div>
+}
+
+@if (!ViewData.ModelState.IsValid)
+{
+    <div class="alert alert-danger">
+        <ul>
+            @foreach (var modelState in ViewData.ModelState.Values)
+            {
+                foreach (var error in modelState.Errors)
+                {
+                    <li>@error.ErrorMessage</li>
+                }
+            }
+        </ul>
+    </div>
+}
+
+<div class="register-container">
+    <div class="register-card">
+        <!-- Bên trái: Hình ảnh và thông tin giới thiệu -->
+        <div class="register-left">
+            <h2>Chào mừng đến với OfficePlantCare</h2>
+            <p>Đăng ký ngay để trải nghiệm dịch vụ chăm sóc cây cảnh văn phòng chuyên nghiệp, giúp không gian làm việc của bạn luôn xanh mát và tràn đầy sức sống!</p>
+        </div>
+
+        <!-- Bên phải: Form đăng ký -->
+        <div class="register-right">
+            <h2>ĐĂNG KÝ</h2>
+            <form asp-action="Create" method="post">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                <div class="form-group mb-3">
+                    <label asp-for="CustomerName" class="form-label">Họ và tên</label>
+                    <input asp-for="CustomerName" class="form-control" placeholder="Nhập họ và tên" />
+                    <span asp-validation-for="CustomerName" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label asp-for="Email" class="form-label">Email</label>
+                    <input asp-for="Email" type="email" class="form-control" placeholder="Nhập email" />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label asp-for="Phone" class="form-label">Số điện thoại</label>
+                    <input asp-for="Phone" class="form-control" placeholder="Nhập số điện thoại" />
+                    <span asp-validation-for="Phone" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label asp-for="Address" class="form-label">Địa chỉ</label>
+                    <input asp-for="Address" class="form-control" placeholder="Nhập địa chỉ" />
+                    <span asp-validation-for="Address" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label asp-for="RoleId" class="form-label">Chọn loại tài khoản</label>
+                    <select asp-for="RoleId" class="form-control" onchange="toggleContractFields()" required>
+                        <option value="">-- Chọn loại tài khoản --</option>
+                        <option value="5">Khách đặt dịch vụ - Đặt từng dịch vụ riêng lẻ</option>
+                        <option value="4">Khách ký hợp đồng - Sử dụng dịch vụ dài hạn</option>
+                    </select>
+                    <span asp-validation-for="RoleId" class="text-danger"></span>
+                </div>
+
+                <!-- Các trường hợp đồng (hiển thị khi RoleId = 4) -->
+                <div id="contractFields" style="display: none;">
+                    <h4 class="text-center mb-3">Thông tin hợp đồng</h4>
+
+                    <div class="form-group mb-3">
+                        <label for="ServiceId" class="form-label">Dịch vụ</label>
+                        <select id="ServiceId" name="ServiceId" class="form-control" onchange="loadServicePrices()">
+                            <option value="">-- Chọn dịch vụ --</option>
+                            @foreach (var service in ViewBag.ValidContractServices)
+                            {
+                                <option value="@service.ServiceId">@service.ServiceName</option>
+                            }
+                        </select>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label for="OfficeSize" class="form-label">Kích thước văn phòng</label>
+                        <select id="OfficeSize" name="OfficeSize" class="form-control" onchange="loadServicePrices()" required>
+                            <option value="">-- Chọn kích thước văn phòng --</option>
+                            <option value="Dưới 50m²">Dưới 50m²</option>
+                            <option value="50-100m²">50-100m²</option>
+                            <option value="Trên 100m²">Trên 100m²</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label for="TreeSize" class="form-label">Kích thước cây</label>
+                        <select id="TreeSize" name="TreeSize" class="form-control" onchange="loadServicePrices()" required>
+                            <option value="">-- Chọn kích thước cây --</option>
+                            <option value="Nhỏ">Nhỏ</option>
+                            <option value="Trung bình">Trung bình</option>
+                            <option value="Lớn">Lớn</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label for="ServiceType" class="form-label">Thời hạn dịch vụ</label>
+                        <select id="ServiceType" name="ServiceType" class="form-control" onchange="loadServicePrices()" required>
+                            <option value="">-- Chọn thời hạn dịch vụ --</option>
+                            <option value="3 tháng">3 tháng</option>
+                            <option value="6 tháng">6 tháng</option>
+                            <option value="12 tháng">12 tháng</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label class="form-label">Giá dịch vụ</label>
+                        <span id="PriceDisplay" class="form-control" style="background-color: #e8f5e9; color: #2e7d32; font-weight: bold;">-- Chưa có giá --</span>
+                        <input type="hidden" id="PriceId" name="PriceId" />
+                        <input type="hidden" id="Duration" name="Duration" />
+                    </div>
+
+                    <!-- Thêm các trường để chọn ngày chăm sóc -->
+                    <div class="form-group mb-3">
+                        <label for="CareDay1" class="form-label">Ngày chăm sóc 1 (Tùy chọn)</label>
+                        <select id="CareDay1" name="CareDay1" class="form-control">
+                            <option value="">-- Chọn ngày (mặc định: Thứ 2) --</option>
+                            <option value="Monday">Thứ 2</option>
+                            <option value="Tuesday">Thứ 3</option>
+                            <option value="Wednesday">Thứ 4</option>
+                            <option value="Thursday">Thứ 5</option>
+                            <option value="Friday">Thứ 6</option>
+                            <option value="Saturday">Thứ 7</option>
+                            <option value="Sunday">Chủ nhật</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label for="CareDay2" class="form-label">Ngày chăm sóc 2 (Tùy chọn)</label>
+                        <select id="CareDay2" name="CareDay2" class="form-control">
+                            <option value="">-- Chọn ngày (mặc định: Thứ 5) --</option>
+                            <option value="Monday">Thứ 2</option>
+                            <option value="Tuesday">Thứ 3</option>
+                            <option value="Wednesday">Thứ 4</option>
+                            <option value="Thursday">Thứ 5</option>
+                            <option value="Friday">Thứ 6</option>
+                            <option value="Saturday">Thứ 7</option>
+                            <option value="Sunday">Chủ nhật</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label asp-for="PasswordHash" class="form-label">Mật khẩu</label>
+                    <input asp-for="PasswordHash" type="password" class="form-control" placeholder="Nhập mật khẩu" />
+                    <span asp-validation-for="PasswordHash" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label class="form-label">Nhập lại mật khẩu</label>
+                    <input type="password" class="form-control" name="ConfirmPassword" placeholder="Xác nhận mật khẩu" />
+                    <span id="confirmPasswordError" class="text-danger"></span>
+                </div>
+
+                <div class="d-grid">
+                    <button type="submit" class="btn btn-success btn-lg">Đăng ký</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script src="../../plugins/jquery/jquery.min.js"></script>
+<script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="../../dist/js/adminlte.min.js"></script>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+
+    <script>
+        // Dữ liệu ServicePrices từ ViewBag
+        const servicePrices = @Html.Raw(Json.Serialize(ViewBag.ServicePrices));
+
+        // Lấy các phần tử DOM thường dùng
+        const elements = {
+            roleId: document.getElementById("RoleId"),
+            contractFields: document.getElementById("contractFields"),
+            serviceId: document.getElementById("ServiceId"),
+            officeSize: document.getElementById("OfficeSize"),
+            treeSize: document.getElementById("TreeSize"),
+            serviceType: document.getElementById("ServiceType"),
+            priceDisplay: document.getElementById("PriceDisplay"),
+            priceIdInput: document.getElementById("PriceId"),
+            durationInput: document.getElementById("Duration"),
+            password: document.getElementById("PasswordHash"),
+            confirmPassword: document.querySelector("input[name='ConfirmPassword']"),
+            confirmPasswordError: document.getElementById("confirmPasswordError"),
+            careDay1: document.getElementById("CareDay1"),
+            careDay2: document.getElementById("CareDay2")
+        };
+
+        // Hiển thị hoặc ẩn các trường hợp đồng dựa trên RoleId
+        function toggleContractFields() {
+            const roleId = elements.roleId.value;
+            elements.contractFields.style.display = roleId === "4" ? "block" : "none";
+        }
+
+        // Tính toán và hiển thị giá dịch vụ dựa trên các tiêu chí
+        function loadServicePrices() {
+            const { serviceId, officeSize, treeSize, serviceType, priceDisplay, priceIdInput, durationInput } = elements;
+
+            // Lấy giá trị từ các dropdown
+            const selectedServiceId = serviceId.value;
+            const selectedOfficeSize = officeSize.value;
+            const selectedTreeSize = treeSize.value;
+            const selectedServiceType = serviceType.value;
+
+            // Đặt lại giá trị mặc định
+            priceDisplay.textContent = "-- Chưa có giá --";
+            priceIdInput.value = "";
+            durationInput.value = "";
+
+            // Kiểm tra nếu tất cả các tiêu chí đã được chọn
+            if (selectedServiceId && selectedOfficeSize && selectedTreeSize && selectedServiceType) {
+                // Lọc danh sách ServicePrices dựa trên các tiêu chí
+                const filteredPrices = servicePrices.filter(price =>
+                    price.serviceId == selectedServiceId &&
+                    price.officeSize == selectedOfficeSize &&
+                    price.treeSize == selectedTreeSize &&
+                    price.serviceType == selectedServiceType
+                );
+
+                // Xử lý kết quả lọc
+                if (filteredPrices.length === 1) {
+                    // Nếu chỉ có 1 giá phù hợp
+                    const price = filteredPrices[0];
+                    priceDisplay.textContent = price.price.toLocaleString('vi-VN') + ' VNĐ';
+                    priceIdInput.value = price.priceId;
+                    durationInput.value = price.durationInMonths;
+                } else if (filteredPrices.length > 1) {
+                    // Nếu có nhiều giá, chọn giá thấp nhất
+                    const lowestPrice = filteredPrices.reduce((prev, curr) =>
+                        prev.price < curr.price ? prev : curr
+                    );
+                    priceDisplay.textContent = lowestPrice.price.toLocaleString('vi-VN') + ' VNĐ';
+                    priceIdInput.value = lowestPrice.priceId;
+                    durationInput.value = lowestPrice.durationInMonths;
+                } else {
+                    // Không tìm thấy giá phù hợp
+                    priceDisplay.textContent = "Không có giá phù hợp";
+                    priceIdInput.value = "";
+                    durationInput.value = "";
+                }
+            }
+        }
+
+        // Kiểm tra form trước khi submit
+        function validateForm(e) {
+            const { password, confirmPassword, confirmPasswordError, roleId, priceIdInput, careDay1, careDay2, officeSize, treeSize, serviceType } = elements;
+
+            // Kiểm tra mật khẩu và xác nhận mật khẩu
+            if (password.value !== confirmPassword.value) {
+                e.preventDefault();
+                confirmPasswordError.textContent = "Mật khẩu xác nhận không khớp.";
+                return false;
+            }
+            confirmPasswordError.textContent = "";
+
+            // Kiểm tra RoleId
+            if (!roleId.value) {
+                e.preventDefault();
+                alert("Vui lòng chọn loại tài khoản.");
+                return false;
+            }
+
+            // Kiểm tra các trường hợp đồng nếu RoleId = 4
+            if (roleId.value === "4") {
+                // Kiểm tra các trường bắt buộc
+                if (!officeSize.value) {
+                    e.preventDefault();
+                    alert("Vui lòng chọn kích thước văn phòng.");
+                    return false;
+                }
+                if (!treeSize.value) {
+                    e.preventDefault();
+                    alert("Vui lòng chọn kích thước cây.");
+                    return false;
+                }
+                if (!serviceType.value) {
+                    e.preventDefault();
+                    alert("Vui lòng chọn thời hạn dịch vụ.");
+                    return false;
+                }
+
+                // Kiểm tra thông tin hợp đồng (PriceId)
+                if (!priceIdInput.value) {
+                    e.preventDefault();
+                    alert("Vui lòng chọn đầy đủ thông tin hợp đồng để xác định giá dịch vụ.");
+                    return false;
+                }
+
+                // Kiểm tra nếu CareDay1 và CareDay2 trùng nhau (nếu có chọn)
+                const careDay1Value = careDay1 ? careDay1.value : "";
+                const careDay2Value = careDay2 ? careDay2.value : "";
+                if (careDay1Value && careDay2Value && careDay1Value === careDay2Value) {
+                    e.preventDefault();
+                    alert("Hai ngày chăm sóc không được trùng nhau. Vui lòng chọn hai ngày khác nhau.");
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+        // Gắn sự kiện
+        document.addEventListener("DOMContentLoaded", () => {
+            // Gọi toggleContractFields khi trang tải
+            toggleContractFields();
+
+            // Gắn sự kiện change cho các dropdown để tính giá
+            elements.roleId.addEventListener("change", toggleContractFields);
+            elements.serviceId.addEventListener("change", loadServicePrices);
+            elements.officeSize.addEventListener("change", loadServicePrices);
+            elements.treeSize.addEventListener("change", loadServicePrices);
+            elements.serviceType.addEventListener("change", loadServicePrices);
+
+            // Gắn sự kiện submit cho form
+            document.querySelector("form").addEventListener("submit", validateForm);
+        });
+    </script>
+}

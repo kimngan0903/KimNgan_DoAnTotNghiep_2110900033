@@ -1,0 +1,65 @@
+﻿﻿
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Kim Ngân - Dịch vụ chăm sóc cây cảnh văn phòng</title>
+    <!-- HTML5 Shim and Respond.js IE11 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 11]>
+    q        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+            <![endif]-->
+    <!-- Meta -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="description" content="" />
+    <meta name="keywords" content="">
+    <meta name="author" content="Phoenixcoded" />
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="~/favicon-32x32.png">
+    @* fonts *@
+    <link rel="stylesheet" href="~/css/fonts.css" />
+    <link rel="stylesheet" href="~/assets/css/fonts.css?v2" />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap-grid.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap-utilities.min.css">
+    <!-- vendor css -->
+    <link rel="stylesheet" href="~/assets/css/styles.css?v2"/>
+</head>
+<body class="">
+    <section class="wrapper">
+        <!-- Preloader -->
+        @await Html.PartialAsync("_Preloader")
+
+        <!-- Navbar -->
+        @await Html.PartialAsync("_NavBar")
+        <!-- /.navbar -->
+        <!-- Main Sidebar Container -->
+        @await Html.PartialAsync("_SideBar")
+
+        <!-- Main content -->
+        <div class="pcoded-main-container">
+            <div class="background"></div>
+            <div class="content">
+                @RenderBody() <!-- Trang con sẽ hiển thị ở đây -->
+            </div>
+        </div>
+
+        <!-- /.content -->
+    </section>
+    <!-- ./wrapper -->
+
+    <!-- Required Js -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="~/assets/js/vendor-all.min.js"></script>
+    <script src="~/assets/js/plugins/bootstrap.min.js"></script>
+    <script src="~/assets/js/pcoded.min.js"></script>
+    <!-- Apex Chart -->
+    <script src="~/assets/js/plugins/apexcharts.min.js"></script>
+    <!-- Custom-chart js -->
+    <script src="~/assets/js/pages/dashboard-main.js"></script>
+
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

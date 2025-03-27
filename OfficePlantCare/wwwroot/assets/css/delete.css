@@ -1,0 +1,39 @@
+﻿.modal-body {
+    background-color: #f8f9fa;
+}
+
+.card {
+    border-radius: 15px;
+    transition: all 0.3s ease;
+}
+
+    .card:hover {
+        box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    }
+
+.form-control.bg-light {
+    border: 1px solid #ced4da;
+    padding: 10px 15px;
+    color: #495057;
+}
+
+.btn {
+    transition: all 0.3s ease;
+}
+
+    .btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+
+.avatar-preview {
+    transition: transform 0.3s ease;
+}
+
+    .avatar-preview:hover {
+        transform: scale(1.05);
+    }
+
+.form-group label {
+    margin-bottom: 8px;
+}

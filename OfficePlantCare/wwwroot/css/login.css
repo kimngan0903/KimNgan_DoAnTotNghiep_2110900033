@@ -1,0 +1,56 @@
+﻿body {
+    background: url('https://newoffice24h.com/wp-content/uploads/2023/07/thiet-ke-van-phong-xanh-43.jpg') no-repeat center center fixed;
+    background-size: cover;
+}
+.custom-input {
+    border-radius: 8px;
+    border: 1px solid #48c023;
+    padding: 10px;
+    font-size: 16px;
+}
+
+    .custom-input:focus {
+        border-color: #369519;
+        box-shadow: 0px 0px 5px rgba(72, 192, 35, 0.5);
+    }
+
+.btn-success {
+    background-color: #48c023;
+    border: none;
+    transition: all 0.3s ease-in-out;
+}
+
+    .btn-success:hover {
+        background-color: #3ba11d;
+        transform: scale(1.05);
+    }
+
+.shadow-lg {
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2) !important;
+}
+
+.alert-danger {
+    background-color: rgba(255, 0, 0, 0.1);
+    border-left: 4px solid red;
+    color: red;
+    padding: 10px;
+    margin-bottom: 20px;
+}
+
+a.text-body {
+    color: #369519 !important;
+    transition: color 0.2s ease-in-out;
+}
+
+    a.text-body:hover {
+        color: #26700f !important;
+        text-decoration: underline;
+    }
+
+a.text-danger {
+    color: #dc3545 !important;
+}
+
+    a.text-danger:hover {
+        color: #a71d2a !important;
+    }

@@ -1,0 +1,328 @@
+﻿@using OfficePlantCare.Models
+@using Microsoft.AspNetCore.Http
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+
+@{
+    var serviceCategories = ViewData["ServiceCategories"] as List<ServiceCategory>;
+    var customerLogin = HttpContextAccessor.HttpContext.Session.GetInt32("CustomerLogin");
+    var roleId = HttpContextAccessor.HttpContext.Session.GetInt32("RoleId");
+    var customerName = HttpContextAccessor.HttpContext.Session.GetString("CustomerName");
+    var contractCode = HttpContextAccessor.HttpContext.Session.GetString("ContractCode");
+    var customerId = HttpContextAccessor.HttpContext.Session.GetInt32("CustomerId");
+    var contractId = HttpContextAccessor.HttpContext.Session.GetInt32("ContractId");
+}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <!-- Title -->
+    <title>Kim Ngân - Dịch vụ chăm sóc cây cảnh văn phòng</title>
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="~/favicon-32x32.png">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
+    <!-- Core Stylesheet -->
+    <link rel="stylesheet" href="~/css/fonts.css" />
+    <link rel="stylesheet" href="~/css/classy-nav.css" />
+    <link rel="stylesheet" href="~/css/styles.css" />
+</head>
+
+<body>
+    <!-- Preloader -->
+    <div class="preloader d-flex align-items-center justify-content-center">
+        <div class="preloader-circle"></div>
+        <div class="preloader-img">
+            <img src="~/img/preloader/preloader_1.jpg" alt="">
+        </div>
+    </div>
+
+    <!-- ##### Header Area Start ##### -->
+    <header class="header-area">
+        <!-- ***** Top Header Area ***** -->
+        <div class="top-header-area">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="top-header-content d-flex align-items-center justify-content-between">
+                            <!-- Top Header Content (Email và Số điện thoại - chạy ngang) -->
+                            <div class="top-header-meta-left">
+                                <div class="marquee-wrapper">
+                                    <div class="marquee-content">
+                                        <a href="#" data-toggle="tooltip" data-placement="bottom" title="ngan36758@gmail.com">
+                                            <i class="fa fa-envelope-o" aria-hidden="true"></i>
+                                            <span>Email: ngan36758@gmail.com</span>
+                                        </a>
+                                        <a href="#" data-toggle="tooltip" data-placement="bottom" title="0373 993 662">
+                                            <i class="fa fa-phone" aria-hidden="true"></i>
+                                            <span>Liên hệ chúng tôi: 0373 993 662</span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Top Header Content (Đăng nhập và Cart - giữ nguyên) -->
+                            <div class="top-header-meta d-flex">
+                                <!-- Login -->
+                                <div class="login">
+                                    @if (customerLogin != null)
+                                    {
+                                        <div class="dropdown">
+                                            <a class="nav-link dropdown-toggle d-flex align-items-center text-light hover-effect"
+                                               href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                <i class="fa-solid fa-user"></i>
+                                                <span class="ms-2 user-text">
+                                                    @if (roleId == 4)
+                                                    {
+                                                        <text>Xin chào, <strong>@contractCode</strong></text>
+                                                    }
+                                                    else if (roleId == 5)
+                                                    {
+                                                        <text>Xin chào, <strong>@customerName</strong></text>
+                                                    }
+                                                </span>
+                                            </a>
+                                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdownButton" id="userDropdownMenu">
+                                                @if (roleId == 4)
+                                                {
+                                                    <li>
+                                                        <a class="dropdown-item text-dark" asp-controller="Contracts" asp-action="Index" asp-route-customerId="@customerId">
+                                                            <i class="fa fa-file-contract"></i> Danh sách hợp đồng
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a class="dropdown-item text-dark" asp-controller="Contracts" asp-action="Details"
+                                                           asp-route-contractId="@contractId">
+                                                            <i class="fa fa-id-card"></i> Thông tin hợp đồng
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a class="dropdown-item text-dark" asp-controller="ServiceRequests" asp-action="Index" asp-route-customerId="@customerId">
+                                                            <i class="fa fa-file-contract"></i> Danh sách dịch vụ phát sinh
+                                                        </a>
+                                                    </li>
+                                                }
+                                                @if (roleId == 5)
+                                                {
+                                                    <li>
+                                                        <a class="dropdown-item text-dark" asp-controller="Customers" asp-action="Details"
+                                                           asp-route-customerId="@customerId">
+                                                            <i class="fa fa-id-card"></i> Thông tin cá nhân
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a class="dropdown-item text-dark" asp-controller="Orders" asp-action="Index" asp-route-customerId="@customerId">
+                                                            <i class="fa fa-leaf"></i> Danh sách dịch vụ đã đặt
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a class="dropdown-item text-dark" asp-controller="OrdersDetails" asp-action="Index" asp-route-customerId="@customerId">
+                                                            <i class="fa fa-leaf"></i> Chi tiết dịch vụ đã đặt
+                                                        </a>
+                                                    </li>
+                                                }
+                                                <li><hr class="dropdown-divider"></li>
+                                                <li>
+                                                    <a class="dropdown-item text-danger" asp-controller="Login" asp-action="Logout">
+                                                        <i class="fa fa-sign-out-alt"></i> Đăng xuất
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <div class="login">
+                                            <a asp-controller="Login" asp-action="Index">
+                                                <i class="fa-solid fa-user"></i>
+                                                <span>Đăng nhập</span>
+                                            </a>
+                                        </div>
+                                    }
+                                </div>
+
+                                <!-- Cart -->
+                                <div class="cart">
+                                    <a asp-controller="Carts" asp-action="Index"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Cart</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- ***** Navbar Area ***** -->
+        <div class="alazea-main-menu">
+            <div class="classy-nav-container breakpoint-off">
+                <div class="container">
+                    <!-- Menu -->
+                    <nav class="classy-navbar justify-content-between" id="alazeaNav">
+                        <!-- Nav Brand -->
+                        <a href="~/home" class="nav-brand"><img src="~/img/logo/logo.png" alt="Ảnh logo" style="width: 70px;height:70px"></a>
+
+                        <!-- Navbar Toggler -->
+                        <div class="classy-navbar-toggler">
+                            <span class="navbarToggler"><span></span><span></span><span></span></span>
+                        </div>
+
+                        <!-- Menu -->
+                        <div class="classy-menu">
+                            <!-- Close Button -->
+                            <div class="classycloseIcon">
+                                <div class="cross-wrap"><span class="top"></span><span class="bottom"></span></div>
+                            </div>
+
+                            <!-- Navbar Start -->
+                            <div class="classynav">
+                                <ul>
+                                    <li><a asp-controller="Home" asp-action="Index">Trang chủ</a></li>
+                                    <li><a asp-controller="AboutUs" asp-action="Index">Giới thiệu</a></li>
+                                    <li>
+                                        <a asp-controller="Services" asp-action="Index">Dịch vụ <i class="fa-solid fa-chevron-down"></i></a>
+                                        <ul class="dropdown">
+                                            @if (serviceCategories != null)
+                                            {
+                                                @foreach (var category in serviceCategories)
+                                                {
+                                                    <li>
+                                                        <a>
+                                                            @category.CategoryServiceName
+                                                            <i class="fa-solid fa-chevron-right"></i>
+                                                        </a>
+                                                        @if (category.Services != null && category.Services.Any())
+                                                        {
+                                                            <ul class="dropdown">
+                                                                @foreach (var service in category.Services)
+                                                                {
+                                                                    <li>
+                                                                        <a href="~/services/details/@service.ServiceId">@service.ServiceName</a>
+                                                                    </li>
+                                                                    <hr style="margin-top: 5px;margin-bottom: 5px;" />
+                                                                }
+                                                            </ul>
+                                                        }
+                                                    </li>
+                                                    <hr style="margin-top: 5px;margin-bottom: 5px;" />
+                                                }
+                                            }
+                                        </ul>
+                                    </li>
+                                    <li><a asp-controller="News" asp-action="Index">Tin tức</a></li>
+                                    <li><a asp-controller="Contact" asp-action="Index">Liên hệ</a></li>
+                                </ul>
+
+                                <!-- Search Icon -->
+                                <div id="searchIcon">
+                                    <i class="fa fa-search" aria-hidden="true"></i>
+                                </div>
+                            </div>
+                            <!-- Navbar End -->
+                        </div>
+                    </nav>
+
+                    <!-- Search Form -->
+                    <div class="search-form">
+                        <form action="#" method="get">
+                            <input type="search" name="search" id="search" placeholder="Vui lòng nhập từ khóa mà bạn muốn tìm">
+                            <button type="submit" class="d-none"></button>
+                        </form>
+                        <!-- Close Icon -->
+                        <div class="closeIcon"><i class="fa fa-times" aria-hidden="true"></i></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- ##### Header Area End ##### -->
+    <main role="main" class="">
+        @RenderBody()
+    </main>
+        <!-- ##### Footer Area Start ##### -->
+        <footer class="footer-area bg-img" style="background-image: url('/img/bg-img/3.jpg');">
+            <!-- Main Footer Area -->
+            <div class="main-footer-area">
+                <div class="container">
+                    <div class="row">
+
+                        <!-- Single Footer Widget -->
+                        <div class="col-12 col-sm-6 col-lg-3">
+                            <div class="single-footer-widget">
+                                <div class="footer-logo mb-30">
+                                    <a href="#"><img src="~/img/logo/logo.png" alt="" style="width: 90px"></a>
+                                </div>
+                                <p>
+                                    "Dịch vụ tận tâm – Cây xanh vững bền, không gian tràn sức sống!" 🌿✨
+                                </p>
+                                <div class="social-info">
+                                    <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+                                    <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+                                    <a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a>
+                                    <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+                                    <a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Single Footer Widget -->
+                        <div class="col-12 col-sm-6 col-lg-3">
+                            <div class="single-footer-widget">
+                                <div class="widget-title">
+                                    <h5>QUICK LINK</h5>
+                                </div>
+                                <nav class="widget-nav">
+                                    <ul>
+                                        <li><a href="#">Purchase</a></li>
+                                        <li><a href="#">FAQs</a></li>
+                                        <li><a href="#">Payment</a></li>
+                                        <li><a href="#">News</a></li>
+                                        <li><a href="#">Return</a></li>
+                                        <li><a href="#">Advertise</a></li>
+                                        <li><a href="#">Shipping</a></li>
+                                        <li><a href="#">Career</a></li>
+                                        <li><a href="#">Orders</a></li>
+                                        <li><a href="#">Policities</a></li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+
+                        <!-- Single Footer Widget -->
+                        <div class="col-12 col-sm-6 col-lg-3">
+                            <div class="single-footer-widget">
+                                <div class="widget-title">
+                                    <h5>LIÊN HỆ</h5>
+                                </div>
+
+                                <div class="contact-information">
+                                    <p><span>Địa chỉ:</span> 36 Lê Trọng Tấn, La Khê, Hà Đông, Hà Nội</p>
+                                    <p><span>Liên hệ:</span> 0373 993 662</p>
+                                    <p><span>Email:</span> ngan36758@gmail.com</p>
+                                    <p><span>Giờ mở:</span> Thứ Hai - Chủ nhật: 8h đến 19h</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>   
+    <!-- ##### Footer Area End ##### -->
+    <!-- ##### All Javascript Files ##### -->
+    <script src="~/js/jquery/jquery-2.2.4.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Popper js -->
+    <script src="~/js/bootstrap/popper.min.js"></script>
+    <!-- Bootstrap js -->
+    <script src="~/js/bootstrap/bootstrap.min.js"></script>
+    <!-- All Plugins js -->
+    <script src="~/js/plugins/plugins.js"></script>
+    <!-- Active js -->
+    <script src="~/js/active.js"></script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

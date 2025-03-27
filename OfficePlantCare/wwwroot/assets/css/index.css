@@ -1,0 +1,176 @@
+﻿.card {
+    border-radius: 10px;
+    transition: all 0.3s ease;
+}
+
+    .card:hover {
+        box-shadow: 0 10px 20px rgba(0,0,0,0.1) !important;
+    }
+
+.table th, .table td {
+    vertical-align: middle;
+}
+
+.btn {
+    transition: all 0.3s ease;
+}
+
+    .btn:hover {
+        transform: translateY(-2px);
+    }
+
+.badge {
+    font-size: 0.9rem;
+    border-radius: 20px;
+}
+
+.pagination .page-link {
+    border-radius: 50%;
+    margin: 0 5px;
+    color: #1ABC9C;
+}
+
+.pagination .page-item.active .page-link {
+    background-color: #1ABC9C;
+    border-color: #1ABC9C;
+}
+
+.avatar-img {
+    transition: transform 0.3s ease;
+}
+
+    .avatar-img:hover {
+        transform: scale(1.1);
+    }
+.card {
+    border-radius: 10px;
+    transition: all 0.3s ease;
+}
+
+    .card:hover {
+        box-shadow: 0 10px 20px rgba(0,0,0,0.1) !important;
+    }
+
+.table th, .table td {
+    vertical-align: middle;
+}
+
+.btn {
+    transition: all 0.3s ease;
+}
+
+    .btn:hover {
+        transform: translateY(-2px);
+    }
+
+.badge {
+    font-size: 0.9rem;
+    border-radius: 20px;
+}
+
+.pagination .page-link {
+    border-radius: 50%;
+    margin: 0 5px;
+    color: #1ABC9C;
+}
+
+.pagination .page-item.active .page-link {
+    background-color: #1ABC9C;
+    border-color: #1ABC9C;
+}
+
+.avatar-img {
+    transition: transform 0.3s ease;
+}
+
+    .avatar-img:hover {
+        transform: scale(1.1);
+    }
+.card {
+    border-radius: 10px;
+    transition: all 0.3s ease;
+}
+
+    .card:hover {
+        box-shadow: 0 10px 20px rgba(0,0,0,0.1) !important;
+    }
+
+.table th, .table td {
+    vertical-align: middle;
+}
+
+.btn {
+    transition: all 0.3s ease;
+}
+
+    .btn:hover {
+        transform: translateY(-2px);
+    }
+
+.badge {
+    font-size: 0.9rem;
+    border-radius: 20px;
+}
+
+.pagination .page-link {
+    border-radius: 50%;
+    margin: 0 5px;
+    color: #1ABC9C;
+}
+
+.pagination .page-item.active .page-link {
+    background-color: #1ABC9C;
+    border-color: #1ABC9C;
+}
+
+.avatar-img {
+    transition: transform 0.3s ease;
+}
+
+    .avatar-img:hover {
+        transform: scale(1.1);
+    }
+.card {
+    border-radius: 10px;
+    transition: all 0.3s ease;
+}
+
+    .card:hover {
+        box-shadow: 0 10px 20px rgba(0,0,0,0.1) !important;
+    }
+
+.table th, .table td {
+    vertical-align: middle;
+}
+
+.btn {
+    transition: all 0.3s ease;
+}
+
+    .btn:hover {
+        transform: translateY(-2px);
+    }
+
+.badge {
+    font-size: 0.9rem;
+    border-radius: 20px;
+}
+
+.pagination .page-link {
+    border-radius: 50%;
+    margin: 0 5px;
+    color: #1ABC9C;
+}
+
+.pagination .page-item.active .page-link {
+    background-color: #1ABC9C;
+    border-color: #1ABC9C;
+}
+
+.avatar-img {
+    transition: transform 0.3s ease;
+}
+
+    .avatar-img:hover {
+        transform: scale(1.1);
+    }

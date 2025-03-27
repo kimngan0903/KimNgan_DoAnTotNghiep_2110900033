@@ -1,0 +1,222 @@
+﻿@model IEnumerable<OfficePlantCare.Models.Cart>
+
+@{
+    ViewData["Title"] = "Giỏ hàng";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- ##### Breadcrumb Area Start ##### -->
+<div class="breadcrumb-area">
+    <div class="top-breadcrumb-area bg-img bg-overlay d-flex align-items-center justify-content-center" style="background-image: url(/img/banner/banner_gio_hang.jpg);">
+        <h2>GIỎ HÀNG</h2>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index"><i class="fa fa-home"></i> Trang chủ</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Giỏ hàng</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ##### Breadcrumb Area End ##### -->
+<!-- ##### Cart Area Start ##### -->
+<div class="cart-area section-padding-0-100 clearfix">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                @if (!Model.Any())
+                {
+                    <div class="text-center mt-5">
+                        <i class="fa fa-shopping-cart fa-5x text-muted mb-4"></i>
+                        <h4 class="mt-3 text-muted mb-4 font-weight-bold">GIỎ HÀNG CỦA BẠN ĐANG TRỐNG</h4>
+                        <a asp-controller="Services" asp-action="Index" class="btn btn-success mt-3 px-4 py-2 rounded-pill shadow-lg">
+                            <i class="fa fa-arrow-left"></i> Tiếp tục đặt dịch vụ nào
+                        </a>
+                    </div>
+                }
+                else
+                {
+                    <div class="cart-table clearfix">
+                        <table class="table table-responsive">
+                            <thead>
+                                <tr>
+                                    <th class="cart-th-image">Ảnh</th>
+                                    <th class="cart-th-service">Dịch vụ</th>
+                                    <th class="cart-th-service-type">Loại dịch vụ</th>
+                                    <th class="cart-th-tree-size">Kích thước cây</th>
+                                    <th class="cart-th-office-size">Diện tích phòng</th>
+                                    <th class="cart-th-quantity">Số lượng</th>
+                                    <th class="cart-th-price">Giá</th>
+                                    <th class="cart-th-total">Tổng tiền</th>
+                                    <th class="cart-th-action"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr data-price="@item.Price" data-cart-id="@item.CartId" class="cart-item" data-service-type="@item.ServiceType">
+                                        <td class="cart_product_img">
+                                            <a href="#"><img src="@item.Image" alt="Dịch vụ" class="img-fluid rounded" style="max-width: 80px;"></a>
+                                        </td>
+                                        <td>
+                                            <h5 class="service-name">@item.ServiceName</h5>
+                                        </td>
+                                        <td>
+                                            <h5 class="service-name">@item.ServiceType</h5>
+                                        </td>
+                                        <td>
+                                            <h5 class="service-name">@item.TreeSize</h5>
+                                        </td>
+                                        <td class="office-size" @(item.ServiceType == "Lẻ" ? "style=display:none" : "")>
+                                            <h5 class="service-name">@item.OfficeSize</h5>
+                                        </td>
+                                        <td class="qty" @(item.ServiceType == "Lẻ" ? "" : "style=display:none")>
+                                            <div class="quantity d-flex align-items-center justify-content-center">
+                                                <span class="qty-minus" onclick="updateQuantity(this, -1)">
+                                                    <i class="fa fa-minus" aria-hidden="true"></i>
+                                                </span>
+                                                <input type="number" class="qty-text text-center" step="1" min="1" max="99" name="quantity" value="@item.Quantity" oninput="updateTotal(this)">
+                                                <span class="qty-plus" onclick="updateQuantity(this, 1)">
+                                                    <i class="fa fa-plus" aria-hidden="true"></i>
+                                                </span>
+                                            </div>
+                                        </td>
+                                        @if (item.ServiceType != "Lẻ")
+                                        {
+                                            <td style="display:none;"></td> <!-- Ô trống để giữ cấu trúc bảng khi cột "Số lượng" ẩn -->
+                                        }
+                                        <td class="price">
+                                            @item.Price.ToString("N0") @(item.ServiceType == "Lẻ" ? "VNĐ/Cây" : "VNĐ/Tháng")
+                                        </td>
+                                        <td class="total_price">
+                                            <span>@item.Total.ToString("N0") VNĐ</span>
+                                        </td>
+                                        <td>
+                                            <a asp-action="RemoveFromCart" asp-route-cartId="@item.CartId" class="btn btn-danger remove-btn" onclick="return confirm('Bạn có chắc muốn xóa dịch vụ này khỏi giỏ hàng?')">X</a>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                }
+            </div>
+        </div>
+        <div class="row">
+            <!-- Cart Totals -->
+            <div class="col-12 col-lg-6 offset-lg-6">
+                <div class="cart-totals-area mt-70">
+                    <h5 class="title--">Tổng Tiền Giỏ Hàng</h5>
+                    <div class="subtotal d-flex justify-content-between">
+                        <h5>Tạm tính</h5>
+                        <h5 id="subtotal">0 VNĐ</h5>
+                    </div>
+                    <div class="total d-flex justify-content-between">
+                        <h5>Tổng cộng</h5>
+                        <h5 id="total">0 VNĐ</h5>
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <form asp-controller="Carts" asp-action="CheckOut" method="get" class="w-100 pr-2">
+                            <button type="submit" class="btn alazea-btn w-100">TIẾP TỤC THANH TOÁN</button>
+                        </form>
+                        <a asp-controller="Services" asp-action="Index" class="btn alazea-btn w-100 pl-2">TIẾP TỤC ĐẶT DỊCH VỤ</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ##### Cart Area End ##### -->
+
+<script>
+    // Cập nhật số lượng khi người dùng thay đổi
+    function updateQuantity(element, change) {
+        let row = element.closest("tr");
+        let qtyInput = row.querySelector(".qty-text");
+        let qty = parseInt(qtyInput.value) + change;
+        if (qty < 1) qty = 1;
+        qtyInput.value = qty;
+
+        // Lưu vào localStorage
+        let cartId = row.getAttribute("data-cart-id");
+        localStorage.setItem(`cartItem_${cartId}_qty`, qty);
+
+        updateTotal(qtyInput);
+        updateCartTotal();
+    }
+
+    // Cập nhật tổng tiền cho một sản phẩm
+    function updateTotal(input) {
+        let row = input.closest("tr");
+        let qty = parseInt(input.value);
+        let unitPrice = parseFloat(row.getAttribute("data-price")) || 0;
+        let totalPrice = qty * unitPrice;
+
+        row.querySelector(".total_price span").innerText = totalPrice.toLocaleString('vi-VN') + " VNĐ";
+    }
+
+    // Cập nhật tổng tiền của giỏ hàng
+    function updateCartTotal() {
+        let rows = document.querySelectorAll("tr[data-price]");
+        let subtotal = 0;
+
+        rows.forEach(row => {
+            let serviceType = row.getAttribute("data-service-type");
+            let qty = serviceType === "Lẻ" ? parseInt(row.querySelector(".qty-text").value) : 1;
+            let unitPrice = parseFloat(row.getAttribute("data-price")) || 0;
+            subtotal += qty * unitPrice;
+        });
+
+        document.getElementById("subtotal").innerText = subtotal.toLocaleString('vi-VN') + " VNĐ";
+        document.getElementById("total").innerText = subtotal.toLocaleString('vi-VN') + " VNĐ";
+    }
+
+    // Tải lại số lượng và tổng tiền từ localStorage khi trang được tải lại
+    function loadCartFromLocalStorage() {
+        let rows = document.querySelectorAll("tr[data-cart-id]");
+
+        rows.forEach(row => {
+            let cartId = row.getAttribute("data-cart-id");
+            let storedQty = localStorage.getItem(`cartItem_${cartId}_qty`);
+            let serviceType = row.getAttribute("data-service-type");
+
+            if (storedQty && serviceType === "Lẻ") {
+                row.querySelector(".qty-text").value = storedQty;
+                updateTotal(row.querySelector(".qty-text"));
+            }
+        });
+
+        updateCartTotal();
+    }
+
+    // Ẩn/hiển thị tiêu đề cột dựa trên ServiceType
+    window.onload = () => {
+        loadCartFromLocalStorage();
+        updateCartTotal();
+
+        let rows = document.querySelectorAll("tr[data-service-type]");
+        let allLe = true;
+        let allThang = true;
+
+        rows.forEach(row => {
+            let serviceType = row.getAttribute("data-service-type");
+            if (serviceType !== "Lẻ") allLe = false;
+            if (serviceType === "Lẻ") allThang = false;
+        });
+
+        // Chỉ ẩn tiêu đề nếu tất cả đều là "Lẻ" hoặc tất cả đều là "Theo tháng"
+        if (allLe) {
+            document.querySelector(".cart-th-office-size").style.display = "none";
+            document.querySelectorAll(".office-size").forEach(cell => cell.style.display = "none");
+        }
+        if (allThang) {
+            document.querySelector(".cart-th-quantity").style.display = "none";
+            document.querySelectorAll(".qty").forEach(cell => cell.style.display = "none");
+        }
+    };
+</script>
