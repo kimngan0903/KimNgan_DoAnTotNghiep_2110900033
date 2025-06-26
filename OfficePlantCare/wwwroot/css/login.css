@@ -1,0 +1,82 @@
+﻿body {
+    background: url('https://newoffice24h.com/wp-content/uploads/2023/07/thiet-ke-van-phong-xanh-43.jpg') no-repeat center center fixed;
+    background-size: cover;
+    font-family: 'Dosis', sans-serif;
+}
+.custom-input.form-control {
+    border-radius: 8px;
+    padding: 10px;
+    transition: border-color 0.3s ease;
+}
+
+.custom-input.form-control:focus {
+    border-color: #48c023;
+    box-shadow: 0 0 5px rgba(72, 192, 35, 0.3);
+}
+
+.input-group-text {
+    background-color: #f8f9fa;
+    border-radius: 0 8px 8px 0;
+}
+
+.icon-animate {
+    transition: transform 0.2s ease;
+}
+
+    .icon-animate:hover {
+        transform: scale(1.2);
+    }
+
+.btn-success {
+    background: linear-gradient(90deg, #48c023, #27ae60);
+    border: none;
+    transition: transform 0.2s ease;
+}
+
+    .btn-success:hover {
+        transform: translateY(-2px);
+    }
+
+.modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+}
+
+    .modal-overlay.show {
+        display: flex;
+    }
+
+.modal-content {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    max-width: 400px;
+    width: 100%;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+    .modal-content h5 {
+        color: #48c023;
+        margin-bottom: 15px;
+    }
+
+.icheck-success {
+    display: flex;
+    align-items: center;
+}
+
+    .icheck-success input {
+        margin-right: 5px;
+    }
+
+
+
+

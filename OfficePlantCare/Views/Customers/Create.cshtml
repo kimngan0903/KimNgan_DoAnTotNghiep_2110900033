@@ -1,0 +1,82 @@
+﻿@model OfficePlantCare.Models.Customer
+
+@{
+    ViewData["Title"] = "Đăng ký";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link rel="stylesheet" href="~/css/create.css" />
+<!-- Container with Background Image and Overlay -->
+<div class="register-wrapper">
+    <!-- Success Message -->
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            @TempData["SuccessMessage"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    }
+
+    <!-- Error Messages -->
+    @if (!ViewData.ModelState.IsValid)
+    {
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <ul class="mb-0">
+                @foreach (var modelState in ViewData.ModelState.Values)
+                {
+                    foreach (var error in modelState.Errors)
+                    {
+                        <li>@error.ErrorMessage</li>
+                    }
+                }
+            </ul>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    }
+
+    <!-- Registration Form -->
+    <div class="register-card">
+        <h2 class="text-center mb-4">Đăng Ký Tài Khoản</h2>
+        <form asp-action="Create" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-group mb-3">
+                <label asp-for="CustomerName" class="form-label fw-bold">Họ và tên</label>
+                <input asp-for="CustomerName" class="form-control" placeholder="Nhập họ và tên của bạn" />
+                <span asp-validation-for="CustomerName" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mb-3">
+                <label asp-for="Email" class="form-label fw-bold">Email</label>
+                <input asp-for="Email" type="email" class="form-control" placeholder="Nhập địa chỉ email" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mb-3">
+                <label asp-for="Phone" class="form-label fw-bold">Số điện thoại</label>
+                <input asp-for="Phone" class="form-control" placeholder="Nhập số điện thoại" />
+                <span asp-validation-for="Phone" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mb-3">
+                <label asp-for="Address" class="form-label fw-bold">Địa chỉ</label>
+                <input asp-for="Address" class="form-control" placeholder="Nhập địa chỉ của bạn" />
+                <span asp-validation-for="Address" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mb-4">
+                <label asp-for="PasswordHash" class="form-label fw-bold">Mật khẩu</label>
+                <input asp-for="PasswordHash" type="password" class="form-control" placeholder="Tạo mật khẩu" />
+                <span asp-validation-for="PasswordHash" class="text-danger"></span>
+            </div>
+
+            <div class="d-flex justify-content-center">
+                <button type="submit" class="btn alazea-btn w-50">Đăng Ký Ngay</button>
+            </div>
+
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

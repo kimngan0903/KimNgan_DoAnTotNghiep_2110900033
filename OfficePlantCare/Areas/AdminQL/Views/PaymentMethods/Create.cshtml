@@ -1,0 +1,74 @@
+﻿@model OfficePlantCare.Models.PaymentMethod
+
+@{
+    ViewData["Title"] = "Tạo phương thức thanh toán";
+    Layout = "~/Areas/AdminQL/Views/Shared/Admin.cshtml";
+}
+
+<link rel="stylesheet" href="~/assets/css/create.css" />
+
+<div class="pcoded-main-container">
+    <div class="pcoded-content">
+        <!-- Page Header -->
+        <div class="page-header card shadow-sm border-0">
+            <div class="page-block">
+                <div class="row align-items-center">
+                    <div class="col-md-12">
+                        <div class="page-header-title d-flex justify-content-between align-items-center py-3 ml-3">
+                            <h5 class="m-0 text-success font-weight-bold">THÊM MỚI PHƯƠNG THỨC THANH TOÁN</h5>
+                            <nav aria-label="breadcrumb">
+                                <ol class="breadcrumb mb-0 bg-transparent">
+                                    <li class="breadcrumb-item"><a asp-area="AdminQL" asp-controller="PaymentMethods" asp-action="Index"><i class="feather icon-home"></i></a></li>
+                                    <li class="breadcrumb-item"><a asp-action="Index">DANH SÁCH PHƯƠNG THỨC THANH TOÁN</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">THÊM MỚI</li>
+                                </ol>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="row">
+            <div class="col-md-8 offset-md-2">
+                <div class="card shadow-sm border-0 rounded-lg p-4">
+                    <h3 class="text-success text-center font-weight-bold mb-4"><i class="fa-solid fa-credit-card me-2"></i>THÊM MỚI PHƯƠNG THỨC THANH TOÁN</h3>
+                    <form asp-action="Create" method="post">
+                        <div asp-validation-summary="ModelOnly" class="text-danger mb-4"></div>
+
+                        <div class="row">
+                            <!-- Cột trái -->
+                            <div class="col-md-6">
+                                <div class="form-group mb-4">
+                                    <i class="fa-solid fa-money-check-alt me-2"></i>
+                                    <label asp-for="MethodName" class="control-label fw-bold text-muted"></label>
+                                    <input asp-for="MethodName" class="form-control rounded-pill" placeholder="Nhập tên phương thức thanh toán" />
+                                    <span asp-validation-for="MethodName" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <!-- Cột phải (trống để căn chỉnh) -->
+                            <div class="col-md-6"></div>
+                        </div>
+
+                        <!-- Buttons -->
+                        <div class="form-group d-flex justify-content-center gap-3">
+                            <button type="submit" class="btn btn-primary rounded-pill px-4">
+                                <i class="fas fa-save me-2"></i>Thêm mới
+                            </button>
+                            <a asp-action="Index" class="btn btn-secondary rounded-pill px-4">
+                                <i class="fas fa-arrow-left me-2"></i>Quay lại
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

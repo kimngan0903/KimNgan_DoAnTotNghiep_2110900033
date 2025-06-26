@@ -1,0 +1,88 @@
+﻿.card {
+    border-radius: 15px;
+    transition: all 0.3s ease;
+}
+
+    .card:hover {
+        box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    }
+
+.form-control, .custom-select {
+    border: 1px solid #ced4da;
+    padding: 10px 15px;
+    transition: border-color 0.3s ease;
+}
+
+    .form-control:focus, .custom-select:focus {
+        border-color: #007bff;
+        box-shadow: 0 0 5px rgba(0,123,255,0.3);
+    }
+
+.btn {
+    transition: all 0.3s ease;
+}
+
+    .btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+
+.avatar-preview {
+    transition: transform 0.3s ease;
+}
+
+    .avatar-preview:hover {
+        transform: scale(1.05);
+    }
+
+.form-group label {
+    margin-bottom: 8px;
+}
+
+.page-header {
+    background-color: #f8f9fa;
+}
+.card {
+    border-radius: 15px;
+    transition: all 0.3s ease;
+}
+
+    .card:hover {
+        box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    }
+
+.form-control, .custom-select {
+    border: 1px solid #ced4da;
+    padding: 10px 15px;
+    transition: border-color 0.3s ease;
+}
+
+    .form-control:focus, .custom-select:focus {
+        border-color: #007bff;
+        box-shadow: 0 0 5px rgba(0,123,255,0.3);
+    }
+
+.btn {
+    transition: all 0.3s ease;
+}
+
+    .btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+
+.avatar-preview {
+    transition: transform 0.3s ease;
+}
+
+    .avatar-preview:hover {
+        transform: scale(1.05);
+    }
+
+.form-group label {
+    margin-bottom: 8px;
+}
+
+.page-header {
+    background-color: #f8f9fa;
+}

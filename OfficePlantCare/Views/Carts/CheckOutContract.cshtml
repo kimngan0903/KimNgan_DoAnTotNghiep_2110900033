@@ -1,0 +1,186 @@
+﻿@model IEnumerable<OfficePlantCare.Models.Cart>
+
+@{
+    ViewData["Title"] = "Thanh toán Hợp đồng";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var customer = ViewBag.Customer as OfficePlantCare.Models.Customer;
+}
+
+<div class="breadcrumb-area">
+    <div class="top-breadcrumb-area bg-img bg-overlay d-flex align-items-center justify-content-center" style="background-image: url(/img/banner/banner.jpg);">
+        <h2 class="text-white" style="font-weight: 700; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);">THANH TOÁN HỢP ĐỒNG</h2>
+    </div>
+    <div class="container">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb shadow-sm p-3 mb-5 bg-white rounded" style="background: linear-gradient(135deg, #f8f9fa, #e9ecef);">
+                <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index"><i class="fa fa-home"></i> Trang chủ</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Thanh toán Hợp đồng</li>
+            </ol>
+        </nav>
+    </div>
+</div>
+
+<div class="checkout_area mb-100">
+    <div class="container">
+        <form asp-controller="Carts" asp-action="CheckOutPost" method="post">
+            <input type="hidden" name="checkoutType" value="Contracts" />
+            <div class="row g-4">
+                <div class="col-12 col-lg-6">
+                    <div class="checkout_details_area clearfix">
+                        <h3>Thông tin đặt dịch vụ</h3>
+                        <div class="row g-3">
+                            <div class="col-md-12">
+                                <div class="border p-4 shadow-sm rounded">
+                                    <h2>Thông tin đặt dịch vụ</h2>
+                                    <div class="input-group mb-4">
+                                        <span class="input-group-text">Địa chỉ chăm sóc</span>
+                                        <input type="text" class="form-control" name="address" placeholder="Nhập địa chỉ chăm sóc" required>
+                                        <span class="text-danger">@Html.ValidationMessage("address")</span>
+                                    </div>
+                                    <div class="input-group mb-4">
+                                        <span class="input-group-text">Ghi chú</span>
+                                        <textarea class="form-control" name="notes" placeholder="Ghi chú (nếu có)"></textarea>
+                                    </div>
+                                    <div class="input-group mb-4">
+                                        <span class="input-group-text">Chọn cách lập lịch</span>
+                                        <select class="form-control" name="scheduleOption" id="scheduleOption" required>
+                                            <option value="">Chọn tùy chọn</option>
+                                            <option value="manual">Tự chọn lịch (2 lần/tuần)</option>
+                                            <option value="random">Tự động tạo lịch ngẫu nhiên</option>
+                                        </select>
+                                    </div>
+                                    <div class="input-group mb-4" id="scheduleFields1" style="display: none;">
+                                        <span class="input-group-text">Ngày bắt đầu chăm sóc 1</span>
+                                        <input type="date" class="form-control" name="scheduledDate1" id="scheduledDate1" min="@DateTime.Now.ToString("yyyy-MM-dd")">
+                                        <span class="text-danger">@Html.ValidationMessage("scheduledDate1")</span>
+                                    </div>
+                                    <div class="input-group mb-4" id="scheduleTimeFields1" style="display: none;">
+                                        <span class="input-group-text">Giờ chăm sóc 1</span>
+                                        <input type="time" class="form-control" name="scheduledTime1" id="scheduledTime1">
+                                        <span class="text-danger">@Html.ValidationMessage("scheduledTime1")</span>
+                                    </div>
+                                    <div class="input-group mb-4" id="scheduleFields2" style="display: none;">
+                                        <span class="input-group-text">Ngày bắt đầu chăm sóc 2</span>
+                                        <input type="date" class="form-control" name="scheduledDate2" id="scheduledDate2" min="@DateTime.Now.ToString("yyyy-MM-dd")">
+                                        <span class="text-danger">@Html.ValidationMessage("scheduledDate2")</span>
+                                    </div>
+                                    <div class="input-group mb-4" id="scheduleTimeFields2" style="display: none;">
+                                        <span class="input-group-text">Giờ chăm sóc 2</span>
+                                        <input type="time" class="form-control" name="scheduledTime2" id="scheduledTime2">
+                                        <span class="text-danger">@Html.ValidationMessage("scheduledTime2")</span>
+                                    </div>
+                                    <div class="input-group mb-4">
+                                        <span class="input-group-text">Phương thức thanh toán</span>
+                                        <select class="form-control" name="paymentMethodId" id="paymentMethod">
+                                            @foreach (var method in ViewBag.PaymentMethods)
+                                            {
+                                                <option value="@method.PaymentMethodId">@method.MethodName</option>
+                                            }
+                                        </select>
+                                    </div>
+                                    <div id="qrContainer" class="mt-3 text-center" style="display: none;">
+                                        <h5>Quét mã QR để thanh toán</h5>
+                                        <img id="qrCode" src="" alt="Mã QR VietQR" style="width: 200px; height: 200px; border-radius: 10px;">
+                                    </div>
+                                    @if (TempData["ErrorMessage"] != null)
+                                    {
+                                        <div class="alert alert-danger mt-3">
+                                            @TempData["ErrorMessage"]
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-6">
+                    <h3>Đơn hàng của bạn</h3>
+                    <div class="checkout-content">
+                        <div class="products">
+                            @foreach (var item in Model)
+                            {
+                                <div class="single-products d-flex justify-content-between align-items-center">
+                                    <h5>Dịch vụ: @item.Service.ServiceName (Loại: @item.ServiceType)</h5>
+                                    <h5>@string.Format("{0:N0}", item.Total).Replace(",", ".") VNĐ</h5>
+                                </div>
+                            }
+                            <div class="subtotal d-flex justify-content-between align-items-center">
+                                <h5>Tổng</h5>
+                                <h5>@string.Format("{0:N0}", ViewBag.totalAmount).Replace(",", ".") VNĐ</h5>
+                            </div>
+                            <div class="checkout-btn mt-30">
+                                <button type="submit" class="btn alazea-btn w-100">Thanh toán ngay</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#scheduleOption").on("change", function () {
+            var selectedOption = $(this).val();
+            var scheduleFields1 = $("#scheduleFields1");
+            var scheduleTimeFields1 = $("#scheduleTimeFields1");
+            var scheduleFields2 = $("#scheduleFields2");
+            var scheduleTimeFields2 = $("#scheduleTimeFields2");
+            var scheduledDateInput1 = $("#scheduledDate1");
+            var scheduledTimeInput1 = $("#scheduledTime1");
+            var scheduledDateInput2 = $("#scheduledDate2");
+            var scheduledTimeInput2 = $("#scheduledTime2");
+
+            if (selectedOption === "manual") {
+                scheduleFields1.show();
+                scheduleTimeFields1.show();
+                scheduleFields2.show();
+                scheduleTimeFields2.show();
+                scheduledDateInput1.prop("required", true);
+                scheduledTimeInput1.prop("required", true);
+                scheduledDateInput2.prop("required", true);
+                scheduledTimeInput2.prop("required", true);
+            } else {
+                scheduleFields1.hide();
+                scheduleTimeFields1.hide();
+                scheduleFields2.hide();
+                scheduleTimeFields2.hide();
+                scheduledDateInput1.prop("required", false);
+                scheduledTimeInput1.prop("required", false);
+                scheduledDateInput2.prop("required", false);
+                scheduledTimeInput2.prop("required", false);
+                scheduledDateInput1.val("");
+                scheduledTimeInput1.val("");
+                scheduledDateInput2.val("");
+                scheduledTimeInput2.val("");
+            }
+        });
+
+        $("#paymentMethod").on("change", function () {
+            var paymentMethod = $(this).val();
+            var qrContainer = $("#qrContainer");
+            var qrCode = $("#qrCode");
+            var totalAmount = parseFloat('@ViewBag.totalAmount') || 0;
+
+            if (paymentMethod === "2") {
+                if (totalAmount > 0) {
+                    var qrUrl = "@Url.Action("GenerateQr", "QrCode")" + "?amount=" + totalAmount;
+                    qrCode.attr("src", qrUrl);
+                    qrContainer.show();
+                } else {
+                    qrContainer.hide();
+                }
+            } else {
+                qrContainer.hide();
+                qrCode.attr("src", "");
+            }
+        });
+
+        $('form').submit(function() {
+            console.log($(this).serialize());
+            return true;
+        });
+    });
+</script>

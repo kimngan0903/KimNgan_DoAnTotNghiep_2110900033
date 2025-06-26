@@ -1,0 +1,98 @@
+﻿@model OfficePlantCare.Models.Feedback
+
+@{
+    ViewData["Title"] = "Chi tiết phản hồi";
+    Layout = "~/Areas/AdminQL/Views/Shared/Admin.cshtml";
+}
+
+<link rel="stylesheet" href="~/assets/css/index.css" />
+
+<!-- [ Main Content ] start -->
+<div class="pcoded-main-container">
+    <div class="pcoded-content">
+        <!-- Page Header -->
+        <div class="page-header card shadow-sm border-0">
+            <div class="page-block">
+                <div class="row align-items-center">
+                    <div class="col-md-12">
+                        <div class="page-header-title d-flex justify-content-between align-items-center py-3 ml-3">
+                            <h5 class="m-0 text-success font-weight-bold">QUẢN LÝ PHẢN HỒI</h5>
+                            <nav aria-label="breadcrumb">
+                                <ol class="breadcrumb mb-0 bg-transparent">
+                                    <li class="breadcrumb-item"><a asp-area="AdminQL" asp-controller="Feedbacks" asp-action="Index"><i class="fa icon-home"></i></a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">CHI TIẾT PHẢN HỒI</li>
+                                </ol>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card shadow-sm border-0">
+                    <div class="card-header bg-white px-4 py-3 border-bottom">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <h5 class="text-success font-weight-bold mb-0">CHI TIẾT PHẢN HỒI</h5>
+                            <div class="d-flex align-items-center gap-3">
+                                @*    <a class="btn btn-success rounded-pill px-4" asp-action="Edit" asp-route-id="@Model?.FeedbackId">
+                                <i class="fas fa-edit"></i> Sửa
+                                </a> *@
+                                <a class="btn btn-secondary rounded-pill px-4" asp-action="Index">
+                                    <i class="fas fa-arrow-left"></i> Quay lại
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body p-4">
+                        <dl class="row">
+                            <dt class="col-sm-4 text-muted font-weight-bold">Ngày phản hồi:</dt>
+                            <dd class="col-sm-8">
+                                <span class="badge bg-info text-white px-3 py-2">@Model.FeedbackDate?.ToString("dd/MM/yyyy HH:mm")</span>
+                            </dd>
+
+                            <dt class="col-sm-4 text-muted font-weight-bold">Đánh giá:</dt>
+                            <dd class="col-sm-8">
+                                <span class="badge bg-warning text-white px-3 py-2">@Model.Rating sao</span>
+                            </dd>
+
+                            <dt class="col-sm-4 text-muted font-weight-bold">Nội dung:</dt>
+                            <dd class="col-sm-8">
+                                <div class="card p-3 bg-light" style="min-height: 150px; overflow-y: auto;">
+                                    @Html.Raw(Model.Content)
+                                </div>
+                            </dd>
+                            <dt class="col-sm-4 text-muted font-weight-bold">Khách hàng:</dt>
+                            <dd class="col-sm-8">
+                                <span class="badge bg-primary text-white px-3 py-2">@Model.Customer?.CustomerName ?? "Không xác định"</span>
+                            </dd>
+
+                            <dt class="col-sm-4 text-muted font-weight-bold">Dịch vụ liên quan:</dt>
+                            <dd class="col-sm-8">
+                                <span class="badge bg-secondary text-white px-3 py-2">@(Model.Service?.ServiceName ?? "Chưa xác định")</span>
+                            </dd>
+                        </dl>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- [ Main Content ] end -->
+<style>
+    .card {
+        transition: all 0.3s ease;
+    }
+
+        .card:hover {
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            transform: translateY(-5px);
+        }
+
+        .card .bg-light {
+            border: 1px solid #dee2e6;
+            border-radius: 5px;
+        }
+</style>

@@ -1,0 +1,120 @@
+﻿@model OfficePlantCare.Models.Contract
+
+@{
+    ViewData["Title"] = "Chỉnh sửa Hợp đồng";
+}
+
+<link rel="stylesheet" href="~/assets/css/edit.css" />
+<div class="card shadow-sm border-0 rounded-lg p-1">
+    <h3 class="text-success text-center font-weight-bold mb-4"><i class="fa-solid fa-pen-to-square me-2"></i>CHỈNH SỬA CHI TIẾT HỢP ĐỒNG</h3>
+    <div class="row">
+        <form asp-action="Edit" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger mb-4"></div>
+            <input type="hidden" asp-for="ContractId" />
+            <input type="hidden" asp-for="CustomerId" />
+            <input type="hidden" asp-for="TotalAmount" />
+            <input type="hidden" asp-for="StartDate" />
+            <input type="hidden" asp-for="EndDate" />
+
+            <div class="row">
+                <!-- Cột trái -->
+                <div class="col-md-6">
+                    <div class="form-group mb-4">
+                        <i class="fa-solid fa-file-contract me-2"></i>
+                        <label asp-for="ContractCode" class="control-label fw-bold text-muted"></label>
+                        <input asp-for="ContractCode" class="form-control rounded-pill" readonly />
+                        <span asp-validation-for="ContractCode" class="text-danger"></span>
+                    </div>
+                    <div class="form-group mb-4">
+                        <i class="fa-solid fa-user me-2"></i>
+                        <label asp-for="CustomerId" class="control-label fw-bold text-muted"></label>
+                        <input type="text" class="form-control rounded-pill" value="@ViewData["CustomerName"]" readonly />
+                        <span asp-validation-for="CustomerId" class="text-danger"></span>
+                    </div>
+                    <div class="form-group mb-4">
+                        <i class="fa-solid fa-calendar-day me-2"></i>
+                        <label asp-for="CreatedDate" class="control-label fw-bold text-muted"></label>
+                        <input asp-for="CreatedDate" class="form-control rounded-pill" type="datetime-local" />
+                        <span asp-validation-for="CreatedDate" class="text-danger"></span>
+                    </div>
+                    <div class="form-group mb-4">
+                        <i class="fa-solid fa-dollar-sign me-2"></i>
+                        <label asp-for="TotalAmount" class="control-label fw-bold text-muted"></label>
+                        <input class="form-control rounded-pill" readonly value="@(Model?.TotalAmount?.ToString("N0").Replace(",", ".") + " VNĐ")" />
+                        <span asp-validation-for="TotalAmount" class="text-danger"></span>
+                    </div>
+                    <div class="form-group mb-4">
+                        <i class="fa-solid fa-ruler me-2"></i>
+                        <label asp-for="DurationUnit" class="control-label fw-bold text-muted"></label>
+                        <input asp-for="DurationUnit" class="form-control rounded-pill" placeholder="Nhập đơn vị thời gian" />
+                        <span asp-validation-for="DurationUnit" class="text-danger"></span>
+                    </div>
+                    <div class="form-group mb-4">
+                        <i class="fa-solid fa-hourglass me-2"></i>
+                        <label asp-for="Duration" class="control-label fw-bold text-muted"></label>
+                        <input asp-for="Duration" class="form-control rounded-pill" placeholder="Nhập thời lượng" />
+                        <span asp-validation-for="Duration" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <!-- Cột phải -->
+                <div class="col-md-6">
+                    <div class="form-group mb-4">
+                        <i class="fa-solid fa-calendar-day me-2"></i>
+                        <label asp-for="StartDate" class="control-label fw-bold text-muted"></label>
+                        <input class="form-control rounded-pill" readonly
+                               value="@Model.StartDate.ToString("dd/MM/yyyy")" />
+                        <span asp-validation-for="StartDate" class="text-danger"></span>
+                    </div>
+                    <div class="form-group mb-4">
+                        <i class="fa-solid fa-calendar-check me-2"></i
+                        <label asp-for="EndDate" class="control-label fw-bold text-muted"></label>
+                        <input class="form-control rounded-pill" readonly
+                               value="@Model.EndDate?.ToString("dd/MM/yyyy")" />
+                        <span asp-validation-for="EndDate" class="text-danger"></span> 
+                    </div>
+                    <div class="form-group mb-4">
+                        <i class="fa-solid fa-credit-card me-2"></i>
+                        <label asp-for="PaymentMethodId" class="control-label fw-bold text-muted"></label>
+                        <select asp-for="PaymentMethodId" class="form-control custom-select rounded-pill" asp-items="ViewBag.PaymentMethodId">
+                            <option value="">-- Chọn phương thức thanh toán --</option>
+                        </select>
+                        <span asp-validation-for="PaymentMethodId" class="text-danger"></span>
+                    </div>
+                    <div class="form-group mb-4">
+                        <i class="fa-solid fa-money-check-alt me-2"></i>
+                        <label asp-for="PaymentStatus" class="control-label fw-bold text-muted"></label>
+                        <select asp-for="PaymentStatus" class="form-control custom-select rounded-pill">
+                            <option value="Chưa thanh toán">Chưa thanh toán</option>
+                            <option value="Đã thanh toán">Đã thanh toán</option>
+                            <option value="Hoàn tiền">Hoàn tiền</option>
+                        </select>
+                        <span asp-validation-for="PaymentStatus" class="text-danger"></span>
+                    </div>
+                    <div class="form-group mb-4">
+                        <i class="fa-solid fa-toggle-on me-2"></i>
+                        <label asp-for="Status" class="control-label fw-bold text-muted"></label>
+                        <select asp-for="Status" class="form-control custom-select rounded-pill">
+                            <option value="Chờ xử lý">Chờ xử lý</option>
+                            <option value="Đang hiệu lực">Đang hiệu lực</option>
+                            <option value="Hết hiệu lực">Hết hiệu lực</option>
+                            <option value="Hủy">Hủy</option>
+                        </select>
+                        <span asp-validation-for="Status" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Buttons -->
+            <div class="form-group d-flex gap-3 justify-content-center mt-4">
+                <button type="submit" class="btn btn-primary rounded-pill px-4">
+                    <i class="fas fa-save me-2"></i>Lưu
+                </button>
+                <a asp-action="Index" class="btn btn-secondary rounded-pill px-4">
+                    <i class="fas fa-arrow-left me-2"></i>Quay lại
+                </a>
+            </div>
+        </form>
+    </div>
+</div>
+

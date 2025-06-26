@@ -1,0 +1,145 @@
+﻿@model dynamic
+
+@{
+    ViewData["Title"] = "Thanh toán thành công";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- ##### Breadcrumb Area Start ##### -->
+<div class="breadcrumb-area">
+    <div class="top-breadcrumb-area bg-img bg-overlay d-flex align-items-center justify-content-center" style="background-image: url(/img/banner/banner.jpg);">
+        <h2>THANH TOÁN THÀNH CÔNG</h2>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index"><i class="fa fa-home"></i> Trang chủ</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Thanh toán thành công</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ##### Breadcrumb Area End ##### -->
+<!-- ##### Success Area Start ##### -->
+<div class="success-area section-padding-0-100 clearfix">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h2 class="success-title">Thanh toán thành công!</h2>
+                <p class="success-message">Cảm ơn bạn đã đặt hàng. Dưới đây là thông tin đơn hàng/hợp đồng của bạn:</p>
+            </div>
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="col-12 col-md-6">
+                <div class="order-info">
+                    <table class="table table-bordered">
+                        @if (ViewBag.OrderId != null)
+                        {
+                            <tr>
+                                <th>Mã đơn hàng</th>
+                                <td>#@ViewBag.OrderId</td>
+                            </tr>
+                        }
+                        @if (ViewBag.ContractId != null)
+                        {
+                            <tr>
+                                <th>Mã hợp đồng</th>
+                                <td>#@ViewBag.ContractId (@ViewBag.ContractCode)</td>
+                            </tr>
+                        }
+                        <tr>
+                            <th>Tổng số tiền</th>
+                            <td>@ViewBag.TotalAmount.ToString("#.##0 VNĐ")</td>
+                        </tr>
+                        <tr>
+                            <th>Ngày thanh toán</th>
+                            <td>@ViewBag.PaymentDate</td>
+                        </tr>
+                        <tr>
+                            <th>Trạng thái thanh toán</th>
+                            <td>@ViewBag.PaymentStatus</td>
+                        </tr>
+                        <tr>
+                            <th>Thông tin giao hàng</th>
+                            <td>@ViewBag.Address</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="text-center mt-4">
+                    <a href="@Url.Action("Index", "Home")" class="btn btn-success">Trở về trang chủ</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ##### Success Area End ##### -->
+
+<style>
+    .success-area {
+        padding: 50px 0;
+        background-color: #f8f9fa;
+    }
+
+    .success-title {
+        font-size: 36px;
+        color: #28a745;
+        font-weight: 700;
+        margin-bottom: 20px;
+    }
+
+    .success-message {
+        font-size: 18px;
+        color: #666;
+        margin-bottom: 40px;
+    }
+
+    .order-info {
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+
+        .order-info table {
+            width: 100%;
+            margin-bottom: 0;
+        }
+
+        .order-info th, .order-info td {
+            padding: 15px;
+            font-size: 16px;
+            vertical-align: middle;
+        }
+
+        .order-info th {
+            background-color: #28a745;
+            color: #fff;
+            font-weight: 600;
+            width: 40%;
+        }
+
+        .order-info td {
+            background-color: #fff;
+            color: #333;
+        }
+
+    .btn-success {
+        background-color: #28a745;
+        border-color: #28a745;
+        padding: 10px 30px;
+        font-size: 16px;
+        text-transform: uppercase;
+        border-radius: 5px;
+        transition: all 0.3s ease;
+    }
+
+        .btn-success:hover {
+            background-color: #218838;
+            border-color: #1e7e34;
+        }
+</style>

@@ -1,0 +1,87 @@
+﻿@model OfficePlantCare.Models.Customer
+
+@{
+    ViewData["Title"] = "Chi tiết Khách hàng";
+}
+
+<link rel="stylesheet" href="~/assets/css/details.css" />
+
+<div class="modal-body p-0">
+    <div class="card shadow-sm border-0 rounded-lg p-1">
+        <h3 class="text-success text-center font-weight-bold mb-4"><i class="fa-solid fa-info-circle me-2"></i> CHI TIẾT KHÁCH HÀNG</h3>
+        <div class="row">
+            <!-- Cột trái -->
+            <div class="col-md-6">
+                <div class="form-group mb-4">
+                    <i class="fa-solid fa-user me-2"></i>
+                    <label class="control-label fw-bold text-muted">@Html.DisplayNameFor(model => model.CustomerName)</label>
+                    <div class="form-control rounded-pill bg-light">@Html.DisplayFor(model => model.CustomerName)</div>
+                </div>
+                <div class="form-group mb-4">
+                    <i class="fa-solid fa-envelope me-2"></i>
+                    <label class="control-label fw-bold text-muted">@Html.DisplayNameFor(model => model.Email)</label>
+                    <div class="form-control rounded-pill bg-light">@Html.DisplayFor(model => model.Email)</div>
+                </div>
+                <div class="form-group mb-4">
+                    <i class="fa-solid fa-phone me-2"></i>
+                    <label class="control-label fw-bold text-muted">@Html.DisplayNameFor(model => model.Phone)</label>
+                    <div class="form-control rounded-pill bg-light">@Html.DisplayFor(model => model.Phone)</div>
+                </div>
+                <div class="form-group mb-4">
+                    <i class="fa-solid fa-map-marker-alt me-2"></i>
+                    <label class="control-label fw-bold text-muted">@Html.DisplayNameFor(model => model.Address)</label>
+                    <div class="form-control rounded-pill bg-light">@Html.DisplayFor(model => model.Address)</div>
+                </div>
+            </div>
+
+            <!-- Cột phải -->
+            <div class="col-md-6">
+                <div class="form-group mb-4">
+                    <i class="fa-solid fa-lock me-2"></i>
+                    <label class="control-label fw-bold text-muted">@Html.DisplayNameFor(model => model.PasswordHash)</label>
+                    <textarea class="form-control bg-light px-3 py-2 rounded-3" rows="2" readonly>@Html.DisplayFor(model => model.PasswordHash)</textarea>
+                </div>
+                <div class="form-group mb-4">
+                    <i class="fa-solid fa-calendar-plus me-2"></i>
+                    <label class="control-label fw-bold text-muted">@Html.DisplayNameFor(model => model.CreatedDate)</label>
+                    <div class="form-control rounded-pill bg-light">@Html.DisplayFor(model => model.CreatedDate)</div>
+                </div>
+                <div class="form-group mb-4">
+                    <i class="fa-solid fa-toggle-on me-2"></i>
+                    <label class="control-label fw-bold text-muted">@Html.DisplayNameFor(model => model.Status)</label>
+                    <div class="form-control rounded-pill bg-light">
+                        @if (Model?.Status != null)
+                        {
+                            @if (Model.Status.ToString() == "Hoạt động")
+                            {
+                                <span class="badge badge-success px-3 py-1">Hoạt động</span>
+                            }
+                            else if (Model.Status.ToString() == "Không hoạt động")
+                            {
+                                <span class="badge badge-warning px-3 py-1">Không hoạt động</span>
+                            }
+                            else if(Model.Status.ToString() == "Bị khóa")
+                            {
+                                <span class="badge badge-danger px-3 py-1">Bị khóa</span>
+                            }
+                            else
+                            {
+                                <span class="badge badge-secondary px-3 py-1">Không xác định</span>
+                            }
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Buttons -->
+        <div class="form-group d-flex gap-3 justify-content-center">
+            <button type="button" class="btn btn-primary rounded-pill px-4" onclick="loadModal('@Url.Action("Edit", "Customers", new { id = Model?.CustomerId })')">
+                <i class="fas fa-edit me-2"></i>Chỉnh sửa
+            </button>
+            <a class="btn btn-secondary rounded-pill px-4" href="@Url.Action("Index")">
+                <i class="fas fa-times me-2"></i>Đóng
+            </a>
+        </div>
+    </div>
+</div>

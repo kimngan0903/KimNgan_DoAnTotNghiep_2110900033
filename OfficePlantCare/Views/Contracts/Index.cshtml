@@ -1,0 +1,202 @@
+﻿@model IEnumerable<OfficePlantCare.Models.Contract>
+
+@{
+    ViewData["Title"] = "Danh sách hợp đồng";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- ##### Breadcrumb Area Start ##### -->
+<div class="breadcrumb-area">
+    <div class="top-breadcrumb-area bg-img bg-overlay d-flex align-items-center justify-content-center" style="background-image: url(/img/banner/banner.jpg);">
+        <h2 class="text-white" style="font-weight: 700; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);">DANH SÁCH HỢP ĐỒNG</h2>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb shadow-sm p-3 mb-5 bg-white rounded" style="background: linear-gradient(135deg, #f8f9fa, #e9ecef);">
+                        <li class="breadcrumb-item"><a href="~/home"><i class="fa fa-home"></i> Trang chủ</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Danh sách hợp đồng</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ##### Breadcrumb Area End ##### -->
+<!-- ##### Contract Details List Area Start ##### -->
+<section class="contract-details-list-area mb-5">
+    <div class="container">
+        @if (TempData["SuccessMessage"] != null)
+        {
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                @TempData["SuccessMessage"]
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+        }
+        @if (TempData["ErrorMessage"] != null)
+        {
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                @TempData["ErrorMessage"]
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+        }
+        <div class="row">
+            <div class="col-12">
+                <div class="card shadow-sm rounded" style="background: linear-gradient(135deg, #ffffff, #e6ffe6); border: 1px solid #c3e6cb;">
+                    <div class="card-body">
+                        <h4 class="card-title mb-4 text-center" style="font-weight: 700; color: #2c3e50; text-transform: uppercase;">HỢP ĐỒNG CỦA BẠN</h4>
+                        @if (Model.Any())
+                        {
+                            <div class="table-responsive">
+                                <table class="table table-hover table-bordered">
+                                    <thead class="thead-dark">
+                                        <tr>
+                                            <th class="text-center" scope="col">@Html.DisplayNameFor(model => model.CustomerId)</th>
+                                            <th class="text-center" scope="col">@Html.DisplayNameFor(model => model.TotalAmount)</th>
+                                            <th class="text-center" scope="col">@Html.DisplayNameFor(model => model.StartDate)</th>
+                                            <th class="text-center" scope="col">@Html.DisplayNameFor(model => model.EndDate)</th>
+                                            <th class="text-center" scope="col">@Html.DisplayNameFor(model => model.Status)</th>
+                                            <th class="text-center" scope="col">Hành động</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var item in Model)
+                                        {
+                                            <tr>
+                                                <td>@Html.DisplayFor(modelItem => item.Customer.CustomerName)</td>
+                                                <td>@Html.DisplayFor(modelItem => item.TotalAmount) VNĐ</td>
+                                                <td>@Html.DisplayFor(modelItem => item.StartDate)</td>
+                                                <td>@Html.DisplayFor(modelItem => item.EndDate)</td>
+                                                <td>
+                                                    @if (item.Status == "Chờ xử lý")
+                                                    {
+                                                        <span class="badge badge-warning px-3 py-2">Chờ xử lý</span>
+                                                    }
+                                                    else if (item.Status == "Đang hiệu lực")
+                                                    {
+                                                        <span class="badge badge-success px-3 py-2">Đang hiệu lực</span>
+                                                    }
+                                                    else if (item.Status == "Hết hiệu lực")
+                                                    {
+                                                        <span class="badge badge-danger px-3 py-2">Hết hiệu lực</span>
+                                                    }
+                                                    else if (item.Status == "Hủy")
+                                                    {
+                                                        <span class="badge badge-danger px-3 py-2">Hủy</span>
+                                                    }
+                                                    else
+                                                    {
+                                                        <span class="badge badge-secondary px-3 py-2">Chưa xác định</span>
+                                                    }
+                                                </td>
+                                                <td>
+                                                    <a asp-action="Details" asp-route-id="@item.ContractId" class="btn btn-sm btn-info text-white mr-1" title="Xem chi tiết">
+                                                        <i class="fa fa-eye"></i> Chi tiết
+                                                    </a>
+                                                    @if (item.Status == "Chờ xử lý" && item.PaymentStatus != "Đã thanh toán")
+                                                    {
+                                                        <a href="#" class="btn btn-sm btn-danger text-white cancel-contract mr-1" title="Hủy hợp đồng" data-contract-id="@item.ContractId" data-toggle="modal" data-target="#cancelContractModal">
+                                                            <i class="fa fa-times"></i> Hủy
+                                                        </a>
+                                                    }
+                                                </td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="alert alert-info text-center" role="alert">
+                                Bạn chưa có hợp đồng nào. <a asp-controller="Services" asp-action="Index" class="alert-link">Đặt ngay!</a>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- ##### Contract Details List Area End ##### -->
+<!-- Modal xác nhận hủy hợp đồng -->
+<div class="modal fade" id="cancelContractModal" tabindex="-1" role="dialog" aria-labelledby="cancelContractModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="cancelContractModalLabel">Xác nhận hủy hợp đồng</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Bạn có chắc chắn muốn hủy hợp đồng này không? Hành động này không thể hoàn tác.
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                <form asp-action="CancelContract" method="post">
+                    <input type="hidden" name="contractId" id="cancelContractId" />
+                    <button type="submit" class="btn btn-danger">Hủy hợp đồng</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .table-hover tbody tr:hover {
+        background-color: #f1f8e9;
+        transition: background-color 0.3s ease;
+    }
+
+    .thead-dark {
+        background-color: #2c3e50;
+        color: white;
+    }
+
+    .btn-sm {
+        padding: 0.25rem 0.5rem;
+        font-size: 0.875rem;
+    }
+
+    .badge {
+        font-size: 0.9rem;
+        padding: 0.5em 0.75em;
+    }
+
+    .modal-content {
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .modal-header {
+        background: linear-gradient(135deg, #2c3e50, #4b6584);
+        color: white;
+    }
+
+    .modal-footer .btn-danger {
+        background: linear-gradient(135deg, #dc3545, #ff6b6b);
+    }
+
+    .modal-footer .btn-secondary {
+        background: linear-gradient(135deg, #6c757d, #adb5bd);
+    }
+</style>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script>
+        $(document).ready(function () {
+            $('.cancel-contract').click(function () {
+                var contractDetailId = $(this).data('contract-id');
+                $('#cancelContractId').val(contractId);
+            });
+        });
+    </script>
+}

@@ -1,0 +1,168 @@
+﻿body {
+    font-family: Dosis, sans-serif;
+    margin: 20px;
+    line-height: 1.6;
+}
+
+.invoice-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+}
+
+.invoice-header {
+    text-align: center;
+    border-bottom: 2px solid #28a745;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+    .invoice-header h2 {
+        color: #28a745;
+        margin: 0;
+    }
+
+.customer-details {
+    margin-bottom: 20px;
+}
+
+    .customer-details p {
+        margin: 5px 0;
+    }
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+    .table th, .table td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+    }
+
+    .table th {
+        background-color: #f8f9fa;
+        color: #333;
+    }
+
+.total {
+    font-weight: bold;
+    font-size: 1.1em;
+    text-align: right;
+}
+
+.print-button {
+    text-align: center;
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+    .print-button button {
+        background-color: #28a745;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+        .print-button button:hover {
+            background-color: #218838;
+        }
+
+    .print-button .transfer-button {
+        background-color: #007bff;
+        display: @((Model.Any(s => s.PaymentMethodId == 2)) ? "inline-block" : "none"); /* Hiển thị nếu có phương thức VietQR */
+    }
+
+        .print-button .transfer-button:hover {
+            background-color: #0056b3;
+        }
+
+@@media print {
+    .print-button {
+        display: none;
+    }
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+    background-color: #fff;
+    margin: 5% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 500px;
+    border-radius: 8px;
+    text-align: center;
+    max-height: 80vh;
+    overflow-y: auto;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+    .close:hover,
+    .close:focus {
+        color: black;
+        text-decoration: none;
+    }
+
+#qrContainer {
+    text-align: center;
+    margin-top: 15px;
+    display: none;
+}
+
+#qrCode {
+    width: 200px;
+    height: 200px;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+}
+
+.contract-details {
+    margin-top: 20px;
+    line-height: 1.8;
+}
+
+    .contract-details h4 {
+        text-align: center;
+        color: #28a745;
+        margin-bottom: 20px;
+    }
+
+    .contract-details h5 {
+        color: #333;
+        margin-top: 15px;
+        margin-bottom: 10px;
+    }
+
+    .contract-details ul {
+        margin-left: 20px;
+    }
+
+    .contract-details p {
+        margin: 5px 0;
+    }

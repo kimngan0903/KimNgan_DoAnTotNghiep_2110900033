@@ -1,0 +1,594 @@
+﻿@model OfficePlantCare.Models.Service
+
+@{
+    ViewData["Title"] = "Chi tiết dịch vụ";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- ##### Breadcrumb Area Start ##### -->
+<div class="breadcrumb-area">
+    <!-- Top Breadcrumb Area -->
+    <div class="top-breadcrumb-area bg-img bg-overlay d-flex align-items-center justify-content-center" style="background-image: url(/img/banner/banner.jpg);">
+        <h2 class="text-white" style="font-weight: 700; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);">CHI TIẾT DỊCH VỤ</h2>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb shadow-sm p-3 mb-5 bg-white rounded" style="background: linear-gradient(135deg, #f8f9fa, #e9ecef);">
+                        <li class="breadcrumb-item"><a href="~/home"><i class="fa fa-home"></i> Trang chủ</a></li>
+                        <li class="breadcrumb-item"><a href="~/services">Dịch vụ</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Chi tiết dịch vụ</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ##### Breadcrumb Area End ##### -->
+<!-- ##### Single Product Details Area Start ##### -->
+<section class="single_product_details_area mb-5">
+    <div class="produts-details--content mb-5">
+        <div class="container">
+            <div class="row justify-content-between align-items-start">
+                <!-- Hình ảnh dịch vụ -->
+                <div class="col-12 col-md-6 col-lg-5 mb-4">
+                    <div class="single_product_thumb shadow-sm rounded" style="overflow: hidden;">
+                        <div id="product_details_slider" class="carousel slide" data-ride="carousel">
+                            <div class="carousel-inner">
+                                <div class="carousel-item active">
+                                    <a class="product-img" href="@Model.Image" title="@Model.ServiceName">
+                                        <img class="d-block w-100" src="@Model.Image" alt="@Model.ServiceName" style="transition: transform 0.3s ease;">
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Thông tin dịch vụ -->
+                <div class="col-12 col-md-6">
+                    <div class="single_product_desc p-4 shadow-sm rounded" style="background: #fff; border: 1px solid #e9ecef;">
+                        <h4 class="title mb-3" style="font-weight: 700; color: #2c3e50;">@Model.ServiceName</h4>
+
+                        <!-- Form chọn loại dịch vụ -->
+                        <div class="form-group" id="serviceTypeGroup">
+                            <label for="serviceType" class="mb-1" style="font-weight: 600; color: #495057;">Loại dịch vụ:</label>
+                            <select id="serviceType" class="form-control custom-select shadow-sm">
+                                @foreach (var type in Model.ServicePrices.Select(p => p.ServiceType).Distinct())
+                                {
+                                    <option value="@type">@type</option>
+                                }
+                            </select>
+                        </div>
+
+                        <!-- Input số lượng cây -->
+                        <div class="form-group" id="numberOfTreesGroup" style="display: none;">
+                            <label for="numberOfTrees" class="mb-1" style="font-weight: 600; color: #495057;">Số lượng cây:</label>
+                            <input type="number" id="numberOfTrees" class="form-control shadow-sm" min="1" value="1">
+                        </div>
+
+                        <!-- Dropdown chọn diện tích văn phòng -->
+                        <div class="form-group" id="officeSizeGroup">
+                            <label for="officeSize" class="mb-1" style="font-weight: 600; color: #495057;">Diện tích văn phòng:</label>
+                            <select id="officeSize" class="form-control custom-select shadow-sm">
+                                @foreach (var office in Model.ServicePrices.Select(p => p.OfficeSize).Distinct())
+                                {
+                                    <option value="@office">@office</option>
+                                }
+                            </select>
+                            <span class="text-danger">@Html.ValidationMessage("officeSize")</span>
+                        </div>
+
+                        <!-- Dropdown chọn kích thước cây -->
+                        <div class="form-group" id="treeSizeGroup" style="display: none;">
+                            <label for="treeSize" class="mb-1" style="font-weight: 600; color: #495057;">Kích thước cây:</label>
+                            <select id="treeSize" class="form-control custom-select shadow-sm">
+                                @foreach (var size in Model.ServicePrices.Select(p => p.TreeSize).Distinct())
+                                {
+                                    <option value="@size">@size</option>
+                                }
+                            </select>
+                        </div>
+
+                        <!-- Giá dịch vụ -->
+                        <h4 class="price mt-4 mb-4" style="font-weight: 600; color: #28a745;">
+                            Giá: <span id="servicePrice" style="color: #e74c3c; font-size: 1.2em;">@Model.ServicePrices.FirstOrDefault()?.Price VNĐ</span>
+                        </h4>
+
+                        <!-- Nút hành động -->
+                        <div class="cart--area d-flex flex-wrap align-items-center">
+                            @if (ViewBag.customerId != null)
+                            {
+                                <form asp-controller="Carts" asp-action="AddToCart" method="post" id="addToCartForm">
+                                    <input type="hidden" name="serviceId" value="@Model.ServiceId" />
+                                    <input type="hidden" name="customerId" value="@ViewBag.customerId" />
+                                    <input type="hidden" name="serviceType" id="selectedServiceType" />
+                                    <input type="hidden" name="treeSize" id="selectedTreeSize" />
+                                    <input type="hidden" name="numberOfTrees" id="selectedNumberOfTrees" />
+                                    <input type="hidden" name="officeSize" id="selectedOfficeSize" />
+                                    <input type="hidden" name="priceId" id="selectedPriceId" />
+                                    <button type="submit" class="btn custom-btn mr-2" style="background: linear-gradient(135deg, #28a745, #34c759); color: #fff;" id="addToCartButton">ĐẶT DỊCH VỤ</button>
+                                </form>
+                            }
+                            else
+                            {
+                                <a asp-controller="Login" asp-action="Index" class="btn custom-btn mr-2" style="background: linear-gradient(135deg, #28a745, #34c759); color: #fff;">ĐẶT DỊCH VỤ</a>
+                            }
+
+                            <button type="button" class="btn custom-btn mr-2" style="background: linear-gradient(135deg, #007bff, #00aaff); color: #fff;">LIÊN HỆ: 0373 993 662</button>
+                            <button type="button" class="btn custom-btn" onclick="window.history.back();" style="background: linear-gradient(135deg, #6c757d, #adb5bd); color: #fff;">QUAY LẠI</button>
+                        </div>
+
+                        <!-- Thông tin bổ sung -->
+                        <div class="products--meta mt-4">
+                            <p><span style="font-weight: 600; color: #495057;">Danh mục:</span> <span>@Model.CategoryService.CategoryServiceName</span></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Phần mô tả và đánh giá -->
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="product_details_tab shadow-sm rounded p-4" style="background: #fff; border: 1px solid #e9ecef;">
+                    <ul class="nav nav-tabs" role="tablist" id="product-details-tab">
+                        <li class="nav-item">
+                            <a class="nav-link @(ViewBag.ActiveTab != "review" ? "active" : "")" id="description-tab" data-bs-toggle="tab" href="#description" role="tab" aria-controls="description" aria-selected="@(ViewBag.ActiveTab != "review" ? "true" : "false")" style="font-weight: 600;">Mô tả</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link @(ViewBag.ActiveTab == "review" ? "active" : "")" id="review-tab" data-bs-toggle="tab" href="#review" role="tab" aria-controls="review" aria-selected="@(ViewBag.ActiveTab == "review" ? "true" : "false")" style="font-weight: 600;">Đánh giá dịch vụ</a>
+                        </li>
+                    </ul>
+                    <div class="tab-content mt-4" id="product-details-tab-content">
+                        <!-- Phần mô tả -->
+                        <div role="tabpanel" class="tab-pane fade @(ViewBag.ActiveTab != "review" ? "show active" : "")" id="description" aria-labelledby="description-tab">
+                            @foreach (var description in Model.ServiceDescriptions)
+                            {
+                                <div class="description_area mb-4">
+                                    <p><b style="color: #28a745;">@description.StepNumber. @description.Title</b></p>
+                                    <p style="color: #666;">@Html.Raw(description.Content)</p>
+                                </div>
+                            }
+                        </div>
+
+                        <!-- Phần đánh giá -->
+                        <!-- Phần đánh giá -->
+                        <div role="tabpanel" class="tab-pane fade @(ViewBag.ActiveTab == "review" ? "show active" : "")" id="review" aria-labelledby="review-tab">
+                            <h4 class="mb-3" style="font-weight: 700; color: #28a745; text-transform: uppercase; letter-spacing: 1px; border-bottom: 2px solid #28a745; display: inline-block; padding-bottom: 2px; background: linear-gradient(to right, rgba(40, 167, 69, 0.1), transparent);">
+                                Đánh giá dịch vụ
+                            </h4>
+
+                            <!-- Hiển thị thông báo lỗi hoặc thành công -->
+                            @if (TempData["ErrorMessage"] != null)
+                            {
+                                <p class="text-danger">@TempData["ErrorMessage"]</p>
+                            }
+                            @if (TempData["SuccessMessage"] != null)
+                            {
+                                <p class="text-success">@TempData["SuccessMessage"]</p>
+                            }
+
+                            <!-- Form gửi đánh giá -->
+                            @if (ViewBag.CustomerId != null) // 
+                            {
+                                if (ViewBag.HasOrdered)
+                                {
+                                    <div class="feedback-form mb-5 p-4 rounded-lg" style="background: linear-gradient(135deg, #f1fff1, #e6ffe6); border: 1px solid #c3e6cb; box-shadow: 0 8px 20px rgba(40, 167, 69, 0.2); position: relative; overflow: hidden;">
+                                        <div class="glow-effect" style="position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: radial-gradient(circle, rgba(40, 167, 69, 0.1) 0%, transparent 70%); animation: glow 8s infinite alternate;"></div>
+                                        <h5 class="mb-3 text-dark position-relative" style="font-weight: 600; color: #2c3e50; z-index: 1;">Gửi đánh giá của bạn</h5>
+                                        <form asp-controller="Services" asp-action="AddFeedback" method="post">
+                                            @Html.AntiForgeryToken()
+                                            <input type="hidden" name="serviceId" value="@Model.ServiceId" />
+                                            <input type="hidden" name="customerId" value="@ViewBag.CustomerId" />
+                                            <input type="hidden" name="rating" id="ratingValue" value="0" />
+                                            <div class="form-group mb-4 position-relative" style="z-index: 1;">
+                                                <label for="rating" class="mb-2 text-muted" style="font-weight: 500; color: #6c757d;">Đánh giá (Click vào sao):</label>
+                                                <div id="starRating" class="rating-stars mb-3">
+                                                    <i class="far fa-star star-icon" data-value="1"></i>
+                                                    <i class="far fa-star star-icon" data-value="2"></i>
+                                                    <i class="far fa-star star-icon" data-value="3"></i>
+                                                    <i class="far fa-star star-icon" data-value="4"></i>
+                                                    <i class="far fa-star star-icon" data-value="5"></i>
+                                                </div>
+                                            </div>
+                                            <div class="form-group mb-4 position-relative" style="z-index: 1;">
+                                                <label for="content" class="mb-2 text-muted" style="font-weight: 500; color: #6c757d;">Nội dung:</label>
+                                                <textarea id="content" name="content" class="form-control shadow-sm" rows="5" placeholder="Nhập nội dung đánh giá của bạn..." required style="border-radius: 12px; padding: 1.2rem; resize: vertical; background: #fff; border: 2px solid #c3e6cb; transition: all 0.3s ease;"></textarea>
+                                            </div>
+                                            <button type="submit" class="btn custom-btn position-relative" style="background: linear-gradient(135deg, #2b6a39, #39de95); color: #fff; padding: 0.9rem 2rem; border-radius: 25px; font-weight: 600; border: none; z-index: 1; transition: all 0.3s ease; text-transform: uppercase;">
+                                                Gửi đánh giá
+                                            </button>
+                                        </form>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <p class="text-muted">Bạn cần đặt và hoàn thành dịch vụ này để có thể gửi đánh giá.</p>
+                                }
+                            }
+                            else
+                            {
+                                <p class="text-muted">Vui lòng đăng nhập với vai trò khách hàng để gửi đánh giá.</p>
+                            }
+
+                            <!-- Danh sách đánh giá -->
+                            @if (Model.Feedbacks != null && Model.Feedbacks.Any())
+                            {
+                                <div class="feedback-list">
+                                    @foreach (var feedback in Model.Feedbacks.OrderByDescending(f => f.FeedbackDate))
+                                    {
+                                        <div class="feedback-item mb-4 p-4 rounded-lg" style="background: linear-gradient(135deg, #ffffff, #f1fff1); border: 1px solid #c3e6cb; box-shadow: 0 10px 25px rgba(40, 167, 69, 0.15); transition: all 0.3s ease; position: relative; overflow: hidden;">
+                                            <div class="glow-effect" style="position: absolute; top: -60%; left: -60%; width: 220%; height: 220%; background: radial-gradient(circle, rgba(40, 167, 69, 0.1) 0%, transparent 70%); animation: glow 8s infinite alternate;"></div>
+                                            <div class="d-flex justify-content-between align-items-center mb-3 position-relative" style="z-index: 1;">
+                                                <h6 class="mb-0 text-dark" style="font-weight: 700; color: #2c3e50;">
+                                                    @if (feedback.CustomerId == null)
+                                                    {
+                                                        <text>Khách vãng lai</text>
+                                                    }
+                                                    else
+                                                    {
+                                                        @feedback.Customer?.CustomerName
+                                                    }
+                                                </h6>
+                                                <small class="text-muted" style="font-size: 0.9rem; color: #6c757d;">@feedback.FeedbackDate?.ToString("dd/MM/yyyy HH:mm")</small>
+                                            </div>
+                                            <div class="rating mb-3 position-relative" style="z-index: 1;">
+                                                @for (int i = 1; i <= 5; i++)
+                                                {
+                                                    if (i <= feedback.Rating)
+                                                    {
+                                                        <i class="fas fa-star star-icon" style="color: #28a745; font-size: 1.4rem;"></i>
+                                                    }
+                                                    else
+                                                    {
+                                                        <i class="far fa-star star-icon" style="color: #28a745; font-size: 1.4rem;"></i>
+                                                    }
+                                                }
+                                            </div>
+                                            <p class="mb-0 text-secondary position-relative" style="color: #555; line-height: 1.7; font-size: 1.1rem; z-index: 1;">@feedback.Content</p>
+                                        </div>
+                                    }
+                                </div>
+                            }
+                            else
+                            {
+                                <p class="text-muted text-center" style="font-size: 1.1rem; color: #6c757d; padding: 1.5rem; background: #f1fff1; border-radius: 15px; border: 1px solid #c3e6cb; box-shadow: 0 6px 15px rgba(40, 167, 69, 0.1);">Chưa có đánh giá nào cho dịch vụ này.</p>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Modal thông báo -->
+<div id="warningModal" class="modal" style="display: none;">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title">THÔNG BÁO</h5>
+            <button type="button" class="close" id="closeWarning">×</button>
+        </div>
+        <div class="modal-body">
+            <div class="text-danger text-center">
+                <i class="bi bi-exclamation-triangle-fill" style="font-size: 2rem;"></i>
+                <p class="mt-2">Dịch vụ này dành cho khách ký hợp đồng dài hạn. Vui lòng liên hệ Hotline: <strong>0373 993 662</strong>.</p>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" id="closeWarningBtn">Đóng</button>
+        </div>
+    </div>
+</div>
+
+<!-- Lớp phủ -->
+<div id="overlay" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.5); z-index: 998;"></div>
+<!-- ##### Single Product Details Area End ##### -->
+<!-- CSS tùy chỉnh -->
+<style>
+    .breadcrumb-area {
+        margin-bottom: 2rem;
+    }
+
+    .breadcrumb {
+        border-radius: 10px;
+        padding: 1rem;
+    }
+
+    .single_product_thumb img:hover {
+        transform: scale(1.05);
+    }
+
+    .single_product_desc {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+        .single_product_desc:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        }
+
+    .form-control, .custom-select {
+        border-radius: 8px;
+        border: 1px solid #ced4da;
+        transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+        .form-control:focus, .custom-select:focus {
+            border-color: #28a745;
+            box-shadow: 0 0 5px rgba(40, 167, 69, 0.3);
+            outline: none;
+        }
+
+    .custom-btn {
+        border-radius: 8px;
+        padding: 0.75rem 1.5rem;
+        font-weight: 600;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        border: none;
+    }
+
+        .custom-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+    .nav-tabs {
+        border-bottom: 2px solid #e9ecef;
+    }
+
+        .nav-tabs .nav-link {
+            border: none;
+            padding: 0.75rem 1.5rem;
+            color: #495057;
+            transition: color 0.3s ease, background 0.3s ease;
+        }
+
+            .nav-tabs .nav-link.active {
+                color: #28a745;
+                font-weight: 600;
+                border-bottom: 3px solid #28a745;
+            }
+
+            .nav-tabs .nav-link:hover {
+                color: #28a745;
+                background: #f8f9fa;
+            }
+
+    .tab-content {
+        padding: 1.5rem;
+        color: #666;
+    }
+
+    .description_area p {
+        line-height: 1.8;
+    }
+    /* CSS cho phần đánh giá */
+    .feedback-form {
+        border-radius: 15px;
+        overflow: hidden;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        position: relative;
+    }
+
+        .feedback-form:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(40, 167, 69, 0.3);
+        }
+
+        .feedback-form textarea {
+            resize: vertical;
+            border-radius: 12px;
+            border: 2px solid #c3e6cb;
+            transition: all 0.3s ease;
+        }
+
+            .feedback-form textarea:focus {
+                border-color: #28a745;
+                box-shadow: 0 0 10px rgba(40, 167, 69, 0.4);
+                outline: none;
+            }
+
+    .feedback-item {
+        border-radius: 15px;
+        overflow: hidden;
+        transition: all 0.3s ease;
+        position: relative;
+    }
+
+        .feedback-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 35px rgba(40, 167, 69, 0.25);
+        }
+
+    .rating-stars {
+        cursor: pointer;
+        font-size: 1.6rem;
+        display: flex; /* Đảm bảo các sao hiển thị ngang hàng */
+        align-items: center;
+    }
+
+    .star-icon {
+        margin-right: 5px; /* Tăng khoảng cách giữa các sao */
+        transition: color 0.3s ease, transform 0.3s ease;
+        color: #ccc; /* Màu mặc định là xám */
+    }
+
+        .star-icon:hover,
+        .star-icon.active {
+            color: #218838 !important;
+            transform: scale(1.1);
+        }
+
+    .glow-effect {
+        pointer-events: none;
+    }
+    #pageContent.blur {
+        filter: blur(5px);
+        transition: filter 0.3s ease;
+    }
+
+</style>
+
+<!-- Thêm Font Awesome CDN -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        // Kích hoạt tab dựa trên ViewBag.ActiveTab
+        var activeTab = '@ViewBag.ActiveTab';
+        if (activeTab === 'review') {
+            var reviewTab = document.getElementById('review-tab');
+            var reviewPane = document.getElementById('review');
+            var descriptionTab = document.getElementById('description-tab');
+            var descriptionPane = document.getElementById('description');
+
+            if (reviewTab && reviewPane && descriptionTab && descriptionPane) {
+                descriptionTab.classList.remove('active');
+                descriptionPane.classList.remove('show', 'active');
+                reviewTab.classList.add('active');
+                reviewPane.classList.add('show', 'active');
+                reviewPane.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        }
+
+        // Script cho hệ thống sao đánh giá
+        const stars = document.querySelectorAll("#starRating .star-icon");
+        const ratingInput = document.getElementById("ratingValue");
+
+        if (stars && ratingInput) {
+            stars.forEach(star => {
+                star.addEventListener("mouseover", function () {
+                    resetStars();
+                    const value = parseInt(this.getAttribute("data-value"));
+                    highlightStars(value);
+                });
+
+                star.addEventListener("click", function () {
+                    const value = parseInt(this.getAttribute("data-value"));
+                    ratingInput.value = value;
+                    highlightStars(value);
+                });
+
+                star.addEventListener("mouseout", function () {
+                    const currentRating = parseInt(ratingInput.value) || 0;
+                    resetStars();
+                    if (currentRating > 0) {
+                        highlightStars(currentRating);
+                    }
+                });
+            });
+
+            function highlightStars(value) {
+                stars.forEach(star => {
+                    const starValue = parseInt(star.getAttribute("data-value"));
+                    if (starValue <= value) {
+                        star.classList.remove("far");
+                        star.classList.add("fas");
+                        star.classList.add("active");
+                    } else {
+                        star.classList.remove("fas");
+                        star.classList.add("far");
+                        star.classList.remove("active");
+                    }
+                });
+            }
+
+            function resetStars() {
+                stars.forEach(star => {
+                    star.classList.remove("fas");
+                    star.classList.add("far");
+                    star.classList.remove("active");
+                });
+            }
+        }
+    });
+
+    $(document).ready(function () {
+        var priceList = @Html.Raw(Json.Serialize(Model.ServicePrices.Select(p => new
+        {
+            serviceType = p.ServiceType,
+            treeSize = p.TreeSize,
+            officeSize = p.OfficeSize,
+            price = p.Price,
+            priceId = p.PriceId 
+        })));
+
+        function updatePrice() {
+            var serviceType = $("#serviceType").val();
+            var treeSize = $("#treeSize").val();
+            var officeSize = $("#officeSize").val();
+            var numberOfTrees = parseInt($("#numberOfTrees").val()) || 1;
+
+            // Hiển thị/ẩn các trường dựa trên serviceType
+            if (serviceType === "Lẻ") {
+                $("#numberOfTreesGroup").show();
+                $("#treeSizeGroup").show();
+                $("#officeSizeGroup").hide();
+            } else {
+                $("#numberOfTreesGroup").hide();
+                $("#treeSizeGroup").show();
+                $("#officeSizeGroup").show();
+                numberOfTrees = 1;
+            }
+
+            // Tìm giá phù hợp
+            var matchedPrice = priceList.find(p =>
+                p.serviceType === serviceType &&
+                p.treeSize === treeSize &&
+                (serviceType === "Lẻ" || p.officeSize === officeSize)
+            );
+
+            if (matchedPrice) {
+                var finalPrice = matchedPrice.price * numberOfTrees;
+                $("#servicePrice").text(finalPrice.toLocaleString("vi-VN") + " VNĐ/" + (serviceType === "Lẻ" ? "Cây" : "Tháng"));
+                $("#selectedPriceId").val(matchedPrice.priceId);
+            } else {
+                $("#servicePrice").text("Vui lòng chọn đầy đủ thông tin");
+                $("#selectedPriceId").val("");
+            }
+        }
+
+        // Thiết lập giá trị mặc định khi trang tải
+        var defaultOption = priceList[0]; // Lấy giá trị đầu tiên từ priceList
+        if (defaultOption) {
+            $("#serviceType").val(defaultOption.serviceType);
+            $("#treeSize").val(defaultOption.treeSize || "");
+            $("#officeSize").val(defaultOption.officeSize || "");
+            $("#numberOfTrees").val(1);
+        } else {
+            $("#serviceType").val("Lẻ"); // Giá trị mặc định nếu priceList rỗng
+            $("#treeSize").val("");
+            $("#officeSize").val("");
+            $("#numberOfTrees").val(1);
+        }
+
+        // Cập nhật giá ngay khi trang tải
+        updatePrice();
+
+        // Lắng nghe sự kiện thay đổi
+        $("#serviceType, #treeSize, #officeSize, #numberOfTrees").change(function () {
+            updatePrice();
+        });
+
+        // Đóng modal
+        $("#closeWarning, #closeWarningBtn").click(function () {
+            $("#overlay").hide();
+            $("#warningModal").hide();
+            $("#pageContent").removeClass("blur");
+            $("#serviceType").val("Lẻ");
+            updatePrice();
+        });
+
+        // Gửi form
+        $("#addToCartForm").submit(function (event) {
+            $("#selectedServiceType").val($("#serviceType").val());
+            $("#selectedTreeSize").val($("#treeSize").val());
+            $("#selectedNumberOfTrees").val($("#numberOfTrees").val());
+            $("#selectedOfficeSize").val($("#officeSize").val());
+        });
+    });
+</script>

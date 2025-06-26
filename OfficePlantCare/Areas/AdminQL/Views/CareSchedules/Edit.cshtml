@@ -1,0 +1,67 @@
+﻿@model OfficePlantCare.Models.CareSchedule
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Areas/AdminQL/Views/Shared/Admin.cshtml";
+}
+
+<h1>Edit</h1>
+
+<h4>CareSchedule</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="ScheduleId" />
+            <div class="form-group">
+                <label asp-for="ContractId" class="control-label"></label>
+                <select asp-for="ContractId" class="form-control" asp-items="ViewBag.ContractId"></select>
+                <span asp-validation-for="ContractId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="OrderId" class="control-label"></label>
+                <select asp-for="OrderId" class="form-control" asp-items="ViewBag.OrderId"></select>
+                <span asp-validation-for="OrderId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="StaffId" class="control-label"></label>
+                <select asp-for="StaffId" class="form-control" asp-items="ViewBag.StaffId"></select>
+                <span asp-validation-for="StaffId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ScheduledDate" class="control-label"></label>
+                <input asp-for="ScheduledDate" class="form-control" />
+                <span asp-validation-for="ScheduledDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ScheduledTime" class="control-label"></label>
+                <input asp-for="ScheduledTime" class="form-control" />
+                <span asp-validation-for="ScheduledTime" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ActualDate" class="control-label"></label>
+                <input asp-for="ActualDate" class="form-control" />
+                <span asp-validation-for="ActualDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Duration" class="control-label"></label>
+                <input asp-for="Duration" class="form-control" />
+                <span asp-validation-for="Duration" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Status" class="control-label"></label>
+                <input asp-for="Status" class="form-control" />
+                <span asp-validation-for="Status" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

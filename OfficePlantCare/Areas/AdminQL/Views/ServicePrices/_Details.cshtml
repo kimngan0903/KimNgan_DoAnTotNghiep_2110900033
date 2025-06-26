@@ -1,0 +1,67 @@
+﻿@model OfficePlantCare.Models.ServicePrice
+
+@{
+    ViewData["Title"] = "Chi tiết Giá dịch vụ";
+}
+
+<link rel="stylesheet" href="~/assets/css/details.css" />
+
+<div class="modal-body p-0">
+    <div class="card shadow-sm border-0 rounded-lg p-1">
+        <h3 class="text-success text-center font-weight-bold mb-4"><i class="fa-solid fa-info-circle me-2"></i> CHI TIẾT GIÁ DỊCH VỤ</h3>
+        <div class="row">
+            <!-- Cột trái -->
+            <div class="col-md-6">
+                <div class="form-group mb-4">
+                    <i class="fa-solid fa-concierge-bell me-2"></i>
+                    <label class="control-label fw-bold text-muted">@Html.DisplayNameFor(model => model.ServiceType)</label>
+                    <div class="form-control rounded-pill bg-light">@Html.DisplayFor(model => model.ServiceType)</div>
+                </div>
+                <div class="form-group mb-4">
+                    <i class="fa-solid fa-tree me-2"></i>
+                    <label class="control-label fw-bold text-muted">@Html.DisplayNameFor(model => model.TreeSize)</label>
+                    <div class="form-control rounded-pill bg-light">@Html.DisplayFor(model => model.TreeSize)</div>
+                </div>
+                <div class="form-group mb-4">
+                    <i class="fa-solid fa-ruler-combined me-2"></i>
+                    <label class="control-label fw-bold text-muted">@Html.DisplayNameFor(model => model.OfficeSize)</label>
+                    <div class="form-control rounded-pill bg-light">@Html.DisplayFor(model => model.OfficeSize)</div>
+                </div>
+                <div class="form-group mb-4">
+                    <i class="fa-solid fa-calendar-alt me-2"></i>
+                    <label class="control-label fw-bold text-muted">@Html.DisplayNameFor(model => model.DurationInMonths)</label>
+                    <div class="form-control rounded-pill bg-light">@Html.DisplayFor(model => model.DurationInMonths)</div>
+                </div>
+            </div>
+
+            <!-- Cột phải -->
+            <div class="col-md-6">
+                <div class="form-group mb-4">
+                    <i class="fa-solid fa-leaf me-2"></i>
+                    <label class="control-label fw-bold text-muted">@Html.DisplayNameFor(model => model.NumberOfTrees)</label>
+                    <div class="form-control rounded-pill bg-light">@Html.DisplayFor(model => model.NumberOfTrees)</div>
+                </div>
+                <div class="form-group mb-4">
+                    <i class="fa-solid fa-dollar-sign me-2"></i>
+                    <label class="control-label fw-bold text-muted">@Html.DisplayNameFor(model => model.Price)</label>
+                    <div class="form-control rounded-pill bg-light">@(Model?.Price != null ? Model.Price?.ToString("N0").Replace(",", ".") + " VNĐ" : "N/A")</div>
+                </div>
+                <div class="form-group mb-4">
+                    <i class="fa-solid fa-concierge-bell me-2"></i>
+                    <label class="control-label fw-bold text-muted">@Html.DisplayNameFor(model => model.Service)</label>
+                    <textarea class="form-control bg-light px-3 py-2 rounded-3" rows="2" readonly>@Html.DisplayFor(model => model.Service.ServiceName)</textarea>
+                </div>
+            </div>
+        </div>
+
+        <!-- Buttons -->
+        <div class="form-group d-flex gap-3 justify-content-center">
+            <button type="button" class="btn btn-primary rounded-pill px-4" onclick="loadModal('@Url.Action("Edit", "ServicePrices", new { id = Model?.PriceId })')">
+                <i class="fas fa-edit me-2"></i>Chỉnh sửa
+            </button>
+            <a class="btn btn-secondary rounded-pill px-4" href="@Url.Action("Index")">
+                <i class="fas fa-times me-2"></i>Đóng
+            </a>
+        </div>
+    </div>
+</div>

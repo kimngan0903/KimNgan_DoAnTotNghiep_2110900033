@@ -1,0 +1,111 @@
+﻿@model OfficePlantCare.Models.ContractDetail
+
+@{
+    ViewData["Title"] = "Chi tiết Hợp đồng";
+    Layout = "~/Areas/AdminQL/Views/Shared/Admin.cshtml";
+}
+
+<link rel="stylesheet" href="~/assets/css/details.css" />
+
+<div class="pcoded-main-container">
+    <div class="pcoded-content">
+        <!-- Page Header -->
+        <div class="page-header card shadow-sm border-0">
+            <div class="page-block">
+                <div class="row align-items-center">
+                    <div class="col-md-12">
+                        <div class="page-header-title d-flex justify-content-between align-items-center py-3 ml-3">
+                            <h5 class="m-0 text-success font-weight-bold">QUẢN LÝ CHI TIẾT HỢP ĐỒNG</h5>
+                            <nav aria-label="breadcrumb">
+                                <ol class="breadcrumb mb-0 bg-transparent">
+                                    <li class="breadcrumb-item"><a asp-area="AdminQL" asp-controller="Contracts" asp-action="Index"><i class="fas fa-home"></i></a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">CHI TIẾT HỢP ĐỒNG</li>
+                                </ol>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card shadow-sm border-0 rounded-lg p-4">
+                    <h3 class="text-success text-center font-weight-bold mb-4"><i class="fa-solid fa-info-circle me-2"></i> CHI TIẾT HỢP ĐỒNG</h3>
+                    <div class="row">
+                        <!-- Cột trái -->
+                        <div class="col-md-6">
+                            <div class="form-group mb-4">
+                                <i class="fa-solid fa-file-contract me-2"></i>
+                                <label class="control-label fw-bold text-muted">@Html.DisplayNameFor(model => model.Contract)</label>
+                                <div class="form-control rounded-pill bg-light">@(Model.Contract?.ContractCode ?? "Không có thông tin")</div>
+                            </div>
+                            <div class="form-group mb-4">
+                                <i class="fa-solid fa-concierge-bell me-2"></i>
+                                <label class="control-label fw-bold text-muted">@Html.DisplayNameFor(model => model.Service)</label>
+                                <div class="form-control rounded-pill bg-light">@(Model.Service?.ServiceName ?? "Không có thông tin")</div>
+                            </div>
+                            <div class="form-group mb-4">
+                                <i class="fa-solid fa-dollar-sign me-2"></i>
+                                <label class="control-label fw-bold text-muted">@Html.DisplayNameFor(model => model.Price)</label>
+                                <div class="form-control rounded-pill bg-light">@(Model.Price.Price?.ToString("N0") ?? "0") VNĐ</div>
+                            </div>
+                            <div class="form-group mb-4">
+                                <i class="fa-solid fa-money-bill-wave me-2"></i>
+                                <label class="control-label fw-bold text-muted">@Html.DisplayNameFor(model => model.TotalAmount)</label>
+                                <div class="form-control rounded-pill bg-light">@(Model.TotalAmount.HasValue ? string.Format("{0:N0}", Model.TotalAmount).Replace(",", ".") : "0") VNĐ</div>
+                            </div>
+                        </div>
+
+                        <!-- Cột phải -->
+                        <div class="col-md-6">
+                            <div class="form-group mb-4">
+                                <i class="fa-solid fa-map-marker-alt me-2"></i>
+                                <label class="control-label fw-bold text-muted">@Html.DisplayNameFor(model => model.Address)</label>
+                                <div class="form-control rounded-pill bg-light">@(Model.Address ?? "Không có thông tin")</div>
+                            </div>
+                            <div class="form-group mb-4">
+                                <i class="fa-solid fa-sticky-note me-2"></i>
+                                <label class="control-label fw-bold text-muted">@Html.DisplayNameFor(model => model.Notes)</label>
+                                <div class="form-control rounded-pill bg-light">@(Model.Notes ?? "Không có ghi chú")</div>
+                            </div>
+                            <div class="form-group mb-4">
+                                <i class="fa-solid fa-toggle-on me-2"></i>
+                                <label class="control-label fw-bold text-muted">@Html.DisplayNameFor(model => model.Status)</label>
+                                <div class="form-control rounded-pill bg-light">
+                                    @if (Model?.Status == "Đang chờ xác nhận")
+                                    {
+                                        <span class="badge badge-warning px-3 py-1">Đang chờ xác nhận</span>
+                                    }
+                                    else if (Model?.Status == "Đã xác nhận")
+                                    {
+                                        <span class="badge badge-success px-3 py-1">Đã xác nhận</span>
+                                    }
+                                    else if (Model?.Status == "Hủy")
+                                    {
+                                        <span class="badge badge-danger px-3 py-1">Hủy</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="badge badge-secondary px-3 py-1">Chưa xác định</span>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Buttons -->
+                    <div class="form-group d-flex gap-3 justify-content-center mt-4">
+                        <button type="button" class="btn btn-primary rounded-pill px-4" onclick="loadModal('@Url.Action("Edit", "ContractDetails", new { id = Model?.ContractDetailId })')">
+                            <i class="fas fa-edit me-2"></i>Chỉnh sửa
+                        </button>
+                        <a class="btn btn-secondary rounded-pill px-4" asp-action="Index">
+                            <i class="fas fa-times me-2"></i>Đóng
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,75 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\DEV_02409GH_KN\\KimNgan_DoAnTotNghiep_2110900033\\OfficePlantCare\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{FDC70881-E16D-43B3-8A87-E4BEEB88CFCB}|OfficePlantCare.csproj|d:\\dev_02409gh_kn\\kimngan_doantotnghiep_2110900033\\officeplantcare\\areas\\adminql\\views\\revenuereport\\revenuedetail.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{FDC70881-E16D-43B3-8A87-E4BEEB88CFCB}|OfficePlantCare.csproj|solutionrelative:areas\\adminql\\views\\revenuereport\\revenuedetail.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FDC70881-E16D-43B3-8A87-E4BEEB88CFCB}|OfficePlantCare.csproj|d:\\dev_02409gh_kn\\kimngan_doantotnghiep_2110900033\\officeplantcare\\areas\\adminql\\views\\revenuereport\\revenuereport.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{FDC70881-E16D-43B3-8A87-E4BEEB88CFCB}|OfficePlantCare.csproj|solutionrelative:areas\\adminql\\views\\revenuereport\\revenuereport.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FDC70881-E16D-43B3-8A87-E4BEEB88CFCB}|OfficePlantCare.csproj|d:\\dev_02409gh_kn\\kimngan_doantotnghiep_2110900033\\officeplantcare\\areas\\adminql\\controllers\\revenuereportcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FDC70881-E16D-43B3-8A87-E4BEEB88CFCB}|OfficePlantCare.csproj|solutionrelative:areas\\adminql\\controllers\\revenuereportcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 221,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "RevenueDetail.cshtml",
+              "DocumentMoniker": "D:\\DEV_02409GH_KN\\KimNgan_DoAnTotNghiep_2110900033\\OfficePlantCare\\Areas\\AdminQL\\Views\\RevenueReport\\RevenueDetail.cshtml",
+              "RelativeDocumentMoniker": "Areas\\AdminQL\\Views\\RevenueReport\\RevenueDetail.cshtml",
+              "ToolTip": "D:\\DEV_02409GH_KN\\KimNgan_DoAnTotNghiep_2110900033\\OfficePlantCare\\Areas\\AdminQL\\Views\\RevenueReport\\RevenueDetail.cshtml",
+              "RelativeToolTip": "Areas\\AdminQL\\Views\\RevenueReport\\RevenueDetail.cshtml",
+              "ViewState": "AgIAAEQBAAAAAAAAAAAgwGcBAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-06-21T00:56:00.547Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Revenuereport.cshtml",
+              "DocumentMoniker": "D:\\DEV_02409GH_KN\\KimNgan_DoAnTotNghiep_2110900033\\OfficePlantCare\\Areas\\AdminQL\\Views\\RevenueReport\\Revenuereport.cshtml",
+              "RelativeDocumentMoniker": "Areas\\AdminQL\\Views\\RevenueReport\\Revenuereport.cshtml",
+              "ToolTip": "D:\\DEV_02409GH_KN\\KimNgan_DoAnTotNghiep_2110900033\\OfficePlantCare\\Areas\\AdminQL\\Views\\RevenueReport\\Revenuereport.cshtml",
+              "RelativeToolTip": "Areas\\AdminQL\\Views\\RevenueReport\\Revenuereport.cshtml",
+              "ViewState": "AgIAANwAAAAAAAAAAAAcwO8AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-06-21T00:55:54.122Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "RevenueReportController.cs",
+              "DocumentMoniker": "D:\\DEV_02409GH_KN\\KimNgan_DoAnTotNghiep_2110900033\\OfficePlantCare\\Areas\\AdminQL\\Controllers\\RevenueReportController.cs",
+              "RelativeDocumentMoniker": "Areas\\AdminQL\\Controllers\\RevenueReportController.cs",
+              "ToolTip": "D:\\DEV_02409GH_KN\\KimNgan_DoAnTotNghiep_2110900033\\OfficePlantCare\\Areas\\AdminQL\\Controllers\\RevenueReportController.cs",
+              "RelativeToolTip": "Areas\\AdminQL\\Controllers\\RevenueReportController.cs",
+              "ViewState": "AgIAAGUEAAAAAAAAAAAkwH0EAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-21T00:55:33.383Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

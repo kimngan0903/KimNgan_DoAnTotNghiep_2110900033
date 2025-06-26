@@ -1,0 +1,395 @@
+﻿@model OfficePlantCare.Models.Contract
+
+@{
+    ViewData["Title"] = "Tạo Hợp đồng Mới";
+    Layout = "~/Areas/AdminQL/Views/Shared/Admin.cshtml";
+}
+
+<link rel="stylesheet" href="~/assets/css/create.css" />
+
+<div class="pcoded-main-container">
+    <div class="pcoded-content">
+        <!-- Page Header -->
+        <div class="page-header card shadow-sm border-0">
+            <div class="page-block">
+                <div class="row align-items-center">
+                    <div class="col-md-12">
+                        <div class="page-header-title d-flex justify-content-between align-items-center py-3 ml-3">
+                            <h5 class="m-0 text-success font-weight-bold">QUẢN LÝ HỢP ĐỒNG</h5>
+                            <nav aria-label="breadcrumb">
+                                <ol class="breadcrumb mb-0 bg-transparent">
+                                    <li class="breadcrumb-item"><a asp-area="AdminQL" asp-controller="Contracts" asp-action="Index"><i class="fas fa-home"></i></a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">TẠO HỢP ĐỒNG MỚI</li>
+                                </ol>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="row">
+            <div class="col-md-8 offset-md-2">
+                <div class="card shadow-sm border-0 rounded-lg p-4">
+                    <h3 class="text-success text-center font-weight-bold mb-4"><i class="fas fa-file-contract me-2"></i> TẠO HỢP ĐỒNG MỚI</h3>
+                    <form asp-action="Create" method="post">
+                        <div asp-validation-summary="ModelOnly" class="text-danger mb-4"></div>
+
+                        <div class="row">
+                            <!-- Cột trái -->
+                            <div class="col-md-6">
+                                <div class="form-group mb-4">
+                                    <i class="fa-solid fa-barcode me-2"></i>
+                                    <label asp-for="ContractCode" class="control-label fw-bold text-muted"></label>
+                                    <input asp-for="ContractCode" class="form-control rounded-pill" readonly value="@ViewBag.ContractCode" />
+                                    <span asp-validation-for="ContractCode" class="text-danger"></span>
+                                </div>
+                                <div class="form-group mb-4">
+                                    <i class="fa-solid fa-user me-2"></i>
+                                    <label asp-for="CustomerId" class="control-label fw-bold text-muted" data-required="true"></label>
+                                    <select asp-for="CustomerId" class="form-control custom-select rounded-pill" asp-items="ViewBag.CustomerId">
+                                        <option value="">-- Chọn khách hàng --</option>
+                                    </select>
+                                    <span asp-validation-for="CustomerId" class="text-danger"></span>
+                                </div>
+                                <div class="form-group mb-4">
+                                    <i class="fa-solid fa-briefcase me-2"></i>
+                                    <label for="ServiceId" class="control-label fw-bold text-muted" data-required="true">Dịch vụ</label>
+                                    <select id="ServiceId" name="ServiceId" class="form-control custom-select rounded-pill" onchange="updatePriceAndDates()">
+                                        <option value="">-- Chọn dịch vụ --</option>
+                                        @foreach (var service in ViewBag.ServiceId)
+                                        {
+                                            <option value="@service.Value">@service.Text</option>
+                                        }
+                                    </select>
+                                    <span class="text-danger">@Html.ValidationMessage("ServiceId")</span>
+                                </div>
+                                <div class="form-group mb-4">
+                                    <i class="fa-solid fa-building me-2"></i>
+                                    <label for="OfficeSize" class="control-label fw-bold text-muted" data-required="true">Kích thước văn phòng</label>
+                                    <select id="OfficeSize" name="OfficeSize" class="form-control custom-select rounded-pill" onchange="updatePriceAndDates()">
+                                        <option value="">-- Chọn kích thước văn phòng --</option>
+                                        <option value="Dưới 50m²">Dưới 50m²</option>
+                                        <option value="50-100m²">50-100m²</option>
+                                        <option value="Trên 100m²">Trên 100m²</option>
+                                    </select>
+                                    <span class="text-danger">@Html.ValidationMessage("OfficeSize")</span>
+                                </div>
+                                <div class="form-group mb-4">
+                                    <i class="fa-solid fa-tree me-2"></i>
+                                    <label for="TreeSize" class="control-label fw-bold text-muted" data-required="true">Kích thước cây</label>
+                                    <select id="TreeSize" name="TreeSize" class="form-control custom-select rounded-pill" onchange="updatePriceAndDates()">
+                                        <option value="">-- Chọn kích thước cây --</option>
+                                        <option value="Nhỏ">Nhỏ</option>
+                                        <option value="Trung bình">Trung bình</option>
+                                        <option value="Lớn">Lớn</option>
+                                    </select>
+                                    <span class="text-danger">@Html.ValidationMessage("TreeSize")</span>
+                                </div>
+                                <div class="form-group mb-4">
+                                    <i class="fa-solid fa-clock me-2"></i>
+                                    <label for="ServiceType" class="control-label fw-bold text-muted" data-required="true">Thời hạn dịch vụ</label>
+                                    <select id="ServiceType" name="ServiceType" class="form-control custom-select rounded-pill" onchange="updatePriceAndDates()">
+                                        <option value="">-- Chọn thời hạn dịch vụ --</option>
+                                        <option value="3 tháng">3 tháng</option>
+                                        <option value="6 tháng">6 tháng</option>
+                                        <option value="12 tháng">12 tháng</option>
+                                    </select>
+                                    <span class="text-danger">@Html.ValidationMessage("ServiceType")</span>
+                                </div>
+                            </div>
+
+                            <!-- Cột phải -->
+                            <div class="col-md-6">
+                                <div class="form-group mb-4">
+                                    <i class="fa-solid fa-calendar-day me-2"></i>
+                                    <label asp-for="CreatedDate" class="control-label fw-bold text-muted"></label>
+                                    <input asp-for="CreatedDate" class="form-control rounded-pill" type="datetime-local" value="@DateTime.Now.ToString("yyyy-MM-ddTHH:mm")" readonly />
+                                    <span asp-validation-for="CreatedDate" class="text-danger"></span>
+                                </div>
+                                <div class="form-group mb-4">
+                                    <i class="fa-solid fa-money-bill me-2"></i>
+                                    <label asp-for="TotalAmount" class="control-label fw-bold text-muted"></label>
+                                    <input id="TotalAmountDisplay" class="form-control rounded-pill" readonly value="0" />
+                                    <input asp-for="TotalAmount" type="hidden" id="TotalAmountHidden" value="0" />
+                                    <span asp-validation-for="TotalAmount" class="text-danger"></span>
+                                </div>
+                                <div class="form-group mb-4">
+                                    <i class="fa-solid fa-hourglass me-2"></i>
+                                    <label asp-for="Duration" class="control-label fw-bold text-muted"></label>
+                                    <input asp-for="Duration" class="form-control rounded-pill" readonly id="DurationDisplay" value="0" />
+                                    <span asp-validation-for="Duration" class="text-danger"></span>
+                                </div>
+                                <div class="form-group mb-4">
+                                    <i class="fa-solid fa-calendar-day me-2"></i>
+                                    <label asp-for="StartDate" class="control-label fw-bold text-muted" data-required="true"></label>
+                                    <input asp-for="StartDate" class="form-control rounded-pill" type="date" id="StartDateInput" required />
+                                    <span asp-validation-for="StartDate" class="text-danger"></span>
+                                </div>
+                                <div class="form-group mb-4">
+                                    <i class="fa-solid fa-calendar-check me-2"></i>
+                                    <label asp-for="EndDate" class="control-label fw-bold text-muted"></label>
+                                    <input asp-for="EndDate" class="form-control rounded-pill" type="date" readonly id="EndDateDisplay" />
+                                    <span asp-validation-for="EndDate" class="text-danger"></span>
+                                </div>
+                                <div class="form-group mb-4">
+                                    <i class="fa-solid fa-credit-card me-2"></i>
+                                    <label asp-for="PaymentMethodId" class="control-label fw-bold text-muted" data-required="true"></label>
+                                    <select asp-for="PaymentMethodId" class="form-control custom-select rounded-pill" asp-items="ViewBag.PaymentMethodId">
+                                        <option value="">-- Chọn phương thức thanh toán --</option>
+                                    </select>
+                                    <span asp-validation-for="PaymentMethodId" class="text-danger"></span>
+                                </div>
+                                <div class="form-group mb-4">
+                                    <i class="fa-solid fa-money-check-alt me-2"></i>
+                                    <label asp-for="PaymentStatus" class="control-label fw-bold text-muted"></label>
+                                    <select asp-for="PaymentStatus" class="form-control custom-select rounded-pill">
+                                        <option value="Chưa thanh toán">Chưa thanh toán</option>
+                                        <option value="Đã thanh toán">Đã thanh toán</option>
+                                        <option value="Hoàn tiền">Hoàn tiền</option>
+                                    </select>
+                                    <span asp-validation-for="PaymentStatus" class="text-danger"></span>
+                                </div>
+                                <div class="form-group mb-4">
+                                    <i class="fa-solid fa-calendar-week me-2"></i>
+                                    <label for="CareDay1" class="control-label fw-bold text-muted" data-required="true">Ngày chăm sóc 1</label>
+                                    <select id="CareDay1" name="CareDay1" class="form-control custom-select rounded-pill" required>
+                                        <option value="">-- Chọn ngày --</option>
+                                        <option value="Monday">Thứ 2</option>
+                                        <option value="Tuesday">Thứ 3</option>
+                                        <option value="Wednesday">Thứ 4</option>
+                                        <option value="Thursday">Thứ 5</option>
+                                        <option value="Friday">Thứ 6</option>
+                                        <option value="Saturday">Thứ 7</option>
+                                        <option value="Sunday">Chủ nhật</option>
+                                    </select>
+                                    <span class="text-danger">@Html.ValidationMessage("CareDay1")</span>
+                                </div>
+                                <div class="form-group mb-4">
+                                    <i class="fa-solid fa-calendar-week me-2"></i>
+                                    <label for="CareDay2" class="control-label fw-bold text-muted" data-required="true">Ngày chăm sóc 2</label>
+                                    <select id="CareDay2" name="CareDay2" class="form-control custom-select rounded-pill" required>
+                                        <option value="">-- Chọn ngày --</option>
+                                        <option value="Monday">Thứ 2</option>
+                                        <option value="Tuesday">Thứ 3</option>
+                                        <option value="Wednesday">Thứ 4</option>
+                                        <option value="Thursday">Thứ 5</option>
+                                        <option value="Friday">Thứ 6</option>
+                                        <option value="Saturday">Thứ 7</option>
+                                        <option value="Sunday">Chủ nhật</option>
+                                    </select>
+                                    <span class="text-danger">@Html.ValidationMessage("CareDay2")</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Hidden fields -->
+                        <input type="hidden" id="DurationUnit" name="DurationUnit" value="Tháng" asp-for="DurationUnit" />
+                        <input type="hidden" id="PriceId" name="PriceId" value="" />
+
+                        <!-- Buttons -->
+                        <div class="form-group d-flex justify-content-center gap-3 mt-4">
+                            <button type="submit" class="btn btn-primary rounded-pill px-4">
+                                <i class="fas fa-save me-2"></i>Tạo Hợp đồng
+                            </button>
+                            <a asp-action="Index" class="btn btn-secondary rounded-pill px-4">
+                                <i class="fas fa-arrow-left me-2"></i>Quay lại
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        var servicePrices = @Html.Raw(Json.Serialize(ViewBag.ServicePrices));
+
+        function updatePriceAndDates() {
+            var serviceId = document.getElementById("ServiceId").value;
+            var officeSize = document.getElementById("OfficeSize").value;
+            var treeSize = document.getElementById("TreeSize").value;
+            var serviceType = document.getElementById("ServiceType").value;
+            var startDateInput = document.getElementById("StartDateInput").value;
+            var totalAmountDisplay = document.getElementById("TotalAmountDisplay");
+            var totalAmountHidden = document.getElementById("TotalAmountHidden");
+            var durationDisplay = document.getElementById("DurationDisplay");
+            var endDateDisplay = document.getElementById("EndDateDisplay");
+            var priceIdInput = document.getElementById("PriceId");
+
+            // Reset default values
+            totalAmountDisplay.value = "0";
+            totalAmountHidden.value = "0";
+            durationDisplay.value = "0";
+            endDateDisplay.value = "";
+            priceIdInput.value = "";
+
+            // Check if all criteria are selected
+            if (serviceId && officeSize && treeSize && serviceType) {
+                // Filter ServicePrices based on criteria
+                var filteredPrices = servicePrices.filter(function (price) {
+                    return price.serviceId == serviceId &&
+                        price.officeSize == officeSize &&
+                        price.treeSize == treeSize &&
+                        price.serviceType == serviceType;
+                });
+
+                // Handle filtered results
+                if (filteredPrices.length === 1) {
+                    var price = filteredPrices[0];
+                    totalAmountDisplay.value = price.price.toLocaleString('vi-VN');
+                    totalAmountHidden.value = price.price; // Update hidden input
+                    durationDisplay.value = parseInt(serviceType.split(' ')[0]);
+                    priceIdInput.value = price.priceId;
+
+                    // Update EndDate based on StartDate and Duration
+                    if (startDateInput) {
+                        var startDate = new Date(startDateInput);
+                        var durationMonths = parseInt(serviceType.split(' ')[0]);
+                        var endDate = new Date(startDate.setMonth(startDate.getMonth() + durationMonths));
+                        endDateDisplay.value = endDate.toISOString().split('T')[0];
+                    }
+                } else if (filteredPrices.length > 1) {
+                    var lowestPrice = filteredPrices.reduce(function (prev, curr) {
+                        return prev.price < curr.price ? prev : curr;
+                    });
+                    totalAmountDisplay.value = lowestPrice.price.toLocaleString('vi-VN');
+                    totalAmountHidden.value = lowestPrice.price; // Update hidden input
+                    durationDisplay.value = parseInt(serviceType.split(' ')[0]);
+                    priceIdInput.value = lowestPrice.priceId;
+
+                    if (startDateInput) {
+                        var startDate = new Date(startDateInput);
+                        var durationMonths = parseInt(serviceType.split(' ')[0]);
+                        var endDate = new Date(startDate.setMonth(startDate.getMonth() + durationMonths));
+                        endDateDisplay.value = endDate.toISOString().split('T')[0];
+                    }
+                } else {
+                    totalAmountDisplay.value = "Không có giá phù hợp";
+                    totalAmountHidden.value = "0"; // Reset hidden input
+                    durationDisplay.value = "0";
+                }
+            }
+        }
+
+        // Update EndDate when StartDate changes
+        document.getElementById("StartDateInput").addEventListener("change", function () {
+            var serviceType = document.getElementById("ServiceType").value;
+            var startDateInput = this.value;
+            var endDateDisplay = document.getElementById("EndDateDisplay");
+
+            if (serviceType && startDateInput) {
+                var startDate = new Date(startDateInput);
+                var durationMonths = parseInt(serviceType.split(' ')[0]);
+                var endDate = new Date(startDate.setMonth(startDate.getMonth() + durationMonths));
+                endDateDisplay.value = endDate.toISOString().split('T')[0];
+            }
+        });
+
+        // Form validation before submit
+        document.querySelector("form").addEventListener("submit", function (e) {
+            var careDay1 = document.getElementById("CareDay1").value;
+            var careDay2 = document.getElementById("CareDay2").value;
+            var priceId = document.getElementById("PriceId").value;
+            var customerId = document.getElementById("CustomerId").value;
+            var startDate = document.getElementById("StartDateInput").value;
+            var paymentMethodId = document.getElementById("PaymentMethodId").value;
+
+            if (!customerId) {
+                e.preventDefault();
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Lỗi!',
+                    text: 'Vui lòng chọn khách hàng.',
+                    confirmButtonText: 'OK',
+                    confirmButtonColor: '#FF0000'
+                });
+                return;
+            }
+            if (!startDate) {
+                e.preventDefault();
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Lỗi!',
+                    text: 'Vui lòng chọn ngày bắt đầu.',
+                    confirmButtonText: 'OK',
+                    confirmButtonColor: '#FF0000'
+                });
+                return;
+            }
+            if (!paymentMethodId) {
+                e.preventDefault();
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Lỗi!',
+                    text: 'Vui lòng chọn phương thức thanh toán.',
+                    confirmButtonText: 'OK',
+                    confirmButtonColor: '#FF0000'
+                });
+                return;
+            }
+            if (!careDay1 || !careDay2) {
+                e.preventDefault();
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Lỗi!',
+                    text: 'Vui lòng chọn cả hai ngày chăm sóc.',
+                    confirmButtonText: 'OK',
+                    confirmButtonColor: '#FF0000'
+                });
+                return;
+            }
+            if (careDay1 === careDay2) {
+                e.preventDefault();
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Lỗi!',
+                    text: 'Hai ngày chăm sóc không được trùng nhau. Vui lòng chọn hai ngày khác nhau.',
+                    confirmButtonText: 'OK',
+                    confirmButtonColor: '#FF0000'
+                });
+                return;
+            }
+            if (!priceId) {
+                e.preventDefault();
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Lỗi!',
+                    text: 'Vui lòng chọn đầy đủ thông tin để xác định giá dịch vụ.',
+                    confirmButtonText: 'OK',
+                    confirmButtonColor: '#FF0000'
+                });
+            }
+        });
+
+        // Display success or error message if present
+        const successMessage = '@Html.Raw(System.Web.HttpUtility.JavaScriptStringEncode(TempData["SuccessMessage"]?.ToString() ?? ""))';
+        if (successMessage) {
+            Swal.fire({
+                icon: 'success',
+                title: 'Thành công!',
+                text: successMessage,
+                confirmButtonText: 'OK',
+                confirmButtonColor: '#1ABC9C'
+            });
+        }
+
+        const errorMessage = '@Html.Raw(System.Web.HttpUtility.JavaScriptStringEncode(TempData["ErrorMessage"]?.ToString() ?? ""))';
+        if (errorMessage) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Lỗi!',
+                text: errorMessage,
+                confirmButtonText: 'OK',
+                confirmButtonColor: '#FF0000'
+            });
+        }
+    </script>
+}

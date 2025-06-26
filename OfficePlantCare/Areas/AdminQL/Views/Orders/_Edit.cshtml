@@ -1,0 +1,101 @@
+﻿@model OfficePlantCare.Models.Order
+
+@{
+    ViewData["Title"] = "Chỉnh sửa Đơn hàng";
+}
+
+<link rel="stylesheet" href="~/assets/css/edit.css" />
+
+<div class="card shadow-sm border-0 rounded-lg p-1">
+    <h3 class="text-success text-center font-weight-bold mb-4"><i class="fa-solid fa-pen-to-square me-2"></i>CHỈNH SỬA THÔNG TIN ĐƠN HÀNG</h3>
+    <form asp-action="Edit" method="post">
+        <input type="hidden" asp-for="OrderId" />
+        <input type="hidden" asp-for="CustomerId" value="@Model.CustomerId" />
+        <input type="hidden" asp-for="OrderDate" />
+        <input type="hidden" asp-for="TotalPrice" />
+
+        <div class="row">
+            <!-- Cột trái -->
+            <div class="col-md-6">
+                <div class="form-group mb-4">
+                    <i class="fa-solid fa-user me-2"></i>
+                    <label asp-for="CustomerId" class="control-label fw-bold text-muted"></label>
+                    <input type="text" class="form-control rounded-pill" value="@ViewData["CustomerName"]" readonly />
+                    <span asp-validation-for="CustomerId" class="text-danger"></span>
+                </div>
+                <div class="form-group mb-4">
+                    <i class="fa-solid fa-user-tie me-2"></i>
+                    <label asp-for="StaffId" class="control-label fw-bold text-muted"></label>
+                    <select asp-for="StaffId" class="form-control custom-select rounded-pill" asp-items="ViewBag.StaffId">
+                        <option value="">-- Chọn nhân viên --</option>
+                    </select>
+                    <span asp-validation-for="StaffId" class="text-danger"></span>
+                </div>
+                <div class="form-group mb-4">
+                    <i class="fa-solid fa-calendar-alt me-2"></i>
+                    <label asp-for="OrderDate" class="control-label fw-bold text-muted"></label>
+                    <input class="form-control rounded-pill" readonly
+                           value="@Model.OrderDate?.ToString("dd/MM/yyyy")" />
+                    <span asp-validation-for="OrderDate" class="text-danger"></span>
+                </div>
+                <div class="form-group mb-4">
+                    <i class="fa-solid fa-money-bill me-2"></i>
+                    <label asp-for="TotalPrice" class="control-label fw-bold text-muted"></label>
+                    <input class="form-control rounded-pill" readonly value="@(Model?.TotalPrice?.ToString("N0").Replace(",", ".") + " VNĐ")" />
+                    <span asp-validation-for="TotalPrice" class="text-danger"></span>
+                </div>
+            </div>
+
+            <!-- Cột phải -->
+            <div class="col-md-6">
+                <div class="form-group mb-4">
+                    <i class="fa-solid fa-credit-card me-2"></i>
+                    <label asp-for="PaymentMethodId" class="control-label fw-bold text-muted"></label>
+                    <select asp-for="PaymentMethodId" class="form-control custom-select rounded-pill" asp-items="ViewBag.PaymentMethodId">
+                        <option value="">-- Chọn phương thức thanh toán --</option>
+                    </select>
+                    <span asp-validation-for="PaymentMethodId" class="text-danger"></span>
+                </div>
+                <div class="form-group mb-4">
+                    <i class="fa-solid fa-calendar-check me-2"></i>
+                    <label asp-for="PaymentDate" class="control-label fw-bold text-muted"></label>
+                    <input asp-for="PaymentDate" type="date" class="form-control rounded-pill" />
+                    <span asp-validation-for="PaymentDate" class="text-danger"></span>
+                </div>
+                <div class="form-group mb-4">
+                    <i class="fa-solid fa-money-check-alt me-2"></i>
+                    <label asp-for="PaymentStatus" class="control-label fw-bold text-muted"></label>
+                    <select asp-for="PaymentStatus" class="form-control custom-select rounded-pill">
+                        <option value="Chưa thanh toán">Chưa thanh toán</option>
+                        <option value="Đã thanh toán">Đã thanh toán</option>
+                        <option value="Hoàn tiền">Hoàn tiền</option>
+                    </select>
+                    <span asp-validation-for="PaymentStatus" class="text-danger"></span>
+                </div>
+                <div class="form-group mb-4">
+                    <i class="fa-solid fa-clipboard-check me-2"></i>
+                    <label asp-for="Status" class="control-label fw-bold text-muted"></label>
+                    <select asp-for="Status" class="form-control custom-select rounded-pill">
+                        <option value="Chờ xử lý">Chờ xử lý</option>
+                        <option value="Đã xác nhận">Đã xác nhận</option>
+                        <option value="Đã hoàn thành">Đã hoàn thành</option>
+                        <option value="Hủy">Hủy</option>
+                    </select>
+                    <span asp-validation-for="Status" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Buttons -->
+        <div class="form-group d-flex gap-3 justify-content-center">
+            <button type="submit" class="btn btn-primary rounded-pill px-4"><i class="fas fa-save me-2"></i>Lưu</button>
+            <a asp-action="Index" class="btn btn-secondary rounded-pill px-4"><i class="fas fa-arrow-left me-2"></i>Quay lại</a>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

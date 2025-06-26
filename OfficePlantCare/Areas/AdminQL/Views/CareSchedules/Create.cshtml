@@ -1,0 +1,126 @@
+﻿@model OfficePlantCare.Models.CareSchedule
+
+@{
+    ViewData["Title"] = "Thêm mới Lịch chăm sóc";
+    Layout = "~/Areas/AdminQL/Views/Shared/Admin.cshtml";
+}
+
+<link rel="stylesheet" href="~/assets/css/create.css" />
+
+<div class="pcoded-main-container">
+    <div class="pcoded-content">
+        <!-- Page Header -->
+        <div class="page-header card shadow-sm border-0">
+            <div class="page-block">
+                <div class="row align-items-center">
+                    <div class="col-md-12">
+                        <div class="page-header-title d-flex justify-content-between align-items-center py-3 ml-3">
+                            <h5 class="m-0 text-success font-weight-bold">THÊM MỚI LỊCH CHĂM SÓC</h5>
+                            <nav aria-label="breadcrumb">
+                                <ol class="breadcrumb mb-0 bg-transparent">
+                                    <li class="breadcrumb-item"><a asp-area="AdminQL" asp-controller="CareSchedules" asp-action="Index"><i class="feather icon-home"></i></a></li>
+                                    <li class="breadcrumb-item"><a asp-action="Index">DANH SÁCH LỊCH CHĂM SÓC</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">THÊM MỚI</li>
+                                </ol>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="row">
+            <div class="col-md-8 offset-md-2">
+                <div class="card shadow-sm border-0 rounded-lg p-4">
+                    <h3 class="text-success text-center font-weight-bold mb-4"><i class="fas fa-calendar-alt me-2"></i>THÊM MỚI LỊCH CHĂM SÓC</h3>
+                    <form asp-action="Create" method="post">
+                        <div asp-validation-summary="ModelOnly" class="text-danger mb-4"></div>
+
+                        <div class="row">
+                            <!-- Cột trái -->
+                            <div class="col-md-6">
+                                <div class="form-group mb-4">
+                                    <i class="fa-solid fa-file-contract me-2"></i>
+                                    <label asp-for="ContractId" class="control-label fw-bold text-muted"></label>
+                                    <select asp-for="ContractId" class="form-control custom-select rounded-pill" asp-items="ViewBag.ContractId">
+                                        <option value="">-- Chọn hợp đồng --</option>
+                                    </select>
+                                    <span asp-validation-for="ContractId" class="text-danger"></span>
+                                </div>
+                                <div class="form-group mb-4">
+                                    <i class="fa-solid fa-shopping-cart me-2"></i>
+                                    <label asp-for="OrderId" class="control-label fw-bold text-muted"></label>
+                                    <select asp-for="OrderId" class="form-control custom-select rounded-pill" asp-items="ViewBag.OrderId">
+                                        <option value="">-- Chọn đơn hàng --</option>
+                                    </select>
+                                    <span asp-validation-for="OrderId" class="text-danger"></span>
+                                </div>
+                            </div>
+
+                            <!-- Cột phải -->
+                            <div class="col-md-6">
+                                <div class="form-group mb-4">
+                                    <i class="fa-solid fa-user me-2"></i>
+                                    <label asp-for="StaffId" class="control-label fw-bold text-muted"></label>
+                                    <select asp-for="StaffId" class="form-control custom-select rounded-pill" asp-items="ViewBag.StaffId">
+                                        <option value="">-- Chọn nhân viên --</option>
+                                    </select>
+                                    <span asp-validation-for="StaffId" class="text-danger"></span>
+                                </div>
+                                <div class="form-group mb-4">
+                                    <i class="fa-solid fa-calendar-day me-2"></i>
+                                    <label asp-for="ScheduledDate" class="control-label fw-bold text-muted"></label>
+                                    <input asp-for="ScheduledDate" type="date" class="form-control rounded-pill" />
+                                    <span asp-validation-for="ScheduledDate" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Additional Fields Section -->
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group mb-4">
+                                    <i class="fa-solid fa-clock me-2"></i>
+                                    <label asp-for="ScheduledTime" class="control-label fw-bold text-muted"></label>
+                                    <input asp-for="ScheduledTime" type="time" class="form-control rounded-pill" />
+                                    <span asp-validation-for="ScheduledTime" class="text-danger"></span>
+                                </div>
+                                <div class="form-group mb-4">
+                                    <i class="fa-solid fa-calendar-check me-2"></i>
+                                    <label asp-for="ActualDate" class="control-label fw-bold text-muted"></label>
+                                    <input asp-for="ActualDate" type="date" class="form-control rounded-pill" />
+                                    <span asp-validation-for="ActualDate" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group mb-4">
+                                    <i class="fa-solid fa-hourglass me-2"></i>
+                                    <label asp-for="Duration" class="control-label fw-bold text-muted"></label>
+                                    <input asp-for="Duration" type="number" class="form-control rounded-pill" placeholder="Nhập thời gian (phút)" min="0" />
+                                    <span asp-validation-for="Duration" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Buttons -->
+                        <div class="form-group d-flex justify-content-center gap-3">
+                            <button type="submit" class="btn btn-primary rounded-pill px-4">
+                                <i class="fas fa-save me-2"></i>Thêm mới
+                            </button>
+                            <a asp-action="Index" class="btn btn-secondary rounded-pill px-4">
+                                <i class="fas fa-arrow-left me-2"></i>Quay lại
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

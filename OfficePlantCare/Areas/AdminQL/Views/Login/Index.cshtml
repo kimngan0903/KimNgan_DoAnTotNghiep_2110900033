@@ -1,0 +1,163 @@
+﻿@model OfficePlantCare.Areas.AdminQL.Models.Login
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Đăng nhập</title>
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="~/favicon-32x32.png">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="~/assets/css/adminlte.css">
+    <link rel="stylesheet" href="~/css/fonts.css" />
+    <link rel="stylesheet" href="~/assets/css/login.css?v2" />
+</head>
+<body class="hold-transition login-page">
+    <div class="login-box">
+        <div class="card">
+            <div class="card-body login-card-body">
+                <div class="text-center-1">
+                    <p>ĐĂNG NHẬP</p>
+                </div>
+                <p class="login-box-msg">Đăng nhập để bắt đầu phiên làm việc</p>
+
+                <form asp-action="Index" method="post" onsubmit="handleLogin()">
+                    <div class="input-group mb-3">
+                        <input type="email" class="form-control" id="email" asp-for="Email" placeholder="Email" value="ngan36758@gmail.com" required>
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-envelope icon-animate" id="email-icon"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="input-group mb-3">
+                        <input type="password" class="form-control" id="password" asp-for="Password" placeholder="Mật khẩu" value="090303" required>
+                        <div class="input-group-append">
+                            <div class="input-group-text toggle-icon" onclick="togglePassword()">
+                                <span class="fas fa-lock icon-animate" id="password-icon"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row align-items-center">
+                        <div class="col-6">
+                            <div class="icheck-success">
+                                <input type="checkbox" id="remember">
+                                <label for="remember">Nhớ tôi</label>
+                            </div>
+                        </div>
+                        <div class="col-6 text-right">
+                            <button type="submit" class="btn btn-success btn-block">Đăng nhập</button>
+                        </div>
+                    </div>
+
+                    <div class="text-center mt-3">
+                        <a href="#" class="text-dark" onclick="showForgotPasswordForm()">Quên mật khẩu?</a>
+                    </div>
+                </form>
+
+                <div id="forgot-password-modal" class="modal-overlay">
+                    <div class="modal-content small-modal">
+                        <h5>Quên mật khẩu</h5>
+                        <p>Nhập email của bạn để đặt lại mật khẩu</p>
+                        <input type="email" id="forgot-email" class="form-control" placeholder="Email" required>
+                        <div class="d-flex justify-content-between mt-3">
+                            <button class="btn btn-primary" onclick="sendResetPassword()">Gửi</button>
+                            <button class="btn btn-secondary" onclick="hideForgotPasswordForm()">Đóng</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="text-danger">
+        @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+    </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // Lấy email từ localStorage
+            const savedEmail = localStorage.getItem("rememberedEmail");
+            if (savedEmail) {
+                document.getElementById("email").value = savedEmail;
+                // Tự động điền mật khẩu nếu có
+                const savedPassword = localStorage.getItem(`password_${savedEmail}`);
+                if (savedPassword) {
+                    document.getElementById("password").value = savedPassword;
+                    document.getElementById("remember").checked = true;
+                }
+            }
+        });
+
+        // Xử lý khi người dùng thay đổi email
+        document.getElementById("email").addEventListener("input", function () {
+            const email = this.value;
+            const savedPassword = localStorage.getItem(`password_${email}`);
+            const passwordField = document.getElementById("password");
+            const rememberCheckbox = document.getElementById("remember");
+
+            if (savedPassword) {
+                passwordField.value = savedPassword;
+                rememberCheckbox.checked = true;
+            } else {
+                passwordField.value = "";
+                rememberCheckbox.checked = false;
+            }
+        });
+
+        function handleLogin() {
+            const email = document.getElementById("email").value;
+            const password = document.getElementById("password").value;
+            const remember = document.getElementById("remember").checked;
+
+            if (remember) {
+                // Lưu email và mật khẩu với khóa riêng biệt
+                localStorage.setItem("rememberedEmail", email);
+                localStorage.setItem(`password_${email}`, password);
+            } else {
+                // Xóa thông tin nếu không chọn "Nhớ tôi"
+                localStorage.removeItem("rememberedEmail");
+                localStorage.removeItem(`password_${email}`);
+            }
+        }
+
+        function togglePassword() {
+            const passwordField = document.getElementById('password');
+            const passwordIcon = document.getElementById('password-icon');
+            if (passwordField.type === 'password') {
+                passwordField.type = 'text';
+                passwordIcon.classList.remove('fa-lock');
+                passwordIcon.classList.add('fa-unlock');
+            } else {
+                passwordField.type = 'password';
+                passwordIcon.classList.remove('fa-unlock');
+                passwordIcon.classList.add('fa-lock');
+            }
+        }
+
+        function showForgotPasswordForm() {
+            document.getElementById('forgot-password-modal').classList.add('show');
+        }
+
+        function hideForgotPasswordForm() {
+            document.getElementById('forgot-password-modal').classList.remove('show');
+        }
+
+        function sendResetPassword() {
+            const email = document.getElementById('forgot-email').value;
+            if (!email) {
+                alert('Vui lòng nhập email hợp lệ!');
+                return;
+            }
+            alert('Email đặt lại mật khẩu đã được gửi đến: ' + email);
+            hideForgotPasswordForm();
+        }
+    </script>
+</body>
+</html>

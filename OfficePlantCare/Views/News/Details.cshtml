@@ -1,0 +1,99 @@
+﻿@{
+    ViewData["Title"] = "Chi tiết tin tức";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- ##### Breadcrumb Area Start ##### -->
+<div class="breadcrumb-area">
+    <!-- Top Breadcrumb Area -->
+    <div class="top-breadcrumb-area bg-img bg-overlay d-flex align-items-center justify-content-center" style="background-image: url(/img/banner/banner.jpg);">
+        <h2>CHI TIẾT TIN TỨC</h2>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="~/home"><i class="fa fa-home"></i> Trang chủ</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Tin tức</li>
+                        <li class="breadcrumb-item active" aria-current="page">Chi tiết tin tức</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ##### Breadcrumb Area End ##### -->
+<!-- ##### Blog Content Area Start ##### -->
+<section class="blog-content-area section-padding-0-100">
+    <div class="container">
+        <div class="row justify-content-center">
+            <!-- Blog Posts Area -->
+            <div class="col-12 col-md-8">
+                <div class="blog-posts-area">
+
+                    <!-- Post Details Area -->
+                    <div class="single-post-details-area">
+                        <div class="post-content">
+                            <h4 class="post-title">@Model.Title</h4>
+                            <div class="post-meta mb-30">
+                                <a href="#"><i class="fa fa-clock-o" aria-hidden="true"></i> @Model.CreatedDate?.ToString("dd MMM yyyy")</a>
+                                <a href="#"><i class="fa fa-user" aria-hidden="true"></i> Admin</a>
+                            </div>
+                            <div class="post-thumbnail mb-30">
+                                <img src="@Model.Image" alt="@Model.Title" style="width: 100%; height: auto;" />
+                            </div>
+                            <p>@Model.Description</p>
+                            @if (!string.IsNullOrEmpty(Model.Content))
+                            {
+                                <div class="post-content-detail">
+                                    <p>@Html.Raw(Model.Content)</p>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Blog Sidebar Area -->
+            <div class="col-12 col-sm-9 col-md-4">
+                <div class="post-sidebar-area">
+
+                    <!-- ##### Single Widget Area ##### -->
+                    <div class="single-widget-area">
+                        <form action="@Url.Action("Index", "News")" method="get" class="search-form">
+                            <input type="search" name="search" id="widgetSearch" placeholder="Search...">
+                            <button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+                        </form>
+                    </div>
+
+                    <!-- ##### Single Widget Area ##### -->
+                    <div class="single-widget-area">
+                        <!-- Title -->
+                        <div class="widget-title">
+                            <h4>Bài viết gần đây</h4>
+                        </div>
+
+                        @foreach (var recentPost in ViewData["RecentPosts"] as List<OfficePlantCare.Models.News>)
+                        {
+                            <!-- Single Latest Posts -->
+                            <div class="single-latest-post d-flex align-items-center">
+                                <div class="post-thumb">
+                                    <img src="@recentPost.Image" alt="@recentPost.Title" onerror="this.src='/img/bg-img/default-news.jpg';" />
+                                </div>
+                                <div class="post-content">
+                                    <a href="@Url.Action("Details", "News", new { id = recentPost.NewsId })" class="post-title">
+                                        <h6>@recentPost.Title</h6>
+                                    </a>
+                                    <a href="#" class="post-date">@recentPost.CreatedDate?.ToString("dd MMM yyyy")</a>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- ##### Blog Content Area End ##### -->

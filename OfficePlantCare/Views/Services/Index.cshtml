@@ -1,0 +1,221 @@
+﻿@using Microsoft.AspNetCore.Mvc.Rendering
+@using X.PagedList.Mvc.Core
+
+@model X.PagedList.IPagedList<OfficePlantCare.Models.Service>
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+
+@{
+    ViewData["Title"] = "Dịch vụ";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var roleId = HttpContextAccessor.HttpContext.Session.GetInt32("RoleId");
+}
+
+<style>
+    /* Đảm bảo các phần tử dịch vụ có kích thước bằng nhau */
+    .single-product-area {
+        display: flex;
+        flex-direction: column;
+        height: 100%; /* Đảm bảo các phần tử có chiều cao bằng nhau */
+        border: 1px solid #e0e0e0; /* Thêm viền để dễ nhìn */
+        border-radius: 5px;
+        overflow: hidden;
+    }
+
+    .product-img {
+        width: 100%;
+        height: 200px; /* Cố định chiều cao hình ảnh */
+        overflow: hidden;
+    }
+
+        .product-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Đảm bảo hình ảnh không bị méo */
+        }
+
+    .product-info {
+        flex-grow: 1;
+        padding: 10px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+        .product-info p {
+            margin: 0;
+            font-size: 16px;
+            font-weight: 500;
+            color: #333;
+            display: -webkit-box;
+            -webkit-line-clamp: 2; /* Giới hạn tiêu đề tối đa 2 dòng */
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            line-height: 1.4em;
+            height: 2.8em; /* 2 dòng x 1.4em */
+        }
+
+        .product-info .text-muted {
+            font-size: 14px;
+            margin-top: 5px;
+            color: #777;
+        }
+
+    .product-info .btn {
+        margin-top: 10px;
+        width: 100%; /* Nút chiếm toàn bộ chiều rộng */
+        text-align: center;
+    }
+</style>
+
+<!-- ##### Breadcrumb Area Start ##### -->
+<div class="breadcrumb-area">
+    <!-- Top Breadcrumb Area -->
+    <div class="top-breadcrumb-area bg-img bg-overlay d-flex align-items-center justify-content-center" style="background-image: url(img/banner/banner_dich_vu.jpg);">
+        <h2>DỊCH VỤ</h2>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="~/home"><i class="fa fa-home"></i> Trang chủ</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Dịch vụ</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ##### Breadcrumb Area End ##### -->
+<!-- ##### Shop Area Start ##### -->
+<section class="shop-page section-padding-0-100">
+    <div class="container">
+        <div class="row">
+            <!-- Shop Sorting Data -->
+            <div class="col-12">
+                <div class="shop-sorting-data d-flex flex-wrap align-items-center justify-content-between">
+                    <!-- Shop Page Count -->
+                    <div class="shop-page-count">
+                        <p>Hiển thị @(Model.PageNumber * Model.PageSize - Model.PageSize + 1)–@(Model.PageNumber * Model.PageSize > Model.TotalItemCount ? Model.TotalItemCount : Model.PageNumber * Model.PageSize) của @ViewBag.TotalServices kết quả</p>
+                    </div>
+                    <!-- Search by Terms -->
+                    <div class="search_by_terms">
+                        <form action="@Url.Action("Index", "Services")" method="get" class="form-inline">
+                            <!-- Thanh tìm kiếm -->
+                            <div class="input-group mr-3">
+                                <input type="text" class="form-control" name="searchString" placeholder="Tìm kiếm dịch vụ..." value="@ViewData["CurrentFilter"]" />
+                                <div class="input-group-append">
+                                    <button class="btn btn-outline-secondary" type="submit"><i class="fa fa-search"></i></button>
+                                </div>
+                            </div>
+                            <!-- Dropdown sắp xếp -->
+                            @{
+                                var currentSort = ViewData["CurrentSort"] as string ?? "";
+                                var sortOptions = new List<SelectListItem>
+                            {
+                            new SelectListItem { Value = "", Text = "Sắp xếp theo Tên (A-Z)" },
+                            new SelectListItem { Value = "name_desc", Text = "Sắp xếp theo Tên (Z-A)" },
+                            };
+                            }
+                            @Html.DropDownList("sortOrder", sortOptions, new { @class = "custom-select widget-title", onchange = "this.form.submit()" })
+                            @{
+                                var selectedCategoryId = ViewBag.SelectedCategoryId as int?;
+                                if (selectedCategoryId.HasValue)
+                                {
+                                    <input type="hidden" name="categoryId" value="@selectedCategoryId" />
+                                }
+                            }
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Sidebar Area -->
+            <div class="col-12 col-md-4 col-lg-3">
+                <div class="shop-sidebar-area">
+                    <!-- Shop Widget -->
+                    <div class="shop-widget catagory mb-50">
+                        <h4 class="widget-title">Danh mục</h4>
+                        <div class="widget-desc">
+                            <!-- All Categories -->
+                            <div class="custom-control custom-checkbox d-flex align-items-center mb-2">
+                                <input type="checkbox" class="custom-control-input" id="customCheckAll" @(ViewBag.SelectedCategoryId == null ? "checked" : "") onchange="window.location.href='@Url.Action("Index", "Services")'">
+                                <label class="custom-control-label" for="customCheckAll">Tất cả Dịch vụ <span class="text-muted">(@ViewBag.TotalServices)</span></label>
+                            </div>
+                            <!-- Categories from Database -->
+                            @foreach (var category in ViewData["ServiceCategories"] as List<OfficePlantCare.Models.ServiceCategory>)
+                            {
+                                <div class="custom-control custom-checkbox d-flex align-items-center mb-2">
+                                    <input type="checkbox" class="custom-control-input" id="customCheck_@category.CategoryServiceId" @(ViewBag.SelectedCategoryId != null && (int)ViewBag.SelectedCategoryId == category.CategoryServiceId ? "checked" : "") onchange="window.location.href='@Url.Action("Index", "Services", new { categoryId = category.CategoryServiceId })'">
+                                    <label class="custom-control-label" for="customCheck_@category.CategoryServiceId">@category.CategoryServiceName <span class="text-muted">(@category.Services.Count)</span></label>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- All Products Area -->
+            <div class="col-12 col-md-8 col-lg-9">
+                <div class="shop-products-area">
+                    <div class="row">
+                        @foreach (var service in Model)
+                        {
+                            <div class="col-12 col-sm-6 col-lg-4 mb-4">
+                                <div class="single-product-area">
+                                    <!-- Product Image -->
+                                    <div class="product-img">
+                                        <a href="@Url.Action("Details", "Services", new { id = service.ServiceId })">
+                                            <img src="@service.Image" alt="@service.ServiceName" onerror="this.src='/img/bg-img/default-service.jpg';" />
+                                        </a>
+                                    </div>
+                                    <!-- Product Info -->
+                                    <div class="product-info">
+                                        <a href="@Url.Action("Details", "Services", new { id = service.ServiceId })">
+                                            <p>@service.ServiceName</p>
+                                        </a>
+                                        @if (roleId == 4 || roleId == 5)
+                                        {
+                                            <a href="@Url.Action("Details", "Services", new { id = service.ServiceId })" class="btn btn-success">Xem Chi Tiết</a>
+                                        }
+                                        else
+                                        {
+                                            <a asp-controller="Login" asp-action="Index" class="btn btn-success">Đặt Lịch Ngay</a>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+
+                    <!-- Pagination -->
+                    <div class="d-flex justify-content-center mt-4">
+                        @Html.PagedListPager(
+                                 Model,
+                                 page => Url.Action("Index", new { page, sortOrder = ViewData["CurrentSort"], categoryId = ViewBag.SelectedCategoryId, searchString = ViewData["CurrentFilter"] }),
+                                 new PagedListRenderOptions
+                        {
+                            LiElementClasses = new[] { "page-item" },
+                            PageClasses = new[] { "page-link" },
+                            UlElementClasses = new[] { "pagination" },
+                            ActiveLiElementClass = "active",
+                            LinkToFirstPageFormat = "«",
+                            LinkToLastPageFormat = "»",
+                            LinkToNextPageFormat = "›",
+                            LinkToPreviousPageFormat = "‹",
+                            DisplayLinkToFirstPage = PagedListDisplayMode.Always,
+                            DisplayLinkToLastPage = PagedListDisplayMode.Always,
+                            DisplayLinkToPreviousPage = PagedListDisplayMode.Always,
+                            DisplayLinkToNextPage = PagedListDisplayMode.Always
+                        }
+                                 )
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

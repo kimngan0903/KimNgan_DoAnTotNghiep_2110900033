@@ -1,0 +1,118 @@
+﻿@model OfficePlantCare.Models.Contract
+
+@{
+    ViewData["Title"] = "Chi tiết Hợp đồng";
+}
+
+<link rel="stylesheet" href="~/assets/css/details.css" />
+<div class="modal-body p-0">
+    <div class="card shadow-sm border-0 rounded-lg p-1">
+        <h3 class="text-success text-center font-weight-bold mb-4"><i class="fa-solid fa-info-circle me-2"></i>THÔNG TIN HỢP ĐỒNG</h3>
+        <div class="row">
+            <!-- Cột trái -->
+            <div class="col-md-6">
+                <div class="form-group mb-4">
+                    <i class="fa-solid fa-file-contract me-2"></i>
+                    <label class="control-label fw-bold text-muted">@Html.DisplayNameFor(model => model.ContractCode)</label>
+                    <div class="form-control rounded-pill bg-light">@Html.DisplayFor(model => model.ContractCode)</div>
+                </div>
+                <div class="form-group mb-4">
+                    <i class="fa-solid fa-ruler me-2"></i>
+                    <label class="control-label fw-bold text-muted">@Html.DisplayNameFor(model => model.DurationUnit)</label>
+                    <div class="form-control rounded-pill bg-light">@Html.DisplayFor(model => model.DurationUnit)</div>
+                </div>
+                <div class="form-group mb-4">
+                    <i class="fa-solid fa-clock me-2"></i>
+                    <label class="control-label fw-bold text-muted">@Html.DisplayNameFor(model => model.Duration)</label>
+                    <div class="form-control rounded-pill bg-light">@Html.DisplayFor(model => model.Duration)</div>
+                </div>
+                <div class="form-group mb-4">
+                    <i class="fa-solid fa-dollar-sign me-2"></i>
+                    <label class="control-label fw-bold text-muted">@Html.DisplayNameFor(model => model.TotalAmount)</label>
+                    <div class="form-control rounded-pill bg-light">@string.Format("{0:N0}", Model.TotalAmount).Replace(",", ".") VNĐ</div>
+                </div>
+                <div class="form-group mb-4">
+                    <i class="fa-solid fa-calendar-day me-2"></i>
+                    <label class="control-label fw-bold text-muted">@Html.DisplayNameFor(model => model.StartDate)</label>
+                    <div class="form-control rounded-pill bg-light">@Html.DisplayFor(model => model.StartDate)</div>
+                </div>
+            </div>
+
+            <!-- Cột phải -->
+            <div class="col-md-6">
+                <div class="form-group mb-4">
+                    <i class="fa-solid fa-calendar-check me-2"></i>
+                    <label class="control-label fw-bold text-muted">@Html.DisplayNameFor(model => model.EndDate)</label>
+                    <div class="form-control rounded-pill bg-light">@Html.DisplayFor(model => model.EndDate)</div>
+                </div>
+                <div class="form-group mb-4">
+                    <i class="fa-solid fa-user me-2"></i>
+                    <label class="control-label fw-bold text-muted">@Html.DisplayNameFor(model => model.Customer)</label>
+                    <div class="form-control rounded-pill bg-light">@Html.DisplayFor(model => model.Customer.CustomerName)</div>
+                </div>
+                <div class="form-group mb-4">
+                    <i class="fa-solid fa-credit-card me-2"></i>
+                    <label class="control-label fw-bold text-muted">@Html.DisplayNameFor(model => model.PaymentMethod)</label>
+                    <div class="form-control rounded-pill bg-light">@Html.DisplayFor(model => model.PaymentMethod.MethodName)</div>
+                </div>
+                <div class="form-group mb-4">
+                    <i class="fa-solid fa-money-check-alt me-2"></i>
+                    <label class="control-label fw-bold text-muted">@Html.DisplayNameFor(model => model.PaymentStatus)</label>
+                    <div class="form-control rounded-pill bg-light">
+                        @if (Model?.PaymentStatus == "Đã thanh toán")
+                        {
+                            <span class="badge badge-success px-3 py-1">Đã thanh toán</span>
+                        }
+                        else if (Model?.PaymentStatus == "Chưa thanh toán")
+                        {
+                            <span class="badge badge-warning px-3 py-1">Chưa thanh toán</span>
+                        }
+                        else if (Model?.PaymentStatus == "Hoàn tiền")
+                        {
+                            <span class="badge badge-danger px-3 py-1">Hoàn tiền</span>
+                        }
+                        else
+                        {
+                            <span class="badge badge-secondary px-3 py-1">Chưa xác định</span>
+                        }
+                    </div>
+                </div>
+                <div class="form-group mb-4">
+                    <i class="fa-solid fa-toggle-on me-2"></i>
+                    <label class="control-label fw-bold text-muted">@Html.DisplayNameFor(model => model.Status)</label>
+                    <div class="form-control rounded-pill bg-light">
+                        @if (Model?.Status == "Đang hiệu lực")
+                        {
+                            <span class="badge badge-success px-3 py-1">Đang hiệu lực</span>
+                        }
+                        else if (Model?.Status == "Hết hiệu lực")
+                        {
+                            <span class="badge badge-secondary px-3 py-1">Hết hiệu lực</span>
+                        }
+                        else if (Model?.Status == "Chờ xử lý")
+                        {
+                            <span class="badge badge-warning px-3 py-1">Chờ xử lý</span>
+                        }
+                        else
+                        {
+                            <span class="badge badge-danger px-3 py-1">Hủy</span>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Buttons -->
+        <div class="form-group d-flex gap-3 justify-content-center mt-4">
+            <button type="button" class="btn btn-primary rounded-pill px-4" onclick="loadModal('@Url.Action("Edit", "Contracts", new { id = Model?.ContractId })')">
+                <i class="fas fa-edit me-2"></i>Chỉnh sửa
+            </button>
+            <a class="btn btn-secondary rounded-pill px-4" asp-action="Index">
+                <i class="fas fa-times me-2"></i>Đóng
+            </a>
+        </div>
+    </div>
+</div>
+        </div>
+    </div>
+</div>

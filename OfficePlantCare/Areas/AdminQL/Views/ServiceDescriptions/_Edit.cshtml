@@ -1,0 +1,104 @@
+﻿@model OfficePlantCare.Models.ServiceDescription
+
+@{
+    ViewData["Title"] = "Chỉnh sửa Mô tả dịch vụ";
+}
+
+<link rel="stylesheet" href="~/assets/css/edit.css" />
+
+<div class="card shadow-sm border-0 rounded-lg p-1">
+    <h3 class="text-success text-center font-weight-bold mb-4"><i class="fa-solid fa-pen-to-square me-2"></i>CHỈNH SỬA MÔ TẢ DỊCH VỤ</h3>
+    <form asp-action="Edit" method="post" enctype="multipart/form-data">
+        <input type="hidden" asp-for="DescriptionId" />
+        <input type="hidden" asp-for="ServiceId" />
+
+        <div class="row">
+            <!-- Cột trái -->
+            <div class="col-md-6">
+                <div class="form-group mb-4">
+                    <i class="fa-solid fa-concierge-bell me-2"></i>
+                    <label asp-for="ServiceId" class="control-label fw-bold text-muted"></label>
+                    <input type="text" class="form-control rounded-pill" value="@ViewData["ServiceName"]" readonly />
+                    <span asp-validation-for="ServiceId" class="text-danger"></span>
+                </div>
+                <div class="form-group mb-4">
+                    <i class="fa-solid fa-list-ol me-2"></i>
+                    <label asp-for="StepNumber" class="control-label fw-bold text-muted"></label>
+                    <input asp-for="StepNumber" type="number" class="form-control rounded-pill" placeholder="Nhập số thứ tự bước" />
+                    <span asp-validation-for="StepNumber" class="text-danger"></span>
+                </div>
+                <div class="form-group mb-4">
+                    <i class="fa-solid fa-heading me-2"></i>
+                    <label asp-for="Title" class="control-label fw-bold text-muted"></label>
+                    <input asp-for="Title" class="form-control rounded-pill" placeholder="Nhập tiêu đề" />
+                    <span asp-validation-for="Title" class="text-danger"></span>
+                </div>
+                <div class="form-group mb-4">
+                    <i class="fa-solid fa-calendar-plus me-2"></i>
+                    <label asp-for="CreatedDate" class="control-label fw-bold text-muted"></label>
+                    <input asp-for="CreatedDate" type="date" class="form-control rounded-pill" />
+                    <span asp-validation-for="CreatedDate" class="text-danger"></span>
+                </div>
+            </div>
+
+            <!-- Cột phải -->
+            <div class="col-md-6">
+                <div class="form-group mb-4">
+                    <i class="fa-solid fa-file-alt me-2"></i>
+                    <label asp-for="Content" class="control-label fw-bold text-muted"></label>
+                    <textarea asp-for="Content" class="form-control rounded" placeholder="Nhập nội dung mô tả" rows="4"></textarea>
+                    <span asp-validation-for="Content" class="text-danger"></span>
+                </div>
+                <div class="form-group mb-4">
+                    <i class="fa-solid fa-calendar-check me-2"></i>
+                    <label asp-for="UpdatedDate" class="control-label fw-bold text-muted"></label>
+                    <input asp-for="UpdatedDate" type="date" class="form-control rounded-pill" />
+                    <span asp-validation-for="UpdatedDate" class="text-danger"></span>
+                </div>
+                <!-- Image Section -->
+                <div class="form-group mb-4">
+                    <label asp-for="Image" class="control-label fw-bold text-muted d-block"><i class="fa-solid fa-image me-2"></i>Ảnh hiện tại</label>
+                    @if (!string.IsNullOrEmpty(Model?.Image))
+                    {
+                        <div class="mb-3">
+                            <img src="@Url.Content(Model.Image)" alt="Service Image" class="rounded-circle shadow-sm image-preview" style="width: 120px; height: 120px; object-fit: cover;" />
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="mb-3">
+                            <img src="~/images/default-service.png" alt="Default Service Image" class="rounded-circle shadow-sm image-preview" style="width: 120px; height: 120px; object-fit: cover;" />
+                        </div>
+                    }
+                    <label asp-for="Image" class="control-label fw-bold text-muted d-block"><i class="fa-solid fa-upload me-2"></i>Tải lên ảnh mới</label>
+                    <div class="custom-file">
+                        <input asp-for="Image" type="file" class="form-control rounded-pill" id="imageUpload" onchange="previewImage(event)" accept="image/*" />
+                        <span asp-validation-for="Image" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Buttons -->
+        <div class="form-group d-flex gap-3 justify-content-center">
+            <button type="submit" class="btn btn-primary rounded-pill px-4"><i class="fas fa-save me-2"></i>Lưu</button>
+            <a asp-action="Index" class="btn btn-secondary rounded-pill px-4"><i class="fas fa-arrow-left me-2"></i>Quay lại</a>
+        </div>
+    </form>
+</div>
+
+<script>
+    function previewImage(event) {
+        const reader = new FileReader();
+        reader.onload = function () {
+            const output = document.querySelector('.image-preview');
+            output.src = reader.result;
+        };
+        reader.readAsDataURL(event.target.files[0]);
+    }
+</script>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

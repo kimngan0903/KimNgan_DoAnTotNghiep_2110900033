@@ -1,0 +1,258 @@
+﻿@model OfficePlantCare.Models.Contract
+
+@{
+    ViewData["Title"] = "Chi tiết hợp đồng";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- ##### Breadcrumb Area Start ##### -->
+<div class="breadcrumb-area">
+    <div class="top-breadcrumb-area bg-img bg-overlay d-flex align-items-center justify-content-center" style="background-image: url('https://noithatduonggia.vn/wp-content/uploads/2019/06/thuc-trang-van-phong-xanh-hien-nay.jpg'); background-size: cover; background-position: center; height: 300px;">
+        <h2 class="text-white" style="font-weight: 700; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);">CHI TIẾT HỢP ĐỒNG</h2>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb shadow-sm p-3 mb-5 bg-white rounded" style="background: linear-gradient(135deg, #f8f9fa, #e9ecef);">
+                        <li class="breadcrumb-item"><a href="~/home"><i class="fa fa-home"></i> Trang chủ</a></li>
+                        <li class="breadcrumb-item"><a asp-action="Index">Danh sách hợp đồng</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Chi tiết hợp đồng</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ##### Breadcrumb Area End ##### -->
+<!-- ##### Contract Details Area Start ##### -->
+<section class="contract-details-area mb-5">
+    <div class="container">
+        @if (TempData["SuccessMessage"] != null)
+        {
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                @TempData["SuccessMessage"]
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+        }
+        @if (TempData["ErrorMessage"] != null)
+        {
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                @TempData["ErrorMessage"]
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+        }
+        <div class="row">
+            <div class="col-12">
+                <div class="card shadow-sm rounded" style="background: linear-gradient(135deg, #ffffff, #e6ffe6); border: 1px solid #c3e6cb;">
+                    <div class="card-body">
+                        <h4 class="card-title mb-4" style="font-weight: 700; color: #2c3e50;">Thông tin hợp đồng</h4>
+                        <dl class="row">
+                            <dt class="col-sm-3" style="font-weight: 600; color: #495057;">@Html.DisplayNameFor(model => model.ContractCode)</dt>
+                            <dd class="col-sm-9">@Html.DisplayFor(model => model.ContractCode)</dd>
+                            <dt class="col-sm-3" style="font-weight: 600; color: #495057;">@Html.DisplayNameFor(model => model.CreatedDate)</dt>
+                            <dd class="col-sm-9">@Html.DisplayFor(model => model.CreatedDate)</dd>
+                            <dt class="col-sm-3" style="font-weight: 600; color: #495057;">@Html.DisplayNameFor(model => model.TotalAmount)</dt>
+                            <dd class="col-sm-9">@Html.DisplayFor(model => model.TotalAmount) VNĐ</dd>
+                            <dt class="col-sm-3" style="font-weight: 600; color: #495057;">@Html.DisplayNameFor(model => model.StartDate)</dt>
+                            <dd class="col-sm-9">@Html.DisplayFor(model => model.StartDate)</dd>
+                            <dt class="col-sm-3" style="font-weight: 600; color: #495057;">@Html.DisplayNameFor(model => model.EndDate)</dt>
+                            <dd class="col-sm-9">@Html.DisplayFor(model => model.EndDate)</dd>
+                            <dt class="col-sm-3" style="font-weight: 600; color: #495057;">@Html.DisplayNameFor(model => model.PaymentStatus)</dt>
+                            <dd class="col-sm-9">
+                                @if (Model.PaymentStatus == "Đã thanh toán")
+                                {
+                                    <span class="badge badge-success px-3 py-2">Đã thanh toán</span>
+                                }
+                                else if (Model.PaymentStatus == "Chưa thanh toán")
+                                {
+                                    <span class="badge badge-warning px-3 py-2">Chưa thanh toán</span>
+                                }
+                                else if (Model.PaymentStatus == "Hoàn tiền")
+                                {
+                                    <span class="badge badge-danger px-3 py-2">Hoàn tiền</span>
+                                }
+                                else
+                                {
+                                    <span>@Html.DisplayFor(model => model.PaymentStatus)</span>
+                                }
+                            </dd>
+                            <dt class="col-sm-3" style="font-weight: 600; color: #495057;">@Html.DisplayNameFor(model => model.Status)</dt>
+                            <dd class="col-sm-9">
+                                @if (Model.Status == "Chờ xử lý")
+                                {
+                                    <span class="badge badge-warning px-3 py-2">Chờ xử lý</span>
+                                }
+                                else if (Model.Status == "Đang hiệu lực")
+                                {
+                                    <span class="badge badge-success px-3 py-2">Đang hiệu lực</span>
+                                }
+                                else if (Model.Status == "Hết hiệu lực")
+                                {
+                                    <span class="badge badge-danger px-3 py-2">Hết hiệu lực</span>
+                                }
+                                else if (Model.Status == "Hủy")
+                                {
+                                    <span class="badge badge-danger px-3 py-2">Hủy</span>
+                                }
+                                else
+                                {
+                                    <span>@Html.DisplayFor(model => model.Status)</span>
+                                }
+                            </dd>
+                            <dt class="col-sm-3" style="font-weight: 600; color: #495057;">@Html.DisplayNameFor(model => model.Customer)</dt>
+                            <dd class="col-sm-9">@(Model.Customer?.CustomerName ?? "Không xác định")</dd>
+                            <dt class="col-sm-3" style="font-weight: 600; color: #495057;">@Html.DisplayNameFor(model => model.PaymentMethod)</dt>
+                            <dd class="col-sm-9">@(Model.PaymentMethod?.MethodName ?? "Không xác định")</dd>
+                        </dl>
+
+                        <h5 class="mt-4" style="font-weight: 600; color: #28a745;">Chi tiết dịch vụ</h5>
+                        @if (Model.ContractDetails.Any())
+                        {
+                            <div class="table-responsive">
+                                <table class="table table-hover table-bordered">
+                                    <thead class="thead-dark">
+                                        <tr>
+                                            <th>Dịch vụ</th>
+                                            <th>Địa chỉ</th>
+                                            <th>Tổng tiền</th>
+                                            <th>Trạng thái</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var detail in Model.ContractDetails)
+                                        {
+                                            <tr>
+                                                <td>@(detail.Service?.ServiceName ?? "Không xác định")</td>
+                                                <td>@(detail.Address ?? "Không xác định")</td>
+                                                <td>@(detail.TotalAmount != 0 ? detail.TotalAmount.Value.ToString("N0") + " VNĐ" : "Không xác định")</td>
+                                                <td>
+                                                    @if (detail.Status == "Chờ xử lý")
+                                                    {
+                                                        <span class="badge badge-warning px-3 py-2">Chờ xử lý</span>
+                                                    }
+                                                    else if (detail.Status == "Đã xác nhận")
+                                                    {
+                                                        <span class="badge badge-info px-3 py-2">Đã xác nhận</span>
+                                                    }
+                                                    else if (detail.Status == "Đã hoàn thành")
+                                                    {
+                                                        <span class="badge badge-success px-3 py-2">Đã hoàn thành</span>
+                                                    }
+                                                    else if (detail.Status == "Hủy")
+                                                    {
+                                                        <span class="badge badge-danger px-3 py-2">Hủy</span>
+                                                    }
+                                                    else
+                                                    {
+                                                        <span>@(detail.Status ?? "Không xác định")</span>
+                                                    }
+                                                </td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        }
+                        else
+                        {
+                            <p class="text-muted">Không có chi tiết dịch vụ nào.</p>
+                        }
+
+                        <div class="mt-4 d-flex flex-wrap">
+                            <a asp-action="Index" class="btn btn-secondary mr-2 mb-2" style="background: linear-gradient(135deg, #6c757d, #adb5bd); color: #fff;">Quay lại</a>
+                            @if (Model.Status == "Chờ xử lý" && Model.PaymentStatus != "Đã thanh toán")
+                            {
+                                <a href="#" class="btn btn-danger cancel-contract mr-2 mb-2" style="background: linear-gradient(135deg, #dc3545, #ff6b6b); color: #fff;" data-contract-id="@Model.ContractId" data-toggle="modal" data-target="#cancelContractModal">Hủy hợp đồng</a>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- ##### Contract Details Area End ##### -->
+<!-- Modal xác nhận hủy hợp đồng -->
+<div class="modal fade" id="cancelContractModal" tabindex="-1" role="dialog" aria-labelledby="cancelContractModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header" style="background: linear-gradient(135deg, #2c3e50, #4b6584); color: white;">
+                <h5 class="modal-title" id="cancelContractModalLabel">Xác nhận hủy hợp đồng</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Bạn có chắc chắn muốn hủy hợp đồng này không? Hành động này không thể hoàn tác.
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" style="background: linear-gradient(135deg, #6c757d, #adb5bd); color: #fff;">Đóng</button>
+                <form asp-action="CancelContract" method="post">
+                    <input type="hidden" name="contractId" id="cancelContractId" />
+                    <button type="submit" class="btn btn-danger" style="background: linear-gradient(135deg, #dc3545, #ff6b6b); color: #fff;">Hủy hợp đồng</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .card {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        }
+
+    .table-hover tbody tr:hover {
+        background-color: #f1f8e9;
+        transition: background-color 0.3s ease;
+    }
+
+    .thead-dark {
+        background-color: #2c3e50;
+        color: white;
+    }
+
+    .btn {
+        border-radius: 8px;
+        padding: 0.75rem 1.5rem;
+        font-weight: 600;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        border: none;
+    }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+    .badge {
+        font-size: 0.9rem;
+        padding: 0.5em 0.75em;
+    }
+
+    .modal-content {
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+</style>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script>
+        $(document).ready(function () {
+            $('.cancel-contract').click(function () {
+                var contractId = $(this).data('contract-id');
+                $('#cancelContractId').val(contractId);
+            });
+        });
+    </script>
+}

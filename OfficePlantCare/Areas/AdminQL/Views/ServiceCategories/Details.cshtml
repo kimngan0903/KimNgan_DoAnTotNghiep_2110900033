@@ -1,0 +1,25 @@
+﻿@model OfficePlantCare.Models.ServiceCategory
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Areas/AdminQL/Views/Shared/Admin.cshtml";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>ServiceCategory</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.CategoryServiceName)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.CategoryServiceName)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.CategoryServiceId">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

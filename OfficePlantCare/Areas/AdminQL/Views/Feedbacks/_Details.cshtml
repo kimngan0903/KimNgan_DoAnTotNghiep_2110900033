@@ -1,0 +1,71 @@
+﻿@model OfficePlantCare.Models.Feedback
+
+@{
+    ViewData["Title"] = "Chi tiết Phản hồi";
+}
+
+<link rel="stylesheet" href="~/assets/css/details.css" />
+
+<div class="modal-body p-0">
+    <div class="card shadow-sm border-0 rounded-lg p-1">
+        <h3 class="text-success text-center font-weight-bold mb-4"><i class="fa-solid fa-info-circle me-2"></i> CHI TIẾT PHẢN HỒI</h3>
+        <div class="row">
+            <!-- Cột trái -->
+            <div class="col-md-6">
+                <div class="form-group mb-4">
+                    <i class="fa-solid fa-calendar-day me-2"></i>
+                    <label class="control-label fw-bold text-muted">@Html.DisplayNameFor(model => model.FeedbackDate)</label>
+                    <div class="form-control rounded-pill bg-light">@(Model?.FeedbackDate?.ToString("dd/MM/yyyy HH:mm") ?? "N/A")</div>
+                </div>
+                <div class="form-group mb-4">
+                    <i class="fa-solid fa-star me-2"></i>
+                    <label class="control-label fw-bold text-muted">@Html.DisplayNameFor(model => model.Rating)</label>
+                    <div class="form-control rounded-pill bg-light">@(Model?.Rating != null ? $"{Model.Rating} sao" : "N/A")</div>
+                </div>
+                <div class="form-group mb-4">
+                    <i class="fa-solid fa-comment me-2"></i>
+                    <label class="control-label fw-bold text-muted">@Html.DisplayNameFor(model => model.Content)</label>
+                    <textarea class="form-control bg-light px-3 py-2 rounded-3" rows="4" readonly>@Html.Raw(Model?.Content)</textarea>
+                </div>
+            </div>
+
+            <!-- Cột phải -->
+            <div class="col-md-6">
+               @*  <div class="form-group mb-4">
+                    <i class="fa-solid fa-toggle-on me-2"></i>
+                    <label class="control-label fw-bold text-muted">@Html.DisplayNameFor(model => model.Status)</label>
+                    <div class="form-control rounded-pill bg-light">
+                        @if (Model?.Status == "Đã xử lý")
+                        {
+                            <span class="badge badge-success px-3 py-1">Đã xử lý</span>
+                        }
+                        else
+                        {
+                            <span class="badge badge-warning px-3 py-1">@(Model?.Status ?? "Chưa xác định")</span>
+                        }
+                    </div>
+                </div> *@
+                <div class="form-group mb-4">
+                    <i class="fa-solid fa-user me-2"></i>
+                    <label class="control-label fw-bold text-muted">@Html.DisplayNameFor(model => model.Customer)</label>
+                    <div class="form-control rounded-pill bg-light">@(Model?.Customer != null ? Model.Customer.CustomerName : "Không xác định")</div>
+                </div>
+                <div class="form-group mb-4">
+                    <i class="fa-solid fa-concierge-bell me-2"></i>
+                    <label class="control-label fw-bold text-muted">@Html.DisplayNameFor(model => model.Service)</label>
+                    <div class="form-control rounded-pill bg-light">@(Model?.Service != null ? Model.Service.ServiceName : "Chưa xác định")</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Buttons -->
+        <div class="form-group d-flex gap-3 justify-content-center">
+           @*  <button type="button" class="btn btn-primary rounded-pill px-4" onclick="loadModal('@Url.Action("Edit", "Feedbacks", new { id = Model?.FeedbackId })')">
+                <i class="fas fa-edit me-2"></i>Chỉnh sửa
+            </button> *@
+            <a class="btn btn-secondary rounded-pill px-4" href="@Url.Action("Index")">
+                <i class="fas fa-times me-2"></i>Đóng
+            </a>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,473 @@
+﻿@{
+    ViewData["Title"] = "Giới thiệu";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- ##### Breadcrumb Area Start ##### -->
+<div class="breadcrumb-area">
+    <!-- Top Breadcrumb Area -->
+    <div class="top-breadcrumb-area bg-img bg-overlay d-flex align-items-center justify-content-center" style="background-image: url(/img/banner/banner.jpg);">
+        <h2>GIỚI THIỆU</h2>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="~/home"><i class="fa fa-home"></i> Trang chủ</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Giới thiệu</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ##### Breadcrumb Area End ##### -->
+<!-- ##### About Area Start ##### -->
+<section class="about-us-area">
+    <div class="container">
+        <div class="row justify-content-between">
+            <div class="col-12 col-lg-5">
+                <!-- Section Heading -->
+                <div class="section-heading">
+                    <h2 style="color: #48c023; font-weight: bold">VỀ CHÚNG TÔI</h2>
+                    <p>Chuyên gia trong lĩnh vực chăm sóc cây cảnh văn phòng.</p>
+                </div>
+                <p>Chúng tôi mang đến giải pháp xanh bền vững cho không gian làm việc, giúp cây cảnh luôn tươi tốt, nâng cao chất lượng môi trường và tạo cảm hứng sáng tạo.</p>
+
+                <!-- Progress Bar Content Area -->
+                <div class="alazea-progress-bar mb-50">
+                    @{
+                        var servicePercentages = ViewData["ServicePercentages"] as List<dynamic>;
+                        var serviceIndex = 1;
+
+                        if (servicePercentages == null || !servicePercentages.Any())
+                        {
+                            <p>Chưa có dữ liệu về các dịch vụ được sử dụng.</p>
+                        }
+                        else
+                        {
+                            foreach (var service in servicePercentages)
+                            {
+                                <div class="single_progress_bar">
+                                    <p>@service.ServiceName</p>
+                                    <div id="bar@(serviceIndex)" class="barfiller">
+                                        <div class="tipWrap">
+                                            <span class="tip"></span>
+                                        </div>
+                                        <span class="fill" data-percentage="@service.Percentage"></span>
+                                    </div>
+                                </div>
+                                serviceIndex++;
+                            }
+                        }
+                    }
+                </div>
+            </div>
+
+            <div class="col-12 col-lg-6">
+                <div class="alazea-benefits-area">
+                    <div class="row">
+                        <!-- Single Benefits Area -->
+                        <div class="col-12 col-sm-6">
+                            <div class="single-benefits-area">
+                                <img src="img/core-img/b1.png" alt="Sản phẩm chất lượng">
+                                <h5>Sản phẩm chất lượng</h5>
+                                <p>Cây xanh được tuyển chọn kỹ lưỡng, đảm bảo sức khỏe tốt và phù hợp với môi trường văn phòng.</p>
+                            </div>
+                        </div>
+
+                        <!-- Single Benefits Area -->
+                        <div class="col-12 col-sm-6">
+                            <div class="single-benefits-area">
+                                <img src="img/core-img/b2.png" alt="Dịch vụ chuyên nghiệp">
+                                <h5>Dịch vụ chuyên nghiệp</h5>
+                                <p>Đội ngũ chuyên gia tận tâm, chăm sóc cây định kỳ, tư vấn giải pháp tối ưu cho khách hàng.</p>
+                            </div>
+                        </div>
+
+                        <!-- Single Benefits Area -->
+                        <div class="col-12 col-sm-6">
+                            <div class="single-benefits-area">
+                                <img src="img/core-img/b3.png" alt="100% tự nhiên">
+                                <h5>100% tự nhiên</h5>
+                                <p>Sử dụng phương pháp chăm sóc thân thiện với môi trường, giúp cây phát triển tự nhiên và bền vững.</p>
+                            </div>
+                        </div>
+
+                        <!-- Single Benefits Area -->
+                        <div class="col-12 col-sm-6">
+                            <div class="single-benefits-area">
+                                <img src="img/core-img/b4.png" alt="Bảo vệ môi trường">
+                                <h5>Bảo vệ môi trường</h5>
+                                <p>Góp phần giảm thiểu khí CO2, tạo không gian làm việc trong lành, nâng cao sức khỏe cho nhân viên.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="border-line"></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ##### About Area End ##### -->
+<!-- ##### Service Area Start ##### -->
+<section class="our-services-area bg-gray section-padding-100-0">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <!-- Section Heading -->
+                <div class="section-heading text-center">
+                    <h2 style="color: #48c023; font-weight: bold">DỊCH VỤ CỦA CHÚNG TÔI</h2>
+                    <p>Xanh mát mỗi ngày – Nâng tầm không gian, truyền cảm hứng thành công!</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="row justify-content-between">
+            <div class="col-12 col-lg-5">
+                <div class="alazea-service-area mb-100">
+
+                    <!-- Single Service Area -->
+                    <div class="single-service-area d-flex align-items-center wow fadeInUp" data-wow-delay="100ms">
+                        <!-- Icon -->
+                        <div class="service-icon mr-30">
+                            <img src="img/core-img/s1.png" alt="Chăm sóc cây cảnh">
+                        </div>
+                        <!-- Content -->
+                        <div class="service-content">
+                            <h5>Chăm sóc cây cảnh</h5>
+                            <p>Giữ cho cây xanh của bạn luôn tươi tốt với dịch vụ tưới nước, cắt tỉa và bổ sung dinh dưỡng chuyên nghiệp.</p>
+                        </div>
+                    </div>
+
+                    <!-- Single Service Area -->
+                    <div class="single-service-area d-flex align-items-center wow fadeInUp" data-wow-delay="300ms">
+                        <!-- Icon -->
+                        <div class="service-icon mr-30">
+                            <img src="img/core-img/s2.png" alt="Làm sạch không gian xanh">
+                        </div>
+                        <!-- Content -->
+                        <div class="service-content">
+                            <h5>Làm sạch không gian xanh</h5>
+                            <p>Dọn dẹp lá rụng, rêu mốc và vệ sinh chậu cây, giúp không gian làm việc luôn trong lành và chuyên nghiệp.</p>
+                        </div>
+                    </div>
+
+                    <!-- Single Service Area -->
+                    <div class="single-service-area d-flex align-items-center wow fadeInUp" data-wow-delay="500ms">
+                        <!-- Icon -->
+                        <div class="service-icon mr-30">
+                            <img src="img/core-img/s3.png" alt="Cắt tỉa & tạo dáng cây">
+                        </div>
+                        <!-- Content -->
+                        <div class="service-content">
+                            <h5>Cắt tỉa & tạo dáng cây</h5>
+                            <p>Tạo hình cây cảnh theo phong cách hiện đại, duy trì vẻ đẹp tự nhiên và hài hòa với không gian văn phòng.</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="col-12 col-lg-6">
+                @*                 <div class="alazea-video-area bg-overlay mb-100">
+                *@                    <img src="https://media2.giphy.com/media/rLuTf4Te8ZQNzMHzjz/giphy.gif?cid=6c09b952c1mfs81pv3rpoadj71c86jthw3z84col9czo5hl3&ep=v1_stickers_search&rid=giphy.gif&ct=s" alt="">
+                @*  <a href="https://www.youtube.com/embed/ixk2ZkwlSrA" class="video-icon">
+                <i class="fa fa-play" aria-hidden="true"></i>
+                </a> *@
+            </div>
+        </div>
+    </div>
+</section>
+<!-- ##### Service Area End ##### -->
+<!-- ##### Testimonial Area Start ##### -->
+<section class="testimonial-area section-padding-100">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="testimonials-slides owl-carousel">
+
+                    <!-- Đánh giá 1 -->
+                    <div class="single-testimonial-slide">
+                        <div class="row align-items-center">
+                            <div class="col-12 col-md-6">
+                                <div class="testimonial-thumb">
+                                    <img src="~/img/feedback/khach_1.jpg" alt="Khách hàng 1" style="object-fit: cover">
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <div class="testimonial-content">
+                                    <!-- Tiêu đề -->
+                                    <div class="section-heading">
+                                        <h2>PHẢN HỒI KHÁCH HÀNG</h2>
+                                        <p>Cảm nhận từ những khách hàng đã sử dụng dịch vụ</p>
+                                    </div>
+                                    <p>“Dịch vụ chăm sóc cây cảnh của công ty thật tuyệt vời! Nhân viên tận tâm, cây luôn xanh tốt và văn phòng trở nên trong lành hơn. Rất hài lòng!”</p>
+                                    <div class="testimonial-author-info">
+                                        <h6>Anh Nguyễn Văn Minh</h6>
+                                        <p>Giám đốc Công ty ABC</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Đánh giá 2 -->
+                    <div class="single-testimonial-slide">
+                        <div class="row align-items-center">
+                            <div class="col-12 col-md-6">
+                                <div class="testimonial-thumb">
+                                    <img src="~/img/feedback/khach_2.jpg" alt="Khách hàng 2">
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <div class="testimonial-content">
+                                    <!-- Tiêu đề -->
+                                    <div class="section-heading">
+                                        <h2>PHẢN HỒI KHÁCH HÀNG</h2>
+                                        <p>Cảm nhận từ những khách hàng đã sử dụng dịch vụ</p>
+                                    </div>
+                                    <p>“Sau khi sử dụng dịch vụ, cây trong văn phòng tôi luôn được chăm sóc đúng lịch trình, không còn tình trạng héo úa như trước. Rất đáng để trải nghiệm!”</p>
+                                    <div class="testimonial-author-info">
+                                        <h6>Chị Trần Thị Lan</h6>
+                                        <p>Trưởng phòng Nhân sự Công ty XYZ</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Đánh giá 3 -->
+                    <div class="single-testimonial-slide">
+                        <div class="row align-items-center">
+                            <div class="col-12 col-md-6">
+                                <div class="testimonial-thumb">
+                                    <img src="~/img/feedback/khach_3.jpg" alt="Khách hàng 3">
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <div class="testimonial-content">
+                                    <!-- Tiêu đề -->
+                                    <div class="section-heading">
+                                        <h2>PHẢN HỒI KHÁCH HÀNG</h2>
+                                        <p>Cảm nhận từ những khách hàng đã sử dụng dịch vụ</p>
+                                    </div>
+                                    <p>“Dịch vụ chăm sóc cây xanh rất chuyên nghiệp, đội ngũ nhân viên làm việc nhanh chóng và luôn đảm bảo chất lượng. Văn phòng tôi luôn tràn ngập không khí tươi mát!”</p>
+                                    <div class="testimonial-author-info">
+                                        <h6>Ông Phạm Hoàng Nam</h6>
+                                        <p>Giám đốc Điều hành Công ty PQR</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section><!-- ##### Testimonial Area End ##### -->
+<!-- ##### Cool Facts Area Start ##### -->
+@* <section class="cool-facts-area bg-img section-padding-100-0" style="background-image: url(img/bg-img/cool-facts.png);">
+    <div class="container">
+        <div class="row">
+
+            <!-- Số lượng hợp đồng -->
+            <div class="col-12 col-sm-6 col-md-3">
+                <div class="single-cool-fact d-flex align-items-center justify-content-center mb-100">
+                    <div class="cf-icon">
+                        <img src="~/img/core-img/hop_dong.jpg" alt="Hợp đồng">
+                    </div>
+                    <div class="cf-content">
+                        <h2><span class="counter">50</span>+</h2>
+                        <h6>Hợp Đồng Dịch Vụ</h6>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Số lượng khách hàng -->
+            <div class="col-12 col-sm-6 col-md-3">
+                <div class="single-cool-fact d-flex align-items-center justify-content-center mb-100">
+                    <div class="cf-icon">
+                        <img src="~/img/core-img/khach-hang.png" alt="Khách hàng">
+                    </div>
+                    <div class="cf-content">
+                        <h2><span class="counter">200</span>+</h2>
+                        <h6>Khách Hàng</h6>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 col-sm-6 col-md-3">
+                <div class="single-cool-fact d-flex align-items-center justify-content-center mb-100">
+                    <div class="cf-icon">
+                        <img src="~/img/core-img/dich_vu.jpg" alt="Dịch vụ">
+                    </div>
+                    <div class="cf-content">
+                        <h2><span class="counter">500</span>+</h2>
+                        <h6>Dịch Vụ</h6>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 col-sm-6 col-md-3">
+                <div class="single-cool-fact d-flex align-items-center justify-content-center mb-100">
+                    <div class="cf-icon">
+                        <img src="~/img/core-img/danh_gia.jpg" alt="Đánh giá">
+                    </div>
+                    <div class="cf-content">
+                        <h2><span class="counter">1.2</span> Tỷ+</h2>
+                        <h6>Đánh Giá</h6>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Hình ảnh bên cạnh -->
+    <div class="side-img wow fadeInUp" data-wow-delay="500ms">
+        <img src="img/core-img/plant-side.png" alt="Chậu cây">
+    </div>
+</section>
+ *@<!-- ##### Cool Facts Area End ##### -->
+<!-- ##### Team Area Start ##### -->
+<section class="team-area section-padding-100-0">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 text-center">
+                <div class="section-heading">
+                    <h2>ĐỘI NGŨ CỦA CHÚNG TÔI</h2>
+                    <p>Những chuyên gia tận tâm và giàu kinh nghiệm.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Thành viên 1 -->
+            <div class="col-12 col-sm-6 col-lg-3">
+                <div class="single-team-member text-center mb-100">
+                    <div class="team-member-thumb">
+                        <img src="img/bg-img/nguoi_sang_lap.jpg" alt="Kim Ngân" style="width: 100%;height: 300px">
+                        <div class="team-member-social-info">
+                            <a href="#"><i class="fab fa-facebook"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fab fa-google-plus"></i></a>
+                            <a href="#"><i class="fab fa-linkedin"></i></a>
+                        </div>
+                    </div>
+                    <div class="team-member-info mt-30">
+                        <h5>Kim Ngân</h5>
+                        <p>CEO &amp; Người sáng lập</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Thành viên 2 -->
+            <div class="col-12 col-sm-6 col-lg-3">
+                <div class="single-team-member text-center mb-100">
+                    <div class="team-member-thumb">
+                        <img src="img/bg-img/nha_thiet_ke.jpg" alt="Kim Tiền" style="width: 100%;height: 300px">
+                        <div class="team-member-social-info">
+                            <a href="#"><i class="fab fa-facebook"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fab fa-google-plus"></i></a>
+                            <a href="#"><i class="fab fa-linkedin"></i></a>
+                        </div>
+                    </div>
+                    <div class="team-member-info mt-30">
+                        <h5>Kim Tiền</h5>
+                        <p>Nhà thiết kế </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Thành viên 3 -->
+            <div class="col-12 col-sm-6 col-lg-3">
+                <div class="single-team-member text-center mb-100">
+                    <div class="team-member-thumb">
+                        <img src="img/bg-img/quan-ly_ke_hoach.jpg" alt="Kim Tuyến" style="width: 100%;height: 300px">
+                        <div class="team-member-social-info">
+                            <a href="#"><i class="fab fa-facebook"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fab fa-google-plus"></i></a>
+                            <a href="#"><i class="fab fa-linkedin"></i></a>
+                        </div>
+                    </div>
+                    <div class="team-member-info mt-30">
+                        <h5>Kim Tuyến</h5>
+                        <p>Quản lý kế hoạch</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Thành viên 4 -->
+            <div class="col-12 col-sm-6 col-lg-3">
+                <div class="single-team-member text-center mb-100">
+                    <div class="team-member-thumb">
+                        <img src="img/bg-img/chuyen_gia_marketing.jpg" alt="Kim Sa" style="width: 100%;height: 300px">
+                        <div class="team-member-social-info">
+                            <a href="#"><i class="fab fa-facebook"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fab fa-google-plus"></i></a>
+                            <a href="#"><i class="fab fa-linkedin"></i></a>
+                        </div>
+                    </div>
+                    <div class="team-member-info mt-30">
+                        <h5>Kim Sa</h5>
+                        <p>Chuyên gia Marketing</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+<!-- ##### Team Area End ##### -->
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const bars = document.querySelectorAll('.barfiller');
+
+        bars.forEach(bar => {
+            const fill = bar.querySelector('.fill');
+            const tip = bar.querySelector('.tip');
+            const percentage = fill.getAttribute('data-percentage') || '0';
+
+            // Đảm bảo fill hiển thị đúng
+            fill.style.width = percentage + '%';
+            fill.style.background = 'rgb(112, 199, 69)';
+
+            // Hiển thị phần trăm trong tip
+            if (tip) {
+                tip.textContent = percentage + '%';
+                tip.style.left = '0'; // Đặt tip ở bên trái thanh
+                tip.style.right = 'auto';
+                tip.style.transform = 'translateX(-50%)'; // Căn giữa tip ở bên trái
+            }
+
+            // Nếu dùng barfiller, khởi tạo với các tùy chọn
+            if (typeof jQuery !== 'undefined' && jQuery.fn.barfiller) {
+                $(bar).barfiller({
+                    barColor: 'rgb(112, 199, 69)', // Màu xanh
+                    tooltip: true,
+                    duration: 2000, // Hiệu ứng 2 giây
+                    onComplete: function () {
+                        if (tip) {
+                            tip.textContent = percentage + '%'; // Đảm bảo phần trăm hiển thị
+                        }
+                    }
+                });
+            }
+        });
+    });
+</script>

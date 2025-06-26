@@ -1,0 +1,259 @@
+﻿@model X.PagedList.IPagedList<OfficePlantCare.Areas.AdminQL.Models.NotificationViewModel>
+@using X.PagedList.Mvc.Core;
+@{
+    ViewData["Title"] = "Tất cả thông báo";
+    Layout = "~/Areas/AdminQL/Views/Shared/Admin.cshtml";
+}
+
+<div class="pcoded-main-container">
+    <div class="pcoded-content">
+        <!-- Page Header -->
+        <div class="page-header card shadow-sm border-0">
+            <div class="page-block">
+                <div class="row align-items-center">
+                    <div class="col-md-12">
+                        <div class="page-header-title d-flex justify-content-between align-items-center py-3 ml-3">
+                            <h5 class="m-0 text-success font-weight-bold">TẤT CẢ THÔNG BÁO</h5>
+                            <nav aria-label="breadcrumb">
+                                <ol class="breadcrumb mb-0 bg-transparent">
+                                    <li class="breadcrumb-item"><a asp-area="AdminQL" asp-controller="Dashboard" asp-action="AllNotifications"><i class="fas fa-home"></i></a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">TẤT CẢ THÔNG BÁO</li>
+                                </ol>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card shadow-sm border-0">
+                    <div class="card-header bg-white px-4 py-3 border-bottom">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <h5 class="text-success font-weight-bold mb-0">DANH SÁCH THÔNG BÁO</h5>
+                            <div class="d-flex align-items-center gap-3">
+                                <!-- Search Form -->
+                                <form method="get" asp-area="AdminQL" asp-action="AllNotifications" asp-controller="Dashboard" class="d-flex flex-wrap gap-2">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control border-success rounded-pill" name="keyword" id="keyword"
+                                               value="@ViewBag.keyword" placeholder="Nhập tên khách hàng cần tìm" style="max-width: 250px;" />
+                                    </div>
+                                    <button type="submit" class="btn btn-success rounded-pill ml-2">
+                                        <i class="fas fa-search"></i> Tìm
+                                    </button>
+                                </form>
+                                <!-- Bộ lọc loại thông báo -->
+                                <form method="get" asp-area="AdminQL" asp-action="AllNotifications" asp-controller="Dashboard" class="d-flex flex-wrap gap-2">
+                                    <input type="hidden" name="keyword" value="@ViewBag.keyword" />
+                                    <input type="hidden" name="status" value="@ViewBag.status" />
+                                    <select name="type" class="form-select form-select-sm" style="width: 150px;" onchange="this.form.submit()">
+                                        <option value="">Tất cả loại</option>
+                                        <option value="Đơn hàng">Đơn hàng</option>
+                                        <option value="Yêu cầu phát sinh">Yêu cầu phát sinh</option>
+                                        <option value="Hợp đồng">Hợp đồng</option>
+                                    </select>
+                                </form>
+                                <!-- Bộ lọc trạng thái -->
+                                <form method="get" asp-area="AdminQL" asp-action="AllNotifications" asp-controller="Dashboard" class="d-flex flex-wrap gap-2">
+                                    <input type="hidden" name="keyword" value="@ViewBag.keyword" />
+                                    <input type="hidden" name="type" value="@ViewBag.type" />
+                                    <select name="status" class="form-select form-select-sm" style="width: 150px;" onchange="this.form.submit()">
+                                        <option value="all">Tất cả trạng thái</option>
+                                        <option value="unread">Chưa đọc</option>
+                                        <option value="read">Đã đọc</option>
+                                    </select>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body p-4">
+                        @if (Model == null || !Model.Any())
+                        {
+                            <div class="alert alert-info text-center" role="alert">
+                                <i class="fas fa-info-circle me-2"></i> Không có thông báo nào để hiển thị.
+                            </div>
+                        }
+                        else
+                        {
+                            <!-- Form để xóa thông báo -->
+                            <form method="post" asp-area="AdminQL" asp-action="DeleteNotifications" asp-controller="Dashboard">
+                                <div class="d-flex justify-content-end mb-3">
+                                    <button type="submit" class="btn btn-danger rounded-pill" id="deleteSelected" disabled>
+                                        <i class="fas fa-trash-alt"></i> Xóa đã chọn
+                                    </button>
+                                </div>
+                                <div class="table-responsive">
+                                    <table class="table table-hover table-striped" id="notificationTable">
+                                        <thead class="bg-dark text-white">
+                                            <tr>
+                                                <th class="text-muted">
+                                                    <input type="checkbox" id="selectAll" />
+                                                </th>
+                                                <th class="text-muted">Loại</th>
+                                                <th class="text-muted">Thông báo</th>
+                                                <th class="text-muted">Thời gian</th>
+                                                <th class="text-muted">Trạng thái</th>
+                                                <th class="text-muted">Hành động</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (var notification in Model)
+                                            {
+                                                <tr class="@(notification.IsRead ? "" : "table-primary")" data-status="@(notification.IsRead ? "read" : "unread")" data-type="@notification.Type">
+                                                    <td>
+                                                        <input type="checkbox" name="notificationIds" value="@notification.NotificationId" class="notificationCheckbox" />
+                                                    </td>
+                                                    <td><i class="@notification.Icon me-2"></i> @notification.Type</td>
+                                                    <td>
+                                                        @if (!string.IsNullOrEmpty(notification.Link))
+                                                        {
+                                                            <a href="@notification.Link" class="text-decoration-none">@notification.Message</a>
+                                                        }
+                                                        else
+                                                        {
+                                                            <span>@notification.Message</span>
+                                                        }
+                                                    </td>
+                                                    <td>@notification.TimeAgo</td>
+                                                    <td>
+                                                        <form method="post" asp-area="AdminQL" asp-action="ToggleReadStatus" asp-controller="Dashboard" style="display:inline;">
+                                                            @Html.AntiForgeryToken()
+                                                            <input type="hidden" name="notificationId" value="@notification.NotificationId" />
+                                                            <input type="hidden" name="isRead" value="@(!notification.IsRead)" />
+                                                            <input type="hidden" name="page" value="@Model.PageNumber" />
+                                                            <input type="hidden" name="keyword" value="@ViewBag.keyword" />
+                                                            <input type="hidden" name="type" value="@ViewBag.type" />
+                                                            <input type="hidden" name="status" value="@ViewBag.status" />
+                                                            <button type="submit" class="badge @(notification.IsRead ? "badge-success" : "badge-danger")">
+                                                                @(notification.IsRead ? "Đã đọc" : "Chưa đọc")
+                                                            </button>
+                                                        </form>
+                                                    </td>
+                                                    <td>
+                                                        @if (!string.IsNullOrEmpty(notification.Link))
+                                                        {
+                                                            <button class="btn btn-sm btn-outline-primary" onclick="loadModal('@notification.Link')">Xem chi tiết</button>                                                        }
+                                                        else
+                                                        {
+                                                            <button class="btn btn-sm btn-outline-secondary" disabled>Xem chi tiết</button>
+                                                        }
+                                                    </td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </form>
+                            <!-- Pagination -->
+                            <div class="d-flex justify-content-center mt-4">
+                                @Html.PagedListPager(
+                                         Model,
+                                         page => Url.Action("AllNotifications", "Dashboard", new { area = "AdminQL", page = page, keyword = ViewBag.keyword, type = ViewBag.type, status = ViewBag.status }),
+                                         new PagedListRenderOptions
+                            {
+                                LiElementClasses = new[] { "page-item" },
+                                PageClasses = new[] { "page-link" },
+                                UlElementClasses = new[] { "pagination" },
+                                ActiveLiElementClass = "active",
+                                LinkToFirstPageFormat = "«",
+                                LinkToLastPageFormat = "»",
+                                LinkToNextPageFormat = "›",
+                                LinkToPreviousPageFormat = "‹",
+                                DisplayLinkToFirstPage = PagedListDisplayMode.Always,
+                                DisplayLinkToLastPage = PagedListDisplayMode.Always,
+                                DisplayLinkToPreviousPage = PagedListDisplayMode.Always,
+                                DisplayLinkToNextPage = PagedListDisplayMode.Always
+                            }
+                                         )
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="modal-container" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content border-0 shadow-lg">
+            <div class="modal-header text-white">
+                <h5 class="modal-title text-success">THÔNG TIN</h5>
+                <button type="button" class="close text-dark" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body" id="modal-content">
+                <!-- Nội dung sẽ được tải bằng AJAX -->
+            </div>
+        </div>
+    </div>
+</div>
+<style>
+    .card {
+        transition: all 0.3s ease;
+    }
+
+        .card:hover {
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            transform: translateY(-5px);
+        }
+
+    .table-primary {
+        background-color: #e7f1ff !important;
+    }
+
+    .badge {
+        font-size: 0.85em;
+        padding: 0.5em 0.75em;
+        cursor: pointer;
+    }
+
+    .form-select-sm {
+        padding: 0.25rem 0.5rem;
+        font-size: 0.875rem;
+    }
+
+    .table th, .table td {
+        vertical-align: middle;
+    }
+</style>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const selectAllCheckbox = document.getElementById('selectAll');
+        const notificationCheckboxes = document.querySelectorAll('.notificationCheckbox');
+        const deleteButton = document.getElementById('deleteSelected');
+
+        // Xử lý checkbox chọn tất cả
+        selectAllCheckbox.addEventListener('change', function () {
+            notificationCheckboxes.forEach(checkbox => {
+                checkbox.checked = this.checked;
+            });
+            updateDeleteButtonState();
+        });
+
+        // Xử lý khi checkbox riêng lẻ thay đổi
+        notificationCheckboxes.forEach(checkbox => {
+            checkbox.addEventListener('change', function () {
+                updateDeleteButtonState();
+                selectAllCheckbox.checked = [...notificationCheckboxes].every(cb => cb.checked);
+            });
+        });
+
+        // Cập nhật trạng thái nút Xóa
+        function updateDeleteButtonState() {
+            const anyChecked = [...notificationCheckboxes].some(cb => cb.checked);
+            deleteButton.disabled = !anyChecked;
+        }
+    });
+        // Hàm loadModal để tải nội dung chi tiết qua AJAX
+        function loadModal(url) {
+            $.get(url, function (data) {
+                $("#modal-content").html(data);
+                $("#modal-container").modal("show");
+            });
+        }
+</script>

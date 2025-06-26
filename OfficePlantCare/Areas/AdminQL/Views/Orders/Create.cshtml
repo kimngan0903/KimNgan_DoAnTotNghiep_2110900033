@@ -1,0 +1,127 @@
+﻿@model OfficePlantCare.Models.Order
+
+@{
+    ViewData["Title"] = "Tạo đơn hàng";
+    Layout = "~/Areas/AdminQL/Views/Shared/Admin.cshtml";
+}
+
+<link rel="stylesheet" href="~/assets/css/create.css" />
+
+<div class="pcoded-main-container">
+    <div class="pcoded-content">
+        <!-- Page Header -->
+        <div class="page-header card shadow-sm border-0">
+            <div class="page-block">
+                <div class="row align-items-center">
+                    <div class="col-md-12">
+                        <div class="page-header-title d-flex justify-content-between align-items-center py-3 ml-3">
+                            <h5 class="m-0 text-success font-weight-bold">THÊM MỚI ĐƠN HÀNG</h5>
+                            <nav aria-label="breadcrumb">
+                                <ol class="breadcrumb mb-0 bg-transparent">
+                                    <li class="breadcrumb-item"><a asp-area="AdminQL" asp-controller="Orders" asp-action="Index"><i class="feather icon-home"></i></a></li>
+                                    <li class="breadcrumb-item"><a asp-action="Index">DANH SÁCH ĐƠN HÀNG</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">THÊM MỚI</li>
+                                </ol>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="row">
+            <div class="col-md-8 offset-md-2">
+                <div class="card shadow-sm border-0 rounded-lg p-4">
+                    <h3 class="text-success text-center font-weight-bold mb-4"><i class="fa-solid fa-shopping-cart me-2"></i>THÊM MỚI ĐƠN HÀNG</h3>
+                    <form asp-action="Create" method="post">
+                        <div asp-validation-summary="ModelOnly" class="text-danger mb-4"></div>
+
+                        <div class="row">
+                            <!-- Cột trái -->
+                            <div class="col-md-6">
+                                <div class="form-group mb-4">
+                                    <i class="fa-solid fa-user me-2"></i>
+                                    <label asp-for="CustomerId" class="control-label fw-bold text-muted"></label>
+                                    <select asp-for="CustomerId" class="form-control custom-select rounded-pill" asp-items="ViewBag.CustomerId">
+                                        <option value="">-- Chọn khách hàng --</option>
+                                    </select>
+                                    <span asp-validation-for="CustomerId" class="text-danger"></span>
+                                </div>
+                                <div class="form-group mb-4">
+                                    <i class="fa-solid fa-user-tie me-2"></i>
+                                    <label asp-for="StaffId" class="control-label fw-bold text-muted"></label>
+                                    <select asp-for="StaffId" class="form-control custom-select rounded-pill" asp-items="ViewBag.StaffId">
+                                        <option value="">-- Chọn nhân viên --</option>
+                                    </select>
+                                    <span asp-validation-for="StaffId" class="text-danger"></span>
+                                </div>
+                                <div class="form-group mb-4">
+                                    <i class="fa-solid fa-dollar-sign me-2"></i>
+                                    <label asp-for="TotalPrice" class="control-label fw-bold text-muted"></label>
+                                    <input asp-for="TotalPrice" type="number" step="0.01" class="form-control rounded-pill" placeholder="Nhập tổng giá trị" min="0" />
+                                    <span asp-validation-for="TotalPrice" class="text-danger"></span>
+                                </div>
+                            </div>
+
+                            <!-- Cột phải -->
+                            <div class="col-md-6">
+                                <div class="form-group mb-4">
+                                    <i class="fa-solid fa-credit-card me-2"></i>
+                                    <label asp-for="PaymentMethodId" class="control-label fw-bold text-muted"></label>
+                                    <select asp-for="PaymentMethodId" class="form-control custom-select rounded-pill" asp-items="ViewBag.PaymentMethodId">
+                                        <option value="">-- Chọn phương thức thanh toán --</option>
+                                    </select>
+                                    <span asp-validation-for="PaymentMethodId" class="text-danger"></span>
+                                </div>
+                                <div class="form-group mb-4">
+                                    <i class="fa-solid fa-calendar-day me-2"></i>
+                                    <label asp-for="PaymentDate" class="control-label fw-bold text-muted"></label>
+                                    <input asp-for="PaymentDate" type="date" class="form-control rounded-pill" />
+                                    <span asp-validation-for="PaymentDate" class="text-danger"></span>
+                                </div>
+                                <div class="form-group mb-4">
+                                    <i class="fa-solid fa-money-check-alt me-2"></i>
+                                    <label asp-for="PaymentStatus" class="control-label fw-bold text-muted"></label>
+                                    <select asp-for="PaymentStatus" class="form-control custom-select rounded-pill">
+                                        <option value="Chưa thanh toán">Chưa thanh toán</option>
+                                        <option value="Đã thanh toán">Đã thanh toán</option>
+                                        <option value="Hoàn tiền">Hoàn tiền</option>
+                                    </select>
+                                    <span asp-validation-for="PaymentStatus" class="text-danger"></span>
+                                </div>
+                                <div class="form-group mb-4">
+                                    <i class="fa-solid fa-toggle-on me-2"></i>
+                                    <label asp-for="Status" class="control-label fw-bold text-muted"></label>
+                                    <select asp-for="Status" class="form-control custom-select rounded-pill">
+                                        <option value="Chờ xử lý">Chờ xử lý</option>
+                                        <option value="Đã xác nhận">Đã xác nhận</option>
+                                        <option value="Đã hoàn thành">Đã hoàn thành</option>
+                                        <option value="Hủy">Hủy</option>
+                                    </select>
+                                    <span asp-validation-for="Status" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Buttons -->
+                        <div class="form-group d-flex justify-content-center gap-3">
+                            <button type="submit" class="btn btn-primary rounded-pill px-4">
+                                <i class="fas fa-save me-2"></i>Thêm mới
+                            </button>
+                            <a asp-action="Index" class="btn btn-secondary rounded-pill px-4">
+                                <i class="fas fa-arrow-left me-2"></i>Quay lại
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

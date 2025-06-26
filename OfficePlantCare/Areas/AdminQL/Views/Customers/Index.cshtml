@@ -1,0 +1,314 @@
+﻿@model X.PagedList.IPagedList<OfficePlantCare.Models.Customer>
+@using X.PagedList.Mvc.Core;
+
+@{
+    ViewData["Title"] = "Danh sách khách hàng";
+    Layout = "~/Areas/AdminQL/Views/Shared/Admin.cshtml";
+}
+
+<link rel="stylesheet" href="~/assets/css/index.css?v2" />
+
+<div class="pcoded-main-container">
+    <div class="pcoded-content">
+        <!-- Page Header -->
+        <div class="page-header card shadow-sm border-0">
+            <div class="page-block">
+                <div class="row align-items-center">
+                    <div class="col-md-12">
+                        <div class="page-header-title d-flex justify-content-between align-items-center py-3 ml-3">
+                            <h5 class="m-0 text-success font-weight-bold">QUẢN LÝ KHÁCH HÀNG</h5>
+                            <nav aria-label="breadcrumb">
+                                <ol class="breadcrumb mb-0 bg-transparent">
+                                    <li class="breadcrumb-item"><a asp-area="AdminQL" asp-controller="Customers" asp-action="Index"><i class="fas fa-home"></i></a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">DANH SÁCH KHÁCH HÀNG</li>
+                                </ol>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card shadow-sm border-0">
+                    <div class="card-header bg-white px-4 py-3 border-bottom">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <h5 class="text-success font-weight-bold mb-0">DANH SÁCH KHÁCH HÀNG</h5>
+                            <div class="d-flex align-items-center gap-3">
+                                <!-- Search Form -->
+                                <form id="filter-form" class="d-flex flex-wrap gap-2">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control border-success rounded-pill" name="name" id="keyword"
+                                               value="@ViewBag.keyword" placeholder="Nhập tên khách hàng cần tìm" style="max-width: 250px;" />
+                                    </div>
+                                    @* <button type="submit" class="btn btn-success rounded-pill ml-2">
+                                        <i class="fas fa-search"></i> Tìm
+                                    </button> *@
+                                </form>
+                                <!-- Add New Button -->
+                                <a class="btn btn-success rounded-pill px-4" asp-action="Create">
+                                    <i class="fas fa-plus"></i> Thêm mới
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card-body p-4">
+                        <div class="table-responsive">
+                            <table class="table table-hover table-striped align-middle">
+                                <thead class="bg-dark">
+                                    <tr>
+                                        <th class="text-muted text-center">
+                                            @Html.DisplayNameFor(model => model.FirstOrDefault().CustomerName)
+                                        </th>
+                                        <th class="text-muted text-center">
+                                            @Html.DisplayNameFor(model => model.FirstOrDefault().Email)
+                                        </th>
+                                        <th class="text-muted text-center">
+                                            @Html.DisplayNameFor(model => model.FirstOrDefault().Status)
+                                        </th>
+                                        <th class="text-muted text-center">Hành động</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if (Model.Any())
+                                    {
+                                        @foreach (var item in Model)
+                                        {
+                                            <tr>
+                                                <td class="text-center">@Html.DisplayFor(modelItem => item.CustomerName)</td>
+                                                <td class="text-center">@Html.DisplayFor(modelItem => item.Email)</td>
+                                                <td class="text-center">
+                                                    @if (item.Status.ToString() == "Hoạt động")
+                                                    {
+                                                        <span class="badge badge-success px-3 py-2">Hoạt động</span>
+                                                    }
+                                                    else if (item.Status.ToString() == "Không hoạt động")
+                                                    {
+                                                        <span class="badge badge-warning px-3 py-2">Không hoạt động</span>
+                                                    }
+                                                    else
+                                                    {
+                                                        <span class="badge badge-danger px-3 py-2">Bị khóa</span>
+                                                    }
+                                                </td>
+                                                <td class="text-center">
+                                                    <div class="btn-group" role="group">
+                                                        <button class="btn btn-outline-primary btn-sm" onclick="loadModal('@Url.Action("Edit", "Customers", new { id = item.CustomerId })')"><i class="fas fa-edit"></i> Sửa</button>
+                                                        <button class="btn btn-outline-info btn-sm" onclick="loadModal('@Url.Action("Details", "Customers", new { id = item.CustomerId })')"><i class="fas fa-info-circle"></i> Chi tiết</button>
+                                                        <button class="btn btn-outline-danger btn-sm" onclick="loadModal('@Url.Action("Delete", "Customers", new { id = item.CustomerId })')"><i class="fas fa-trash-alt"></i> Xóa</button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <tr>
+                                            <td colspan="5" class="text-center text-muted py-3">
+                                                Không có khách hàng nào.
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <!-- Pagination -->
+                        @if (Model.Any())
+                        {
+                            <div class="d-flex justify-content-center mt-4">
+                                @Html.PagedListPager(
+                                         Model,
+                                         page => Url.Action("Index", new { page = page, name = ViewBag.keyword, roleId = ViewBag.selectedRoleId }),
+                                         new PagedListRenderOptions
+                                {
+                                    LiElementClasses = new[] { "page-item" },
+                                    PageClasses = new[] { "page-link" },
+                                    UlElementClasses = new[] { "pagination" },
+                                    ActiveLiElementClass = "active",
+                                    LinkToFirstPageFormat = "«",
+                                    LinkToLastPageFormat = "»",
+                                    LinkToNextPageFormat = "›",
+                                    LinkToPreviousPageFormat = "‹",
+                                    DisplayLinkToFirstPage = PagedListDisplayMode.Always,
+                                    DisplayLinkToLastPage = PagedListDisplayMode.Always,
+                                    DisplayLinkToPreviousPage = PagedListDisplayMode.Always,
+                                    DisplayLinkToNextPage = PagedListDisplayMode.Always
+                                }
+                                         )
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="modal-container" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content border-0 shadow-lg">
+            <div class="modal-header text-white">
+                <h5 class="modal-title text-success">THÔNG TIN</h5>
+                <button type="button" class="close text-dark" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body" id="modal-content">
+                <!-- Nội dung sẽ được tải bằng AJAX -->
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        // Load modal content via AJAX
+        function loadModal(url) {
+            $.get(url, function (data) {
+                $("#modal-content").html(data);
+                $("#modal-container").modal("show");
+            });
+        }
+
+        // Function to update table content via AJAX
+        function updateTable(page, roleId, name) {
+            // Construct the URL with parameters
+            let url = '@Url.Action("Index", "Customers")' + '?page=' + page;
+            if (name) url += '&name=' + encodeURIComponent(name);
+
+            // Fetch table content via AJAX
+            fetch(url, {
+                method: 'GET',
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest' // Indicate AJAX request
+                }
+            })
+                .then(response => response.text())
+                .then(data => {
+                    // Parse the response HTML and extract the table and pagination
+                    const parser = new DOMParser();
+                    const doc = parser.parseFromString(data, 'text/html');
+                    const newTable = doc.querySelector('.table-responsive');
+                    const newPagination = doc.querySelector('.pagination');
+
+                    // Update the table content
+                    document.querySelector('.table-responsive').innerHTML = newTable.innerHTML;
+
+                    // Update pagination if it exists
+                    const paginationContainer = document.querySelector('.d-flex.justify-content-center.mt-4');
+                    if (newPagination && paginationContainer) {
+                        paginationContainer.innerHTML = newPagination.outerHTML;
+                        // Reattach event listeners to new pagination links
+                        attachPaginationListeners();
+                    } else if (paginationContainer) {
+                        paginationContainer.innerHTML = ''; // Clear pagination if no results
+                    }
+
+                    // Show notification if no data and roleId is set
+                    const hasData = doc.querySelector('.table-responsive tbody tr') && !doc.querySelector('.table-responsive tbody tr td[colspan="5"]');
+                    const roleId = sessionStorage.getItem('selectedRoleId') || '';
+                    if (roleId && !hasData) {
+                        Swal.fire({
+                            icon: 'info',
+                            title: 'Thông báo',
+                            text: 'Không có khách hàng nào thuộc vai trò này.',
+                            confirmButtonText: 'OK',
+                            confirmButtonColor: '#1ABC9C'
+                        });
+                    }
+                })
+                .catch(error => console.error('Error updating table:', error));
+        }
+
+        // Function to attach click event listeners to pagination links
+        function attachPaginationListeners() {
+            const paginationLinks = document.querySelectorAll('.pagination a.page-link');
+            paginationLinks.forEach(link => {
+                link.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const href = this.getAttribute('href');
+                    const urlParams = new URLSearchParams(href.split('?')[1] || '');
+                    const page = urlParams.get('page') || 1;
+                    const roleId = sessionStorage.getItem('selectedRoleId') || '';
+                    const name = sessionStorage.getItem('selectedName') || '';
+
+                    // Update table content for the clicked page
+                    updateTable(page, roleId, name);
+                });
+            });
+        }
+
+        // On document ready
+        document.addEventListener('DOMContentLoaded', function () {
+            // Load saved filter values from sessionStorage
+            const savedName = sessionStorage.getItem('selectedName');
+            if (savedName) {
+                document.getElementById('keyword').value = savedName;
+            }
+
+            // Handle name select change
+            document.getElementById('name').addEventListener('change', function () {
+                const name = document.getElementById('keyword').value;
+                sessionStorage.setItem('selectedName', name || '');
+
+                // Update table with the selected filters
+                updateTable(1, roleId, name);
+            });
+
+            // Handle keyword input change (optional: trigger on input for instant search)
+            document.getElementById('keyword').addEventListener('input', function () {
+                const roleId = document.getElementById('roleId').value;
+                const name = this.value;
+
+                // Store filter values in sessionStorage
+                if (name) {
+                    sessionStorage.setItem('selectedName', name);
+                } else {
+                    sessionStorage.removeItem('selectedName');
+                }
+
+                // Update table with the selected filters
+                updateTable(1, roleId, name);
+            });
+
+            // Handle form submission
+            document.getElementById('filter-form').addEventListener('submit', function (e) {
+                e.preventDefault();
+                const roleId = document.getElementById('roleId').value;
+                const name = document.getElementById('keyword').value;
+
+                // Store filter values in sessionStorage
+                sessionStorage.setItem('selectedName', name || '');
+
+                // Update table with search parameters
+                updateTable(1, roleId, name);
+            });
+
+            // Attach pagination listeners initially
+            attachPaginationListeners();
+
+            // Display success message if present
+            const successMessage = '@Html.Raw(System.Web.HttpUtility.JavaScriptStringEncode(TempData["SuccessMessage"]?.ToString() ?? ""))';
+            if (successMessage) {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Thành công!',
+                    text: successMessage,
+                    confirmButtonText: 'OK',
+                    confirmButtonColor: '#1ABC9C'
+                });
+            }
+
+            // Initial table update with saved filters if present
+            if (savedName) {
+                updateTable(@(TempData["CurrentPage"] ?? 1), savedRoleId, savedName);
+            }
+        });
+    </script>
+}

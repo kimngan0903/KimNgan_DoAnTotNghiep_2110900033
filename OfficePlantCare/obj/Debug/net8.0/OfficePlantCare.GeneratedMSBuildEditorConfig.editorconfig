@@ -1,0 +1,783 @@
+is_global = true
+build_property.TargetFramework = net8.0
+build_property.TargetFramework = net8.0
+build_property.TargetPlatformMinVersion = 
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = true
+build_property.UsingMicrosoftNETSdkWeb = true
+build_property.ProjectTypeGuids = 
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = 
+build_property.InvariantGlobalization = 
+build_property.PlatformNeutralAssembly = 
+build_property.PlatformNeutralAssembly = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property.RootNamespace = OfficePlantCare
+build_property.RootNamespace = OfficePlantCare
+build_property.ProjectDir = D:\DEV_02409GH_KN\KimNgan_DoAnTotNghiep_2110900033\OfficePlantCare\
+build_property.EnableComHosting = 
+build_property.EnableGeneratedComInterfaceComImportInterop = 
+build_property.RazorLangVersion = 8.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.MSBuildProjectDirectory = D:\DEV_02409GH_KN\KimNgan_DoAnTotNghiep_2110900033\OfficePlantCare
+build_property._RazorSourceGeneratorDebug = 
+
+[D:/DEV_02409GH_KN/KimNgan_DoAnTotNghiep_2110900033/OfficePlantCare/Areas/AdminQL/Views/Admins/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5RTFxWaWV3c1xBZG1pbnNcQ3JlYXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/DEV_02409GH_KN/KimNgan_DoAnTotNghiep_2110900033/OfficePlantCare/Areas/AdminQL/Views/Admins/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5RTFxWaWV3c1xBZG1pbnNcRGVsZXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/DEV_02409GH_KN/KimNgan_DoAnTotNghiep_2110900033/OfficePlantCare/Areas/AdminQL/Views/Admins/Detail.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5RTFxWaWV3c1xBZG1pbnNcRGV0YWlsLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/DEV_02409GH_KN/KimNgan_DoAnTotNghiep_2110900033/OfficePlantCare/Areas/AdminQL/Views/Admins/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5RTFxWaWV3c1xBZG1pbnNcRWRpdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/DEV_02409GH_KN/KimNgan_DoAnTotNghiep_2110900033/OfficePlantCare/Areas/AdminQL/Views/Admins/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5RTFxWaWV3c1xBZG1pbnNcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/DEV_02409GH_KN/KimNgan_DoAnTotNghiep_2110900033/OfficePlantCare/Areas/AdminQL/Views/Admins/_Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5RTFxWaWV3c1xBZG1pbnNcX0RlbGV0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/DEV_02409GH_KN/KimNgan_DoAnTotNghiep_2110900033/OfficePlantCare/Areas/AdminQL/Views/Admins/_Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5RTFxWaWV3c1xBZG1pbnNcX0RldGFpbHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/DEV_02409GH_KN/KimNgan_DoAnTotNghiep_2110900033/OfficePlantCare/Areas/AdminQL/Views/Admins/_Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5RTFxWaWV3c1xBZG1pbnNcX0VkaXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/DEV_02409GH_KN/KimNgan_DoAnTotNghiep_2110900033/OfficePlantCare/Areas/AdminQL/Views/Banners/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5RTFxWaWV3c1xCYW5uZXJzXENyZWF0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/DEV_02409GH_KN/KimNgan_DoAnTotNghiep_2110900033/OfficePlantCare/Areas/AdminQL/Views/Banners/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5RTFxWaWV3c1xCYW5uZXJzXERlbGV0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/DEV_02409GH_KN/KimNgan_DoAnTotNghiep_2110900033/OfficePlantCare/Areas/AdminQL/Views/Banners/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5RTFxWaWV3c1xCYW5uZXJzXERldGFpbHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/DEV_02409GH_KN/KimNgan_DoAnTotNghiep_2110900033/OfficePlantCare/Areas/AdminQL/Views/Banners/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5RTFxWaWV3c1xCYW5uZXJzXEVkaXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/DEV_02409GH_KN/KimNgan_DoAnTotNghiep_2110900033/OfficePlantCare/Areas/AdminQL/Views/Banners/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5RTFxWaWV3c1xCYW5uZXJzXEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/DEV_02409GH_KN/KimNgan_DoAnTotNghiep_2110900033/OfficePlantCare/Areas/AdminQL/Views/Banners/_Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5RTFxWaWV3c1xCYW5uZXJzXF9EZWxldGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/DEV_02409GH_KN/KimNgan_DoAnTotNghiep_2110900033/OfficePlantCare/Areas/AdminQL/Views/Banners/_Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5RTFxWaWV3c1xCYW5uZXJzXF9EZXRhaWxzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/DEV_02409GH_KN/KimNgan_DoAnTotNghiep_2110900033/OfficePlantCare/Areas/AdminQL/Views/Banners/_Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5RTFxWaWV3c1xCYW5uZXJzXF9FZGl0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/DEV_02409GH_KN/KimNgan_DoAnTotNghiep_2110900033/OfficePlantCare/Areas/AdminQL/Views/CareSchedules/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5RTFxWaWV3c1xDYXJlU2NoZWR1bGVzXENyZWF0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/DEV_02409GH_KN/KimNgan_DoAnTotNghiep_2110900033/OfficePlantCare/Areas/AdminQL/Views/CareSchedules/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5RTFxWaWV3c1xDYXJlU2NoZWR1bGVzXERlbGV0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/DEV_02409GH_KN/KimNgan_DoAnTotNghiep_2110900033/OfficePlantCare/Areas/AdminQL/Views/CareSchedules/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5RTFxWaWV3c1xDYXJlU2NoZWR1bGVzXERldGFpbHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/DEV_02409GH_KN/KimNgan_DoAnTotNghiep_2110900033/OfficePlantCare/Areas/AdminQL/Views/CareSchedules/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5RTFxWaWV3c1xDYXJlU2NoZWR1bGVzXEVkaXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/DEV_02409GH_KN/KimNgan_DoAnTotNghiep_2110900033/OfficePlantCare/Areas/AdminQL/Views/CareSchedules/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5RTFxWaWV3c1xDYXJlU2NoZWR1bGVzXEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/DEV_02409GH_KN/KimNgan_DoAnTotNghiep_2110900033/OfficePlantCare/Areas/AdminQL/Views/CareSchedules/_Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5RTFxWaWV3c1xDYXJlU2NoZWR1bGVzXF9EZWxldGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/DEV_02409GH_KN/KimNgan_DoAnTotNghiep_2110900033/OfficePlantCare/Areas/AdminQL/Views/CareSchedules/_Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5RTFxWaWV3c1xDYXJlU2NoZWR1bGVzXF9EZXRhaWxzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/DEV_02409GH_KN/KimNgan_DoAnTotNghiep_2110900033/OfficePlantCare/Areas/AdminQL/Views/CareSchedules/_Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5RTFxWaWV3c1xDYXJlU2NoZWR1bGVzXF9FZGl0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/DEV_02409GH_KN/KimNgan_DoAnTotNghiep_2110900033/OfficePlantCare/Areas/AdminQL/Views/Contacts/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5RTFxWaWV3c1xDb250YWN0c1xDcmVhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/DEV_02409GH_KN/KimNgan_DoAnTotNghiep_2110900033/OfficePlantCare/Areas/AdminQL/Views/Contacts/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5RTFxWaWV3c1xDb250YWN0c1xEZWxldGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/DEV_02409GH_KN/KimNgan_DoAnTotNghiep_2110900033/OfficePlantCare/Areas/AdminQL/Views/Contacts/Detail.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5RTFxWaWV3c1xDb250YWN0c1xEZXRhaWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/DEV_02409GH_KN/KimNgan_DoAnTotNghiep_2110900033/OfficePlantCare/Areas/AdminQL/Views/Contacts/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5RTFxWaWV3c1xDb250YWN0c1xFZGl0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/DEV_02409GH_KN/KimNgan_DoAnTotNghiep_2110900033/OfficePlantCare/Areas/AdminQL/Views/Contacts/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5RTFxWaWV3c1xDb250YWN0c1xJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/DEV_02409GH_KN/KimNgan_DoAnTotNghiep_2110900033/OfficePlantCare/Areas/AdminQL/Views/Contacts/_Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5RTFxWaWV3c1xDb250YWN0c1xfRGVsZXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/DEV_02409GH_KN/KimNgan_DoAnTotNghiep_2110900033/OfficePlantCare/Areas/AdminQL/Views/Contacts/_Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5RTFxWaWV3c1xDb250YWN0c1xfRGV0YWlscy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/DEV_02409GH_KN/KimNgan_DoAnTotNghiep_2110900033/OfficePlantCare/Areas/AdminQL/Views/Contacts/_Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5RTFxWaWV3c1xDb250YWN0c1xfRWRpdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/DEV_02409GH_KN/KimNgan_DoAnTotNghiep_2110900033/OfficePlantCare/Areas/AdminQL/Views/ContractDetails/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5RTFxWaWV3c1xDb250cmFjdERldGFpbHNcQ3JlYXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/DEV_02409GH_KN/KimNgan_DoAnTotNghiep_2110900033/OfficePlantCare/Areas/AdminQL/Views/ContractDetails/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5RTFxWaWV3c1xDb250cmFjdERldGFpbHNcRGVsZXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/DEV_02409GH_KN/KimNgan_DoAnTotNghiep_2110900033/OfficePlantCare/Areas/AdminQL/Views/ContractDetails/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5RTFxWaWV3c1xDb250cmFjdERldGFpbHNcRGV0YWlscy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/DEV_02409GH_KN/KimNgan_DoAnTotNghiep_2110900033/OfficePlantCare/Areas/AdminQL/Views/ContractDetails/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5RTFxWaWV3c1xDb250cmFjdERldGFpbHNcRWRpdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/DEV_02409GH_KN/KimNgan_DoAnTotNghiep_2110900033/OfficePlantCare/Areas/AdminQL/Views/ContractDetails/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5RTFxWaWV3c1xDb250cmFjdERldGFpbHNcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/DEV_02409GH_KN/KimNgan_DoAnTotNghiep_2110900033/OfficePlantCare/Areas/AdminQL/Views/ContractDetails/_Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5RTFxWaWV3c1xDb250cmFjdERldGFpbHNcX0RlbGV0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/DEV_02409GH_KN/KimNgan_DoAnTotNghiep_2110900033/OfficePlantCare/Areas/AdminQL/Views/ContractDetails/_Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5RTFxWaWV3c1xDb250cmFjdERldGFpbHNcX0RldGFpbHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/DEV_02409GH_KN/KimNgan_DoAnTotNghiep_2110900033/OfficePlantCare/Areas/AdminQL/Views/ContractDetails/_Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5RTFxWaWV3c1xDb250cmFjdERldGFpbHNcX0VkaXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/DEV_02409GH_KN/KimNgan_DoAnTotNghiep_2110900033/OfficePlantCare/Areas/AdminQL/Views/Contracts/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5RTFxWaWV3c1xDb250cmFjdHNcQ3JlYXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/DEV_02409GH_KN/KimNgan_DoAnTotNghiep_2110900033/OfficePlantCare/Areas/AdminQL/Views/Contracts/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5RTFxWaWV3c1xDb250cmFjdHNcRGVsZXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/DEV_02409GH_KN/KimNgan_DoAnTotNghiep_2110900033/OfficePlantCare/Areas/AdminQL/Views/Contracts/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5RTFxWaWV3c1xDb250cmFjdHNcRGV0YWlscy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/DEV_02409GH_KN/KimNgan_DoAnTotNghiep_2110900033/OfficePlantCare/Areas/AdminQL/Views/Contracts/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5RTFxWaWV3c1xDb250cmFjdHNcRWRpdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/DEV_02409GH_KN/KimNgan_DoAnTotNghiep_2110900033/OfficePlantCare/Areas/AdminQL/Views/Contracts/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5RTFxWaWV3c1xDb250cmFjdHNcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/DEV_02409GH_KN/KimNgan_DoAnTotNghiep_2110900033/OfficePlantCare/Areas/AdminQL/Views/Contracts/PrintInvoice.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5RTFxWaWV3c1xDb250cmFjdHNcUHJpbnRJbnZvaWNlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/DEV_02409GH_KN/KimNgan_DoAnTotNghiep_2110900033/OfficePlantCare/Areas/AdminQL/Views/Contracts/_Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5RTFxWaWV3c1xDb250cmFjdHNcX0RlbGV0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/DEV_02409GH_KN/KimNgan_DoAnTotNghiep_2110900033/OfficePlantCare/Areas/AdminQL/Views/Contracts/_Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5RTFxWaWV3c1xDb250cmFjdHNcX0RldGFpbHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/DEV_02409GH_KN/KimNgan_DoAnTotNghiep_2110900033/OfficePlantCare/Areas/AdminQL/Views/Contracts/_Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5RTFxWaWV3c1xDb250cmFjdHNcX0VkaXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/DEV_02409GH_KN/KimNgan_DoAnTotNghiep_2110900033/OfficePlantCare/Areas/AdminQL/Views/Customers/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5RTFxWaWV3c1xDdXN0b21lcnNcQ3JlYXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/DEV_02409GH_KN/KimNgan_DoAnTotNghiep_2110900033/OfficePlantCare/Areas/AdminQL/Views/Customers/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5RTFxWaWV3c1xDdXN0b21lcnNcRGVsZXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/DEV_02409GH_KN/KimNgan_DoAnTotNghiep_2110900033/OfficePlantCare/Areas/AdminQL/Views/Customers/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5RTFxWaWV3c1xDdXN0b21lcnNcRGV0YWlscy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/DEV_02409GH_KN/KimNgan_DoAnTotNghiep_2110900033/OfficePlantCare/Areas/AdminQL/Views/Customers/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5RTFxWaWV3c1xDdXN0b21lcnNcRWRpdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/DEV_02409GH_KN/KimNgan_DoAnTotNghiep_2110900033/OfficePlantCare/Areas/AdminQL/Views/Customers/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5RTFxWaWV3c1xDdXN0b21lcnNcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/DEV_02409GH_KN/KimNgan_DoAnTotNghiep_2110900033/OfficePlantCare/Areas/AdminQL/Views/Customers/_Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5RTFxWaWV3c1xDdXN0b21lcnNcX0RlbGV0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/DEV_02409GH_KN/KimNgan_DoAnTotNghiep_2110900033/OfficePlantCare/Areas/AdminQL/Views/Customers/_Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5RTFxWaWV3c1xDdXN0b21lcnNcX0RldGFpbHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/DEV_02409GH_KN/KimNgan_DoAnTotNghiep_2110900033/OfficePlantCare/Areas/AdminQL/Views/Customers/_Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5RTFxWaWV3c1xDdXN0b21lcnNcX0VkaXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/DEV_02409GH_KN/KimNgan_DoAnTotNghiep_2110900033/OfficePlantCare/Areas/AdminQL/Views/Dashboard/AdminDashboard.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5RTFxWaWV3c1xEYXNoYm9hcmRcQWRtaW5EYXNoYm9hcmQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/DEV_02409GH_KN/KimNgan_DoAnTotNghiep_2110900033/OfficePlantCare/Areas/AdminQL/Views/Dashboard/AllNotifications.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5RTFxWaWV3c1xEYXNoYm9hcmRcQWxsTm90aWZpY2F0aW9ucy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/DEV_02409GH_KN/KimNgan_DoAnTotNghiep_2110900033/OfficePlantCare/Areas/AdminQL/Views/Dashboard/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5RTFxWaWV3c1xEYXNoYm9hcmRcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/DEV_02409GH_KN/KimNgan_DoAnTotNghiep_2110900033/OfficePlantCare/Areas/AdminQL/Views/Dashboard/SalesDashboard.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5RTFxWaWV3c1xEYXNoYm9hcmRcU2FsZXNEYXNoYm9hcmQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/DEV_02409GH_KN/KimNgan_DoAnTotNghiep_2110900033/OfficePlantCare/Areas/AdminQL/Views/Feedbacks/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5RTFxWaWV3c1xGZWVkYmFja3NcQ3JlYXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/DEV_02409GH_KN/KimNgan_DoAnTotNghiep_2110900033/OfficePlantCare/Areas/AdminQL/Views/Feedbacks/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5RTFxWaWV3c1xGZWVkYmFja3NcRGVsZXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/DEV_02409GH_KN/KimNgan_DoAnTotNghiep_2110900033/OfficePlantCare/Areas/AdminQL/Views/Feedbacks/Detail.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5RTFxWaWV3c1xGZWVkYmFja3NcRGV0YWlsLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/DEV_02409GH_KN/KimNgan_DoAnTotNghiep_2110900033/OfficePlantCare/Areas/AdminQL/Views/Feedbacks/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5RTFxWaWV3c1xGZWVkYmFja3NcRWRpdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/DEV_02409GH_KN/KimNgan_DoAnTotNghiep_2110900033/OfficePlantCare/Areas/AdminQL/Views/Feedbacks/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5RTFxWaWV3c1xGZWVkYmFja3NcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/DEV_02409GH_KN/KimNgan_DoAnTotNghiep_2110900033/OfficePlantCare/Areas/AdminQL/Views/Feedbacks/_Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5RTFxWaWV3c1xGZWVkYmFja3NcX0RlbGV0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/DEV_02409GH_KN/KimNgan_DoAnTotNghiep_2110900033/OfficePlantCare/Areas/AdminQL/Views/Feedbacks/_Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5RTFxWaWV3c1xGZWVkYmFja3NcX0RldGFpbHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/DEV_02409GH_KN/KimNgan_DoAnTotNghiep_2110900033/OfficePlantCare/Areas/AdminQL/Views/Feedbacks/_Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5RTFxWaWV3c1xGZWVkYmFja3NcX0VkaXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/DEV_02409GH_KN/KimNgan_DoAnTotNghiep_2110900033/OfficePlantCare/Areas/AdminQL/Views/Login/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5RTFxWaWV3c1xMb2dpblxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/DEV_02409GH_KN/KimNgan_DoAnTotNghiep_2110900033/OfficePlantCare/Areas/AdminQL/Views/News/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5RTFxWaWV3c1xOZXdzXENyZWF0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/DEV_02409GH_KN/KimNgan_DoAnTotNghiep_2110900033/OfficePlantCare/Areas/AdminQL/Views/News/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5RTFxWaWV3c1xOZXdzXERlbGV0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/DEV_02409GH_KN/KimNgan_DoAnTotNghiep_2110900033/OfficePlantCare/Areas/AdminQL/Views/News/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5RTFxWaWV3c1xOZXdzXERldGFpbHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/DEV_02409GH_KN/KimNgan_DoAnTotNghiep_2110900033/OfficePlantCare/Areas/AdminQL/Views/News/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5RTFxWaWV3c1xOZXdzXEVkaXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/DEV_02409GH_KN/KimNgan_DoAnTotNghiep_2110900033/OfficePlantCare/Areas/AdminQL/Views/News/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5RTFxWaWV3c1xOZXdzXEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/DEV_02409GH_KN/KimNgan_DoAnTotNghiep_2110900033/OfficePlantCare/Areas/AdminQL/Views/News/_Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5RTFxWaWV3c1xOZXdzXF9EZWxldGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/DEV_02409GH_KN/KimNgan_DoAnTotNghiep_2110900033/OfficePlantCare/Areas/AdminQL/Views/News/_Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5RTFxWaWV3c1xOZXdzXF9EZXRhaWxzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/DEV_02409GH_KN/KimNgan_DoAnTotNghiep_2110900033/OfficePlantCare/Areas/AdminQL/Views/News/_Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5RTFxWaWV3c1xOZXdzXF9FZGl0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/DEV_02409GH_KN/KimNgan_DoAnTotNghiep_2110900033/OfficePlantCare/Areas/AdminQL/Views/OrderDetails/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5RTFxWaWV3c1xPcmRlckRldGFpbHNcQ3JlYXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/DEV_02409GH_KN/KimNgan_DoAnTotNghiep_2110900033/OfficePlantCare/Areas/AdminQL/Views/OrderDetails/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5RTFxWaWV3c1xPcmRlckRldGFpbHNcRGVsZXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/DEV_02409GH_KN/KimNgan_DoAnTotNghiep_2110900033/OfficePlantCare/Areas/AdminQL/Views/OrderDetails/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5RTFxWaWV3c1xPcmRlckRldGFpbHNcRGV0YWlscy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/DEV_02409GH_KN/KimNgan_DoAnTotNghiep_2110900033/OfficePlantCare/Areas/AdminQL/Views/OrderDetails/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5RTFxWaWV3c1xPcmRlckRldGFpbHNcRWRpdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/DEV_02409GH_KN/KimNgan_DoAnTotNghiep_2110900033/OfficePlantCare/Areas/AdminQL/Views/OrderDetails/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5RTFxWaWV3c1xPcmRlckRldGFpbHNcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/DEV_02409GH_KN/KimNgan_DoAnTotNghiep_2110900033/OfficePlantCare/Areas/AdminQL/Views/OrderDetails/_Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5RTFxWaWV3c1xPcmRlckRldGFpbHNcX0RlbGV0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/DEV_02409GH_KN/KimNgan_DoAnTotNghiep_2110900033/OfficePlantCare/Areas/AdminQL/Views/OrderDetails/_Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5RTFxWaWV3c1xPcmRlckRldGFpbHNcX0RldGFpbHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/DEV_02409GH_KN/KimNgan_DoAnTotNghiep_2110900033/OfficePlantCare/Areas/AdminQL/Views/OrderDetails/_Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5RTFxWaWV3c1xPcmRlckRldGFpbHNcX0VkaXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/DEV_02409GH_KN/KimNgan_DoAnTotNghiep_2110900033/OfficePlantCare/Areas/AdminQL/Views/Orders/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5RTFxWaWV3c1xPcmRlcnNcQ3JlYXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/DEV_02409GH_KN/KimNgan_DoAnTotNghiep_2110900033/OfficePlantCare/Areas/AdminQL/Views/Orders/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5RTFxWaWV3c1xPcmRlcnNcRGVsZXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/DEV_02409GH_KN/KimNgan_DoAnTotNghiep_2110900033/OfficePlantCare/Areas/AdminQL/Views/Orders/Detail.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5RTFxWaWV3c1xPcmRlcnNcRGV0YWlsLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/DEV_02409GH_KN/KimNgan_DoAnTotNghiep_2110900033/OfficePlantCare/Areas/AdminQL/Views/Orders/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5RTFxWaWV3c1xPcmRlcnNcRWRpdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/DEV_02409GH_KN/KimNgan_DoAnTotNghiep_2110900033/OfficePlantCare/Areas/AdminQL/Views/Orders/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5RTFxWaWV3c1xPcmRlcnNcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/DEV_02409GH_KN/KimNgan_DoAnTotNghiep_2110900033/OfficePlantCare/Areas/AdminQL/Views/Orders/PrintInvoice.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5RTFxWaWV3c1xPcmRlcnNcUHJpbnRJbnZvaWNlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/DEV_02409GH_KN/KimNgan_DoAnTotNghiep_2110900033/OfficePlantCare/Areas/AdminQL/Views/Orders/_Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5RTFxWaWV3c1xPcmRlcnNcX0RlbGV0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/DEV_02409GH_KN/KimNgan_DoAnTotNghiep_2110900033/OfficePlantCare/Areas/AdminQL/Views/Orders/_Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5RTFxWaWV3c1xPcmRlcnNcX0RldGFpbHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/DEV_02409GH_KN/KimNgan_DoAnTotNghiep_2110900033/OfficePlantCare/Areas/AdminQL/Views/Orders/_Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5RTFxWaWV3c1xPcmRlcnNcX0VkaXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/DEV_02409GH_KN/KimNgan_DoAnTotNghiep_2110900033/OfficePlantCare/Areas/AdminQL/Views/PaymentMethods/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5RTFxWaWV3c1xQYXltZW50TWV0aG9kc1xDcmVhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/DEV_02409GH_KN/KimNgan_DoAnTotNghiep_2110900033/OfficePlantCare/Areas/AdminQL/Views/PaymentMethods/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5RTFxWaWV3c1xQYXltZW50TWV0aG9kc1xEZWxldGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/DEV_02409GH_KN/KimNgan_DoAnTotNghiep_2110900033/OfficePlantCare/Areas/AdminQL/Views/PaymentMethods/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5RTFxWaWV3c1xQYXltZW50TWV0aG9kc1xEZXRhaWxzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/DEV_02409GH_KN/KimNgan_DoAnTotNghiep_2110900033/OfficePlantCare/Areas/AdminQL/Views/PaymentMethods/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5RTFxWaWV3c1xQYXltZW50TWV0aG9kc1xFZGl0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/DEV_02409GH_KN/KimNgan_DoAnTotNghiep_2110900033/OfficePlantCare/Areas/AdminQL/Views/PaymentMethods/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5RTFxWaWV3c1xQYXltZW50TWV0aG9kc1xJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/DEV_02409GH_KN/KimNgan_DoAnTotNghiep_2110900033/OfficePlantCare/Areas/AdminQL/Views/PaymentMethods/_Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5RTFxWaWV3c1xQYXltZW50TWV0aG9kc1xfRGVsZXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/DEV_02409GH_KN/KimNgan_DoAnTotNghiep_2110900033/OfficePlantCare/Areas/AdminQL/Views/PaymentMethods/_Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5RTFxWaWV3c1xQYXltZW50TWV0aG9kc1xfRGV0YWlscy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/DEV_02409GH_KN/KimNgan_DoAnTotNghiep_2110900033/OfficePlantCare/Areas/AdminQL/Views/PaymentMethods/_Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5RTFxWaWV3c1xQYXltZW50TWV0aG9kc1xfRWRpdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/DEV_02409GH_KN/KimNgan_DoAnTotNghiep_2110900033/OfficePlantCare/Areas/AdminQL/Views/RevenueReport/RevenueDetail.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5RTFxWaWV3c1xSZXZlbnVlUmVwb3J0XFJldmVudWVEZXRhaWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/DEV_02409GH_KN/KimNgan_DoAnTotNghiep_2110900033/OfficePlantCare/Areas/AdminQL/Views/RevenueReport/Revenuereport.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5RTFxWaWV3c1xSZXZlbnVlUmVwb3J0XFJldmVudWVyZXBvcnQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/DEV_02409GH_KN/KimNgan_DoAnTotNghiep_2110900033/OfficePlantCare/Areas/AdminQL/Views/Roles/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5RTFxWaWV3c1xSb2xlc1xDcmVhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/DEV_02409GH_KN/KimNgan_DoAnTotNghiep_2110900033/OfficePlantCare/Areas/AdminQL/Views/Roles/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5RTFxWaWV3c1xSb2xlc1xEZWxldGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/DEV_02409GH_KN/KimNgan_DoAnTotNghiep_2110900033/OfficePlantCare/Areas/AdminQL/Views/Roles/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5RTFxWaWV3c1xSb2xlc1xEZXRhaWxzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/DEV_02409GH_KN/KimNgan_DoAnTotNghiep_2110900033/OfficePlantCare/Areas/AdminQL/Views/Roles/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5RTFxWaWV3c1xSb2xlc1xFZGl0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/DEV_02409GH_KN/KimNgan_DoAnTotNghiep_2110900033/OfficePlantCare/Areas/AdminQL/Views/Roles/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5RTFxWaWV3c1xSb2xlc1xJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/DEV_02409GH_KN/KimNgan_DoAnTotNghiep_2110900033/OfficePlantCare/Areas/AdminQL/Views/Roles/_Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5RTFxWaWV3c1xSb2xlc1xfRGVsZXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/DEV_02409GH_KN/KimNgan_DoAnTotNghiep_2110900033/OfficePlantCare/Areas/AdminQL/Views/Roles/_Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5RTFxWaWV3c1xSb2xlc1xfRGV0YWlscy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/DEV_02409GH_KN/KimNgan_DoAnTotNghiep_2110900033/OfficePlantCare/Areas/AdminQL/Views/Roles/_Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5RTFxWaWV3c1xSb2xlc1xfRWRpdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/DEV_02409GH_KN/KimNgan_DoAnTotNghiep_2110900033/OfficePlantCare/Areas/AdminQL/Views/ServiceCategories/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5RTFxWaWV3c1xTZXJ2aWNlQ2F0ZWdvcmllc1xDcmVhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/DEV_02409GH_KN/KimNgan_DoAnTotNghiep_2110900033/OfficePlantCare/Areas/AdminQL/Views/ServiceCategories/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5RTFxWaWV3c1xTZXJ2aWNlQ2F0ZWdvcmllc1xEZWxldGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/DEV_02409GH_KN/KimNgan_DoAnTotNghiep_2110900033/OfficePlantCare/Areas/AdminQL/Views/ServiceCategories/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5RTFxWaWV3c1xTZXJ2aWNlQ2F0ZWdvcmllc1xEZXRhaWxzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/DEV_02409GH_KN/KimNgan_DoAnTotNghiep_2110900033/OfficePlantCare/Areas/AdminQL/Views/ServiceCategories/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5RTFxWaWV3c1xTZXJ2aWNlQ2F0ZWdvcmllc1xFZGl0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/DEV_02409GH_KN/KimNgan_DoAnTotNghiep_2110900033/OfficePlantCare/Areas/AdminQL/Views/ServiceCategories/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5RTFxWaWV3c1xTZXJ2aWNlQ2F0ZWdvcmllc1xJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/DEV_02409GH_KN/KimNgan_DoAnTotNghiep_2110900033/OfficePlantCare/Areas/AdminQL/Views/ServiceCategories/_Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5RTFxWaWV3c1xTZXJ2aWNlQ2F0ZWdvcmllc1xfRGVsZXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/DEV_02409GH_KN/KimNgan_DoAnTotNghiep_2110900033/OfficePlantCare/Areas/AdminQL/Views/ServiceCategories/_Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5RTFxWaWV3c1xTZXJ2aWNlQ2F0ZWdvcmllc1xfRGV0YWlscy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/DEV_02409GH_KN/KimNgan_DoAnTotNghiep_2110900033/OfficePlantCare/Areas/AdminQL/Views/ServiceCategories/_Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5RTFxWaWV3c1xTZXJ2aWNlQ2F0ZWdvcmllc1xfRWRpdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/DEV_02409GH_KN/KimNgan_DoAnTotNghiep_2110900033/OfficePlantCare/Areas/AdminQL/Views/ServiceDescriptions/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5RTFxWaWV3c1xTZXJ2aWNlRGVzY3JpcHRpb25zXENyZWF0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/DEV_02409GH_KN/KimNgan_DoAnTotNghiep_2110900033/OfficePlantCare/Areas/AdminQL/Views/ServiceDescriptions/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5RTFxWaWV3c1xTZXJ2aWNlRGVzY3JpcHRpb25zXERlbGV0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/DEV_02409GH_KN/KimNgan_DoAnTotNghiep_2110900033/OfficePlantCare/Areas/AdminQL/Views/ServiceDescriptions/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5RTFxWaWV3c1xTZXJ2aWNlRGVzY3JpcHRpb25zXERldGFpbHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/DEV_02409GH_KN/KimNgan_DoAnTotNghiep_2110900033/OfficePlantCare/Areas/AdminQL/Views/ServiceDescriptions/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5RTFxWaWV3c1xTZXJ2aWNlRGVzY3JpcHRpb25zXEVkaXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/DEV_02409GH_KN/KimNgan_DoAnTotNghiep_2110900033/OfficePlantCare/Areas/AdminQL/Views/ServiceDescriptions/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5RTFxWaWV3c1xTZXJ2aWNlRGVzY3JpcHRpb25zXEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/DEV_02409GH_KN/KimNgan_DoAnTotNghiep_2110900033/OfficePlantCare/Areas/AdminQL/Views/ServiceDescriptions/_Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5RTFxWaWV3c1xTZXJ2aWNlRGVzY3JpcHRpb25zXF9EZWxldGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/DEV_02409GH_KN/KimNgan_DoAnTotNghiep_2110900033/OfficePlantCare/Areas/AdminQL/Views/ServiceDescriptions/_Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5RTFxWaWV3c1xTZXJ2aWNlRGVzY3JpcHRpb25zXF9EZXRhaWxzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/DEV_02409GH_KN/KimNgan_DoAnTotNghiep_2110900033/OfficePlantCare/Areas/AdminQL/Views/ServiceDescriptions/_Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5RTFxWaWV3c1xTZXJ2aWNlRGVzY3JpcHRpb25zXF9FZGl0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/DEV_02409GH_KN/KimNgan_DoAnTotNghiep_2110900033/OfficePlantCare/Areas/AdminQL/Views/ServicePrices/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5RTFxWaWV3c1xTZXJ2aWNlUHJpY2VzXENyZWF0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/DEV_02409GH_KN/KimNgan_DoAnTotNghiep_2110900033/OfficePlantCare/Areas/AdminQL/Views/ServicePrices/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5RTFxWaWV3c1xTZXJ2aWNlUHJpY2VzXERlbGV0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/DEV_02409GH_KN/KimNgan_DoAnTotNghiep_2110900033/OfficePlantCare/Areas/AdminQL/Views/ServicePrices/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5RTFxWaWV3c1xTZXJ2aWNlUHJpY2VzXERldGFpbHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/DEV_02409GH_KN/KimNgan_DoAnTotNghiep_2110900033/OfficePlantCare/Areas/AdminQL/Views/ServicePrices/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5RTFxWaWV3c1xTZXJ2aWNlUHJpY2VzXEVkaXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/DEV_02409GH_KN/KimNgan_DoAnTotNghiep_2110900033/OfficePlantCare/Areas/AdminQL/Views/ServicePrices/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5RTFxWaWV3c1xTZXJ2aWNlUHJpY2VzXEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/DEV_02409GH_KN/KimNgan_DoAnTotNghiep_2110900033/OfficePlantCare/Areas/AdminQL/Views/ServicePrices/_Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5RTFxWaWV3c1xTZXJ2aWNlUHJpY2VzXF9EZWxldGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/DEV_02409GH_KN/KimNgan_DoAnTotNghiep_2110900033/OfficePlantCare/Areas/AdminQL/Views/ServicePrices/_Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5RTFxWaWV3c1xTZXJ2aWNlUHJpY2VzXF9EZXRhaWxzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/DEV_02409GH_KN/KimNgan_DoAnTotNghiep_2110900033/OfficePlantCare/Areas/AdminQL/Views/ServicePrices/_Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5RTFxWaWV3c1xTZXJ2aWNlUHJpY2VzXF9FZGl0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/DEV_02409GH_KN/KimNgan_DoAnTotNghiep_2110900033/OfficePlantCare/Areas/AdminQL/Views/Services/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5RTFxWaWV3c1xTZXJ2aWNlc1xDcmVhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/DEV_02409GH_KN/KimNgan_DoAnTotNghiep_2110900033/OfficePlantCare/Areas/AdminQL/Views/Services/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5RTFxWaWV3c1xTZXJ2aWNlc1xEZWxldGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/DEV_02409GH_KN/KimNgan_DoAnTotNghiep_2110900033/OfficePlantCare/Areas/AdminQL/Views/Services/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5RTFxWaWV3c1xTZXJ2aWNlc1xEZXRhaWxzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/DEV_02409GH_KN/KimNgan_DoAnTotNghiep_2110900033/OfficePlantCare/Areas/AdminQL/Views/Services/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5RTFxWaWV3c1xTZXJ2aWNlc1xFZGl0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/DEV_02409GH_KN/KimNgan_DoAnTotNghiep_2110900033/OfficePlantCare/Areas/AdminQL/Views/Services/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5RTFxWaWV3c1xTZXJ2aWNlc1xJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/DEV_02409GH_KN/KimNgan_DoAnTotNghiep_2110900033/OfficePlantCare/Areas/AdminQL/Views/Services/_Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5RTFxWaWV3c1xTZXJ2aWNlc1xfRGVsZXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/DEV_02409GH_KN/KimNgan_DoAnTotNghiep_2110900033/OfficePlantCare/Areas/AdminQL/Views/Services/_Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5RTFxWaWV3c1xTZXJ2aWNlc1xfRGV0YWlscy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/DEV_02409GH_KN/KimNgan_DoAnTotNghiep_2110900033/OfficePlantCare/Areas/AdminQL/Views/Services/_Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5RTFxWaWV3c1xTZXJ2aWNlc1xfRWRpdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/DEV_02409GH_KN/KimNgan_DoAnTotNghiep_2110900033/OfficePlantCare/Areas/AdminQL/Views/Shared/Admin.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5RTFxWaWV3c1xTaGFyZWRcQWRtaW4uY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/DEV_02409GH_KN/KimNgan_DoAnTotNghiep_2110900033/OfficePlantCare/Areas/AdminQL/Views/Shared/Error.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5RTFxWaWV3c1xTaGFyZWRcRXJyb3IuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/DEV_02409GH_KN/KimNgan_DoAnTotNghiep_2110900033/OfficePlantCare/Areas/AdminQL/Views/Shared/_NavBar.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5RTFxWaWV3c1xTaGFyZWRcX05hdkJhci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/DEV_02409GH_KN/KimNgan_DoAnTotNghiep_2110900033/OfficePlantCare/Areas/AdminQL/Views/Shared/_Preloader.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5RTFxWaWV3c1xTaGFyZWRcX1ByZWxvYWRlci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/DEV_02409GH_KN/KimNgan_DoAnTotNghiep_2110900033/OfficePlantCare/Areas/AdminQL/Views/Shared/_SideBar.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5RTFxWaWV3c1xTaGFyZWRcX1NpZGVCYXIuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/DEV_02409GH_KN/KimNgan_DoAnTotNghiep_2110900033/OfficePlantCare/Areas/AdminQL/Views/Shared/_ValidationScriptsPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5RTFxWaWV3c1xTaGFyZWRcX1ZhbGlkYXRpb25TY3JpcHRzUGFydGlhbC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/DEV_02409GH_KN/KimNgan_DoAnTotNghiep_2110900033/OfficePlantCare/Areas/AdminQL/Views/Staffs/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5RTFxWaWV3c1xTdGFmZnNcQ3JlYXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/DEV_02409GH_KN/KimNgan_DoAnTotNghiep_2110900033/OfficePlantCare/Areas/AdminQL/Views/Staffs/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5RTFxWaWV3c1xTdGFmZnNcRGVsZXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/DEV_02409GH_KN/KimNgan_DoAnTotNghiep_2110900033/OfficePlantCare/Areas/AdminQL/Views/Staffs/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5RTFxWaWV3c1xTdGFmZnNcRGV0YWlscy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/DEV_02409GH_KN/KimNgan_DoAnTotNghiep_2110900033/OfficePlantCare/Areas/AdminQL/Views/Staffs/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5RTFxWaWV3c1xTdGFmZnNcRWRpdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/DEV_02409GH_KN/KimNgan_DoAnTotNghiep_2110900033/OfficePlantCare/Areas/AdminQL/Views/Staffs/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5RTFxWaWV3c1xTdGFmZnNcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/DEV_02409GH_KN/KimNgan_DoAnTotNghiep_2110900033/OfficePlantCare/Areas/AdminQL/Views/Staffs/_Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5RTFxWaWV3c1xTdGFmZnNcX0RlbGV0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/DEV_02409GH_KN/KimNgan_DoAnTotNghiep_2110900033/OfficePlantCare/Areas/AdminQL/Views/Staffs/_Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5RTFxWaWV3c1xTdGFmZnNcX0RldGFpbHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/DEV_02409GH_KN/KimNgan_DoAnTotNghiep_2110900033/OfficePlantCare/Areas/AdminQL/Views/Staffs/_Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5RTFxWaWV3c1xTdGFmZnNcX0VkaXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/DEV_02409GH_KN/KimNgan_DoAnTotNghiep_2110900033/OfficePlantCare/Areas/AdminQL/Views/_ViewImports.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5RTFxWaWV3c1xfVmlld0ltcG9ydHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/DEV_02409GH_KN/KimNgan_DoAnTotNghiep_2110900033/OfficePlantCare/Areas/AdminQL/Views/_ViewStart.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5RTFxWaWV3c1xfVmlld1N0YXJ0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/DEV_02409GH_KN/KimNgan_DoAnTotNghiep_2110900033/OfficePlantCare/Views/AboutUs/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWJvdXRVc1xJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/DEV_02409GH_KN/KimNgan_DoAnTotNghiep_2110900033/OfficePlantCare/Views/Carts/CartIndex.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2FydHNcQ2FydEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/DEV_02409GH_KN/KimNgan_DoAnTotNghiep_2110900033/OfficePlantCare/Views/Carts/CheckOutCart.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2FydHNcQ2hlY2tPdXRDYXJ0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/DEV_02409GH_KN/KimNgan_DoAnTotNghiep_2110900033/OfficePlantCare/Views/Carts/CheckOutContract.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2FydHNcQ2hlY2tPdXRDb250cmFjdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/DEV_02409GH_KN/KimNgan_DoAnTotNghiep_2110900033/OfficePlantCare/Views/Carts/ContractIndex.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2FydHNcQ29udHJhY3RJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/DEV_02409GH_KN/KimNgan_DoAnTotNghiep_2110900033/OfficePlantCare/Views/Carts/Success.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2FydHNcU3VjY2Vzcy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/DEV_02409GH_KN/KimNgan_DoAnTotNghiep_2110900033/OfficePlantCare/Views/Contact/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29udGFjdFxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/DEV_02409GH_KN/KimNgan_DoAnTotNghiep_2110900033/OfficePlantCare/Views/Contracts/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29udHJhY3RzXERldGFpbHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/DEV_02409GH_KN/KimNgan_DoAnTotNghiep_2110900033/OfficePlantCare/Views/Contracts/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29udHJhY3RzXEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/DEV_02409GH_KN/KimNgan_DoAnTotNghiep_2110900033/OfficePlantCare/Views/Customers/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ3VzdG9tZXJzXENyZWF0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/DEV_02409GH_KN/KimNgan_DoAnTotNghiep_2110900033/OfficePlantCare/Views/Customers/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ3VzdG9tZXJzXERldGFpbHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/DEV_02409GH_KN/KimNgan_DoAnTotNghiep_2110900033/OfficePlantCare/Views/Customers/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ3VzdG9tZXJzXEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/DEV_02409GH_KN/KimNgan_DoAnTotNghiep_2110900033/OfficePlantCare/Views/Home/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/DEV_02409GH_KN/KimNgan_DoAnTotNghiep_2110900033/OfficePlantCare/Views/Home/Privacy.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/DEV_02409GH_KN/KimNgan_DoAnTotNghiep_2110900033/OfficePlantCare/Views/Login/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTG9naW5cSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/DEV_02409GH_KN/KimNgan_DoAnTotNghiep_2110900033/OfficePlantCare/Views/News/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTmV3c1xEZXRhaWxzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/DEV_02409GH_KN/KimNgan_DoAnTotNghiep_2110900033/OfficePlantCare/Views/News/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTmV3c1xJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/DEV_02409GH_KN/KimNgan_DoAnTotNghiep_2110900033/OfficePlantCare/Views/Orders/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcT3JkZXJzXERldGFpbHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/DEV_02409GH_KN/KimNgan_DoAnTotNghiep_2110900033/OfficePlantCare/Views/Orders/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcT3JkZXJzXEVkaXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/DEV_02409GH_KN/KimNgan_DoAnTotNghiep_2110900033/OfficePlantCare/Views/Orders/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcT3JkZXJzXEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/DEV_02409GH_KN/KimNgan_DoAnTotNghiep_2110900033/OfficePlantCare/Views/Services/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2VydmljZXNcRGV0YWlscy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/DEV_02409GH_KN/KimNgan_DoAnTotNghiep_2110900033/OfficePlantCare/Views/Services/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2VydmljZXNcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/DEV_02409GH_KN/KimNgan_DoAnTotNghiep_2110900033/OfficePlantCare/Views/Services/Search.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2VydmljZXNcU2VhcmNoLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/DEV_02409GH_KN/KimNgan_DoAnTotNghiep_2110900033/OfficePlantCare/Views/Shared/Error.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/DEV_02409GH_KN/KimNgan_DoAnTotNghiep_2110900033/OfficePlantCare/Views/Shared/_ValidationScriptsPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/DEV_02409GH_KN/KimNgan_DoAnTotNghiep_2110900033/OfficePlantCare/Views/_ViewImports.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/DEV_02409GH_KN/KimNgan_DoAnTotNghiep_2110900033/OfficePlantCare/Views/_ViewStart.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/DEV_02409GH_KN/KimNgan_DoAnTotNghiep_2110900033/OfficePlantCare/Views/Shared/_Layout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = b-rv64l6wacb

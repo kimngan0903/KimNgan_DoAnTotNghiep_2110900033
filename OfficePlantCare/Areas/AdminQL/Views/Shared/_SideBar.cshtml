@@ -1,0 +1,150 @@
+﻿@using Microsoft.AspNetCore.Http
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+
+<!-- [ navigation menu ] start -->
+<nav class="pcoded-navbar">
+    <div class="navbar-wrapper">
+        <div class="navbar-content scroll-div">
+            <div class="">
+                <div class="main-menu-header">
+                    <img class="img-radius" src="~/assets/images/user/admin.jpg" alt="User-Profile-Image">
+                    <div class="user-details">
+                        <span>
+                            @HttpContextAccessor.HttpContext.Session.GetString("AdminName")
+                        </span>
+                        <div id="more-details">
+                            @HttpContextAccessor.HttpContext.Session.GetString("AdminAddress")
+                            <i class="fas fa-chevron-down m-l-5"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="collapse" id="nav-user-link">
+                    <ul class="list-unstyled">
+                        <li class="list-group-item"><a asp-controller="Admins" asp-action="Detail" asp-route-id="@Context.Session.GetInt32("AdminId")"><i class="fas fa-user m-r-5"></i>Xem hồ sơ</a></li>
+                        <li class="list-group-item"><a asp-action="Logout" asp-controller="Login"><i class="fas fa-sign-out-alt m-r-5"></i>Thoát</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <ul class="nav pcoded-inner-navbar">
+                <li class="nav-item">
+                    <a href="~/adminql/dashboard" class="nav-link">
+                        <span class="pcoded-micon">
+                            <i class="fas fa-tachometer-alt"></i>
+                        </span>
+                        <span class="pcoded-mtext">Thống kê</span>
+                    </a>
+                </li>
+                @if (HttpContextAccessor.HttpContext.Session.GetInt32("RoleId") == 1)
+                {
+                    <li class="nav-item pcoded-hasmenu">
+                        <a href="#" class="nav-link">
+                            <span class="pcoded-micon"><i class="fas fa-user-shield"></i></span>
+                            <span class="pcoded-mtext">Quản lý tài khoản</span>
+                        </a>
+                        <ul class="pcoded-submenu">
+                            <li><a href="~/adminql/admins"><i class="fas fa-user-cog"></i> Danh sách admin</a></li>
+                            <li><a href="~/adminql/roles"><i class="fas fa-user-tag"></i> Phân quyền</a></li>
+                        </ul>
+                    </li>
+                }
+                <li class="nav-item pcoded-hasmenu">
+                    <a href="#" class="nav-link">
+                        <span class="pcoded-micon"><i class="fas fa-users"></i></span>
+                        <span class="pcoded-mtext">Quản lý khách hàng</span>
+                    </a>
+                    <ul class="pcoded-submenu">
+                        @if (HttpContextAccessor.HttpContext.Session.GetInt32("RoleId") == 1)
+                        {
+                            <li><a href="~/adminql/customers"><i class="fas fa-user"></i> Danh sách khách hàng</a></li>
+                            <li><a href="~/adminql/contracts"><i class="fas fa-file-contract"></i> Hợp đồng dịch vụ</a></li>
+                            <li><a href="~/adminql/contractdetails"><i class="fas fa-file-contract"></i> Chi tiết hợp đồng</a></li>
+                        }
+                        <li><a href="~/adminql/feedbacks"><i class="fas fa-comment"></i> Phản hồi và đánh giá</a></li>
+                    </ul>
+                </li>
+
+                <li class="nav-item pcoded-hasmenu">
+                    <a href="#" class="nav-link">
+                        <span class="pcoded-micon"><i class="fas fa-user-tie"></i></span>
+                        <span class="pcoded-mtext">Quản lý nhân viên</span>
+                    </a>
+                    <ul class="pcoded-submenu">
+                        @if (HttpContextAccessor.HttpContext.Session.GetInt32("RoleId") == 1)
+                        {
+                            <li><a href="~/adminql/staffs"><i class="fas fa-users"></i> Danh sách nhân viên</a></li>
+                        }
+                        <li><a href="~/adminql/careschedules"><i class="fas fa-calendar-alt"></i> Lịch chăm sóc</a></li>
+                    </ul>
+                </li>
+
+                @if (HttpContextAccessor.HttpContext.Session.GetInt32("RoleId") == 1)
+                {
+                    <li class="nav-item pcoded-hasmenu">
+                        <a href="#" class="nav-link">
+                            <span class="pcoded-micon"><i class="fas fa-concierge-bell"></i></span>
+                            <span class="pcoded-mtext">Quản lý dịch vụ</span>
+                        </a>
+                        <ul class="pcoded-submenu">
+                            <li><a href="~/adminql/servicecategories"><i class="fas fa-th"></i> Danh mục dịch vụ</a></li>
+                            <li><a href="~/adminql/services"><i class="fas fa-list"></i> Danh sách dịch vụ</a></li>
+                            <li><a href="~/adminql/servicedescriptions"><i class="fas fa-file-alt"></i> Mô tả dịch vụ</a></li>
+                            <li><a href="~/adminql/serviceprices"><i class="fas fa-tag"></i> Giá dịch vụ</a></li>
+                        </ul>
+                    </li>
+                }
+
+               @*  <li class="nav-item pcoded-hasmenu">
+                    <a href="#" class="nav-link">
+                        <span class="pcoded-micon"><i class="fas fa-box"></i></span>
+                        <span class="pcoded-mtext">Quản lý vật tư</span>
+                    </a>
+                    <ul class="pcoded-submenu">
+                        <li><a href="~/adminql/supplies"><i class="fas fa-boxes"></i> Danh sách vật tư</a></li>
+                        <li><a href="~/adminql/plants"><i class="fas fa-leaf"></i> Danh sách cây chăm sóc</a></li>
+                        <li><a href="~/adminql/careschedulesupplies"><i class="fas fa-tools"></i> Vật tư cho lịch chăm sóc</a></li>
+                    </ul>
+                </li> *@
+                <li class="nav-item pcoded-hasmenu">
+                    <a href="#" class="nav-link">
+                        <span class="pcoded-micon"><i class="fas fa-money-bill"></i></span>
+                        <span class="pcoded-mtext">Quản lý thanh toán</span>
+                    </a>
+                    <ul class="pcoded-submenu">
+                        <li><a href="~/adminql/orders"><i class="fas fa-file-invoice"></i> Hóa đơn và giao dịch</a></li>
+                        <li><a href="~/adminql/orderdetails"><i class="fas fa-list-ul"></i> Chi tiết đơn hàng</a></li>
+                        <li><a href="~/adminql/paymentmethods"><i class="fas fa-credit-card"></i> Phương thức thanh toán</a></li>
+                    </ul>
+                </li>
+
+                <li class="nav-item pcoded-hasmenu">
+                    <a href="#" class="nav-link">
+                        <span class="pcoded-micon"><i class="fas fa-file"></i></span>
+                        <span class="pcoded-mtext">Quản lý nội dung</span>
+                    </a>
+                    <ul class="pcoded-submenu">
+                        <li><a href="~/adminql/banners"><i class="fas fa-image"></i> Banner quảng cáo</a></li>
+                        <li><a href="~/adminql/news"><i class="fas fa-newspaper"></i> Tin tức</a></li>
+                        <li><a href="~/adminql/contacts"><i class="fas fa-address-book"></i> Danh bạ liên hệ</a></li>
+                    </ul>
+                </li>
+
+                <li class="nav-item pcoded-hasmenu">
+                    @if (HttpContextAccessor.HttpContext.Session.GetInt32("RoleId") == 1)
+                    {
+                        <a href="#" class="nav-link">
+                            <span class="pcoded-micon"><i class="fas fa-money-bill"></i></span>
+                            <span class="pcoded-mtext">Báo cáo doanh thu</span>
+                        </a>
+                        <ul class="pcoded-submenu">
+                            <li><a href="~/adminql/revenuereport/revenuereport"><i class="fas fa-chart-line"></i> Tổng doanh thu</a></li>
+                            <li><a href="~/adminql/revenuereport/contractrevenue"><i class="fas fa-file-invoice"></i> Doanh thu theo hợp đồng</a></li>
+                            <li><a href="~/adminql/revenuereport/orderrevenue"><i class="fas fa-file-invoice"></i> Doanh thu theo đơn hàng</a></li>
+                        </ul>
+                    }
+                </li>        
+            </ul>
+        </div>
+    </div>
+</nav>
+<!-- [ navigation menu ] end -->

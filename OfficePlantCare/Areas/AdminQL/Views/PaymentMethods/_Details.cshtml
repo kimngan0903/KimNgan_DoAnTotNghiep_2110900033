@@ -1,0 +1,38 @@
+﻿@model OfficePlantCare.Models.PaymentMethod
+
+@{
+    ViewData["Title"] = "Chi tiết Phương thức thanh toán";
+}
+
+<link rel="stylesheet" href="~/assets/css/details.css" />
+
+<div class="modal-body p-0">
+    <div class="card shadow-sm border-0 rounded-lg p-1">
+        <h3 class="text-success text-center font-weight-bold mb-4"><i class="fa-solid fa-info-circle me-2"></i> CHI TIẾT PHƯƠNG THỨC THANH TOÁN</h3>
+        <div class="row">
+            <!-- Cột trái -->
+            <div class="col-md-6">
+                <div class="form-group mb-4">
+                    <i class="fa-solid fa-credit-card me-2"></i>
+                    <label class="control-label fw-bold text-muted">@Html.DisplayNameFor(model => model.MethodName)</label>
+                    <div class="form-control rounded-pill bg-light">@Html.DisplayFor(model => model.MethodName)</div>
+                </div>
+            </div>
+
+            <!-- Cột phải (để trống cho nhất quán) -->
+            <div class="col-md-6">
+                <!-- Có thể thêm trường khác nếu model được mở rộng trong tương lai -->
+            </div>
+        </div>
+
+        <!-- Buttons -->
+        <div class="form-group d-flex gap-3 justify-content-center">
+            <button type="button" class="btn btn-primary rounded-pill px-4" onclick="loadModal('@Url.Action("Edit", "PaymentMethods", new { id = Model?.PaymentMethodId })')">
+                <i class="fas fa-edit me-2"></i>Chỉnh sửa
+            </button>
+            <a class="btn btn-secondary rounded-pill px-4" href="@Url.Action("Index")">
+                <i class="fas fa-times me-2"></i>Đóng
+            </a>
+        </div>
+    </div>
+</div>

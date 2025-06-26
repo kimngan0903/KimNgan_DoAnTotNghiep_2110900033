@@ -1,0 +1,126 @@
+﻿@model OfficePlantCare.Models.Customer
+
+@{
+    ViewData["Title"] = "Thông tin khách hàng";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- ##### Breadcrumb Area Start ##### -->
+<div class="breadcrumb-area">
+    <!-- Top Breadcrumb Area -->
+    <div class="top-breadcrumb-area bg-img bg-overlay d-flex align-items-center justify-content-center" style="background-image: url('https://noithatduonggia.vn/wp-content/uploads/2019/06/thuc-trang-van-phong-xanh-hien-nay.jpg'); background-size: cover; background-position: center; height: 300px;">
+        <h2 class="text-white" style="font-weight: 700; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);">THÔNG TIN KHÁCH HÀNG</h2>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb shadow-sm p-3 mb-5 bg-white rounded" style="background: linear-gradient(135deg, #f8f9fa, #e9ecef);">
+                        <li class="breadcrumb-item"><a href="~/home"><i class="fa fa-home"></i> Trang chủ</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Thông tin khách hàng</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ##### Breadcrumb Area End ##### -->
+<!-- ##### Customer Details Area Start ##### -->
+<section class="customer_details_area mb-5">
+    <div class="container">
+        <div class="row">
+            <!-- Phần thông tin chi tiết (Details) - Bên trái -->
+            <div class="col-12 col-md-6" id="detailsSection">
+                <div class="customer_desc p-4 shadow-sm rounded" style="background: linear-gradient(135deg, #ffffff, #e6ffe6); border: 1px solid #c3e6cb;">
+                    <h4 class="title mb-4 text-center" style="font-weight: 700; color: #2c3e50; text-transform: uppercase;">THÔNG TIN KHÁCH HÀNG</h4>
+                    <dl class="customer-info">
+                        <div class="info-item mb-3">
+                            <dt class="info-label">@Html.DisplayNameFor(model => model.CustomerName):</dt>
+                            <dd class="info-value">@Html.DisplayFor(model => model.CustomerName)</dd>
+                        </div>
+                        <div class="info-item mb-3">
+                            <dt class="info-label">@Html.DisplayNameFor(model => model.Email):</dt>
+                            <dd class="info-value">@Html.DisplayFor(model => model.Email)</dd>
+                        </div>
+                        <div class="info-item mb-3">
+                            <dt class="info-label">@Html.DisplayNameFor(model => model.Phone):</dt>
+                            <dd class="info-value">@Html.DisplayFor(model => model.Phone)</dd>
+                        </div>
+                        <div class="info-item mb-3">
+                            <dt class="info-label">@Html.DisplayNameFor(model => model.Address):</dt>
+                            <dd class="info-value">@Html.DisplayFor(model => model.Address)</dd>
+                        </div>
+                        <div class="info-item mb-3">
+                            <dt class="info-label">@Html.DisplayNameFor(model => model.CreatedDate):</dt>
+                            <dd class="info-value">@Html.DisplayFor(model => model.CreatedDate)</dd>
+                        </div>
+                    </dl>
+                </div>
+                <!-- Nút hành động -->
+                <div class="action-buttons d-flex justify-content-center flex-wrap align-items-center mt-4" id="actionButtonsDetails">
+                    <button type="button" class="btn custom-btn mr-2" style="background: linear-gradient(135deg, #28a745, #34c759); color: #fff;" onclick="showEditSection()">CHỈNH SỬA</button>
+                    <button type="button" class="btn custom-btn" onclick="window.history.back();" style="background: linear-gradient(135deg, #6c757d, #adb5bd); color: #fff;">QUAY LẠI</button>
+                </div>
+            </div>
+
+            <!-- Phần chỉnh sửa (Edit) - Bên phải, ẩn ban đầu -->
+            <div class="col-12 col-md-6" id="editSection" style="display: none; position: relative;">
+                <div class="customer_desc p-4 shadow-sm rounded" style="background: linear-gradient(135deg, #ffffff, #e6ffe6); border: 1px solid #c3e6cb;">
+                    <h4 class="title mb-4 text-center" style="font-weight: 700; color: #2c3e50; text-transform: uppercase;">CHỈNH SỬA THÔNG TIN KHÁCH HÀNG</h4>
+                </div>
+                <form asp-action="Edit" asp-controller="Customers" method="post" id="editForm" asp-route-id="@Model.CustomerId">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input type="hidden" asp-for="CustomerId" />
+                    <div class="form-group mb-3">
+                        <label asp-for="CustomerName" class="info-label"></label>
+                        <input asp-for="CustomerName" class="form-control" />
+                        <span asp-validation-for="CustomerName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label asp-for="Email" class="info-label"></label>
+                        <input asp-for="Email" class="form-control" />
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label asp-for="Phone" class="info-label"></label>
+                        <input asp-for="Phone" class="form-control" />
+                        <span asp-validation-for="Phone" class="text-danger"></span>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label asp-for="Address" class="info-label"></label>
+                        <input asp-for="Address" class="form-control" />
+                        <span asp-validation-for="Address" class="text-danger"></span>
+                    </div>
+                    <input type="hidden" asp-for="CreatedDate" />
+                    <input type="hidden" asp-for="PasswordHash" />
+                    <input type="hidden" asp-for="Status" />
+
+                    <div class="action-buttons d-flex justify-content-center flex-wrap align-items-center mt-4" id="actionButtonsEdit" style="display: none;">
+                        <button type="submit" class="btn custom-btn mr-2" style="background: linear-gradient(135deg, #28a745, #34c759); color: #fff;">LƯU</button>
+                        <button type="button" class="btn custom-btn" onclick="showDetailsSection()" style="background: linear-gradient(135deg, #6c757d, #adb5bd); color: #fff;">HỦY</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- ##### Customer Details Area End ##### -->
+<!-- JavaScript để điều khiển hiển thị/ẩn -->
+<script>
+    function showEditSection() {
+        document.getElementById("editSection").style.display = "block";
+        document.getElementById("actionButtonsDetails").style.display = "none";
+        document.getElementById("actionButtonsEdit").style.display = "flex";
+    }
+
+    function showDetailsSection() {
+        document.getElementById("editSection").style.display = "none";
+        document.getElementById("actionButtonsDetails").style.display = "flex";
+        document.getElementById("actionButtonsEdit").style.display = "none";
+    }
+</script>
+
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}

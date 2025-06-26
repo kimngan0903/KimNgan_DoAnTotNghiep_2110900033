@@ -1,0 +1,647 @@
+﻿@using OfficePlantCare.Models
+@using Microsoft.AspNetCore.Http
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+
+@{
+    var serviceCategories = ViewData["ServiceCategories"] as List<ServiceCategory>;
+    var customerId = HttpContextAccessor.HttpContext.Session.GetInt32("CustomerId");
+    var roleId = HttpContextAccessor.HttpContext.Session.GetInt32("RoleId");
+    var customerName = HttpContextAccessor.HttpContext.Session.GetString("CustomerName");
+    var contractId = HttpContextAccessor.HttpContext.Session.GetInt32("ContractId");
+}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <!-- Title -->
+    <title>Kim Ngân - Dịch vụ chăm sóc cây cảnh văn phòng</title>
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="~/favicon-32x32.png">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
+    @*     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    *@    <!-- Core Stylesheet -->
+    <link rel="stylesheet" href="~/css/fonts.css" />
+    <link rel="stylesheet" href="~/css/classy-nav.css" />
+    <link rel="stylesheet" href="~/css/styles.css" />
+</head>
+
+<body>
+    <!-- Preloader -->
+    <div class="preloader d-flex align-items-center justify-content-center">
+        <div class="preloader-circle"></div>
+        <div class="preloader-img">
+            <img src="~/img/preloader/preloader_1.jpg" alt="">
+        </div>
+    </div>
+
+    <!-- ##### Header Area Start ##### -->
+    <header class="header-area">
+        <!-- ***** Top Header Area ***** -->
+        <div class="top-header-area">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="top-header-content d-flex align-items-center justify-content-between">
+                            <!-- Top Header Content (Email và Số điện thoại - chạy ngang) -->
+                            <div class="top-header-meta-left">
+                                <div class="marquee-wrapper">
+                                    <div class="marquee-content">
+                                        <a href="#" data-toggle="tooltip" data-placement="bottom" title="ngan36758@gmail.com">
+                                            <i class="fa-solid fa-envelope" aria-hidden="true"></i>
+                                            <span> Email: ngan36758@gmail.com</span>
+                                        </a>
+                                        <a href="#" data-toggle="tooltip" data-placement="bottom" title="0373 993 662">
+                                            <i class="fa fa-phone" aria-hidden="true"></i>
+                                            <span> Liên hệ chúng tôi: 0373 993 662</span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Top Header Content (Đăng nhập và Cart - giữ nguyên) -->
+                            <div class="top-header-meta d-flex">
+                                <!-- Login -->
+                                <div class="login">
+                                    @if (customerId != null) 
+                                    {
+                                        <div class="dropdown">
+                                            <a class="nav-link dropdown-toggle d-flex align-items-center text-light hover-effect"
+                                               href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                <i class="fa-solid fa-user"></i>
+                                                <span class="ms-2 user-text">
+                                                    Xin chào, <strong>@customerName</strong>
+                                                </span>
+                                            </a>
+                                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdownButton" id="userDropdownMenu">
+                                                <li>
+                                                    <a class="dropdown-item text-dark" asp-controller="Customers" asp-action="Details"
+                                                       asp-route-customerId="@customerId">
+                                                        <i class="fa fa-id-card"></i> Thông tin cá nhân
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a class="dropdown-item text-dark" asp-controller="Contracts" asp-action="Index" asp-route-customerId="@customerId">
+                                                        <i class="fa fa-file-contract"></i> Danh sách hợp đồng
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a class="dropdown-item text-dark" asp-controller="Orders" asp-action="Index" asp-route-customerId="@customerId">
+                                                        <i class="fa fa-leaf"></i> Danh sách dịch vụ đã đặt
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a class="dropdown-item text-dark" asp-controller="Customers" asp-action="Index" asp-route-id="@customerId">
+                                                        <i class="fa fa-calendar"></i> Danh sách lịch chăm sóc
+                                                    </a>
+                                                </li>
+                                                <li><hr class="dropdown-divider"></li>
+                                                <li>
+                                                    <a class="dropdown-item text-danger" asp-controller="Login" asp-action="Logout">
+                                                        <i class="fa fa-sign-out-alt"></i> Đăng xuất
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <div class="login">
+                                            <a asp-controller="Login" asp-action="Index">
+                                                <i class="fa-solid fa-user"></i>
+                                                <span>Đăng nhập</span>
+                                            </a>
+                                        </div>
+                                    }
+                                </div>
+
+                                <!-- Cart -->
+                                <div class="cart">
+                                    <a asp-controller="Carts" asp-action="CartIndex"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Giỏ hàng</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- ***** Navbar Area ***** -->
+        <div class="alazea-main-menu">
+            <div class="classy-nav-container breakpoint-off">
+                <div class="container">
+                    <!-- Menu -->
+                    <nav class="classy-navbar justify-content-between" id="alazeaNav">
+                        <!-- Nav Brand -->
+                        <a href="~/home" class="nav-brand"><img src="~/img/logo/logo.png" alt="Ảnh logo" style="width: 70px;height:70px"></a>
+
+                        <!-- Navbar Toggler -->
+                        <div class="classy-navbar-toggler">
+                            <span class="navbarToggler"><span></span><span></span><span></span></span>
+                        </div>
+
+                        <!-- Menu -->
+                        <div class="classy-menu">
+                            <!-- Close Button -->
+                            <div class="classycloseIcon">
+                                <div class="cross-wrap"><span class="top"></span><span class="bottom"></span></div>
+                            </div>
+
+                            <!-- Navbar Start -->
+                            <div class="classynav">
+                                <ul>
+                                    <li><a asp-controller="Home" asp-action="Index">Trang chủ</a></li>
+                                    <li><a asp-controller="AboutUs" asp-action="Index">Giới thiệu</a></li>
+                                    <li>
+                                        <a asp-controller="Services" asp-action="Index">Dịch vụ <i class="fa-solid fa-chevron-down"></i></a>
+                                        <ul class="dropdown">
+                                            @if (serviceCategories != null)
+                                            {
+                                                @foreach (var category in serviceCategories)
+                                                {
+                                                    <li>
+                                                        <a>
+                                                            @category.CategoryServiceName
+                                                            <i class="fa-solid fa-chevron-right"></i>
+                                                        </a>
+                                                        @if (category.Services != null && category.Services.Any())
+                                                        {
+                                                            <ul class="dropdown">
+                                                                @foreach (var service in category.Services)
+                                                                {
+                                                                    <li>
+                                                                        <a href="~/services/details/@service.ServiceId">@service.ServiceName</a>
+                                                                    </li>
+                                                                    <hr style="margin-top: 5px;margin-bottom: 5px;" />
+                                                                }
+                                                            </ul>
+                                                        }
+                                                    </li>
+                                                    <hr style="margin-top: 5px;margin-bottom: 5px;" />
+                                                }
+                                            }
+                                        </ul>
+                                    </li>
+                                    <li><a asp-controller="News" asp-action="Index">Tin tức</a></li>
+                                    <li><a asp-controller="Contact" asp-action="Index">Liên hệ</a></li>
+                                    <li><a asp-controller="Carts" asp-action="ContractIndex">Hợp đồng</a></li>
+                                </ul>
+
+                                <!-- Search Icon -->
+                                <div id="searchIcon">
+                                    <i class="fa fa-search" aria-hidden="true"></i>
+                                </div>
+                            </div>
+                            <!-- Navbar End -->
+                        </div>
+                    </nav>
+
+                    <!-- Search Form -->
+                    <div class="search-form">
+                        <form asp-controller="Services" asp-action="Search" method="get">
+                            <input type="search" name="keyword" id="search" placeholder="Vui lòng nhập từ khóa mà bạn muốn tìm" required>
+                            <button type="submit" class="d-none"></button>
+                        </form>
+                        <!-- Close Icon -->
+                        <div class="closeIcon"><i class="fa fa-times" aria-hidden="true"></i></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- ##### Header Area End ##### -->
+    <main role="main" class="">
+        @RenderBody()
+    </main>
+    <!-- ##### Footer Area Start ##### -->
+    <footer class="footer-area bg-img" style="background-image: url('/img/bg-img/3.jpg');">
+        <!-- Main Footer Area -->
+        <div class="main-footer-area">
+            <div class="container">
+                <div class="row">
+                    <!-- Single Footer Widget -->
+                    <div class="col-12 col-sm-7 col-lg-4">
+                        <div class="single-footer-widget">
+                            <div class="footer-logo mb-30">
+                                <a href="#"><img src="~/img/logo/logo.png" alt="" style="width: 90px"></a>
+                            </div>
+                            <p>
+                                "Dịch vụ tận tâm – Cây xanh vững bền, không gian tràn sức sống!" 🌿✨
+                            </p>
+                            <div class="social-info">
+                                <a href="https://www.tiktok.com/" class="social-icon"><i class="fab fa-tiktok"></i></a>
+                                <a href="https://www.facebook.com/" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                                <a href="https://www.instagram.com/" class="social-icon"><i class="fab fa-instagram"></i></a>
+                                <a href="https://www.youtube.com/" class="social-icon"><i class="fab fa-youtube"></i></a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Single Footer Widget -->
+                    <div class="col-12 col-sm-7 col-lg-4">
+                        <div class="single-footer-widget">
+                            <div class="widget-title">
+                                <h5>ĐIỀU HƯỚNG NHANH</h5>
+                            </div>
+                            <nav class="widget-nav">
+                                <ul>
+                                    <li><a href="~/home">Trang chủ</a></li>
+                                    <li><a href="~/aboutus">Giới thiệu</a></li>
+                                    <li><a href="~/services">Dịch vụ</a></li>
+                                    <li><a href="~/news">Tin tức</a></li>
+                                    <li><a href="~/contact">Liên hệ</a></li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+
+                    <!-- Single Footer Widget -->
+                    <div class="col-12 col-sm-7 col-lg-4">
+                        <div class="single-footer-widget">
+                            <div class="widget-title">
+                                <h5>THÔNG TIN LIÊN HỆ</h5>
+                            </div>
+                            <div class="contact-information">
+                                <p><span>Địa chỉ:</span> 36 Lê Trọng Tấn, La Khê, Hà Đông, Hà Nội</p>
+                                <p><span>Liên hệ:</span> 0373 993 662</p>
+                                <p><span>Email:</span> ngan36758@gmail.com</p>
+                                <p><span>Giờ mở:</span> Thứ Hai - Chủ nhật: 8h đến 19h</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- ##### Footer Area End ##### -->
+    <!-- ##### All Javascript Files ##### -->
+    <script src="~/js/jquery/jquery-2.2.4.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/jquery.barfiller.js"></script>
+    <script src="~/js/custom.js"></script>
+    <!-- Popper js -->
+    <script src="~/js/bootstrap/popper.min.js"></script>
+    <!-- Bootstrap js -->
+    <script src="~/js/bootstrap/bootstrap.min.js"></script>
+    <!-- All Plugins js -->
+    <script src="~/js/plugins/plugins.js"></script>
+    <!-- Active js -->
+    <script src="~/js/active.js"></script>
+    @RenderSection("Scripts", required: false)
+    <canvas id="leafCanvas" style="position: fixed; top: 0; left: 0; pointer-events: none; z-index: 9999;"></canvas>
+    <!-- Contact Widget -->
+    <div class="contact-widget">
+        <a href="https://id.zalo.me/account?continue=https%3A%2F%2Fchat.zalo.me%2F" target="_blank" class="contact-icon zalo" title="Liên hệ qua Zalo">
+            <i class="fa-solid fa-comment-dots"></i>
+        </a>
+        <a href="https://mail.google.com/mail/?view=cm&fs=1&to=ngan36758@gmail.com" target="_blank" class="contact-icon email" title="Email: ngan36758@gmail.com">
+            <i class="fa-solid fa-envelope"></i>
+        </a>
+        <a href="#" class="contact-icon chat" title="Chat trực tiếp trên trang">
+            <i class="fa-solid fa-message"></i>
+        </a>
+        <a href="tel:0373 993 662" class="contact-icon phone" title="Liên hệ qua số điện thoại">
+            <span>0373 993 662</span>
+            <i class="fa-solid fa-phone"></i>
+        </a>
+    </div>
+
+    <!-- Chat Popup -->
+    <div id="chatPopup" style="position: fixed; bottom: 20px; right: 20px; display: none;">
+        <div class="card chat-card" style="width: 300px;">
+            <div class="card-header bg-primary text-white">
+                <h5 class="mb-0">Chat với chúng tôi</h5>
+                <button class="btn btn-link text-white p-0" onclick="toggleChat()">
+                    <i class="fa-solid fa-times"></i>
+                </button>
+            </div>
+            <div class="card-body">
+                <div id="chatMessages" style="max-height: 300px; overflow-y: auto; padding: 10px;"></div>
+                <div class="input-group">
+                    <input type="text" class="form-control" id="chatInput" placeholder="Nhập tin nhắn..." autocomplete="off">
+                    <button class="btn btn-primary" onclick="sendMessage()">
+                        <i class="fa-solid fa-paper-plane"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+<script>
+    // Khởi tạo thông tin khách hàng
+    var customerName = "@HttpContextAccessor.HttpContext.Session.GetString("CustomerName")" || "Khách Hàng";
+    var customerId = "@HttpContextAccessor.HttpContext.Session.GetInt32("CustomerId")";
+    if (!customerId) {
+        customerId = localStorage.getItem('customerId') || "Guest_" + Math.random().toString(36).substring(2, 10);
+        localStorage.setItem('customerId', customerId);
+    }
+
+    // Lưu ánh xạ customerId và customerName
+    var customerMap = JSON.parse(localStorage.getItem('customerMap')) || {};
+    customerMap[customerId] = customerName;
+    localStorage.setItem('customerMap', JSON.stringify(customerMap));
+
+    // Khởi tạo chatData với unreadCount và hasOpenedChatFirstTime
+    window.chatData = JSON.parse(localStorage.getItem('chatData')) || {};
+    if (!window.chatData[customerId]) {
+        window.chatData[customerId] = [];
+    }
+    if (!window.chatData[customerId].hasOwnProperty('unreadCount')) {
+        window.chatData[customerId].unreadCount = 0;
+    }
+    if (!window.chatData[customerId].hasOwnProperty('hasOpenedChatFirstTime')) {
+        window.chatData[customerId].hasOpenedChatFirstTime = false; // Thay hasSentFirstMessage bằng hasOpenedChatFirstTime
+    }
+    let nextMessageId = Object.keys(window.chatData).reduce((max, id) => {
+        return Math.max(max, ...(window.chatData[id]?.map(msg => msg.id) || [0]));
+    }, 0) + 1;
+
+    document.addEventListener("DOMContentLoaded", () => {
+        // Cập nhật badge trên icon chat
+        function updateChatBadge() {
+            const chatIcon = document.querySelector(".contact-icon.chat");
+            if (chatIcon) {
+                const unreadCount = window.chatData[customerId]?.unreadCount || 0;
+                let badge = chatIcon.querySelector(".badge");
+                if (unreadCount > 0) {
+                    if (!badge) {
+                        badge = document.createElement("span");
+                        badge.className = "badge badge-danger";
+                        badge.style.position = "absolute";
+                        badge.style.top = "2px";
+                        badge.style.right = "5px";
+                        badge.style.fontSize = "12px";
+                        chatIcon.appendChild(badge);
+                    }
+                    badge.textContent = unreadCount;
+                } else if (badge) {
+                    badge.remove();
+                }
+            }
+        }
+
+        // Gắn sự kiện mở chat
+        const chatIcon = document.querySelector(".contact-icon.chat");
+        if (chatIcon) {
+            chatIcon.addEventListener("click", (e) => {
+                e.preventDefault();
+                toggleChat();
+                loadMessages();
+                // Đặt lại unreadCount khi mở chat
+                if (window.chatData[customerId].unreadCount > 0) {
+                    window.chatData[customerId].unreadCount = 0;
+                    localStorage.setItem('chatData', JSON.stringify(window.chatData));
+                    updateChatBadge();
+                }
+                console.log("Chat opened for customerId:", customerId, "Name:", customerName);
+            });
+        } else {
+            console.error("Chat icon not found");
+        }
+
+        // Gắn sự kiện Enter cho input
+        const chatInput = document.getElementById("chatInput");
+        if (chatInput) {
+            chatInput.addEventListener("keypress", (e) => {
+                if (e.key === "Enter") {
+                    sendMessage();
+                }
+            });
+        } else {
+            console.error("chatInput not found");
+        }
+
+        window.toggleChat = function () {
+            const chatPopup = document.getElementById("chatPopup");
+            if (chatPopup) {
+                chatPopup.style.display = chatPopup.style.display === "block" ? "none" : "block";
+                console.log("Chat popup toggled, display:", chatPopup.style.display);
+            } else {
+                console.error("chatPopup not found");
+            }
+        };
+
+        // Load tin nhắn
+        function loadMessages() {
+            const chatMessages = document.getElementById("chatMessages");
+            if (!chatMessages) {
+                console.error("chatMessages not found");
+                return;
+            }
+            chatMessages.innerHTML = "";
+
+            // Thêm tin nhắn chào nếu chưa có
+            if (!window.chatData[customerId] || window.chatData[customerId].length === 0) {
+                const welcomeMessage = {
+                    id: nextMessageId++,
+                    sender: "Kim Ngân",
+                    content: "Xin chào! Bạn cần hỗ trợ gì về dịch vụ cây cảnh văn phòng? 😊",
+                    time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+                    isAdmin: true
+                };
+                window.chatData[customerId] = [welcomeMessage];
+                localStorage.setItem('chatData', JSON.stringify(window.chatData));
+                console.log("Added welcome message for customerId:", customerId);
+            }
+
+            // Thêm tin nhắn "Cảm ơn" nếu là lần đầu mở chat
+            if (!window.chatData[customerId].hasOpenedChatFirstTime) {
+                const now = new Date();
+                const timeString = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+                const thankYouMessage = {
+                    id: nextMessageId++,
+                    sender: "Kim Ngân",
+                    content: "Cảm ơn bạn đã liên hệ! Chúng tôi sẽ phản hồi sớm nhất có thể! 😊",
+                    time: timeString,
+                    isAdmin: true
+                };
+                window.chatData[customerId].push(thankYouMessage);
+                window.chatData[customerId].hasOpenedChatFirstTime = true;
+                localStorage.setItem('chatData', JSON.stringify(window.chatData));
+                console.log("Added thank you message for first chat open for customerId:", customerId);
+            }
+
+            // Hiển thị tin nhắn
+            (window.chatData[customerId] || []).forEach(msg => {
+                const messageDiv = document.createElement("div");
+                messageDiv.className = msg.isAdmin ? "row m-b-20 received-chat" : "row m-b-20 send-chat";
+                messageDiv.innerHTML = `
+                                    <div class="col-auto ${msg.isAdmin ? 'p-r-0' : 'p-l-0'}">
+                                        <span class="chat-name">${msg.sender}</span>
+                                    </div>
+                                    <div class="col">
+                                        <div class="msg">
+                                            <p>${msg.content}</p>
+                                        </div>
+                                        <p class="text-muted m-b-0">
+                                            <i class="fa fa-clock m-r-10"></i>${msg.time}
+                                        </p>
+                                    </div>
+                                `;
+                chatMessages.appendChild(messageDiv);
+            });
+
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+            console.log("Loaded messages:", window.chatData[customerId]);
+            updateChatBadge();
+        }
+
+        // Gửi tin nhắn
+        window.sendMessage = function () {
+            const chatInput = document.getElementById("chatInput");
+            const chatMessages = document.getElementById("chatMessages");
+            if (!chatInput || !chatMessages) {
+                console.error("chatInput or chatMessages not found");
+                return;
+            }
+
+            const messageText = chatInput.value.trim();
+            if (messageText === "") {
+                console.log("Empty message, not sending");
+                return;
+            }
+
+            const now = new Date();
+            const timeString = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
+            // Thêm tin nhắn của khách hàng
+            const newMessage = {
+                id: nextMessageId++,
+                sender: customerName,
+                content: messageText,
+                time: timeString,
+                isAdmin: false
+            };
+
+            if (!window.chatData[customerId]) {
+                window.chatData[customerId] = [];
+            }
+            window.chatData[customerId].push(newMessage);
+
+            const userMessage = document.createElement("div");
+            userMessage.className = "row m-b-20 send-chat";
+            userMessage.innerHTML = `
+                                <div class="col">
+                                    <div class="msg">
+                                        <p>${newMessage.content}</p>
+                                    </div>
+                                    <p class="text-muted m-b-0">
+                                        <i class="fa fa-clock m-r-10"></i>${newMessage.time}
+                                    </p>
+                                </div>
+                                <div class="col-auto p-l-0">
+                                    <span class="chat-name">${customerName}</span>
+                                </div>
+                            `;
+            chatMessages.appendChild(userMessage);
+
+            chatInput.value = "";
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+            localStorage.setItem('chatData', JSON.stringify(window.chatData));
+            console.log("Sent message:", newMessage);
+            updateChatBadge();
+        };
+
+        // Kiểm tra tin nhắn mới từ admin
+        function checkAdminMessages() {
+            const messages = window.chatData[customerId] || [];
+            const lastChecked = parseInt(localStorage.getItem(`lastChecked_${customerId}`)) || 0;
+            const newMessages = messages.filter(msg => msg.id > lastChecked && msg.isAdmin && msg.sender !== "Kim Ngân");
+            if (newMessages.length > 0) {
+                window.chatData[customerId].unreadCount = (window.chatData[customerId].unreadCount || 0) + newMessages.length;
+                localStorage.setItem('chatData', JSON.stringify(window.chatData));
+                localStorage.setItem(`lastChecked_${customerId}`, messages[messages.length - 1].id);
+                updateChatBadge();
+                loadMessages(); // Cập nhật giao diện nếu chat đang mở
+                console.log("New admin messages:", newMessages.length);
+            }
+        }
+        setInterval(checkAdminMessages, 1000); // Kiểm tra mỗi 1 giây
+        updateChatBadge(); // Cập nhật badge ngay khi tải trang
+    });
+</script>
+<script>
+    const canvas = document.getElementById("leafCanvas");
+    const ctx = canvas.getContext("2d");
+
+    let leaves = [];
+    let leafImage = new Image();
+    leafImage.src = "/img/leaves/leaf1.png";
+
+    function resizeCanvas() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+    }
+
+    window.addEventListener("resize", resizeCanvas);
+    resizeCanvas();
+
+    function createLeaf() {
+        return {
+            x: Math.random() * canvas.width,
+            y: -20,
+            speedY: 1 + Math.random() * 2,
+            speedX: Math.random() * 1 - 0.5,
+            size: 20 + Math.random() * 20,
+            rotation: Math.random() * 360,
+            rotationSpeed: Math.random() * 2 - 1
+        };
+    }
+
+    function drawLeaf(leaf) {
+        ctx.save();
+        ctx.translate(leaf.x, leaf.y);
+        ctx.rotate(leaf.rotation * Math.PI / 180);
+        ctx.drawImage(leafImage, -leaf.size / 2, -leaf.size / 2, leaf.size, leaf.size);
+        ctx.restore();
+    }
+
+    function updateLeaves() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        if (leaves.length < 15) {
+            leaves.push(createLeaf());
+        }
+        for (let i = 0; i < leaves.length; i++) {
+            const leaf = leaves[i];
+            leaf.y += leaf.speedY;
+            leaf.x += leaf.speedX;
+            leaf.rotation += leaf.rotationSpeed;
+
+            drawLeaf(leaf);
+
+            if (leaf.y > canvas.height) {
+                leaves.splice(i, 1);
+                i--;
+            }
+        }
+        requestAnimationFrame(updateLeaves);
+    }
+
+    leafImage.onload = () => {
+        updateLeaves();
+    };
+</script>
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const searchIcon = document.getElementById("searchIcon");
+        const searchForm = document.querySelector(".search-form");
+        const closeIcon = document.querySelector(".closeIcon");
+
+        if (searchIcon && searchForm && closeIcon) {
+            searchIcon.addEventListener("click", () => {
+                searchForm.classList.add("active");
+            });
+
+            closeIcon.addEventListener("click", () => {
+                searchForm.classList.remove("active");
+            });
+        }
+    });
+</script>

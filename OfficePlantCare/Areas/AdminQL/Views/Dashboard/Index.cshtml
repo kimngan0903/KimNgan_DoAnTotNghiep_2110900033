@@ -1,0 +1,423 @@
+﻿@model OfficePlantCare.Areas.AdminQL.Models.Dashboard
+
+@{
+    ViewData["Title"] = "Quản trị viên";
+    Layout = "~/Areas/AdminQL/Views/Shared/Admin.cshtml";
+}
+
+<!-- [ Main Content ] start -->
+<div class="pcoded-main-container">
+    <div class="pcoded-content">
+        <!-- Page Header -->
+        <div class="page-header card shadow-sm border-0">
+            <div class="page-block">
+                <div class="row align-items-center">
+                    <div class="col-md-12">
+                        <div class="page-header-title d-flex justify-content-between align-items-center py-3 ml-3">
+                            <h5 class="m-0 text-success font-weight-bold">THỐNG KÊ</h5>
+                            <nav aria-label="breadcrumb">
+                                <ol class="breadcrumb mb-0 bg-transparent">
+                                    <li class="breadcrumb-item"><a asp-area="AdminQL" asp-controller="Dashboard" asp-action="AdminDashboard"><i class="fas fa-home"></i></a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">THỐNG KÊ</li>
+                                </ol>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- [ breadcrumb ] end -->
+        <!-- [ Main Content ] start -->
+        <div class="row">
+            <!-- Thống kê nhanh (phần 1) -->
+            <div class="col-md-12 col-xl-6">
+                <div class="card flat-card">
+                    <div class="row-table">
+                        <div class="col-sm-6 card-body br">
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <i class="fas fa-user text-c-green mb-1 d-block"></i>
+                                </div>
+                                <div class="col-sm-8 text-md-center">
+                                    <h5>@Model.KhachHang</h5>
+                                    <span>Khách hàng</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 card-body">
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <i class="fas fa-users text-c-red mb-1 d-block"></i>
+                                </div>
+                                <div class="col-sm-8 text-md-center">
+                                    <h5>@Model.NhanVien</h5>
+                                    <span>Nhân viên</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row-table">
+                        <div class="col-sm-6 card-body br">
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <i class="fas fa-concierge-bell text-c-blue mb-1 d-block"></i>
+                                </div>
+                                <div class="col-sm-8 text-md-center">
+                                    <h5>@Model.DichVu</h5>
+                                    <span>Dịch vụ</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 card-body">
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <i class="fas fa-file-contract text-c-yellow mb-1 d-block"></i>
+                                </div>
+                                <div class="col-sm-8 text-md-center">
+                                    <h5>@Model.HopDong</h5>
+                                    <span>Hợp đồng</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Thống kê nhanh (phần 2) -->
+            <div class="col-md-12 col-xl-6">
+                <div class="card flat-card">
+                    <div class="row-table">
+                        <div class="col-sm-6 card-body br">
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <i class="fas fa-shopping-cart text-c-blue mb-1 d-block"></i>
+                                </div>
+                                <div class="col-sm-8 text-md-center">
+                                    <h5>@Model.DonHang</h5>
+                                    <span>Đơn hàng</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 card-body">
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <i class="fas fa-star text-c-blue mb-1 d-block"></i>
+                                </div>
+                                <div class="col-sm-8 text-md-center">
+                                    <h5>@Model.DanhGia</h5>
+                                    <span>Đánh giá</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row-table">
+                        <div class="col-sm-6 card-body br">
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <i class="fas fa-box-open text-c-blue mb-1 d-block"></i>
+                                </div>
+                                <div class="col-sm-8 text-md-center">
+                                    <h5>@Model.TinTuc</h5>
+                                    <span>Tin tức</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 card-body br">
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <i class="fas fa-handshake text-c-green mb-1 d-block"></i>
+                                </div>
+                                <div class="col-sm-8 text-md-center">
+                                    <h5>@Model.LichChamSoc</h5>
+                                    <span>Lịch chăm sóc</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Biểu đồ tổng quan -->
+            <div class="col-md-12 col-xl-6">
+                <div class="card shadow-sm" style="border-radius: 15px;">
+                    <div class="card-body">
+                        <h5 class="card-title">THỐNG KẾ TỔNG QUAN</h5>
+                        <canvas id="dashboardChart" style="max-height: 300px;"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Biểu đồ tỷ lệ danh mục -->
+            <div class="col-md-12 col-xl-6">
+                <div class="card shadow-sm" style="border-radius: 15px;">
+                    <div class="card-body">
+                        <h5 class="card-title">TỶ LỆ THỐNG KÊ</h5>
+                        <canvas id="pieChart" style="max-height: 300px;"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Lịch chăm sóc của ngày hiện tại -->
+            <div class="col-md-12">
+                <div class="card shadow-sm" style="border-radius: 15px;">
+                    <div class="card-body">
+                        <h5 class="card-title">LỊCH CHĂM SÓC HÔM NAY (@DateTime.Now.ToString("dd/MM/yyyy"))</h5>
+                        @if (Model.CareSchedulesToday.Any())
+                        {
+                            <div class="table-responsive">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Thời gian</th>
+                                            <th>Thời lượng</th>
+                                            <th>Nhân viên</th>
+                                            <th>Trạng thái</th>
+                                            @*                                             <th>Hành động</th>
+                                        *@
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var schedule in Model.CareSchedulesToday.Select((value, index) => new { Value = value, Index = index }))
+                                        {
+                                            <tr>
+                                                <td>@(schedule.Index + 1)</td>
+                                                <td>@schedule.Value.ScheduledTime.ToString("HH:mm")</td>
+                                                <td>@schedule.Value.Duration giờ</td>
+                                                <td>
+                                                    @(schedule.Value.Staff != null ? schedule.Value.Staff.StaffName : "Chưa phân công")
+                                                </td>
+                                                <td>
+                                                    @if (schedule.Value.Status == "Chưa thực hiện")
+                                                    {
+                                                        <span class="badge badge-danger">@schedule.Value.Status</span>
+                                                    }
+                                                    else if (schedule.Value.Status == "Hoàn thành")
+                                                    {
+                                                        <span class="badge badge-success">@schedule.Value.Status</span>
+                                                    }
+                                                    else if (schedule.Value.Status == "Đang thực hiện")
+                                                    {
+                                                        <span class="badge badge-warning">@schedule.Value.Status</span>
+                                                    }
+                                                    else
+                                                    {
+                                                        <span class="badge badge-secondary">@schedule.Value.Status</span>
+                                                    }
+                                                </td>
+                                                @*  <td>
+                                        <a href="#" class="btn btn-sm btn-primary">Xem chi tiết</a>
+                                        </td> *@
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        }
+                        else
+                        {
+                            <p class="text-muted">Không có lịch chăm sóc nào cho hôm nay.</p>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- [ Main Content ] end -->
+    </div>
+</div>
+
+<!-- CSS tùy chỉnh -->
+<style>
+    .card {
+        border: none;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+    .card-body {
+        padding: 1.5rem;
+        transition: transform 0.3s ease;
+    }
+
+    .flat-card .card-body:hover {
+        transform: scale(1.02);
+    }
+
+    .card-title {
+        font-size: 1.25rem;
+        font-weight: 600;
+        margin-bottom: 1rem;
+    }
+
+    .row-table {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+        .row-table .col-sm-6 {
+            flex: 0 0 50%;
+            max-width: 50%;
+        }
+
+    .br {
+        border-right: 1px solid rgba(0, 0, 0, 0.1);
+    }
+
+    canvas {
+        max-height: 300px !important;
+    }
+
+    h5 {
+        font-weight: 600;
+    }
+
+    span {
+        font-size: 0.9rem;
+        opacity: 0.8;
+    }
+
+    .table-responsive {
+        max-height: 400px;
+        overflow-y: auto;
+    }
+
+    .table th, .table td {
+        vertical-align: middle;
+    }
+
+    .badge {
+        font-size: 0.9rem;
+        padding: 0.5em 1em;
+        display: inline-block !important;
+    }
+</style>
+
+<!-- Script to generate the charts -->
+@section Scripts {
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            var ctxLine = document.getElementById("dashboardChart").getContext("2d");
+            var ctxPie = document.getElementById("pieChart").getContext("2d");
+
+            // Gradient cho biểu đồ đường (màu xanh ngọc)
+            var gradientFill = ctxLine.createLinearGradient(0, 0, 0, 300);
+            gradientFill.addColorStop(0, 'rgba(26, 188, 156, 0.5)'); // #1ABC9C với độ trong suốt
+            gradientFill.addColorStop(1, 'rgba(26, 188, 156, 0)');
+
+            // Line Chart
+            var dashboardChart = new Chart(ctxLine, {
+                type: "line",
+                data: {
+                    labels: ["Khách hàng", "Nhân viên", "Dịch vụ", "Hợp đồng", "Đơn hàng", "Đánh giá", "Tin tức", "Lịch chăm sóc"],
+                    datasets: [{
+                        label: "Số lượng & Giá trị",
+                        data: [
+        @Model.KhachHang,
+        @Model.NhanVien,
+        @Model.DichVu,
+        @Model.HopDong,
+        @Model.DonHang,
+        @Model.DanhGia,
+        @Model.TinTuc,
+        @Model.LichChamSoc
+                                        ],
+                        backgroundColor: gradientFill,
+                        borderColor: "#1ABC9C", // Màu xanh ngọc
+                        borderWidth: 2,
+                        pointBackgroundColor: "#fff",
+                        pointBorderColor: "#1ABC9C",
+                        pointRadius: 5,
+                        pointHoverRadius: 7,
+                        fill: true,
+                        tension: 0.4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false }, // Tắt legend "Số lượng & Giá trị"
+                        tooltip: {
+                            backgroundColor: 'rgba(0, 0, 0, 0.9)',
+                            titleColor: '#fff',
+                            bodyColor: '#fff',
+                            borderColor: 'rgba(255, 255, 255, 0.2)',
+                            borderWidth: 1
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: { color: '#666' },
+                            grid: { color: 'rgba(0, 0, 0, 0.1)' }
+                        },
+                        x: {
+                            ticks: { color: '#666' },
+                            grid: { display: false }
+                        }
+                    }
+                }
+            });
+
+            // Pie Chart
+            var pieChart = new Chart(ctxPie, {
+                type: "pie",
+                data: {
+                    labels: ["Khách hàng", "Nhân viên", "Dịch vụ", "Hợp đồng", "Đơn hàng", "Đánh giá", "Tin tức", "Lịch chăm sóc"],
+                    datasets: [{
+                        data: [
+        @Model.KhachHang,
+        @Model.NhanVien,
+        @Model.DichVu,
+        @Model.HopDong,
+        @Model.DonHang,
+        @Model.DanhGia,
+        @Model.TinTuc,
+        @Model.LichChamSoc
+                                        ],
+                        backgroundColor: [
+                            "rgba(74, 144, 226, 0.8)",
+                            "rgba(229, 115, 115, 0.8)",
+                            "rgba(80, 200, 120, 0.8)",
+                            "rgba(247, 201, 72, 0.8)",
+                            "rgba(153, 102, 255, 0.8)",
+                            "rgba(255, 159, 64, 0.8)",
+                            "rgba(199, 199, 199, 0.8)",
+                            "rgba(83, 102, 255, 0.8)"
+                        ],
+                        borderColor: "#fff",
+                        borderWidth: 2,
+                        hoverOffset: 10  // Hiệu ứng phóng to khi hover
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: "right",
+                            labels: {
+                                boxWidth: 15,
+                                padding: 20,
+                                color: '#666'
+                            }
+                        },
+                        tooltip: {
+                            backgroundColor: 'rgba(0, 0, 0, 0.9)',
+                            titleColor: '#fff',
+                            bodyColor: '#fff',
+                            borderColor: 'rgba(255, 255, 255, 0.2)',
+                            borderWidth: 1
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+}

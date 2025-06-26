@@ -1,0 +1,400 @@
+﻿@model X.PagedList.IPagedList<OfficePlantCare.Models.CareSchedule>
+@using X.PagedList.Mvc.Core;
+
+@{
+    ViewData["Title"] = "Danh sách lịch chăm sóc";
+    Layout = "~/Areas/AdminQL/Views/Shared/Admin.cshtml";
+}
+
+<link rel="stylesheet" href="~/assets/css/index.css?v2" />
+
+<div class="pcoded-main-container">
+    <div class="pcoded-content">
+        <!-- Page Header -->
+        <div class="page-header card shadow-sm border-0">
+            <div class="page-block">
+                <div class="row align-items-center">
+                    <div class="col-md-12">
+                        <div class="page-header-title d-flex justify-content-between align-items-center py-3 ml-3">
+                            <h5 class="m-0 text-success font-weight-bold">QUẢN LÝ LỊCH CHĂM SÓC</h5>
+                            <nav aria-label="breadcrumb">
+                                <ol class="breadcrumb mb-0 bg-transparent">
+                                    <li class="breadcrumb-item"><a asp-area="AdminQL" asp-controller="CareSchedules" asp-action="Index"><i class="fas fa-home"></i></a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">DANH SÁCH LỊCH CHĂM SÓC</li>
+                                </ol>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card shadow-sm border-0">
+                    <div class="card-header bg-white px-4 py-3 border-bottom">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <h5 class="text-success font-weight-bold mb-0">DANH SÁCH LỊCH CHĂM SÓC</h5>
+                            <div class="d-flex align-items-center gap-3">
+                                <!-- Search Form -->
+                                <form id="filter-form" class="d-flex">
+                                    <div class="input-group">
+                                        <select name="status" id="status" class="form-control border-success rounded-pill" style="max-width: 200px;">
+                                            <option value="">-- Chọn trạng thái --</option>
+                                            <option value="Hoàn thành">Hoàn thành</option>
+                                            <option value="Đang thực hiện">Đang thực hiện</option>
+                                            <option value="Chưa thực hiện">Chưa thực hiện</option>
+                                        </select>
+                                    </div>
+                                    <div class="input-group">
+                                        <input type="date" class="form-control border-success rounded-pill" name="scheduledDate" id="scheduledDate"
+                                               value="@ViewBag.scheduledDate" style="max-width: 200px;" />
+                                    </div>
+                                    <div class="input-group">
+                                        <input type="text" class="form-control border-success rounded-pill" name="name" id="keyword"
+                                               value="@ViewBag.keyword" placeholder="Nhập trạng thái cần tìm" style="max-width: 250px;" />
+                                        @* <button type="submit" class="btn btn-success rounded-pill ml-2">
+                                            <i class="fas fa-search"></i> Tìm
+                                        </button> *@
+                                    </div>
+                                </form>
+                                <!-- Export and Add New Buttons -->
+                                <a class="btn btn-success rounded-pill px-3" href="@Url.Action("ExportToExcel", new { name = ViewBag.keyword, status = ViewBag.status, scheduledDate = ViewBag.scheduledDate })">
+                                    <i class="fas fa-file-excel"></i> Xuất Excel
+                                </a>
+                               @*  <a class="btn btn-success rounded-pill px-3" asp-action="Create">
+                                    <i class="fas fa-plus"></i> Thêm mới
+                                </a> *@
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card-body p-4">
+                        <div class="table-responsive">
+                            <table class="table table-hover table-striped align-middle">
+                                <thead class="bg-dark">
+                                    <tr>
+                                        <th class="text-muted text-center">
+                                            @Html.DisplayNameFor(model => model.FirstOrDefault().ContractId)
+                                        </th>
+                                        <th class="text-muted text-center">
+                                            @Html.DisplayNameFor(model => model.FirstOrDefault().OrderId)
+                                        </th>
+                                        <th class="text-muted text-center">
+                                            @Html.DisplayNameFor(model => model.FirstOrDefault().ScheduledDate)
+                                        </th>
+                                        <th class="text-muted text-center">
+                                            @Html.DisplayNameFor(model => model.FirstOrDefault().ScheduledTime)
+                                        </th>
+                                        <th class="text-muted text-center">
+                                            @Html.DisplayNameFor(model => model.FirstOrDefault().StaffId)
+                                        </th>
+                                        <th class="text-muted text-center">
+                                            @Html.DisplayNameFor(model => model.FirstOrDefault().Status)
+                                        </th>
+                                        <th class="text-muted text-center">Hành động</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if (Model.Any())
+                                    {
+                                        @foreach (var item in Model)
+                                        {
+                                            <tr>
+                                                <td class="text-center">@Html.DisplayFor(modelItem => item.Contract.ContractCode)</td>
+                                                <td class="text-center">@Html.DisplayFor(modelItem => item.Order.OrderId)</td>
+                                                <td class="text-center">@Html.DisplayFor(modelItem => item.ScheduledDate)</td>
+                                                <td class="text-center">@Html.DisplayFor(modelItem => item.ScheduledTime)</td>
+                                                <td class="text-center">@Html.DisplayFor(modelItem => item.Staff.StaffName)</td>
+                                                <td class="text-center">
+                                                    @if (item.Status.ToString() == "Hoàn thành")
+                                                    {
+                                                        <span class="badge badge-success px-3 py-1">Hoàn thành</span> <!-- Màu xanh -->
+                                                    }
+                                                    else if (item.Status.ToString() == "Đang thực hiện")
+                                                    {
+                                                        <span class="badge badge-warning px-3 py-1">Đang thực hiện</span> <!-- Màu vàng -->
+                                                    }
+                                                    else if (item.Status.ToString() == "Chưa thực hiện")
+                                                    {
+                                                        <span class="badge badge-danger px-3 py-1">Chưa thực hiện</span> <!-- Màu đỏ -->
+                                                    }
+                                                    else
+                                                    {
+                                                        <span class="badge badge-secondary px-3 py-1">Không xác định</span> <!-- Màu xám nếu giá trị null -->
+                                                    }
+                                                </td>
+                                                <td class="text-center">
+                                                    <div class="btn-group" role="group">
+                                                        <button class="btn btn-outline-primary btn-sm" onclick="loadModal('@Url.Action("Edit", "CareSchedules", new { id = item.ScheduleId })')"><i class="fas fa-edit"></i> Sửa</button>
+                                                        <button class="btn btn-outline-info btn-sm" onclick="loadModal('@Url.Action("Details", "CareSchedules", new { id = item.ScheduleId })')"><i class="fas fa-info-circle"></i> Chi tiết</button>
+                                                        <button class="btn btn-outline-danger btn-sm" onclick="loadModal('@Url.Action("Delete", "CareSchedules", new { id = item.ScheduleId })')"><i class="fas fa-trash-alt"></i> Xóa</button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <tr>
+                                            <td colspan="8" class="text-center text-muted py-3">
+                                                Không có lịch chăm sóc nào.
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <!-- Pagination -->
+                        @if (Model.Any())
+                        {
+                            <div class="d-flex justify-content-center mt-4">
+                                @Html.PagedListPager(
+                                    Model,
+                                    page => Url.Action("Index", new { page = page, name = ViewBag.keyword, status = ViewBag.status, scheduledDate = ViewBag.scheduledDate }),
+                                    new PagedListRenderOptions
+                                    {
+                                        LiElementClasses = new[] { "page-item" },
+                                        PageClasses = new[] { "page-link" },
+                                        UlElementClasses = new[] { "pagination" },
+                                        ActiveLiElementClass = "active",
+                                        LinkToFirstPageFormat = "«",
+                                        LinkToLastPageFormat = "»",
+                                        LinkToNextPageFormat = "›",
+                                        LinkToPreviousPageFormat = "‹",
+                                        DisplayLinkToFirstPage = PagedListDisplayMode.Always,
+                                        DisplayLinkToLastPage = PagedListDisplayMode.Always,
+                                        DisplayLinkToPreviousPage = PagedListDisplayMode.Always,
+                                        DisplayLinkToNextPage = PagedListDisplayMode.Always
+                                    }
+                                )
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="modal-container" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content border-0 shadow-lg">
+            <div class="modal-header text-white">
+                <h5 class="modal-title text-success">THÔNG TIN</h5>
+                <button type="button" class="close text-dark" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body" id="modal-content">
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        // Load modal content via AJAX
+        function loadModal(url) {
+            $.get(url, function (data) {
+                $("#modal-content").html(data);
+                $("#modal-container").modal("show");
+            });
+        }
+
+        // Function to update table content via AJAX
+        function updateTable(page, status, scheduledDate, name) {
+            // Construct the URL with parameters
+            let url = '@Url.Action("Index", "CareSchedules")' + '?page=' + page;
+            if (status) url += '&status=' + encodeURIComponent(status);
+            if (scheduledDate) url += '&scheduledDate=' + encodeURIComponent(scheduledDate);
+            if (name) url += '&name=' + encodeURIComponent(name);
+
+            // Fetch table content via AJAX
+            fetch(url, {
+                method: 'GET',
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest' // Indicate AJAX request
+                }
+            })
+                .then(response => response.text())
+                .then(data => {
+                    // Parse the response HTML and extract the table and pagination
+                    const parser = new DOMParser();
+                    const doc = parser.parseFromString(data, 'text/html');
+                    const newTable = doc.querySelector('.table-responsive');
+                    const newPagination = doc.querySelector('.pagination');
+
+                    // Update the table content
+                    document.querySelector('.table-responsive').innerHTML = newTable.innerHTML;
+
+                    // Update pagination if it exists
+                    const paginationContainer = document.querySelector('.d-flex.justify-content-center.mt-4');
+                    if (newPagination && paginationContainer) {
+                        paginationContainer.innerHTML = newPagination.outerHTML;
+                        // Reattach event listeners to new pagination links
+                        attachPaginationListeners();
+                    } else if (paginationContainer) {
+                        paginationContainer.innerHTML = ''; // Clear pagination if no results
+                    }
+
+                    // Update Export to Excel link with current filter parameters
+                    const exportLink = document.querySelector('a[href*="ExportToExcel"]');
+                    if (exportLink) {
+                        let exportUrl = '@Url.Action("ExportToExcel", "CareSchedules")' + '?';
+                        if (name) exportUrl += 'name=' + encodeURIComponent(name) + '&';
+                        if (status) exportUrl += 'status=' + encodeURIComponent(status) + '&';
+                        if (scheduledDate) exportUrl += 'scheduledDate=' + encodeURIComponent(scheduledDate);
+                        exportLink.setAttribute('href', exportUrl);
+                    }
+
+                    // Show notification if no data and scheduledDate is set
+                    const hasData = doc.querySelector('.table-responsive tbody tr') && !doc.querySelector('.table-responsive tbody tr td[colspan="8"]');
+                    if (scheduledDate && !hasData) {
+                        Swal.fire({
+                            icon: 'info',
+                            title: 'Thông báo',
+                            text: 'Không có lịch chăm sóc trong ngày ' + scheduledDate + '.',
+                            confirmButtonText: 'OK',
+                            confirmButtonColor: '#1ABC9C'
+                        });
+                    }
+                })
+                .catch(error => console.error('Error updating table:', error));
+        }
+
+        // Function to attach click event listeners to pagination links
+        function attachPaginationListeners() {
+            const paginationLinks = document.querySelectorAll('.pagination a.page-link');
+            paginationLinks.forEach(link => {
+                link.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const href = this.getAttribute('href');
+                    const urlParams = new URLSearchParams(href.split('?')[1] || '');
+                    const page = urlParams.get('page') || 1;
+                    const status = sessionStorage.getItem('selectedStatus') || '';
+                    const scheduledDate = sessionStorage.getItem('selectedScheduledDate') || '';
+                    const name = sessionStorage.getItem('selectedName') || '';
+
+                    // Update table content for the clicked page
+                    updateTable(page, status, scheduledDate, name);
+                });
+            });
+        }
+
+        // On document ready
+        document.addEventListener('DOMContentLoaded', function () {
+            // Load saved filter values from sessionStorage
+            const savedStatus = sessionStorage.getItem('selectedStatus');
+            const savedScheduledDate = sessionStorage.getItem('selectedScheduledDate');
+            const savedName = sessionStorage.getItem('selectedName');
+
+            if (savedStatus) {
+                document.getElementById('status').value = savedStatus;
+            }
+            if (savedScheduledDate) {
+                document.getElementById('scheduledDate').value = savedScheduledDate;
+            }
+            if (savedName) {
+                document.getElementById('keyword').value = savedName;
+            }
+
+            // Handle status select change
+            document.getElementById('status').addEventListener('change', function () {
+                const status = this.value;
+                const scheduledDate = document.getElementById('scheduledDate').value;
+                const name = document.getElementById('keyword').value;
+
+                // Store filter values in sessionStorage
+                if (status) {
+                    sessionStorage.setItem('selectedStatus', status);
+                } else {
+                    sessionStorage.removeItem('selectedStatus');
+                }
+                sessionStorage.setItem('selectedScheduledDate', scheduledDate || '');
+                sessionStorage.setItem('selectedName', name || '');
+
+                // Update table with the selected filters
+                updateTable(1, status, scheduledDate, name);
+            });
+
+            // Handle scheduledDate input change
+            document.getElementById('scheduledDate').addEventListener('change', function () {
+                const status = document.getElementById('status').value;
+                const scheduledDate = this.value;
+                const name = document.getElementById('keyword').value;
+
+                // Store filter values in sessionStorage
+                sessionStorage.setItem('selectedStatus', status || '');
+                if (scheduledDate) {
+                    sessionStorage.setItem('selectedScheduledDate', scheduledDate);
+                } else {
+                    sessionStorage.removeItem('selectedScheduledDate');
+                }
+                sessionStorage.setItem('selectedName', name || '');
+
+                // Update table with the selected filters
+                updateTable(1, status, scheduledDate, name);
+            });
+
+            // Handle keyword input change (optional: trigger on keyup for instant search)
+            document.getElementById('keyword').addEventListener('input', function () {
+                const status = document.getElementById('status').value;
+                const scheduledDate = document.getElementById('scheduledDate').value;
+                const name = this.value;
+
+                // Store filter values in sessionStorage
+                sessionStorage.setItem('selectedStatus', status || '');
+                sessionStorage.setItem('selectedScheduledDate', scheduledDate || '');
+                if (name) {
+                    sessionStorage.setItem('selectedName', name);
+                } else {
+                    sessionStorage.removeItem('selectedName');
+                }
+
+                // Update table with the selected filters
+                updateTable(1, status, scheduledDate, name);
+            });
+
+            // Handle form submission
+            document.getElementById('filter-form').addEventListener('submit', function (e) {
+                e.preventDefault();
+                const status = document.getElementById('status').value;
+                const scheduledDate = document.getElementById('scheduledDate').value;
+                const name = document.getElementById('keyword').value;
+
+                // Store filter values in sessionStorage
+                sessionStorage.setItem('selectedStatus', status || '');
+                sessionStorage.setItem('selectedScheduledDate', scheduledDate || '');
+                sessionStorage.setItem('selectedName', name || '');
+
+                // Update table with search parameters
+                updateTable(1, status, scheduledDate, name);
+            });
+
+            // Attach pagination listeners initially
+            attachPaginationListeners();
+
+            // Display success message if present
+            const successMessage = '@Html.Raw(System.Web.HttpUtility.JavaScriptStringEncode(TempData["SuccessMessage"]?.ToString() ?? ""))';
+            if (successMessage) {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Thành công!',
+                    text: successMessage,
+                    confirmButtonText: 'OK',
+                    confirmButtonColor: '#1ABC9C'
+                });
+            }
+
+            // Initial table update with saved filters if present
+            if (savedStatus || savedScheduledDate || savedName) {
+                updateTable(@(TempData["CurrentPage"] ?? 1), savedStatus, savedScheduledDate, savedName);
+            }
+        });
+    </script>
+}

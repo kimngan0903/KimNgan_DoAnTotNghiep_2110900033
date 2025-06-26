@@ -1,0 +1,114 @@
+﻿.register-wrapper {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: url('https://newoffice24h.com/wp-content/uploads/2023/07/thiet-ke-van-phong-xanh-43.jpg') no-repeat center center fixed;
+    background-size: cover;
+    position: relative;
+    padding: 2rem;
+}
+
+.register-wrapper::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /*background: rgba(0, 0, 0, 0.5);*/ /* Overlay for readability */
+    z-index: 1;
+}
+
+.register-card, .alert {
+    position: relative;
+    z-index: 2;
+    background: rgba(255, 255, 255, 0.95); /* Semi-transparent white */
+    border-radius: 15px;
+    padding: 2rem;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    width: 100%;
+    max-width: 500px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    margin-top: 100px;
+}
+
+    .register-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+    }
+
+.form-label {
+    color: #2c3e50;
+    margin-bottom: 0.5rem;
+}
+
+.form-control {
+    border-radius: 8px;
+    border: 1px solid #ced4da;
+    padding: 0.75rem;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+    .form-control:focus {
+        border-color: #28a745;
+        box-shadow: 0 0 8px rgba(40, 167, 69, 0.3);
+        outline: none;
+    }
+
+.btn-success {
+    background: linear-gradient(135deg, #28a745, #34c759);
+    border: none;
+    padding: 0.75rem;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+    .btn-success:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(40, 167, 69, 0.4);
+    }
+
+.alert-success, .alert-danger {
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+    padding: 1rem;
+    width: 100%;
+    max-width: 500px;
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+.alert-success {
+    background: #d4edda;
+    color: #155724;
+}
+
+.alert-danger {
+    background: #f8d7da;
+    color: #721c24;
+}
+
+.text-danger {
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (max-width: 576px) {
+    .register-card {
+        padding: 1.5rem;
+    }
+}

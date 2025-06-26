@@ -1,0 +1,346 @@
+﻿@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+@{
+    var adminName = HttpContextAccessor.HttpContext.Session.GetString("AdminName");
+    var customerName = HttpContextAccessor.HttpContext.Session.GetString("CustomerName") ?? "Khách Hàng";
+    var customerId = HttpContextAccessor.HttpContext.Session.GetInt32("CustomerId")?.ToString() ?? "Guest_" + Guid.NewGuid().ToString("N").Substring(0, 8); // Tạo ID tạm thời cho khách chưa đăng nhập
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Kim Ngân - Dịch vụ chăm sóc cây cảnh văn phòng</title>
+    <!-- HTML5 Shim and Respond.js IE11 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 11]>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]
+    <!-- Meta -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width," initial-scale="1.0," user-scalable="0," minimal-ui="minimal-ui">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="description" content="" />
+    <meta name="keywords" content="">
+    <meta name="author" content="Phoenixcoded" />
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="~/favicon-32x32.png">
+    <!-- Fonts -->
+    <link rel="stylesheet" href="~/css/fonts.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap-grid.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap-utilities.min.css">
+    <!-- Vendor CSS -->
+    <link rel="stylesheet" href="~/assets/css/styles.css?v2" />
+</head>
+<body class="">
+    <section class="wrapper">
+        <!-- Preloader -->
+        @await Html.PartialAsync("_Preloader")
+
+        <!-- Navbar -->
+        @await Html.PartialAsync("_NavBar")
+        <!-- /.navbar -->
+        <!-- Main Sidebar Container -->
+        @await Html.PartialAsync("_SideBar")
+
+        <!-- Main content -->
+        <div class="pcoded-main-container">
+            <div class="background"></div>
+            <div class="content">
+                @RenderBody() <!-- Trang con sẽ hiển thị ở đây -->
+            </div>
+        </div>
+
+        <!-- /.content -->
+    </section>
+    <!-- ./wrapper -->
+    <!-- Required Js -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="~/assets/js/vendor-all.min.js"></script>
+    <script src="~/assets/js/plugins/bootstrap.min.js"></script>
+    <script src="~/assets/js/pcoded.min.js"></script>
+    <!-- Apex Chart -->
+    <script src="~/assets/js/plugins/apexcharts.min.js"></script>
+    <!-- Custom-chart js -->
+    <script src="~/assets/js/pages/dashboard-main.js"></script>
+
+    @RenderSection("Scripts", required: false)
+
+    <!-- Contact Widget -->
+    <div class="contact-widget">
+        <a href="#" class="contact-icon chat admin-chat" title="Chat với khách hàng (Admin)">
+            <i class="fa-solid fa-comments"></i>
+        </a>
+    </div>
+
+    <!-- Admin Chat Popup -->
+    <div id="adminChatPopup" style="position: fixed; bottom: 20px; right: 20px; display: none;">
+        <div class="card chat-card" style="width: 320px;">
+            <div class="card-header bg-primary text-white">
+                <h5 class="mb-0">Chat với khách hàng</h5>
+                <button class="btn btn-link text-white p-0" onclick="toggleAdminChat()">
+                    <i class="fa-solid fa-times"></i>
+                </button>
+            </div>
+            <div class="card-body">
+                <!-- Customer List -->
+                <div class="customer-list" id="customerList" style="max-height: 150px; overflow-y: auto; margin-bottom: 10px;"></div>
+                <!-- Messages -->
+                <div id="adminChatMessages" style="max-height: 300px; overflow-y: auto; padding: 10px;"></div>
+                <div class="input-group">
+                    <input type="text" class="form-control" id="adminChatInput" placeholder="Nhập tin nhắn..." autocomplete="off">
+                    <button class="btn btn-primary" onclick="sendAdminMessage()">
+                        <i class="fa-solid fa-paper-plane"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Script chat admin -->
+    <script>
+        var adminName = "@adminName" || "Admin";
+        var customerName = "@customerName";
+        var customerId = "@customerId";
+
+        // Khởi tạo chatData và customerMap từ localStorage
+        window.chatData = JSON.parse(localStorage.getItem('chatData')) || {};
+        if (!window.chatData.hasOwnProperty('admin')) {
+            window.chatData['admin'] = [];
+        }
+        if (!window.chatData['admin'].hasOwnProperty('unreadCount')) {
+            window.chatData['admin'].unreadCount = 0;
+        }
+        window.customerMap = JSON.parse(localStorage.getItem('customerMap')) || {};
+        let nextMessageId = Object.keys(window.chatData).reduce((max, customer) => {
+            return Math.max(max, ...(window.chatData[customer]?.map(msg => msg.id) || [0]));
+        }, 0) + 1;
+        let selectedCustomer = null;
+
+        document.addEventListener("DOMContentLoaded", () => {
+            // Cập nhật badge trên icon chat
+            function updateChatBadge() {
+                const adminChatIcon = document.querySelector(".contact-icon.admin-chat");
+                if (adminChatIcon) {
+                    const unreadCount = window.chatData['admin'].unreadCount || 0;
+                    let badge = adminChatIcon.querySelector(".badge");
+                    if (unreadCount > 0) {
+                        if (!badge) {
+                            badge = document.createElement("span");
+                            badge.className = "badge badge-danger";
+                            badge.style.position = "absolute";
+                            badge.style.top = "1px";
+                            badge.style.right = "-5px";
+                            badge.style.fontSize = "12px";
+                            adminChatIcon.appendChild(badge);
+                        }
+                        badge.textContent = unreadCount;
+                    } else if (badge) {
+                        badge.remove();
+                    }
+                }
+            }
+
+            // Admin Chat Icon
+            const adminChatIcon = document.querySelector(".contact-icon.admin-chat");
+            if (adminChatIcon) {
+                adminChatIcon.addEventListener("click", (e) => {
+                    e.preventDefault();
+                    toggleAdminChat();
+                    loadCustomers();
+                    console.log("Admin chat opened");
+                });
+            } else {
+                console.error("Admin chat icon not found");
+            }
+
+            // Gắn sự kiện Enter cho input
+            const adminChatInput = document.getElementById("adminChatInput");
+            if (adminChatInput) {
+                adminChatInput.addEventListener("keypress", (e) => {
+                    if (e.key === "Enter") {
+                        sendAdminMessage();
+                    }
+                });
+            } else {
+                console.error("adminChatInput not found");
+            }
+
+            window.toggleAdminChat = function () {
+                const chatPopup = document.getElementById("adminChatPopup");
+                if (chatPopup) {
+                    chatPopup.style.display = chatPopup.style.display === "block" ? "none" : "block";
+                    console.log("Admin chat popup toggled, display:", chatPopup.style.display);
+                } else {
+                    console.error("adminChatPopup not found");
+                }
+            };
+
+            // Load danh sách khách hàng
+            function loadCustomers() {
+                const customerList = document.getElementById("customerList");
+                if (!customerList) {
+                    console.error("customerList not found");
+                    return;
+                }
+                customerList.innerHTML = "";
+
+                const customers = Object.keys(window.chatData).filter(id => id !== 'admin');
+                if (customers.length === 0) {
+                    customerList.innerHTML = "<p class='text-muted'>Không có khách hàng nào.</p>";
+                    return;
+                }
+
+                customers.forEach(customer => {
+                    const latestMessage = window.chatData[customer][window.chatData[customer].length - 1] || { content: "Chưa có tin nhắn" };
+                    const displayName = window.customerMap[customer] || "Khách Hàng";
+                    const unreadCount = window.chatData[customer].unreadCount || 0;
+                    const item = document.createElement("div");
+                    item.className = "customer-item";
+                    item.dataset.customer = customer;
+                    item.innerHTML = `
+                            <span class="name">${displayName}</span>
+                            ${unreadCount > 0 ? `<span class="unread-badge">${unreadCount}</span>` : ''}
+                            <span class="preview">${latestMessage.content}</span>
+                        `;
+                    item.addEventListener("click", () => {
+                        selectedCustomer = customer;
+                        if (window.chatData[customer].unreadCount > 0) {
+                            window.chatData['admin'].unreadCount -= window.chatData[customer].unreadCount;
+                            window.chatData[customer].unreadCount = 0;
+                            localStorage.setItem('chatData', JSON.stringify(window.chatData));
+                            updateChatBadge();
+                        }
+                        loadAdminMessages();
+                        console.log("Selected customer:", customer, "Name:", displayName);
+                    });
+                    customerList.appendChild(item);
+                });
+            }
+
+            // Load tin nhắn của khách hàng được chọn
+            function loadAdminMessages() {
+                const chatMessages = document.getElementById("adminChatMessages");
+                if (!chatMessages) {
+                    console.error("adminChatMessages not found");
+                    return;
+                }
+                chatMessages.innerHTML = "";
+
+                if (!selectedCustomer) {
+                    chatMessages.innerHTML = "<p class='text-muted'>Vui lòng chọn một khách hàng.</p>";
+                    return;
+                }
+
+                const messages = window.chatData[selectedCustomer] || [];
+                messages.forEach(msg => {
+                    const messageDiv = document.createElement("div");
+                    messageDiv.className = msg.isAdmin ? "row m-b-20 send-chat" : "row m-b-20 received-chat";
+                    messageDiv.innerHTML = `
+                            <div class="col-auto ${msg.isAdmin ? 'p-l-0' : 'p-r-0'}">
+                                <span class="chat-name">${msg.sender}</span>
+                            </div>
+                            <div class="col">
+                                <div class="msg" style="color: #000000">
+                                    <p>${msg.content}</p>
+                                </div>
+                                <p class="text-muted m-b-0">
+                                    <i class="fa fa-clock m-r-10"></i>${msg.time}
+                                </p>
+                            </div>
+                        `;
+                    chatMessages.appendChild(messageDiv);
+                });
+
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+                console.log("Loaded messages for customer:", selectedCustomer, messages);
+            }
+
+            // Gửi tin nhắn từ admin
+            window.sendAdminMessage = function () {
+                const chatInput = document.getElementById("adminChatInput");
+                const chatMessages = document.getElementById("adminChatMessages");
+                if (!chatInput || !chatMessages) {
+                    console.error("adminChatInput or adminChatMessages not found");
+                    return;
+                }
+
+                const messageText = chatInput.value.trim();
+                if (!selectedCustomer) {
+                    alert("Vui lòng chọn một khách hàng.");
+                    return;
+                }
+
+                if (messageText === "") {
+                    console.log("Empty message, not sending");
+                    return;
+                }
+
+                const now = new Date();
+                const timeString = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
+                const newMessage = {
+                    id: nextMessageId++,
+                    sender: adminName,
+                    content: messageText,
+                    time: timeString,
+                    isAdmin: true
+                };
+
+                if (!window.chatData[selectedCustomer]) {
+                    window.chatData[selectedCustomer] = [];
+                }
+                window.chatData[selectedCustomer].push(newMessage);
+
+                const adminMessage = document.createElement("div");
+                adminMessage.className = "row m-b-20 send-chat";
+                adminMessage.innerHTML = `
+                        <div class="col">
+                            <div class="msg">
+                                <p>${newMessage.content}</p>
+                            </div>
+                            <p class="text-muted m-b-0">
+                                <i class="fa fa-clock m-r-10"></i>${newMessage.time}
+                            </p>
+                        </div>
+                        <div class="col-auto p-l-0">
+                            <span class="chat-name">${adminName}</span>
+                        </div>
+                    `;
+                chatMessages.appendChild(adminMessage);
+
+                chatInput.value = "";
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+                localStorage.setItem('chatData', JSON.stringify(window.chatData));
+                loadCustomers();
+                console.log("Admin sent message:", newMessage);
+            };
+
+            // Kiểm tra tin nhắn mới từ khách hàng
+            function checkNewMessages() {
+                const customers = Object.keys(window.chatData).filter(id => id !== 'admin');
+                let totalNewMessages = 0;
+                customers.forEach(customer => {
+                    const messages = window.chatData[customer] || [];
+                    const lastChecked = parseInt(localStorage.getItem(`lastChecked_${customer}`)) || 0;
+                    const newMessages = messages.filter(msg => msg.id > lastChecked && !msg.isAdmin);
+                    if (newMessages.length > 0) {
+                        window.chatData[customer].unreadCount = (window.chatData[customer].unreadCount || 0) + newMessages.length;
+                        window.chatData['admin'].unreadCount = (window.chatData['admin'].unreadCount || 0) + newMessages.length;
+                        totalNewMessages += newMessages.length;
+                        localStorage.setItem(`lastChecked_${customer}`, messages[messages.length - 1].id);
+                        localStorage.setItem('chatData', JSON.stringify(window.chatData));
+                        loadCustomers(); // Cập nhật danh sách khách hàng nếu chat admin đang mở
+                    }
+                });
+                if (totalNewMessages > 0) {
+                    updateChatBadge();
+                    console.log("New customer messages:", totalNewMessages);
+                }
+            }
+            setInterval(checkNewMessages, 1000); // Kiểm tra mỗi 1 giây
+            updateChatBadge(); // Cập nhật badge ngay khi tải trang
+        });
+    </script>
+</body>
+</html>
+    

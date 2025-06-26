@@ -1,0 +1,248 @@
+﻿@model OfficePlantCare.Models.Admin
+
+@{
+    ViewData["Title"] = "Xem hồ sơ";
+    Layout = "~/Areas/AdminQL/Views/Shared/Admin.cshtml";
+}
+
+<link rel="stylesheet" href="~/assets/css/index.css" />
+
+<div class="pcoded-main-container">
+    <div class="pcoded-content">
+        <!-- Page Header -->
+        <div class="page-header card shadow-lg border-0" style="background: linear-gradient(45deg, #28a745, #218838);">
+            <div class="page-block">
+                <div class="row align-items-center">
+                    <div class="col-md-12">
+                        <div class="page-header-title d-flex justify-content-between align-items-center py-2 ml-2">
+                            <h5 class="m-0 text-white font-weight-bold">THÔNG TIN QUẢN TRỊ VIÊN</h5>
+                            <nav aria-label="breadcrumb">
+                                <ol class="breadcrumb mb-0 bg-transparent">
+                                    <li class="breadcrumb-item"><a asp-area="AdminQL" asp-controller="Dashboard" asp-action="AdminDashboard"><i class="fas fa-home text-white"></i></a></li> 
+                                    <li class="breadcrumb-item active text-white" aria-current="page">XEM HỒ SƠ</li>
+                                </ol>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card shadow-lg border-0" style="border-radius: 12px; overflow: hidden;">
+                    <div class="card-header bg-gradient-success text-dark py-2 text-center" style="background: linear-gradient(45deg, #28a745, #218838);">
+                        <h6 class="m-0 font-weight-bold">HỒ SƠ QUẢN TRỊ VIÊN</h6>
+                    </div>
+
+                    <div class="card-body p-3 bg-light" style="background: linear-gradient(145deg, #f8f9fa, #e9ecef);">
+                        <!-- Tabs -->
+                        <ul class="nav nav-tabs" id="myTab" role="tablist">
+                            <li class="nav-item" role="presentation">
+                                <a class="nav-link active" id="details-tab" data-bs-toggle="tab" href="#details" role="tab" aria-controls="details" aria-selected="true">
+                                    <i class="fas fa-eye"></i> Xem hồ sơ
+                                </a>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <a class="nav-link" id="edit-tab" data-bs-toggle="tab" href="#edit" role="tab" aria-controls="edit" aria-selected="false">
+                                    <i class="fas fa-edit"></i> Chỉnh sửa
+                                </a>
+                            </li>
+                        </ul>
+
+                        <!-- Tab Content -->
+                        <div class="tab-content p-3" id="myTabContent">
+                            <!-- Tab Details -->
+                            <div class="tab-pane fade show active" id="details" role="tabpanel" aria-labelledby="details-tab">
+                                <div class="table-responsive">
+                                    <table class="table table-hover table-striped align-middle">
+                                        <tbody>
+                                            <tr>
+                                                <td class="text-success font-weight-bold w-30" style="font-size: 0.9rem;">
+                                                    @Html.DisplayNameFor(model => model.Username)
+                                                </td>
+                                                <td style="font-size: 0.9rem;" class="text-dark">@Html.DisplayFor(model => model.Username)</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-success font-weight-bold w-30" style="font-size: 0.9rem;">
+                                                    @Html.DisplayNameFor(model => model.Email)
+                                                </td>
+                                                <td style="font-size: 0.9rem;" class="text-dark">@Html.DisplayFor(model => model.Email)</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-success font-weight-bold w-30" style="font-size: 0.9rem;">
+                                                    @Html.DisplayNameFor(model => model.CreatedDate)
+                                                </td>
+                                                <td style="font-size: 0.9rem;" class="text-dark">@Html.DisplayFor(model => model.CreatedDate)</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-success font-weight-bold w-30" style="font-size: 0.9rem;">
+                                                    @Html.DisplayNameFor(model => model.UpdatedDate)
+                                                </td>
+                                                <td style="font-size: 0.9rem;" class="text-dark">@Html.DisplayFor(model => model.UpdatedDate)</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-success font-weight-bold w-30" style="font-size: 0.9rem;">
+                                                    @Html.DisplayNameFor(model => model.Address)
+                                                </td>
+                                                <td style="font-size: 0.9rem;" class="text-dark">@Html.DisplayFor(model => model.Address)</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-success font-weight-bold w-30" style="font-size: 0.9rem;">
+                                                    @Html.DisplayNameFor(model => model.RoleId)
+                                                </td>
+                                                <td style="font-size: 0.9rem;" class="text-dark">@Html.DisplayFor(model => model.Role.RoleName)</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <!-- Avatar Section -->
+                                <div class="text-center mt-2">
+                                    <h6 class="text-success font-weight-bold mb-1" style="font-size: 0.9rem;">
+                                        @Html.DisplayNameFor(model => model.Avatar)
+                                    </h6>
+                                    <div>
+                                        @if (!string.IsNullOrEmpty(Model.Avatar))
+                                        {
+                                            <img src="@Model.Avatar" alt="Avatar" class="rounded-circle shadow-sm img-fluid" style="max-width: 100px; height: auto; border: 3px solid #28a745;" />
+                                        }
+                                        else
+                                        {
+                                            <img src="~/images/default-avatar.png" alt="Default Avatar" class="rounded-circle shadow-sm img-fluid" style="max-width: 100px; height: auto; border: 3px solid #28a745;" />
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Tab Edit -->
+                            <div class="tab-pane fade" id="edit" role="tabpanel" aria-labelledby="edit-tab">
+                                <form asp-action="Edit" method="post" enctype="multipart/form-data">
+                                    <div asp-validation-summary="ModelOnly" class="text-danger text-center mb-2" style="font-size: 0.85rem;"></div>
+                                    <input type="hidden" asp-for="AdminId" />
+
+                                    <!-- Username -->
+                                    <div class="form-group mb-2">
+                                        <label asp-for="Username" class="form-label text-success font-weight-bold" style="font-size: 0.9rem;"></label>
+                                        <input asp-for="Username" class="form-control shadow-sm" style="border-color: #28a745; font-size: 0.9rem;" />
+                                        <span asp-validation-for="Username" class="text-danger" style="font-size: 0.85rem;"></span>
+                                    </div>
+
+                                    <!-- Email -->
+                                    <div class="form-group mb-2">
+                                        <label asp-for="Email" class="form-label text-success font-weight-bold" style="font-size: 0.9rem;"></label>
+                                        <input asp-for="Email" class="form-control shadow-sm" style="border-color: #28a745; font-size: 0.9rem;" />
+                                        <span asp-validation-for="Email" class="text-danger" style="font-size: 0.85rem;"></span>
+                                    </div>
+
+                                    <!-- Avatar -->
+                                    <div class="form-group mb-2">
+                                        <label asp-for="Avatar" class="form-label text-success font-weight-bold" style="font-size: 0.9rem;"></label>
+                                        <input asp-for="Avatar" type="file" class="form-control shadow-sm" style="border-color: #28a745; font-size: 0.9rem;" />
+                                        <span asp-validation-for="Avatar" class="text-danger" style="font-size: 0.85rem;"></span>
+                                    </div>
+
+                                    <!-- Status -->
+                                    <div class="form-group mb-2">
+                                        <label asp-for="Status" class="form-label text-success font-weight-bold" style="font-size: 0.9rem;"></label>
+                                        <select asp-for="Status" class="form-control shadow-sm" style="border-color: #28a745; font-size: 0.9rem;">
+                                            <option value="Hoạt động">Hoạt động</option>
+                                            <option value="Không hoạt động">Không hoạt động</option>
+                                        </select>
+                                        <span asp-validation-for="Status" class="text-danger" style="font-size: 0.85rem;"></span>
+                                    </div>
+
+                                    <!-- RoleId -->
+                                    <div class="form-group mb-2">
+                                        <label asp-for="RoleId" class="form-label text-success font-weight-bold" style="font-size: 0.9rem;"></label>
+                                        <select asp-for="RoleId" class="form-control shadow-sm" asp-items="ViewBag.RoleId" style="border-color: #28a745; font-size: 0.9rem;"></select>
+                                        <span asp-validation-for="RoleId" class="text-danger" style="font-size: 0.85rem;"></span>
+                                    </div>
+
+                                    <!-- Address -->
+                                    <div class="form-group mb-2">
+                                        <label asp-for="Address" class="form-label text-success font-weight-bold" style="font-size: 0.9rem;"></label>
+                                        <input asp-for="Address" class="form-control shadow-sm" style="border-color: #28a745; font-size: 0.9rem;" />
+                                        <span asp-validation-for="Address" class="text-danger" style="font-size: 0.85rem;"></span>
+                                    </div>
+
+                                    <!-- Submit Button -->
+                                    <div class="form-group text-center mb-0">
+                                        <button type="submit" class="btn btn-success btn-sm shadow-lg" style="background: linear-gradient(45deg, #28a745, #218838); border: none; font-size: 0.9rem;">
+                                            <i class="fas fa-save me-1"></i>Lưu thay đổi
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .card {
+        border-radius: 12px;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+        .card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+
+    .form-control:focus {
+        border-color: #28a745;
+        box-shadow: 0 0 5px rgba(40, 167, 69, 0.5);
+    }
+
+    .nav-tabs .nav-link {
+        color: #28a745;
+        border: none;
+        font-size: 0.9rem;
+    }
+
+        .nav-tabs .nav-link.active {
+            background-color: #28a745;
+            color: white;
+            border-radius: 5px 5px 0 0;
+        }
+
+    .btn {
+        transition: all 0.3s ease;
+        padding: 0.25rem 0.75rem;
+    }
+
+        .btn:hover {
+            transform: translateY(-1px);
+            opacity: 0.9;
+        }
+
+    .bg-gradient-success {
+        background: linear-gradient(45deg, #28a745, #218838);
+    }
+
+    .breadcrumb-item a, .breadcrumb-item.active {
+        transition: color 0.3s ease;
+    }
+
+        .breadcrumb-item a:hover {
+            color: #ffffff !important;
+            text-decoration: underline;
+        }
+</style>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const card = document.querySelector('.card');
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(15px)';
+            setTimeout(() => {
+                card.style.transition = 'all 0.4s ease';
+                card.style.opacity = '1';
+                card.style.transform = 'translateY(0)';
+            }, 50);
+        });
+    </script>

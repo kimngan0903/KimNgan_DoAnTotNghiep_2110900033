@@ -1,0 +1,180 @@
+﻿@model OfficePlantCare.Models.Order
+
+@{
+    ViewData["Title"] = "Hóa đơn tổng hợp đơn hàng khách đặt dịch vụ lẻ";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"]</title>
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="~/favicon-32x32.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/css/fonts.css" />
+    <link rel="stylesheet" href="~/css/printinvoice.css" />
+</head>
+<body>
+    <div class="invoice-container">
+        @if (Model == null)
+        {
+            <div class="alert alert-info text-center">
+                <h4>Thông báo</h4>
+                <p>Không có yêu cầu dịch vụ nào chưa thanh toán để hiển thị hóa đơn.</p>
+                <button onclick="window.close()" class="btn btn-secondary">Đóng</button>
+            </div>
+        }
+        else
+        {
+            <!-- Tiêu đề hóa đơn -->
+            <div class="invoice-header">
+                <h2>HÓA ĐƠN TỔNG HỢP ĐƠN HÀNG</h2>
+                <p>Khách hàng: @Model.Customer?.CustomerName</p>
+                <p>Ngày in: @DateTime.Now.ToString("dd/MM/yyyy")</p>
+            </div>
+
+            <!-- Thông tin khách hàng -->
+            <div class="customer-details">
+                <h4>Thông tin khách hàng</h4>
+                <p><strong>Mã đơn hàng:</strong> #@Model.OrderId</p>
+                <p><strong>Tên khách hàng:</strong> @Model.Customer?.CustomerName</p>
+                <p><strong>Email:</strong> @Model.Customer?.Email</p>
+                <p><strong>Số điện thoại:</strong> @Model.Customer?.Phone</p>
+                <p><strong>Quê quán:</strong> @Model.Customer?.Address</p>
+                <p><strong>Phương thức thanh toán:</strong> @(Model.PaymentMethodId == 2 ? "Thanh toán qua VietQR" : Model.PaymentMethod?.MethodName)</p>
+            </div>
+
+            <!-- Chi tiết đơn hàng -->
+            <div class="invoice-details">
+                <h4>Chi tiết các đơn hàng</h4>
+                @if (Model.OrderDetails != null && Model.OrderDetails.Any())
+                {
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th class="text-center">Dịch vụ</th>
+                                <th class="text-center">Số lượng</th>
+                                <th class="text-center">Giá</th>
+                                <th class="text-center">Ngày đặt hàng</th>
+                                <th class="text-center">Nhân viên</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.OrderDetails)
+                            {
+                                <tr>
+                                    <td>@(item.Service?.ServiceName ?? "Không có thông tin")</td>
+                                    <td class="text-center">@item.Quantity</td>
+                                    <td>@(item.TotalAmount?.ToString("N0") ?? "0") VNĐ</td>
+                                    <td>@Model.OrderDate?.ToString("dd/MM/yyyy")</td>
+                                    <td>@(Model.Staff?.StaffName ?? "Không có thông tin")</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                }
+                else
+                {
+                    <p class="text-center">Không có chi tiết đơn hàng để hiển thị.</p>
+                }
+
+                <!-- Tổng cộng -->
+                <p class="total">Tổng cộng: @(Model.TotalPrice?.ToString("N0") ?? "0") VNĐ</p>
+            </div>
+
+            <!-- Nút in và chuyển khoản -->
+            <div class="print-button">
+                <button onclick="window.print()"><i class="fas fa-print"></i> In hóa đơn</button>
+                @if (Model.PaymentMethodId == 2 && Model.PaymentStatus == "Chưa thanh toán")
+                {
+                    <button class="transfer-button" onclick="openTransferModal()">
+                        <i class="fas fa-money-bill-wave"></i> Chuyển khoản
+                    </button>
+                }
+            </div>
+            @if (Model.PaymentMethodId == 2 && Model.PaymentStatus == "Chưa thanh toán")
+            {
+                <!-- Modal chuyển khoản -->
+                <div id="transferModal" class="modal">
+                    <div class="modal-content">
+                        <span class="close" onclick="closeTransferModal()">×</span>
+                        <h3>Thông tin chuyển khoản</h3>
+                        <p><strong>Số tiền cần chuyển:</strong> @(Model.TotalPrice?.ToString("N0") ?? "0") VNĐ</p>
+                        <p><strong>Ngân hàng:</strong> Vietcombank</p>
+                        <p><strong>Chủ tài khoản:</strong> Phạm Thị Kim Ngân</p>
+                        <p><strong>Số tài khoản:</strong> 9373993662</p>
+                        <p><strong>Nội dung chuyển khoản:</strong> Thanh toán hóa đơn tổng hợp cho @Model.Customer?.CustomerName</p>
+
+                        <!-- Container mã QR -->
+                        <div id="qrContainer" class="mt-3 text-center">
+                            <h5>Quét mã QR để thanh toán</h5>
+                            <img id="qrCode" src="" alt="Mã QR VietQR" style="width: 200px; height: 200px; border-radius: 10px;">
+                            <!-- Nút xác nhận chuyển khoản -->
+                            <div class="mt-3">
+                                <button id="confirmTransferBtn" class="btn btn-primary"
+                                        onclick="@(Model != null ? $"confirmTransfer({Model.CustomerId})" : "alert('Không có dữ liệu để xác nhận.')")">
+                                    Xác nhận đã chuyển khoản
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+    </div>
+    <script>
+        // Tự động mở cửa sổ in khi trang được tải (tùy chọn)
+        window.onload = function () {
+            // window.print(); // Bỏ comment nếu muốn tự động in
+        };
+
+        // Hàm mở modal chuyển khoản và tải mã QR
+        function openTransferModal() {
+            document.getElementById("transferModal").style.display = "block";
+
+            // Tải mã QR với tổng số tiền của tất cả đơn hàng
+            var totalAmount = @(Model?.TotalPrice?.ToString("0.##") ?? "0");
+            var qrUrl = "@Url.Action("GenerateQr", "QrCode")" + "?amount=" + totalAmount;
+            console.log("Đang tải mã QR từ:", qrUrl);
+            document.getElementById("qrCode").src = qrUrl;
+            document.getElementById("qrContainer").style.display = "block";
+        }
+
+        // Hàm đóng modal chuyển khoản
+        function closeTransferModal() {
+            document.getElementById("transferModal").style.display = "none";
+            document.getElementById("qrContainer").style.display = "none"; // Ẩn mã QR khi đóng modal
+        }
+
+        // Đóng modal khi nhấp bên ngoài
+        window.onclick = function (event) {
+            var modal = document.getElementById("transferModal");
+            if (event.target == modal) {
+                modal.style.display = "none";
+                document.getElementById("qrContainer").style.display = "none"; // Ẩn mã QR
+            }
+        };
+
+        // Hàm xác nhận chuyển khoản
+        function confirmTransfer(customerId) {
+            document.getElementById("qrContainer").style.display = "none";
+            closeTransferModal();
+
+            // Hiển thị thông báo trước khi redirect
+            alert("Xác nhận chuyển khoản thành công! Đang chuyển về trang chính...");
+
+            // Redirect cửa sổ hiện tại về Index với tham số confirmPayment
+            window.location.href = "/AdminQL/Orders/Index?confirmPayment=" + customerId;
+
+            // Đóng cửa sổ sau khi redirect (tùy chọn, nhưng có thể không cần vì đã redirect)
+            setTimeout(function () {
+                window.close();
+            }, 1000); // Đợi 1 giây để người dùng thấy thông báo
+        }
+    </script>
+</body>
+</html>

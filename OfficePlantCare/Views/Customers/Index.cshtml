@@ -1,0 +1,204 @@
+﻿@model IEnumerable<OfficePlantCare.Models.CareSchedule>
+
+@{
+    ViewData["Title"] = "Danh sách lịch chăm sóc";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- ##### Breadcrumb Area Start ##### -->
+<div class="breadcrumb-area">
+    <div class="top-breadcrumb-area bg-img bg-overlay d-flex align-items-center justify-content-center" style="background-image: url('https://noithatduonggia.vn/wp-content/uploads/2019/06/thuc-trang-van-phong-xanh-hien-nay.jpg'); background-size: cover; background-position: center; height: 300px;">
+        <h2 class="text-white" style="font-weight: 700; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);">DANH SÁCH LỊCH CHĂM SÓC</h2>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb shadow-sm p-3 mb-5 bg-white rounded" style="background: linear-gradient(135deg, #f8f9fa, #e9ecef);">
+                        <li class="breadcrumb-item"><a href="~/home"><i class="fa fa-home"></i> Trang chủ</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Danh sách lịch chăm sóc</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ##### Breadcrumb Area End ##### -->
+<!-- ##### Care Schedule List Area Start ##### -->
+<section class="care-schedule-list-area mb-5">
+    <div class="container">
+        @if (TempData["SuccessMessage"] != null)
+        {
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                @TempData["SuccessMessage"]
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+        }
+        @if (TempData["ErrorMessage"] != null)
+        {
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                @TempData["ErrorMessage"]
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+        }
+        <!-- Bảng 1: Lịch chăm sóc theo Hợp đồng (ContractId) -->
+        <div class="row mb-5">
+            <div class="col-12">
+                <div class="card shadow-sm rounded" style="background: linear-gradient(135deg, #ffffff, #e6ffe6); border: 1px solid #c3e6cb;">
+                    <div class="card-body">
+                        <h4 class="card-title mb-4 text-center" style="font-weight: 700; color: #2c3e50; text-transform: uppercase;">LỊCH CHĂM SÓC THEO HỢP ĐỒNG</h4>
+                        @if (Model.Any(x => x.ContractId != null))
+                        {
+                            <div class="table-responsive">
+                                <table class="table table-hover table-bordered">
+                                    <thead class="thead-dark">
+                                        <tr>
+                                            <th class="text-center" scope="col">@Html.DisplayNameFor(model => model.ScheduledDate)</th>
+                                            <th class="text-center" scope="col">@Html.DisplayNameFor(model => model.ScheduledTime)</th>
+                                            <th class="text-center" scope="col">@Html.DisplayNameFor(model => model.ActualDate)</th>
+                                            <th class="text-center" scope="col">@Html.DisplayNameFor(model => model.Duration)</th>
+                                            <th class="text-center" scope="col">@Html.DisplayNameFor(model => model.StaffId)</th>
+                                            <th class="text-center" scope="col">@Html.DisplayNameFor(model => model.Status)</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var item in Model.Where(x => x.ContractId != null))
+                                        {
+                                            <tr>
+                                                <td>@Html.DisplayFor(modelItem => item.ScheduledDate)</td>
+                                                <td>@Html.DisplayFor(modelItem => item.ScheduledTime)</td>
+                                                <td>@Html.DisplayFor(modelItem => item.ActualDate)</td>
+                                                <td>@Html.DisplayFor(modelItem => item.Duration)</td>
+                                                <td>@Html.DisplayFor(modelItem => item.Staff.StaffName)</td>
+                                                <td>
+                                                    @if (item.Status.ToString() == "Hoàn thành")
+                                                    {
+                                                        <span class="badge badge-success px-3 py-1">Hoàn thành</span>
+                                                    }
+                                                    else if (item.Status.ToString() == "Đang thực hiện")
+                                                    {
+                                                        <span class="badge badge-warning px-3 py-1">Đang thực hiện</span>
+                                                    }
+                                                    else if (item.Status.ToString() == "Chưa thực hiện")
+                                                    {
+                                                        <span class="badge badge-danger px-3 py-1">Chưa thực hiện</span>
+                                                    }
+                                                    else
+                                                    {
+                                                        <span class="badge badge-secondary px-3 py-1">Không xác định</span>
+                                                    }
+                                                </td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="alert alert-info text-center" role="alert">
+                                Chưa có lịch chăm sóc nào theo hợp đồng.
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bảng 2: Lịch chăm sóc theo đơn hàng (OrderId) -->
+        <div class="row">
+            <div class="col-12">
+                <div class="card shadow-sm rounded" style="background: linear-gradient(135deg, #ffffff, #e6ffe6); border: 1px solid #c3e6cb;">
+                    <div class="card-body">
+                        <h4 class="card-title mb-4 text-center" style="font-weight: 700; color: #2c3e50; text-transform: uppercase;">LỊCH CHĂM SÓC THEO ĐƠN HÀNG</h4>
+                        @if (Model.Any(x => x.OrderId != null))
+                        {
+                            <div class="table-responsive">
+                                <table class="table table-hover table-bordered">
+                                    <thead class="thead-dark">
+                                        <tr>
+                                            <th class="text-center" scope="col">@Html.DisplayNameFor(model => model.ScheduledDate)</th>
+                                            <th class="text-center" scope="col">@Html.DisplayNameFor(model => model.ScheduledTime)</th>
+                                            <th class="text-center" scope="col">@Html.DisplayNameFor(model => model.ActualDate)</th>
+                                            <th class="text-center" scope="col">@Html.DisplayNameFor(model => model.Duration)</th>
+                                            <th class="text-center" scope="col">@Html.DisplayNameFor(model => model.StaffId)</th>
+                                            <th class="text-center" scope="col">@Html.DisplayNameFor(model => model.Status)</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var item in Model.Where(x => x.OrderId != null))
+                                        {
+                                            <tr>
+                                                <td>@Html.DisplayFor(modelItem => item.ScheduledDate)</td>
+                                                <td>@Html.DisplayFor(modelItem => item.ScheduledTime)</td>
+                                                <td>@Html.DisplayFor(modelItem => item.ActualDate)</td>
+                                                <td>@Html.DisplayFor(modelItem => item.Duration)</td>
+                                                <td>@Html.DisplayFor(modelItem => item.Staff.StaffName)</td>
+                                                <td>
+                                                    @if (item.Status.ToString() == "Hoàn thành")
+                                                    {
+                                                        <span class="badge badge-success px-3 py-1">Hoàn thành</span>
+                                                    }
+                                                    else if (item.Status.ToString() == "Đang thực hiện")
+                                                    {
+                                                        <span class="badge badge-warning px-3 py-1">Đang thực hiện</span>
+                                                    }
+                                                    else if (item.Status.ToString() == "Chưa thực hiện")
+                                                    {
+                                                        <span class="badge badge-danger px-3 py-1">Chưa thực hiện</span>
+                                                    }
+                                                    else
+                                                    {
+                                                        <span class="badge badge-secondary px-3 py-1">Không xác định</span>
+                                                    }
+                                                </td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="alert alert-info text-center" role="alert">
+                                Chưa có lịch chăm sóc nào theo đơn hàng.
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- ##### Care Schedule List Area End ##### -->
+
+<style>
+    .table-hover tbody tr:hover {
+        background-color: #f1f8e9;
+        transition: background-color 0.3s ease;
+    }
+
+    .thead-dark {
+        background-color: #2c3e50;
+        color: white;
+    }
+
+    .btn-sm {
+        padding: 0.25rem 0.5rem;
+        font-size: 0.875rem;
+    }
+
+    .badge {
+        font-size: 0.9rem;
+        padding: 0.5em 0.75em;
+    }
+</style>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

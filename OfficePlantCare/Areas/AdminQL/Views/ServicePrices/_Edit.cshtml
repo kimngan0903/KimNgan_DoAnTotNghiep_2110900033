@@ -1,0 +1,79 @@
+﻿@model OfficePlantCare.Models.ServicePrice
+
+@{
+    ViewData["Title"] = "Chỉnh sửa Giá dịch vụ";
+}
+
+<link rel="stylesheet" href="~/assets/css/edit.css" />
+
+<div class="card shadow-sm border-0 rounded-lg p-1">
+    <h3 class="text-success text-center font-weight-bold mb-4"><i class="fa-solid fa-pen-to-square me-2"></i>CHỈNH SỬA GIÁ DỊCH VỤ</h3>
+    <form asp-action="Edit" method="post">
+        <input type="hidden" asp-for="PriceId" />
+        <input type="hidden" asp-for="ServiceId" />
+
+        <div class="row">
+            <!-- Cột trái -->
+            <div class="col-md-6">
+                <div class="form-group mb-4">
+                    <i class="fa-solid fa-concierge-bell me-2"></i>
+                    <label asp-for="ServiceId" class="control-label fw-bold text-muted"></label>
+                    <input type="text" class="form-control rounded-pill" value="@ViewData["ServiceName"]" readonly />
+                    <span asp-validation-for="ServiceId" class="text-danger"></span>
+                </div>
+                <div class="form-group mb-4">
+                    <i class="fa-solid fa-tags me-2"></i>
+                    <label asp-for="ServiceType" class="control-label fw-bold text-muted"></label>
+                    <input asp-for="ServiceType" class="form-control rounded-pill" placeholder="Nhập loại dịch vụ" />
+                    <span asp-validation-for="ServiceType" class="text-danger"></span>
+                </div>
+                <div class="form-group mb-4">
+                    <i class="fa-solid fa-tree me-2"></i>
+                    <label asp-for="TreeSize" class="control-label fw-bold text-muted"></label>
+                    <input asp-for="TreeSize" class="form-control rounded-pill" placeholder="Nhập kích thước cây" />
+                    <span asp-validation-for="TreeSize" class="text-danger"></span>
+                </div>
+                <div class="form-group mb-4">
+                    <i class="fa-solid fa-building me-2"></i>
+                    <label asp-for="OfficeSize" class="control-label fw-bold text-muted"></label>
+                    <input asp-for="OfficeSize" class="form-control rounded-pill" placeholder="Nhập kích thước văn phòng" />
+                    <span asp-validation-for="OfficeSize" class="text-danger"></span>
+                </div>
+            </div>
+
+            <!-- Cột phải -->
+            <div class="col-md-6">
+                <div class="form-group mb-4">
+                    <i class="fa-solid fa-clock me-2"></i>
+                    <label asp-for="DurationInMonths" class="control-label fw-bold text-muted"></label>
+                    <input asp-for="DurationInMonths" type="number" class="form-control rounded-pill" placeholder="Nhập thời gian (tháng)" min="1" />
+                    <span asp-validation-for="DurationInMonths" class="text-danger"></span>
+                </div>
+                <div class="form-group mb-4">
+                    <i class="fa-solid fa-trees me-2"></i>
+                    <label asp-for="NumberOfTrees" class="control-label fw-bold text-muted"></label>
+                    <input asp-for="NumberOfTrees" type="number" class="form-control rounded-pill" placeholder="Nhập số lượng cây" min="1" />
+                    <span asp-validation-for="NumberOfTrees" class="text-danger"></span>
+                </div>
+                <div class="form-group mb-4">
+                    <i class="fa-solid fa-money-bill me-2"></i>
+                    <label asp-for="Price" class="control-label fw-bold text-muted"></label>
+                    <input asp-for="Price" type="number" step="0.01" class="form-control rounded-pill" placeholder="Nhập giá dịch vụ" min="0" value="@(Model.Price?.ToString("N0").Replace(",", ".") + " VNĐ")" />
+                    <span asp-validation-for="Price" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Buttons -->
+        <div class="form-group d-flex gap-3 justify-content-center">
+            <button type="submit" class="btn btn-primary rounded-pill px-4"><i class="fas fa-save me-2"></i>Lưu</button>
+            <a asp-action="Index" class="btn btn-secondary rounded-pill px-4"><i class="fas fa-arrow-left me-2"></i>Quay lại</a>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

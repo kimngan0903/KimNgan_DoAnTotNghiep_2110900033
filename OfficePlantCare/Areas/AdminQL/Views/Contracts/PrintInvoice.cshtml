@@ -1,0 +1,226 @@
+﻿@model List<OfficePlantCare.Models.Contract>
+
+@{
+    ViewData["Title"] = "Hóa đơn của khách ký hợp đồng";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"]</title>
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="~/favicon-32x32.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+    <link rel="stylesheet" href="~/css/fonts.css" />
+    <link rel="stylesheet" href="~/css/printinvoice.css" />
+</head>
+<body>
+    <div class="invoice-container">
+        @if (!Model.Any())
+        {
+            <div class="alert alert-info text-center">
+                <h4>Thông báo</h4>
+                <p>Không có hợp đồng nào để hiển thị hóa đơn.</p>
+                <button onclick="window.close()" class="btn btn-secondary">Đóng</button>
+            </div>
+        }
+        else
+        {
+            var firstContract = Model.First(); // Lưu vào biến để sử dụng nhiều lần
+            var contractDetails = firstContract.ContractDetails ?? new List<ContractDetail>(); // Đảm bảo không null
+
+            <!-- Tiêu đề hóa đơn -->
+            <div class="invoice-header">
+                <h2>HÓA ĐƠN HỢP ĐỒNG</h2>
+                <p>Khách hàng: @firstContract.Customer.CustomerName</p>
+                <p>Ngày in: @DateTime.Now.ToString("dd/MM/yyyy HH:mm")</p>
+            </div>
+
+            <!-- Thông tin khách hàng -->
+            <div class="customer-details">
+                <h4>Thông tin khách hàng</h4>
+                <p><strong>Số hợp đồng:</strong> @firstContract.ContractCode</p>
+                <p><strong>Tên khách hàng:</strong> @firstContract.Customer.CustomerName</p>
+                <p><strong>Email:</strong> @firstContract.Customer.Email</p>
+                <p><strong>Số điện thoại:</strong> @firstContract.Customer.Phone</p>
+                <p><strong>Quê quán:</strong> @(firstContract.Customer.Address ?? "Không có thông tin")</p>
+                <p><strong>Phương thức thanh toán:</strong> @(firstContract.PaymentMethodId == 2 ? "Thanh toán qua VietQR" : (firstContract.PaymentMethod?.MethodName ?? "Không có thông tin"))</p>
+            </div>
+
+            <!-- Nội dung hợp đồng -->
+            <div class="contract-details">
+                <h4>HỢP ĐỒNG DỊCH VỤ CHĂM SÓC CÂY CẢNH VĂN PHÒNG</h4>
+                <p><strong>Số hợp đồng:</strong> @firstContract.ContractCode</p>
+                <p><strong>Ngày ký:</strong> @firstContract.StartDate.ToString("dd/MM/yyyy")</p>
+
+                <h5>BÊN A (BÊN CUNG CẤP DỊCH VỤ):</h5>
+                <p>- Tên công ty: Công ty TNHH Chăm sóc Cây cảnh Văn phòng</p>
+                <p>- Địa chỉ: ngõ 36, Lê Trọng Tấn, La Khê, Hà Đông, Hà Nội</p>
+                <p>- Mã số thuế: 0373 993 662</p>
+                <p>- Đại diện: Bà Phạm Thị Kim Ngân</p>
+                <p>- Chức vụ: Giám đốc</p>
+                <p>- Số điện thoại: 0373 993 662</p>
+                <p>- Email: ngan36758@gmail.com</p>
+
+                <h5>BÊN B (KHÁCH HÀNG):</h5>
+                <p>- Tên khách hàng: @firstContract.Customer.CustomerName</p>
+                <p>- Email: @firstContract.Customer.Email</p>
+                <p>- Số điện thoại: @firstContract.Customer.Phone</p>
+                <p>- Địa chỉ: @(firstContract.Customer.Address ?? "Không có thông tin")</p>
+
+                <p>Hai bên cùng thỏa thuận ký kết hợp đồng với các điều khoản sau:</p>
+
+                <h5>ĐIỀU 1: NỘI DUNG HỢP ĐỒNG</h5>
+                <p>1. Bên A đồng ý cung cấp dịch vụ chăm sóc cây cảnh văn phòng cho Bên B theo các chi tiết hợp đồng sau:</p>
+                <ul>
+                    @foreach (var detail in contractDetails)
+                    {
+                        <li>
+                            <strong>Dịch vụ:</strong> @(detail.Service?.ServiceName ?? "Không có thông tin")<br>
+                            <strong>Giá dịch vụ:</strong> @(detail.Price.Price?.ToString("N0") ?? "0") VNĐ<br>
+                            <strong>Địa chỉ thực hiện:</strong> @(detail.Address ?? "Không có thông tin")<br>
+                            <strong>Trạng thái:</strong> @(detail.Status ?? "Chưa xác định")
+                        </li>
+                    }
+                    <li><strong>Thời hạn hợp đồng:</strong> @firstContract.Duration @firstContract.DurationUnit (từ @firstContract.StartDate.ToString("dd/MM/yyyy") đến @firstContract.EndDate?.ToString("dd/MM/yyyy"))</li>
+                    <li><strong>Tổng giá trị hợp đồng:</strong> @firstContract.TotalAmount?.ToString("N0") VNĐ</li>
+                </ul>
+
+                <h5>ĐIỀU 2: PHƯƠNG THỨC THANH TOÁN</h5>
+                <p>1. Bên B thanh toán cho Bên A tổng số tiền: @firstContract.TotalAmount?.ToString("N0") VNĐ.</p>
+                <p>2. Phương thức thanh toán: @(firstContract.PaymentMethodId == 2 ? "Thanh toán qua VietQR" : firstContract.PaymentMethod?.MethodName ?? "Không xác định").</p>
+                <p>3. Trạng thái thanh toán: @(firstContract.PaymentStatus ?? "Chưa xác định").</p>
+                <p>4. Thời hạn thanh toán: Trong vòng 7 ngày kể từ ngày ký hợp đồng.</p>
+                <p>5. Thông tin chuyển khoản:</p>
+                <ul>
+                    <li>Ngân hàng: Vietcombank</li>
+                    <li>Chủ tài khoản: Phạm Thị Kim Ngân</li>
+                    <li>Số tài khoản: 9373993662</li>
+                    <li>Nội dung chuyển khoản: Thanh toán hợp đồng @firstContract.ContractCode cho @firstContract.Customer.CustomerName</li>
+                </ul>
+
+                <h5>ĐIỀU 3: TRÁCH NHIỆM CỦA CÁC BÊN</h5>
+                <p><strong>Trách nhiệm của Bên A:</strong></p>
+                <ul>
+                    <li>Đảm bảo thực hiện dịch vụ đúng thời gian và chất lượng như cam kết.</li>
+                    <li>Cung cấp đầy đủ hóa đơn, chứng từ liên quan đến dịch vụ.</li>
+                    <li>Thông báo trước cho Bên B nếu có thay đổi lịch chăm sóc.</li>
+                    <li>Đảm bảo cây cảnh luôn trong tình trạng tốt, thay thế cây hư hỏng trong vòng 3 ngày kể từ khi nhận được thông báo từ Bên B.</li>
+                </ul>
+                <p><strong>Trách nhiệm của Bên B:</strong></p>
+                <ul>
+                    <li>Thanh toán đúng hạn theo thỏa thuận.</li>
+                    <li>Cung cấp điều kiện thuận lợi để Bên A thực hiện dịch vụ (nước, không gian làm việc, v.v.).</li>
+                    <li>Thông báo kịp thời nếu có vấn đề với cây cảnh.</li>
+                    <li>Đảm bảo an toàn cho nhân viên của Bên A trong quá trình thực hiện dịch vụ.</li>
+                </ul>
+
+                <h5>ĐIỀU 4: ĐIỀU KHOẢN CHUNG</h5>
+                <p>1. Hợp đồng có hiệu lực từ @firstContract.StartDate.ToString("dd/MM/yyyy") đến @firstContract.EndDate?.ToString("dd/MM/yyyy").</p>
+                <p>2. Mọi thay đổi, bổ sung hợp đồng phải được lập thành văn bản và có sự đồng ý của cả hai bên.</p>
+                <p>3. Trong trường hợp có tranh chấp, hai bên sẽ thương lượng giải quyết. Nếu không đạt được thỏa thuận, tranh chấp sẽ được giải quyết tại Tòa án có thẩm quyền tại Hà Nội.</p>
+                <p>4. Hợp đồng có thể chấm dứt trước thời hạn nếu:</p>
+                <ul>
+                    <li>Hai bên đồng ý chấm dứt.</li>
+                    <li>Một trong hai bên vi phạm nghiêm trọng các điều khoản của hợp đồng.</li>
+                </ul>
+
+                <h5>ĐIỀU 5: KÝ KẾT</h5>
+                <p>Hợp đồng được lập thành 2 bản, mỗi bên giữ 1 bản có giá trị pháp lý như nhau.</p>
+                <p><strong>ĐẠI DIỆN BÊN A</strong><br>Phạm Thị Kim Ngân<br>(Ký, ghi rõ họ tên)</p>
+                <p><strong>ĐẠI DIỆN BÊN B</strong><br>@firstContract.Customer.CustomerName<br>(Ký, ghi rõ họ tên)</p>
+            </div>
+
+            <!-- Nút in và chuyển khoản -->
+            <div class="print-button">
+                <button onclick="window.print()"><i class="fas fa-print"></i> In hóa đơn</button>
+                @if (firstContract.PaymentStatus == "Chưa thanh toán")
+                {
+                    <button class="transfer-button" onclick="openTransferModal()"><i class="fas fa-money-bill-wave"></i> Chuyển khoản</button>
+                }
+            </div>
+
+            <!-- Modal chuyển khoản -->
+            @if (firstContract.PaymentStatus == "Chưa thanh toán")
+            {
+                <div id="transferModal" class="modal">
+                    <div class="modal-content">
+                        <span class="close" onclick="closeTransferModal()">×</span>
+                        <h3>Thông tin chuyển khoản</h3>
+                        <p><strong>Số tiền cần chuyển:</strong> @firstContract.TotalAmount?.ToString("N0") VNĐ</p>
+                        <p><strong>Ngân hàng:</strong> Vietcombank</p>
+                        <p><strong>Chủ tài khoản:</strong> Phạm Thị Kim Ngân</p>
+                        <p><strong>Số tài khoản:</strong> 9373993662</p>
+                        <p><strong>Nội dung chuyển khoản:</strong> Thanh toán hóa đơn hợp đồng cho @firstContract.Customer.CustomerName</p>
+
+                        <!-- Container mã QR -->
+                        <div id="qrContainer" class="mt-3 text-center">
+                            <h5>Quét mã QR để thanh toán</h5>
+                            <img id="qrCode" src="" alt="Mã QR VietQR" style="width: 200px; height: 200px; border-radius: 10px;">
+                        </div>
+
+                        <!-- Nút xác nhận chuyển khoản -->
+                        <div class="mt-3">
+                            <button id="confirmTransferBtn" class="btn btn-primary" onclick="@($"confirmTransfer({firstContract.CustomerId})")">Xác nhận đã chuyển khoản</button>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+    </div>
+
+    <script>
+        // Tự động mở cửa sổ in khi trang được tải (tùy chọn)
+        window.onload = function () {
+            // window.print(); // Bỏ comment nếu muốn tự động in
+        };
+
+        // Hàm mở modal chuyển khoản và tải mã QR
+        function openTransferModal() {
+            document.getElementById("transferModal").style.display = "block";
+
+            // Tải mã QR với tổng số tiền
+            var totalAmount = @Model.Sum(s => s.TotalAmount ?? 0).ToString("0.##") ?? "0";
+            var qrUrl = "@Url.Action("GenerateQr", "QrCode")" + "?amount=" + totalAmount;
+            console.log("Đang tải mã QR từ:", qrUrl);
+            document.getElementById("qrCode").src = qrUrl;
+            document.getElementById("qrContainer").style.display = "block";
+        }
+
+        // Hàm đóng modal chuyển khoản
+        function closeTransferModal() {
+            document.getElementById("transferModal").style.display = "none";
+            document.getElementById("qrContainer").style.display = "none"; // Ẩn mã QR khi đóng modal
+        }
+
+        // Đóng modal khi nhấp bên ngoài
+        window.onclick = function (event) {
+            var modal = document.getElementById("transferModal");
+            if (event.target == modal) {
+                modal.style.display = "none";
+                document.getElementById("qrContainer").style.display = "none"; // Ẩn mã QR
+            }
+        };
+
+        // Hàm xác nhận chuyển khoản
+        function confirmTransfer(customerId) {
+            document.getElementById("qrContainer").style.display = "none";
+            closeTransferModal();
+
+            // Hiển thị thông báo trước khi redirect
+            alert("Xác nhận chuyển khoản thành công! Đang chuyển về trang chính...");
+
+            // Redirect cửa sổ hiện tại về Index với tham số confirmPayment
+            window.location.href = "/AdminQL/Contracts/Index?confirmPayment=" + customerId;
+
+            // Đóng cửa sổ sau khi redirect (tùy chọn)
+            setTimeout(function () {
+                window.close();
+            }, 1000); // Đợi 1 giây để người dùng thấy thông báo
+        }
+    </script>
+</body>
+</html>

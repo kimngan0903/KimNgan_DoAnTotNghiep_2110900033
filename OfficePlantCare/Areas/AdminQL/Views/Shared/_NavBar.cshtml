@@ -1,0 +1,316 @@
+﻿@using Microsoft.AspNetCore.Http
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+@inject OfficePlantCareContext DbContext
+@using OfficePlantCare.Areas.AdminQL.Models
+
+<!-- [ Header ] start -->
+<header class="navbar pcoded-header navbar-expand-lg navbar-light header-dark">
+    <div class="m-header">
+        <a class="mobile-menu" id="mobile-collapse" href="#!"><span></span></a>
+        <a href="#!" class="b-brand">
+            <img src="~/assets/images/logo.png" alt="" class="logo" style="width: 50px; height: 50px; margin-left: 5rem">
+        </a>
+        <a href="#!" class="mob-toggler">
+            <i class="fas fa-ellipsis-v"></i>
+        </a>
+    </div>
+    <div class="collapse navbar-collapse">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a href="#!" class="pop-search"><i class="fas fa-search"></i></a>
+                <div class="search-bar">
+                    <input type="text" class="form-control border-0 shadow-none" placeholder="Tìm kiếm...">
+                    <button type="button" class="close" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+            </li>
+        </ul>
+        <ul class="navbar-nav ml-auto">
+            <li>
+                <div class="dropdown">
+                    <a class="dropdown-toggle" href="#" data-toggle="dropdown">
+                        <i class="fas fa-bell"></i>
+                        @{
+                            var adminId = HttpContextAccessor.HttpContext.Session.GetInt32("AdminId") ?? 0;
+                            Console.WriteLine($"AdminId from session: {adminId}");
+                            var notifications = GetNotifications(DbContext, adminId);
+                            Console.WriteLine($"Notifications count: {notifications.Count}");
+                            var unreadCount = notifications.Count(n => !n.IsRead && !n.IsDeleted);
+                            if (unreadCount > 0)
+                            {
+                                <span class="badge badge-pill badge-danger">@unreadCount</span>
+                            }
+                        }
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right notification" id="notificationDropdown">
+                        <form id="notificationForm" method="post" asp-action="UpdateNotifications" asp-controller="Dashboard" style="display: none;">
+                            <input type="hidden" name="action" id="notificationAction" />
+                            <input type="hidden" name="adminId" value="@adminId" />
+                        </form>
+                        <div class="noti-head">
+                            <h6 class="d-inline-block m-b-0">Thông báo</h6>
+                            <div class="float-right">
+                                <a href="#!" id="markAllRead" class="m-r-10">Đánh dấu là đã đọc</a>
+                                <a href="#!" id="clearAll" class="m-r-10">Xóa tất cả</a>
+                            </div>
+                        </div>
+                        <ul class="noti-body" id="notificationList">
+                            @if (!notifications.Any(n => !n.IsDeleted))
+                            {
+                                <li class="notification">
+                                    <div class="media">
+                                        <div class="media-body">
+                                            <p class="text-muted">Không có thông báo mới</p>
+                                        </div>
+                                    </div>
+                                </li>
+                            }
+                            else
+                            {
+                                foreach (var notification in notifications.Where(n => !n.IsDeleted))
+                                {
+                                    Console.WriteLine($"Rendering notification: {notification.Message}");
+                                    <li class="notification @(notification.IsRead ? "" : "unread")">
+                                        <div class="media">
+                                            <i class="@notification.Icon me-2"></i>
+                                            <div class="media-body">
+                                                <p>
+                                                    @if (!string.IsNullOrEmpty(notification.Link))
+                                                    {
+                                                        <a href="@notification.Link">@notification.Message</a>
+                                                    }
+                                                    else
+                                                    {
+                                                        @notification.Message
+                                                    }
+                                                    <span class="n-time text-muted"><i class="fas fa-clock m-r-10"></i>@notification.TimeAgo</span>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </li>
+                                }
+                            }
+                        </ul>
+                        <div class="noti-footer">
+                            <a href="@Url.Action("AllNotifications", "Dashboard", new { area = "AdminQL" })" id="viewAll" class="btn btn-sm btn-outline-success">Hiển thị tất cả</a>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="dropdown drp-user">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <i class="fas fa-user"></i>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right profile-notification">
+                        <div class="pro-head">
+                            <img src="~/assets/images/user/admin.jpg" class="img-radius" alt="User-Profile-Image">
+                            <span>
+                                @HttpContextAccessor.HttpContext.Session.GetString("AdminName")
+                            </span>
+                            <a asp-action="Logout" asp-controller="Login" class="dud-logout" title="Logout">
+                                <i class="fas fa-sign-out-alt"></i>
+                            </a>
+                        </div>
+                        <ul class="pro-body">
+                            <li><a asp-area="AdminQL" asp-controller="Admins" asp-action="Detail" asp-route-id="@adminId" class="dropdown-item"><i class="fas fa-user"></i> Xem hồ sơ</a></li>
+                            <li><a asp-action="Logout" asp-controller="Login" class="dropdown-item"><i class="fas fa-sign-out-alt m-r-5"></i>Thoát</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+</header>
+<!-- [ Header ] end -->
+
+@functions {
+    private List<NotificationViewModel> GetNotifications(OfficePlantCareContext dbContext, int adminId)
+    {
+        // Gọi hàm SeedInitialNotifications để tạo thông báo nếu chưa có
+        SeedInitialNotifications(dbContext, adminId);
+
+        var notifications = new List<NotificationViewModel>();
+        var now = DateTime.Now;
+
+        var dbNotifications = dbContext.Notifications
+            .Where(n => n.AdminId == adminId && !n.IsDeleted)
+            .OrderByDescending(n => n.CreatedDate)
+            .Take(10)
+            .ToList();
+
+        foreach (var dbNotif in dbNotifications)
+        {
+            var timeAgo = CalculateTimeAgo(dbNotif.CreatedDate);
+            var link = GetNotificationLink(dbNotif.Type, dbNotif.ReferenceId);
+            notifications.Add(new NotificationViewModel
+            {
+                NotificationId = dbNotif.NotificationId,
+                Type = dbNotif.Type,
+                Message = dbNotif.Message,
+                TimeAgo = timeAgo,
+                IsRead = dbNotif.IsRead,
+                IsDeleted = dbNotif.IsDeleted,
+                Icon = GetNotificationIcon(dbNotif.Type),
+                Link = link
+            });
+        }
+
+        return notifications;
+    }
+
+    private void SeedInitialNotifications(OfficePlantCareContext dbContext, int adminId)
+    {
+        if (adminId == 0) return;
+
+        // 1. Đơn hàng
+        var orders = dbContext.Orders
+            .Where(o => o.Status == "Chờ xử lý")
+            .OrderByDescending(o => o.OrderDate)
+            .Take(5)
+            .ToList();
+        foreach (var order in orders)
+        {
+            var customerName = order.CustomerId.HasValue ? dbContext.Customers.Find(order.CustomerId)?.CustomerName : "Đặt dịch vụ";
+            var referenceId = order.OrderId.ToString();
+            var message = $"Đơn hàng mới #{order.OrderId} từ {customerName}";
+
+            if (!dbContext.Notifications.Any(n => n.AdminId == adminId && n.Type == "Đơn hàng" && n.ReferenceId == referenceId))
+            {
+                dbContext.Notifications.Add(new Notification
+                    {
+                        AdminId = adminId,
+                        ReferenceId = referenceId,
+                        Type = "Đơn hàng",
+                        Message = message,
+                        CreatedDate = order.OrderDate ?? DateTime.Now,
+                        IsRead = false,
+                        IsDeleted = false
+                    });
+            }
+        }
+
+        // 4. Phản hồi
+        var feedbacks = dbContext.Feedbacks
+            .OrderByDescending(f => f.FeedbackDate)
+            .Take(5)
+            .ToList();
+        foreach (var feedback in feedbacks)
+        {
+            var customerName = feedback.CustomerId.HasValue ? dbContext.Customers.Find(feedback.CustomerId)?.CustomerName : "Vãng lai";
+            var referenceId = feedback.FeedbackId.ToString();
+            var message = $"Phản hồi mới từ {customerName}";
+
+            if (!dbContext.Notifications.Any(n => n.AdminId == adminId && n.Type == "Phản hồi" && n.ReferenceId == referenceId))
+            {
+                dbContext.Notifications.Add(new Notification
+                    {
+                        AdminId = adminId,
+                        ReferenceId = referenceId,
+                        Type = "Phản hồi",
+                        Message = message,
+                        CreatedDate = feedback.FeedbackDate ?? DateTime.Now,
+                        IsRead = false,
+                        IsDeleted = false
+                    });
+            }
+        }
+
+        // 5. Hợp đồng
+        var contracts = dbContext.Contracts
+            .Where(c => c.Status == "Chờ xử lý")
+            .OrderByDescending(c => c.StartDate)
+            .Take(5)
+            .ToList();
+        foreach (var contract in contracts)
+        {
+            var customer = dbContext.Customers.Find(contract.CustomerId);
+            var customerName = customer?.CustomerName ?? "Khách không xác định";
+            var referenceId = contract.ContractId.ToString();
+            var message = $"Hợp đồng mới #{contract.ContractCode} từ {customerName}";
+
+            if (!dbContext.Notifications.Any(n => n.AdminId == adminId && n.Type == "Hợp đồng" && n.ReferenceId == referenceId))
+            {
+                dbContext.Notifications.Add(new Notification
+                    {
+                        AdminId = adminId,
+                        ReferenceId = referenceId,
+                        Type = "Hợp đồng",
+                        Message = message,
+                        CreatedDate = contract.StartDate.ToDateTime(TimeOnly.MinValue),
+                        IsRead = false,
+                        IsDeleted = false
+                    });
+            }
+        }
+
+        dbContext.SaveChanges();
+    }
+    private string GetNotificationIcon(string type)
+    {
+        return type switch
+        {
+            "Đơn hàng" => "fas fa-shopping-cart",
+            "Yêu cầu phát sinh" => "fas fa-exclamation-circle",
+            "Phản hồi" => "fas fa-comment-dots",
+            "Hợp đồng" => "fas fa-file-contract",
+            _ => "fas fa-bell"
+        };
+    }
+
+    private string GetNotificationLink(string type, string referenceId)
+    {
+        return type switch
+        {
+            "Đơn hàng" => Url.Action("Details", "Orders", new { id = referenceId, area = "AdminQL" }),
+            "Yêu cầu phát sinh" => Url.Action("Details", "ServiceRequests", new { id = referenceId, area = "AdminQL" }),
+            "Phản hồi" => Url.Action("Details", "Feedbacks", new { id = referenceId, area = "AdminQL" }),
+            "Hợp đồng" => Url.Action("Details", "Contracts", new { id = referenceId, area = "AdminQL" }),
+            _ => null
+        };
+    }
+
+    private string CalculateTimeAgo(DateTime dateTime)
+    {
+        var timeSpan = DateTime.Now - dateTime;
+        if (timeSpan.TotalMinutes < 1) return "Vừa xong";
+        if (timeSpan.TotalHours < 1) return $"{(int)timeSpan.TotalMinutes} phút trước";
+        if (timeSpan.TotalDays < 1) return $"{(int)timeSpan.TotalHours} giờ trước";
+        return $"{(int)timeSpan.TotalDays} ngày trước";
+    }
+}
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const markAllRead = document.getElementById('markAllRead');
+        const clearAll = document.getElementById('clearAll');
+        const notificationForm = document.getElementById('notificationForm');
+        const notificationAction = document.getElementById('notificationAction');
+        const notificationList = document.getElementById('notificationList');
+
+        markAllRead.addEventListener('click', function () {
+            notificationAction.value = "markAllRead";
+            notificationForm.submit();
+        });
+
+        clearAll.addEventListener('click', function () {
+            notificationAction.value = "clearAll";
+            notificationForm.submit();
+        });
+
+        function updateBadge(count) {
+            const badge = document.querySelector('.badge');
+            if (badge) {
+                if (count > 0) {
+                    badge.textContent = count;
+                    badge.style.display = 'inline-block';
+                } else {
+                    badge.style.display = 'none';
+                }
+            }
+        }
+
+        updateBadge(@unreadCount);
+    });
+</script>
