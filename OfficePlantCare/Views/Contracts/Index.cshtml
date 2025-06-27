@@ -70,7 +70,7 @@
                                         {
                                             <tr>
                                                 <td>@Html.DisplayFor(modelItem => item.Customer.CustomerName)</td>
-                                                <td>@Html.DisplayFor(modelItem => item.TotalAmount) VNĐ</td>
+                                                <td>@string.Format("{0:N0}", item.TotalAmount).Replace(",", ".") VNĐ</td>
                                                 <td>@Html.DisplayFor(modelItem => item.StartDate)</td>
                                                 <td>@Html.DisplayFor(modelItem => item.EndDate)</td>
                                                 <td>
@@ -148,46 +148,6 @@
         </div>
     </div>
 </div>
-
-<style>
-    .table-hover tbody tr:hover {
-        background-color: #f1f8e9;
-        transition: background-color 0.3s ease;
-    }
-
-    .thead-dark {
-        background-color: #2c3e50;
-        color: white;
-    }
-
-    .btn-sm {
-        padding: 0.25rem 0.5rem;
-        font-size: 0.875rem;
-    }
-
-    .badge {
-        font-size: 0.9rem;
-        padding: 0.5em 0.75em;
-    }
-
-    .modal-content {
-        border-radius: 8px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    }
-
-    .modal-header {
-        background: linear-gradient(135deg, #2c3e50, #4b6584);
-        color: white;
-    }
-
-    .modal-footer .btn-danger {
-        background: linear-gradient(135deg, #dc3545, #ff6b6b);
-    }
-
-    .modal-footer .btn-secondary {
-        background: linear-gradient(135deg, #6c757d, #adb5bd);
-    }
-</style>
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />

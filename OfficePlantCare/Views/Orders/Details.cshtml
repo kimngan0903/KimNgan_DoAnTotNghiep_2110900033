@@ -55,7 +55,7 @@
                             <dt class="col-sm-3" style="font-weight: 600; color: #495057;">@Html.DisplayNameFor(model => model.OrderDate)</dt>
                             <dd class="col-sm-9">@Html.DisplayFor(model => model.OrderDate)</dd>
                             <dt class="col-sm-3" style="font-weight: 600; color: #495057;">@Html.DisplayNameFor(model => model.TotalPrice)</dt>
-                            <dd class="col-sm-9">@Html.DisplayFor(model => model.TotalPrice) VNĐ</dd>
+                            <dd class="col-sm-9">@string.Format("{0:N0}", Model.TotalPrice).Replace(",", ".") VNĐ</dd>
                             <dt class="col-sm-3" style="font-weight: 600; color: #495057;">@Html.DisplayNameFor(model => model.PaymentDate)</dt>
                             <dd class="col-sm-9">@Html.DisplayFor(model => model.PaymentDate)</dd>
                             <dt class="col-sm-3" style="font-weight: 600; color: #495057;">@Html.DisplayNameFor(model => model.PaymentStatus)</dt>
@@ -131,7 +131,7 @@
                                                 <td>@(detail.Service?.ServiceName ?? "Không xác định")</td>
                                                 <td>@(detail.Address ?? "Không xác định")</td>
                                                 <td>@(detail.Quantity != 0 ? detail.Quantity.ToString() : "Không xác định")</td>
-                                                <td>@(detail.TotalAmount != 0 ? detail.TotalAmount.Value.ToString("N0") + " VNĐ" : "Không xác định")</td>
+                                                <td>@(detail.TotalAmount != 0 ? detail.TotalAmount.Value.ToString("N0").Replace(",", ".") + " VNĐ" : "Không xác định")</td>
 @*                                                 <td>@(detail.Notes ?? "Không có ghi chú")</td>
  *@                                                <td>
                                                     @if (detail.Status == "Chờ xử lý")
@@ -206,50 +206,6 @@
         </div>
     </div>
 </div>
-
-<style>
-    .card {
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-        }
-
-    .table-hover tbody tr:hover {
-        background-color: #f1f8e9;
-        transition: background-color 0.3s ease;
-    }
-
-    .thead-dark {
-        background-color: #2c3e50;
-        color: white;
-    }
-
-    .btn {
-        border-radius: 8px;
-        padding: 0.75rem 1.5rem;
-        font-weight: 600;
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-        border: none;
-    }
-
-        .btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-        }
-
-    .badge {
-        font-size: 0.9rem;
-        padding: 0.5em 0.75em;
-    }
-
-    .modal-content {
-        border-radius: 8px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    }
-</style>
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />

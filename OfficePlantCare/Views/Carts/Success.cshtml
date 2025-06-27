@@ -54,7 +54,7 @@
                         }
                         <tr>
                             <th>Tổng số tiền</th>
-                            <td>@ViewBag.TotalAmount.ToString("#.##0 VNĐ")</td>
+                            <td>@ViewBag.TotalAmount.ToString("N0").Replace(",", ".") VNĐ</td>
                         </tr>
                         <tr>
                             <th>Ngày thanh toán</th>
@@ -78,7 +78,6 @@
     </div>
 </div>
 <!-- ##### Success Area End ##### -->
-
 <style>
     .success-area {
         padding: 50px 0;

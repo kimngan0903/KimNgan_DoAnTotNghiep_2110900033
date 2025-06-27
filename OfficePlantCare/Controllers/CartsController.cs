@@ -492,7 +492,7 @@ namespace OfficePlantCare.Controllers
 
             if (customerId == null)
             {
-                return RedirectToAction("Login", "Index");
+                return RedirectToAction("Index", "Login"); // Fixed: Correct controller name for login
             }
 
             var cartItem = await _context.Carts
@@ -506,7 +506,15 @@ namespace OfficePlantCare.Controllers
             _context.Carts.Remove(cartItem);
             await _context.SaveChangesAsync();
 
-            return RedirectToAction("Index");
+            // Redirect based on ServiceType
+            if (cartItem.ServiceType == "Lẻ")
+            {
+                return RedirectToAction("CartIndex");
+            }
+            else
+            {
+                return RedirectToAction("ContractIndex");
+            }
         }
 
         // Success page after order

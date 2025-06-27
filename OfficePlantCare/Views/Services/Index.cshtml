@@ -10,68 +10,10 @@
     var roleId = HttpContextAccessor.HttpContext.Session.GetInt32("RoleId");
 }
 
-<style>
-    /* Đảm bảo các phần tử dịch vụ có kích thước bằng nhau */
-    .single-product-area {
-        display: flex;
-        flex-direction: column;
-        height: 100%; /* Đảm bảo các phần tử có chiều cao bằng nhau */
-        border: 1px solid #e0e0e0; /* Thêm viền để dễ nhìn */
-        border-radius: 5px;
-        overflow: hidden;
-    }
-
-    .product-img {
-        width: 100%;
-        height: 200px; /* Cố định chiều cao hình ảnh */
-        overflow: hidden;
-    }
-
-        .product-img img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover; /* Đảm bảo hình ảnh không bị méo */
-        }
-
-    .product-info {
-        flex-grow: 1;
-        padding: 10px;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-    }
-
-        .product-info p {
-            margin: 0;
-            font-size: 16px;
-            font-weight: 500;
-            color: #333;
-            display: -webkit-box;
-            -webkit-line-clamp: 2; /* Giới hạn tiêu đề tối đa 2 dòng */
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            line-height: 1.4em;
-            height: 2.8em; /* 2 dòng x 1.4em */
-        }
-
-        .product-info .text-muted {
-            font-size: 14px;
-            margin-top: 5px;
-            color: #777;
-        }
-
-    .product-info .btn {
-        margin-top: 10px;
-        width: 100%; /* Nút chiếm toàn bộ chiều rộng */
-        text-align: center;
-    }
-</style>
-
 <!-- ##### Breadcrumb Area Start ##### -->
 <div class="breadcrumb-area">
     <!-- Top Breadcrumb Area -->
-    <div class="top-breadcrumb-area bg-img bg-overlay d-flex align-items-center justify-content-center" style="background-image: url(img/banner/banner_dich_vu.jpg);">
+    <div class="top-breadcrumb-area bg-img bg-overlay d-flex align-items-center justify-content-center" style="background-image: url(/img/banner/banner.jpg);">
         <h2>DỊCH VỤ</h2>
     </div>
 
@@ -169,22 +111,25 @@
                                 <div class="single-product-area">
                                     <!-- Product Image -->
                                     <div class="product-img">
-                                        <a href="@Url.Action("Details", "Services", new { id = service.ServiceId })">
-                                            <img src="@service.Image" alt="@service.ServiceName" onerror="this.src='/img/bg-img/default-service.jpg';" />
+                                        <a href="@Url.Action("Details", "Services", new { id = service.ServiceId })" style="display: block;">
+                                            <img src="@(string.IsNullOrEmpty(service.Image) ? "/img/default-service.jpg" : service.Image)"
+                                                 alt="@service.ServiceName"
+                                                 class="img-fluid"
+                                                 style="height: 200px; object-fit: cover;">
                                         </a>
                                     </div>
                                     <!-- Product Info -->
-                                    <div class="product-info">
+                                    <div class="product-info-1">
                                         <a href="@Url.Action("Details", "Services", new { id = service.ServiceId })">
                                             <p>@service.ServiceName</p>
                                         </a>
-                                        @if (roleId == 4 || roleId == 5)
+                                        @if (HttpContextAccessor.HttpContext.Session.GetInt32("CustomerId").HasValue)
                                         {
-                                            <a href="@Url.Action("Details", "Services", new { id = service.ServiceId })" class="btn btn-success">Xem Chi Tiết</a>
+                                            <a href="@Url.Action("Details", "Services", new { id = service.ServiceId })" class="btn alazea-btn">Xem Chi Tiết</a>
                                         }
                                         else
                                         {
-                                            <a asp-controller="Login" asp-action="Index" class="btn btn-success">Đặt Lịch Ngay</a>
+                                            <a asp-controller="Login" asp-action="Index" class="btn alazea-btn">Đặt Lịch Ngay</a>
                                         }
                                     </div>
                                 </div>
@@ -219,3 +164,18 @@
         </div>
     </div>
 </section>
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            // Loại bỏ hành vi Magnific Popup cho các liên kết trong product-img
+            $('.product-img a').each(function () {
+                $(this).off('click.mfp'); // Loại bỏ sự kiện click của Magnific Popup
+                $(this).on('click', function (e) {
+                    e.preventDefault();
+                    e.stopPropagation(); // Ngăn sự kiện lan ra ngoài
+                    window.location.href = $(this).attr('href');
+                });
+            });
+        });
+    </script>
+}

@@ -70,7 +70,7 @@
                                         {
                                             <tr>
                                                 <td>@Html.DisplayFor(modelItem => item.Customer.CustomerName)</td>
-                                                <td>@Html.DisplayFor(modelItem => item.TotalPrice) VNĐ</td>
+                                                <td>@string.Format("{0:N0}", item.TotalPrice).Replace(",", ".") VNĐ</td>
                                                 <td>@Html.DisplayFor(modelItem => item.PaymentDate)</td>
                                                 <td>
                                                     @if (item.PaymentStatus == "Đã thanh toán")

@@ -221,25 +221,28 @@
             </div>
         </div>
 
-        <div class="row">
+        <div class="row justify-content-center">
             @if (services != null && services.Any())
             {
-                @foreach (var service in services.Take(4)) // Chỉ lấy 4 dịch vụ đầu tiên
+                @foreach (var service in services.Take(4))
                 {
                     <div class="col-12 col-sm-6 col-lg-3">
                         <div class="single-product-area mb-50 wow fadeInUp" data-wow-delay="100ms">
                             <!-- Product Image -->
                             <div class="product-img">
-                                <a href="/services/details/@service.ServiceId">
-                                    <img src="@service.Image" alt="@service.ServiceName" class="img-fluid" style="height: 200px">
+                                <a href="@Url.Action("Details", "Services", new { id = service.ServiceId })" style="display: block;">
+                                    <img src="@(string.IsNullOrEmpty(service.Image) ? "/img/default-service.jpg" : service.Image)"
+                                         alt="@service.ServiceName"
+                                         class="img-fluid"
+                                         style="height: 200px; object-fit: cover;">
                                 </a>
                             </div>
                             <!-- Product Info -->
                             <div class="product-info mt-15 text-center">
-                                <a href="/services/details/@service.ServiceId">
+                                <a href="@Url.Action("Details", "Services", new { id = service.ServiceId })">
                                     <p>@service.ServiceName</p>
                                 </a>
-                                <a href="/services/details/@service.ServiceId" class="btn alazea-btn">ĐẶT NGAY</a>
+                                <a href="@Url.Action("Details", "Services", new { id = service.ServiceId })" class="btn alazea-btn">ĐẶT NGAY</a>
                             </div>
                         </div>
                     </div>
@@ -252,13 +255,12 @@
                 </div>
             }
 
-            <div class="col-12 text-center">
+            <div class="col-12 text-center mt-3">
                 <a asp-controller="Services" asp-action="Index" class="btn alazea-btn">Xem tất cả</a>
             </div>
         </div>
     </div>
-</section>
-<!-- ##### Product Area End ##### -->
+</section><!-- ##### Product Area End ##### -->
 <!-- ##### Blog Area Start ##### -->
 <section class="alazea-blog-area section-padding-100-0">
     <div class="container">
@@ -447,6 +449,17 @@
                         }
                     });
                 }
+            });
+        });
+        $(document).ready(function () {
+            // Loại bỏ hành vi Magnific Popup cho các liên kết trong product-img
+            $('.product-img a').each(function () {
+                $(this).off('click.mfp'); // Loại bỏ sự kiện click của Magnific Popup
+                $(this).on('click', function (e) {
+                    e.preventDefault();
+                    e.stopPropagation(); // Ngăn sự kiện lan ra ngoài
+                    window.location.href = $(this).attr('href');
+                });
             });
         });
     </script>

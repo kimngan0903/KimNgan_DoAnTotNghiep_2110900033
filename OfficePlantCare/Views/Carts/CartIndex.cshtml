@@ -81,7 +81,7 @@
                                             @item.Price.ToString("N0") VNĐ/Cây
                                         </td>
                                         <td class="total_price">
-                                            <span>@item.Total.ToString("N0") VNĐ</span>
+                                            <span>@item.Total.ToString("N0").Replace(",", ".") VNĐ</span>
                                         </td>
                                         <td>
                                             <a asp-action="RemoveFromCart" asp-route-cartId="@item.CartId" class="btn btn-danger remove-btn" onclick="return confirm('Bạn có chắc muốn xóa dịch vụ này khỏi giỏ hàng?')">X</a>

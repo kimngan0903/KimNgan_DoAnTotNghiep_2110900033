@@ -57,7 +57,7 @@
                             <dt class="col-sm-3" style="font-weight: 600; color: #495057;">@Html.DisplayNameFor(model => model.CreatedDate)</dt>
                             <dd class="col-sm-9">@Html.DisplayFor(model => model.CreatedDate)</dd>
                             <dt class="col-sm-3" style="font-weight: 600; color: #495057;">@Html.DisplayNameFor(model => model.TotalAmount)</dt>
-                            <dd class="col-sm-9">@Html.DisplayFor(model => model.TotalAmount) VNĐ</dd>
+                            <dd class="col-sm-9">@string.Format("{0:N0}", Model.TotalAmount).Replace(",", ".") VNĐ</dd>
                             <dt class="col-sm-3" style="font-weight: 600; color: #495057;">@Html.DisplayNameFor(model => model.StartDate)</dt>
                             <dd class="col-sm-9">@Html.DisplayFor(model => model.StartDate)</dd>
                             <dt class="col-sm-3" style="font-weight: 600; color: #495057;">@Html.DisplayNameFor(model => model.EndDate)</dt>
@@ -104,9 +104,9 @@
                                     <span>@Html.DisplayFor(model => model.Status)</span>
                                 }
                             </dd>
-                            <dt class="col-sm-3" style="font-weight: 600; color: #495057;">@Html.DisplayNameFor(model => model.Customer)</dt>
+                            <dt class="col-sm-3" style="font-weight: 600; color: #495057;">@Html.DisplayNameFor(model => model.CustomerId)</dt>
                             <dd class="col-sm-9">@(Model.Customer?.CustomerName ?? "Không xác định")</dd>
-                            <dt class="col-sm-3" style="font-weight: 600; color: #495057;">@Html.DisplayNameFor(model => model.PaymentMethod)</dt>
+                            <dt class="col-sm-3" style="font-weight: 600; color: #495057;">@Html.DisplayNameFor(model => model.PaymentMethodId)</dt>
                             <dd class="col-sm-9">@(Model.PaymentMethod?.MethodName ?? "Không xác định")</dd>
                         </dl>
 
@@ -129,7 +129,7 @@
                                             <tr>
                                                 <td>@(detail.Service?.ServiceName ?? "Không xác định")</td>
                                                 <td>@(detail.Address ?? "Không xác định")</td>
-                                                <td>@(detail.TotalAmount != 0 ? detail.TotalAmount.Value.ToString("N0") + " VNĐ" : "Không xác định")</td>
+                                                <td>@(detail.TotalAmount != 0 ? detail.TotalAmount.Value.ToString("N0").Replace(",", ".") + " VNĐ" : "Không xác định")</td>
                                                 <td>
                                                     @if (detail.Status == "Chờ xử lý")
                                                     {
@@ -200,51 +200,6 @@
         </div>
     </div>
 </div>
-
-<style>
-    .card {
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-        }
-
-    .table-hover tbody tr:hover {
-        background-color: #f1f8e9;
-        transition: background-color 0.3s ease;
-    }
-
-    .thead-dark {
-        background-color: #2c3e50;
-        color: white;
-    }
-
-    .btn {
-        border-radius: 8px;
-        padding: 0.75rem 1.5rem;
-        font-weight: 600;
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-        border: none;
-    }
-
-        .btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-        }
-
-    .badge {
-        font-size: 0.9rem;
-        padding: 0.5em 0.75em;
-    }
-
-    .modal-content {
-        border-radius: 8px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    }
-</style>
-
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
     <script>
